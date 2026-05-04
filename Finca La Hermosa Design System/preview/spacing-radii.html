@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--color-crema-calida); padding: 24px 28px; display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
+.item { display:flex; flex-direction:column; align-items:center; gap:8px; }
+.box  { width:56px; height:56px; background: var(--color-crema-clara); border: 1px solid var(--color-crema-media); }
+.lbl  { font-family: var(--font-body); font-size:10px; color: var(--fg-muted); text-align:center; }
+</style>
+</head>
+<body>
+  <div class="item"><div class="box" style="border-radius:0"></div><div class="lbl">--radius-none<br>0</div></div>
+  <div class="item"><div class="box" style="border-radius:4px"></div><div class="lbl">--radius-sm<br>4px</div></div>
+  <div class="item"><div class="box" style="border-radius:8px"></div><div class="lbl">--radius-md<br>8px</div></div>
+  <div class="item"><div class="box" style="border-radius:16px"></div><div class="lbl">--radius-lg<br>16px</div></div>
+  <div class="item"><div class="box" style="border-radius:999px"></div><div class="lbl">--radius-pill<br>999px</div></div>
+</body>
+</html>

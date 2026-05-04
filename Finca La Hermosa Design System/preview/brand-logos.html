@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#f5f0e8; padding:28px 32px; font-family:'Jost',sans-serif; display:flex; flex-direction:column; gap:32px; }
+
+.section-label {
+  font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase;
+  color:#8c7d68; margin-bottom:16px; border-bottom:1px solid #ede6d6; padding-bottom:8px;
+}
+.row { display:flex; gap:16px; align-items:stretch; }
+.variant { display:flex; flex-direction:column; align-items:center; flex:1; border-radius:10px; overflow:hidden; }
+.variant-bg {
+  width:100%; display:flex; align-items:center; justify-content:center;
+  padding:28px 20px; flex:1;
+}
+.variant-bg.crema  { background:#fffdf8; border:1px solid #ede6d6; border-bottom:none; }
+.variant-bg.verde  { background:#2d4949; }
+.variant-bg.carbon { background:#1a1a1a; }
+.variant-label {
+  width:100%; text-align:center; padding:8px 10px;
+  font-size:10px; font-weight:400; letter-spacing:0.08em; text-transform:uppercase;
+  color:#8c7d68; background:#eee8dc; border-top:1px solid #ede6d6;
+}
+img.logo { height:60px; width:auto; max-width:100%; object-fit:contain; }
+img.iso  { height:80px; width:auto; object-fit:contain; }
+</style>
+</head>
+<body>
+
+  <!-- LOGOTIPOS -->
+  <div>
+    <div class="section-label">Logotipo — 3 variantes</div>
+    <div class="row">
+      <div class="variant">
+        <div class="variant-bg crema">
+          <img class="logo" src="../assets/logo-terracota.svg?v=1777084165749" alt="Logo Terracota">
+        </div>
+        <div class="variant-label">Terracota · sobre crema</div>
+      </div>
+      <div class="variant">
+        <div class="variant-bg crema">
+          <img class="logo" src="../assets/logo-verde.svg?v=1777084165749" alt="Logo Verde">
+        </div>
+        <div class="variant-label">Verde · sobre crema</div>
+      </div>
+      <div class="variant">
+        <div class="variant-bg carbon">
+          <img class="logo" src="../assets/logo-blanco.svg?v=1777084165749" alt="Logo Blanco">
+        </div>
+        <div class="variant-label">Blanco · sobre oscuro</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ISOTIPOS -->
+  <div>
+    <div class="section-label">Isotipo — 3 variantes</div>
+    <div class="row">
+      <div class="variant">
+        <div class="variant-bg crema">
+          <img class="iso" src="../assets/isotipo-terracota.svg?v=1777084165749" alt="Isotipo Terracota">
+        </div>
+        <div class="variant-label">Terracota · sobre crema</div>
+      </div>
+      <div class="variant">
+        <div class="variant-bg crema">
+          <img class="iso" src="../assets/isotipo-verde.svg?v=1777084165749" alt="Isotipo Verde">
+        </div>
+        <div class="variant-label">Verde · sobre crema</div>
+      </div>
+      <div class="variant">
+        <div class="variant-bg carbon">
+          <img class="iso" src="../assets/isotipo-blanco.svg?v=1777084165749" alt="Isotipo Blanco">
+        </div>
+        <div class="variant-label">Blanco · sobre oscuro</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

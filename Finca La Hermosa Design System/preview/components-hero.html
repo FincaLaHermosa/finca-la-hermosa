@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Against'; src:url('../fonts/against-regular.otf') format('opentype'); }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; overflow-y:auto; }
+body { background:#1e3232; font-family:'Jost',sans-serif; }
+
+/* ── Hero wrapper ── */
+.hero {
+  position:relative; width:100%; height:100vh;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  overflow:hidden; min-height:600px; padding-top:30vh;
+}
+
+/* ── Parallax image ── */
+.hero-bg {
+  position:absolute; inset:-80px 0;
+  background-image: url(../assets/hero-wedding.jpg);
+  background-size:cover; background-position:center 40%;
+  will-change:transform;
+  transition:transform 0.05s linear;
+}
+.hero-bg::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(
+    170deg,
+    rgba(18,28,24,0.35) 0%,
+    rgba(18,28,24,0.15) 35%,
+    rgba(18,28,24,0.55) 70%,
+    rgba(18,28,24,0.80) 100%
+  );
+}
+
+/* ── Giant bleed title ── */
+.hero-bleed {
+  position:absolute; top:80px; left:0; right:0;
+  padding: 0 36px;
+  display:flex; align-items:flex-start; justify-content:flex-end;
+  z-index:2; pointer-events:none;
+}
+.bleed-wordmark {
+  font-family:'Against',serif; font-size:clamp(90px,13vw,160px);
+  line-height:0.88; color:rgba(255,253,248,0.09);
+  letter-spacing:-0.03em; user-select:none;
+  text-transform:uppercase;
+}
+
+/* ── Top bar ── */
+.top-bar {
+  position:absolute; top:0; left:0; right:0; z-index:10;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:28px 44px;
+}
+.top-brand { display:flex; align-items:center; gap:10px; }
+.top-brand img { height:32px; filter:brightness(10) opacity(0.9); }
+.top-meta {
+  font-family:'Jost',sans-serif; font-size:10px; font-weight:400;
+  letter-spacing:0.1em; text-transform:uppercase;
+  color:rgba(255,253,248,0.45);
+}
+
+/* ── Main content ── */
+.hero-content {
+  position:relative; z-index:5;
+  padding:0 44px 52px;
+  display:grid; grid-template-columns:1fr auto;
+  gap:24px; align-items:flex-end;
+}
+
+.hero-left {}
+
+.overline {
+  font-family:'Jost',sans-serif; font-size:10px; font-weight:400;
+  letter-spacing:0.18em; text-transform:uppercase;
+  color:rgba(232,196,173,0.75); margin-bottom:14px;
+  display:flex; align-items:center; gap:10px;
+}
+.overline::before { content:''; display:block; width:24px; height:1px; background:rgba(232,196,173,0.5); }
+
+.hero-h1 {
+  font-family:'Against',serif;
+  font-size:clamp(52px,7.5vw,96px);
+  line-height:0.92; color:#fffdf8;
+  letter-spacing:-0.02em;
+  margin-bottom:0;
+}
+.hero-h1-italic {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(52px,7.5vw,96px);
+  font-style:italic; font-weight:300;
+  line-height:1; color:#c07a5a;
+  letter-spacing:-0.01em;
+  margin-bottom:28px;
+}
+.hero-desc {
+  font-family:'Jost',sans-serif; font-size:13px; font-weight:300;
+  line-height:1.7; color:rgba(255,253,248,0.6);
+  max-width:380px; margin-bottom:32px;
+}
+.hero-actions { display:flex; gap:12px; align-items:center; }
+
+/* Glass button */
+.btn-glass {
+  font-family:'Jost',sans-serif; font-size:11px; font-weight:400;
+  letter-spacing:0.13em; text-transform:uppercase;
+  color:rgba(255,253,248,0.92);
+  background:rgba(255,253,248,0.1);
+  backdrop-filter:blur(16px) saturate(1.2);
+  -webkit-backdrop-filter:blur(16px) saturate(1.2);
+  border:1px solid rgba(255,255,255,0.18);
+  padding:14px 32px; border-radius:999px; cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);
+  transition:all 0.22s ease;
+}
+.btn-glass:hover { background:rgba(255,253,248,0.18); transform:scale(1.04); }
+
+.btn-link {
+  font-family:'Jost',sans-serif; font-size:11px; font-weight:300;
+  letter-spacing:0.1em; text-transform:uppercase;
+  color:rgba(255,253,248,0.5); background:none; border:none;
+  cursor:pointer; transition:color 0.2s;
+}
+.btn-link:hover { color:rgba(255,253,248,0.85); }
+
+/* ── Right info card (glass) ── */
+.hero-card {
+  background:rgba(39,63,61,0.52);
+  backdrop-filter:blur(18px) saturate(1.3);
+  -webkit-backdrop-filter:blur(18px) saturate(1.3);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px; padding:22px 22px;
+  min-width:200px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.07), 0 8px 32px rgba(0,0,0,0.18);
+}
+.card-stat { margin-bottom:16px; }
+.card-stat:last-child { margin-bottom:0; }
+.card-stat-val {
+  font-family:'Against',serif; font-size:32px; color:#fffdf8;
+  line-height:1; margin-bottom:2px;
+}
+.card-stat-lbl {
+  font-family:'Jost',sans-serif; font-size:10px; font-weight:300;
+  letter-spacing:0.1em; text-transform:uppercase;
+  color:rgba(255,253,248,0.45);
+}
+.card-divider { height:1px; background:rgba(255,255,255,0.08); margin:14px 0; }
+
+/* ── Scroll indicator ── */
+.scroll-hint {
+  position:absolute; bottom:52px; right:44px; z-index:5;
+  display:flex; flex-direction:column; align-items:center; gap:5px;
+  writing-mode:vertical-rl; text-orientation:mixed;
+}
+.scroll-hint span {
+  font-family:'Jost',sans-serif; font-size:9px; font-weight:400;
+  letter-spacing:0.16em; text-transform:uppercase;
+  color:rgba(255,253,248,0.3);
+}
+.scroll-line {
+  width:1px; height:40px;
+  background:linear-gradient(to bottom, rgba(255,253,248,0.25), transparent);
+  animation:scrollpulse 2s ease-in-out infinite;
+}
+/* Add extra content below hero so scroll works */
+.scroll-content {
+  min-height:60vh; background:#1e3232;
+  display:flex; align-items:center; justify-content:center;
+}
+</style>
+</head>
+<body>
+<div class="hero">
+
+  <!-- Parallax BG -->
+  <div class="hero-bg" id="heroBg"></div>
+
+<!-- Main content -->
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="overline">Finca La Hermosa · Experiencias</div>
+      <div class="hero-h1">Cada experiencia,</div>
+      <div class="hero-h1-italic">diseñada para ti.</div>
+      <p class="hero-desc">Bodas, retiros, team buildings, estancias y experiencias únicas. Explora los paquetes y encuentra el que se ajusta a tu momento.</p>
+      <div class="hero-actions">
+        <button class="btn-glass">Explorar paquetes</button>
+        <button class="btn-link">Conocer la finca →</button>
+      </div>
+    </div>
+
+    <!-- Info card -->
+    <div class="hero-card" style="height:269px; margin-bottom:80px;">
+      <div class="card-stat">
+        <div class="card-stat-val">+25</div>
+        <div class="card-stat-lbl">Años de historia</div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="card-stat">
+        <div class="card-stat-val">5</div>
+        <div class="card-stat-lbl">Tipos de experiencia</div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="card-stat">
+        <div class="card-stat-val">120</div>
+        <div class="card-stat-lbl">Invitados máx.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll -->
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</div>
+
+<!-- Extra space so scroll triggers parallax -->
+<div class="scroll-content"></div>
+
+<script>
+  const bg = document.getElementById('heroBg');
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const moveY = scrollY * 0.45;
+        bg.style.transform = `translateY(${moveY}px) scale(1.08)`;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+</script>
+</body>
+</html>

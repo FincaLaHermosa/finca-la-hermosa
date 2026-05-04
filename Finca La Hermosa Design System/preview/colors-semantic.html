@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--color-crema-clara); padding: 28px 32px; }
+.row { display:flex; gap:0; }
+.section { flex:1; padding: 20px 24px; }
+.s1 { background: var(--color-crema-clara); }
+.s2 { background: var(--color-crema-calida); }
+.s3 { background: var(--color-verde-finca); }
+.s4 { background: var(--color-carbon); }
+.overline { font-family: var(--font-body); font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px; }
+.title { font-family: var(--font-editorial); font-size:20px; font-weight:300; line-height:1.3; margin-bottom:6px; }
+.body  { font-family: var(--font-body); font-size:12px; font-weight:300; line-height:1.7; }
+.light .overline, .light .title, .light .body { color: var(--color-texto-cuerpo); }
+.light .overline { color: var(--color-terracota); }
+.dark  .overline { color: var(--color-terracota-light); }
+.dark  .title    { color: var(--color-crema-clara); }
+.dark  .body     { color: rgba(255,253,248,0.7); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="section s1 light">
+      <div class="overline">Sección clara</div>
+      <div class="title">Crema clara #fffdf8</div>
+      <div class="body">Fondo principal del sitio</div>
+    </div>
+    <div class="section s2 light">
+      <div class="overline">Sección alterna</div>
+      <div class="title">Crema cálida #f5f0e8</div>
+      <div class="body">Fondos de secciones alternas</div>
+    </div>
+    <div class="section s3 dark">
+      <div class="overline">Sección verde</div>
+      <div class="title">Verde Finca #2d4949</div>
+      <div class="body">Fondos oscuros y footer</div>
+    </div>
+    <div class="section s4 dark" style="background:var(--color-terracota)">
+      <div class="overline" style="color:rgba(255,253,248,0.7)">Sección acento</div>
+      <div class="title" style="color:#fffdf8">Terracota #c07a5a</div>
+      <div class="body" style="color:rgba(255,253,248,0.75)">Énfasis, CTAs, detalles</div>
+    </div>
+  </div>
+</body>
+</html>

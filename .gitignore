@@ -1,0 +1,16 @@
+# Archivos comprimidos
+*.zip
+
+# Referencias visuales (imágenes grandes de referencia, no son assets del proyecto)
+ejemplos estilo de sitio web/
+
+# Node / Next.js (cuando se cree el proyecto)
+node_modules/
+.next/
+.env
+.env.local
+.env.production
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
