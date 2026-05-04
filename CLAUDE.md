@@ -52,8 +52,21 @@ Generar propuestas visuales del sitio usando Claude Design antes de construir en
 - Estructura de 7 rutas públicas + `/admin`
 - Modelo de datos Supabase con 9 tablas definidas
 
+### Estado actual de Fase 4
+- Prompt de Claude Design para página de inicio (/) listo y validado — cubre los 8 actos del home en orden exacto al plan aprobado
+- Estrategia: página por página en Claude Design; contexto del design system se da una vez, cada página siguiente es solo un mensaje corto con su estructura
+- Siguiente acción: pegar el prompt en Claude Design y traer el resultado para aprobación
+
+### Orden de diseño en Claude Design
+1. `/` Inicio — prompt listo ✅
+2. `/experiencias` — pendiente de describir
+3. `/espacios` — pendiente
+4. `/nosotros` — pendiente
+5. `/faq` — pendiente
+6. `/cotizar` — pendiente
+
 ### Entregable esperado de Fase 4
-Propuestas visuales (Claude Design) de: hero principal, sección de tipos de experiencia, cards de paquetes, cotizador embebido, CTA final dark. Al aprobar → avanzar a Fase 5 (GitHub repo) y Fase 6 (construcción en código).
+Propuestas visuales aprobadas de las 6 páginas públicas. Al aprobar → avanzar a Fase 5 (GitHub repo) y Fase 6 (construcción en código).
 
 ### Criterios y límites
 - Identidad visual cerrada: no proponer paletas ni tipografías alternativas
@@ -451,6 +464,7 @@ eventos_confirmados   (id, fecha_inicio, fecha_fin, tipo, notas, created_at)
 
 ## Historial de cambios
 
+`2026-05-04` — Prompt de Claude Design para página de inicio listo: 8 actos completos en orden fiel al plan aprobado. Estrategia de diseño página por página definida. FOCO ACTIVO actualizado con estado de Fase 4 y orden de diseño.
 `2026-05-04` — Arquitectura del sitio web aprobada (7 rutas + admin). Stack técnico completo definido. Sistema de cotización automatizada y modelo de datos Supabase (9 tablas) documentados. Fases del proyecto reordenadas según flujo /arqweb. FOCO ACTIVO actualizado a Fase 4 (diseño visual). Ruta de assets SVG corregida a `Finca La Hermosa Design System/assets/`. Referencias visuales agregadas.
 `2026-05-03` — Tipografía actualizada: Poppins → Jost. Ruta del design system actualizada a carpeta extraída. Poppins marcado como descartado en decisiones.
 `2026-05-02` — Sistema de diseño completo integrado. Paleta corregida a valores exactos del design system. Sección expandida con voz/tono, tipografía, componentes, iconografía y fotografía.
