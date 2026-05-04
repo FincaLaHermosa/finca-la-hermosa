@@ -53,13 +53,17 @@ Generar propuestas visuales del sitio usando Claude Design antes de construir en
 - Modelo de datos Supabase con 9 tablas definidas
 
 ### Estado actual de Fase 4
-- Prompt de Claude Design para página de inicio (/) listo y validado — cubre los 8 actos del home en orden exacto al plan aprobado
-- Estrategia: página por página en Claude Design; contexto del design system se da una vez, cada página siguiente es solo un mensaje corto con su estructura
-- Siguiente acción: pegar el prompt en Claude Design y traer el resultado para aprobación
+- Prototipo HTML/CSS/JS funcional de la página de inicio en `sitio/index.html` — single-file, ~1350 líneas, 8 actos completos
+- Custom scroll system (snap por sección con easeInOutCubic 950ms), animaciones `txt-reveal` con IntersectionObserver, navbar pill glassmorphism
+- S2 (Experiencias): tabs centrados, layout 56/44 con imagen 16:9 (420px), título Cormorant `clamp(3.2rem,5.5vw,5.4rem)`
+- S4 (Cómo funciona): timeline horizontal con barra de progreso 5s (verde→terracota), dots crecen 3× secuencialmente
+- S7 (Testimonios): post-it cards con rotación, pin y sombra multilayer
+- Mobile/responsive deferred al final de Fase 4
+- Siguiente acción: replicar lógica del home a las 5 páginas restantes
 
 ### Orden de diseño en Claude Design
-1. `/` Inicio — prompt listo ✅
-2. `/experiencias` — pendiente de describir
+1. `/` Inicio — prototipo HTML funcional ✅
+2. `/experiencias` — pendiente
 3. `/espacios` — pendiente
 4. `/nosotros` — pendiente
 5. `/faq` — pendiente
@@ -97,6 +101,7 @@ Propuestas visuales aprobadas de las 6 páginas públicas. Al aprobar → avanza
 | 3 | Arquitectura | Estructura de páginas, secciones, modelo de datos, stack | ✅ Completada | Emanuel |
 | 4 | Diseño visual | Propuestas en Claude Design, aprobación de dirección visual | 🔄 En curso | Emanuel |
 | 5 | GitHub / repo base | Crear repo, estructura Next.js, variables de entorno | ⏳ Pendiente | Emanuel |
+| 5.5 | Inventario de contenido editable | Mapeo `Ubicación → Tipo (estático/Supabase/config) → Tabla.campo` para cada texto/imagen del sitio | ⏳ Pendiente | Emanuel |
 | 6 | Construcción en código | Sitio público + panel /admin + conexión Supabase | ⏳ Pendiente | Emanuel |
 | 7 | Retoques visuales | Refinamiento, responsive, animaciones | ⏳ Pendiente | Emanuel |
 | 8 | Vercel + deploy | Despliegue, dominio, variables de producción | ⏳ Pendiente | Emanuel |
@@ -464,6 +469,7 @@ eventos_confirmados   (id, fecha_inicio, fecha_fin, tipo, notas, created_at)
 
 ## Historial de cambios
 
+`2026-05-04` — Prototipo HTML/CSS/JS de la página de inicio funcional en `sitio/index.html`: 8 actos completos, custom scroll snap, animaciones IntersectionObserver, S2 layout 56/44 con imagen 16:9, S4 timeline horizontal con barra de progreso 5s, S7 post-it cards. Fase 5.5 (Inventario de contenido editable) agregada como hito explícito entre Fase 5 y Fase 6.
 `2026-05-04` — Prompt de Claude Design para página de inicio listo: 8 actos completos en orden fiel al plan aprobado. Estrategia de diseño página por página definida. FOCO ACTIVO actualizado con estado de Fase 4 y orden de diseño.
 `2026-05-04` — Arquitectura del sitio web aprobada (7 rutas + admin). Stack técnico completo definido. Sistema de cotización automatizada y modelo de datos Supabase (9 tablas) documentados. Fases del proyecto reordenadas según flujo /arqweb. FOCO ACTIVO actualizado a Fase 4 (diseño visual). Ruta de assets SVG corregida a `Finca La Hermosa Design System/assets/`. Referencias visuales agregadas.
 `2026-05-03` — Tipografía actualizada: Poppins → Jost. Ruta del design system actualizada a carpeta extraída. Poppins marcado como descartado en decisiones.
