@@ -15,7 +15,7 @@ Diseño visual página por página en HTML/CSS/JS vanilla antes de migrar a Next
 | `/` Inicio | `sitio/index.html` | ✅ Completo (8 secciones, snap-scroll) |
 | `/experiencias` | `sitio/experiencias.html` | ✅ Completo (catálogo filtrable, add-ons) |
 | `/espacios` | `sitio/espacios.html` | ✅ Completo (galería editorial, lightbox) |
-| `/nosotros` | `sitio/nosotros.html` | ⏳ Pendiente |
+| `/nosotros` | `sitio/nosotros.html` | ✅ Completo (hero, historia, valores, timeline, equipo glass cards, promesa) |
 | `/faq` | `sitio/faq.html` | ⏳ Pendiente |
 | `/cotizar` | `sitio/cotizar.html` | ⏳ Pendiente |
 
@@ -149,5 +149,6 @@ Casa principal (6 hab) · 2 jardines · Salón 22×14 m · Terraza 3.5 m · Albe
 
 ## ★ Historial
 
+`2026-05-05` — `nosotros.html` completo: 7 secciones (hero split, historia editorial, valores dark, timeline, equipo glass cards verde, promesa, CTA). Orden: valores → timeline. Cards de equipo: imagen full + glassmorphism + fondo verde degradado. Skill frontend-design activar siempre por defecto en este proyecto.
 `2026-05-05` — Fase 4 avanza: `experiencias.html` (catálogo filtrable 6 paquetes + add-ons) y `espacios.html` (galería editorial asimétrica + lightbox) completados. Nav de `index.html` corregido con links reales. CLAUDE.md comprimido de 478 → ~180 líneas.
 `2026-05-04` — Prototipo `index.html` completo (8 secciones snap-scroll). Arquitectura, stack, cotizador y modelo de datos definidos.
