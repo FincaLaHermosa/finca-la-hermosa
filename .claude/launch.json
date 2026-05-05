@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "finca-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "sitio", "-p", "3333", "--no-clipboard"],
+      "port": 3333
+    }
+  ]
+}

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espacios — Finca La Hermosa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Against'; src:url('fonts/against-regular.otf') format('opentype'); }
+
+:root {
+  --crema:#fffdf8; --crema-warm:#f5f0e8; --crema-border:#ede6d6;
+  --verde:#2d4949; --verde-dark:#1e3232; --verde-mid:#4a6e6e;
+  --terracota:#c07a5a; --terra-light:#e8c4ad;
+  --body-clr:#5a5040; --muted:#8c7d68; --carbon:#1a1a1a;
+  --ease-out:cubic-bezier(0.22,1,0.36,1);
+  --ease-snap:cubic-bezier(0.76,0,0.24,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr);overflow-x:hidden;}
+
+/* NAV */
+#site-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;padding:14px 24px;pointer-events:none;}
+.nav-pill{width:100%;max-width:1500px;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-radius:999px;background:rgba(18,28,24,0.12);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 32px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.07);transition:background 0.4s,border-color 0.4s;pointer-events:all;}
+.nav-pill.scrolled{background:rgba(28,46,44,0.92);border-color:rgba(255,255,255,0.13);box-shadow:0 8px 40px rgba(0,0,0,0.32);}
+.nav-logo img{height:32px;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,253,248,0.72);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:color 0.22s,border-color 0.22s;}
+.nav-links a:hover{color:#fffdf8;border-color:rgba(255,253,248,0.4);}
+.nav-links a.active{color:#fffdf8;border-color:rgba(192,122,90,0.6);}
+.nav-cta{font-family:'Jost',sans-serif;font-size:0.67rem;font-weight:300;letter-spacing:0.13em;text-transform:uppercase;color:#fffdf8;background:rgba(255,253,248,0.09);border:1px solid rgba(255,255,255,0.2);padding:8px 20px;border-radius:999px;cursor:pointer;transition:all 0.22s;}
+.nav-cta:hover{background:rgba(192,122,90,0.9);border-color:rgba(192,122,90,0.6);}
+
+/* WA */
+.wa-float{position:fixed;bottom:32px;right:32px;z-index:150;width:50px;height:50px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.26s,box-shadow 0.26s;text-decoration:none;}
+.wa-float:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(37,211,102,0.5);}
+
+/* BUTTONS */
+.btn-accent{font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:#fffdf8;background:var(--terracota);border:none;padding:13px 28px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.22s;}
+.btn-accent:hover{background:#a8664a;transform:scale(1.04);}
+.btn-ghost{font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,253,248,0.75);background:transparent;border:1px solid rgba(255,255,255,0.2);padding:13px 28px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.22s;}
+.btn-ghost:hover{color:#fffdf8;border-color:rgba(255,255,255,0.5);}
+.btn-primary{font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:#fffdf8;background:var(--verde);border:none;padding:13px 28px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.22s;}
+.btn-primary:hover{background:var(--verde-mid);transform:scale(1.04);}
+
+/* OVERLINE */
+.overline{font-family:'Jost',sans-serif;font-size:0.67rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;display:flex;align-items:center;gap:10px;}
+.overline::before{content:'';display:block;width:20px;height:1px;flex-shrink:0;}
+.overline-dark{color:var(--terracota);}
+.overline-dark::before{background:var(--terra-light);}
+.overline-light{color:rgba(232,196,173,0.8);}
+.overline-light::before{background:rgba(232,196,173,0.5);}
+
+/* REVEAL */
+.txt-reveal{opacity:0;transform:translateY(28px);transition:opacity 0.85s var(--ease-snap),transform 0.85s var(--ease-snap);}
+.txt-reveal.in{opacity:1;transform:translateY(0);}
+.txt-reveal[data-d="1"]{transition-delay:0.10s;}
+.txt-reveal[data-d="2"]{transition-delay:0.22s;}
+.txt-reveal[data-d="3"]{transition-delay:0.36s;}
+.txt-reveal[data-d="4"]{transition-delay:0.50s;}
+.img-reveal{position:relative;overflow:hidden;}
+.img-reveal .reveal-cover{position:absolute;inset:0;z-index:2;background:var(--verde-dark);transform:translateY(0);transition:transform 1.3s var(--ease-snap);}
+.img-reveal.in .reveal-cover{transform:translateY(-100%);}
+.img-reveal .img-bg{transform:scale(1.08);transition:transform 1.6s var(--ease-snap);}
+.img-reveal.in .img-bg{transform:scale(1);}
+
+/* ARCH LABEL */
+.arch-label{font-family:'Against',serif;font-size:clamp(5rem,8vw,9rem);line-height:0.9;letter-spacing:-0.03em;color:rgba(45,73,73,0.04);pointer-events:none;user-select:none;position:absolute;}
+
+/* ESPACIO CARDS */
+.espacio-card{position:relative;overflow:hidden;border-radius:10px;cursor:pointer;display:block;}
+.espacio-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.55s var(--ease-out);}
+.espacio-card:hover img{transform:scale(1.06);}
+.espacio-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,26,24,0.75) 0%,transparent 55%);opacity:0;transition:opacity 0.32s;}
+.espacio-card:hover .espacio-overlay{opacity:1;}
+.espacio-info{position:absolute;bottom:0;left:0;right:0;padding:22px 20px;transform:translateY(8px);transition:transform 0.32s var(--ease-out);}
+.espacio-card:hover .espacio-info{transform:translateY(0);}
+.espacio-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:#fffdf8;line-height:1.2;}
+.espacio-cap{font-family:'Jost',sans-serif;font-size:0.65rem;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,253,248,0.6);margin-top:4px;}
+.espacio-cta{font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:var(--terra-light);margin-top:8px;display:flex;align-items:center;gap:5px;}
+.espacio-cta svg{transition:transform 0.22s;}
+.espacio-card:hover .espacio-cta svg{transform:translateX(4px);}
+
+/* LIGHTBOX */
+#lightbox{position:fixed;inset:0;z-index:500;background:rgba(10,18,16,0.96);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+#lightbox.open{opacity:1;pointer-events:all;}
+#lightbox img{max-width:90vw;max-height:82vh;object-fit:contain;border-radius:6px;box-shadow:0 24px 80px rgba(0,0,0,0.5);}
+#lightbox-caption{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);text-align:center;}
+#lightbox-caption h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:#fffdf8;}
+#lightbox-caption p{font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;letter-spacing:0.1em;color:rgba(255,253,248,0.45);margin-top:4px;}
+#lb-close{position:absolute;top:24px;right:28px;background:transparent;border:1px solid rgba(255,255,255,0.18);border-radius:999px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,253,248,0.7);transition:all 0.22s;}
+#lb-close:hover{background:rgba(255,255,255,0.08);color:#fffdf8;}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:999px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,253,248,0.7);transition:all 0.22s;}
+#lb-prev:hover,#lb-next:hover{background:rgba(255,255,255,0.13);color:#fffdf8;}
+#lb-prev{left:24px;}
+#lb-next{right:24px;}
+#lb-counter{position:absolute;top:28px;left:50%;transform:translateX(-50%);font-family:'Jost',sans-serif;font-size:0.65rem;font-weight:300;letter-spacing:0.12em;color:rgba(255,253,248,0.35);}
+
+/* CTA CARDS */
+.cta-card{padding:28px 24px;background:rgba(255,255,255,0.07);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.11);border-radius:12px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;transition:background 0.26s,border-color 0.26s;}
+.cta-card:hover{background:rgba(255,255,255,0.11);border-color:rgba(255,255,255,0.18);}
+.cta-card-icon{width:26px;height:26px;color:rgba(255,253,248,0.7);}
+.cta-card-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;color:#fff;}
+.cta-card-sub{font-family:'Jost',sans-serif;font-size:0.75rem;font-weight:300;color:rgba(255,253,248,0.52);line-height:1.65;flex:1;}
+
+/* FOOTER */
+.site-footer{background:var(--verde-dark);padding:60px 80px 40px;}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:48px;margin-bottom:48px;}
+.footer-link-group{display:flex;flex-direction:column;gap:9px;}
+.footer-link-group a,.footer-link-group span{font-family:'Jost',sans-serif;font-size:0.82rem;font-weight:300;color:rgba(255,253,248,0.6);text-decoration:none;cursor:pointer;transition:color 0.2s;}
+.footer-link-group a:hover{color:#fffdf8;}
+.footer-head{font-family:'Jost',sans-serif;font-size:0.63rem;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,253,248,0.35);margin-bottom:14px;display:block;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:22px;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-family:'Jost',sans-serif;font-size:0.68rem;font-weight:300;color:rgba(255,253,248,0.3);}
+
+@media(prefers-reduced-motion:reduce){.txt-reveal{transition-duration:0.3s;}.img-reveal .reveal-cover{transition-duration:0.4s;}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="site-nav">
+  <div class="nav-pill" id="nav-pill">
+    <div class="nav-logo"><img src="assets/logo-blanco.svg" alt="Finca La Hermosa"></div>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="experiencias.html">Experiencias</a>
+      <a href="espacios.html" class="active">Espacios</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-cta" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Cotizar ahora</button>
+    </div>
+  </div>
+</nav>
+
+<!-- WA -->
+<a href="https://wa.me/5215500000000" class="wa-float" title="WhatsApp" target="_blank" rel="noopener">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+
+<!-- ══ S1 · HERO ══════════════════════════════════════════════ -->
+<section style="min-height:62vh;background:var(--verde-dark);display:flex;align-items:center;position:relative;overflow:hidden;padding-top:86px;">
+
+  <div class="img-reveal" style="position:absolute;right:0;top:0;bottom:0;width:55%;z-index:0;">
+    <div class="reveal-cover"></div>
+    <div class="img-bg" style="position:absolute;inset:0;">
+      <img src="assets/photo-jardines.jpg" alt="Espacios Finca La Hermosa" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;">
+    </div>
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,var(--verde-dark) 0%,transparent 38%);z-index:1;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(14,26,24,0.45) 100%);z-index:1;"></div>
+  </div>
+
+  <div style="font-family:'Against',serif;font-size:clamp(6rem,10vw,12rem);line-height:0.9;letter-spacing:-0.03em;color:rgba(255,253,248,0.03);position:absolute;right:-10px;bottom:0;pointer-events:none;user-select:none;">ESPACIOS</div>
+
+  <div style="position:relative;z-index:2;max-width:1500px;width:100%;margin:0 auto;padding:60px 52px 72px;">
+    <div style="max-width:540px;">
+      <div class="overline overline-light txt-reveal" style="margin-bottom:24px;">El venue</div>
+      <div class="txt-reveal" data-d="1" style="font-family:'Against',serif;font-size:clamp(3.8rem,6.2vw,6.8rem);line-height:0.92;letter-spacing:-0.025em;color:#fffdf8;">Un lugar,</div>
+      <div class="txt-reveal" data-d="2" style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5.2vw,5.6rem);font-style:italic;font-weight:300;line-height:1;color:var(--terracota);margin-top:4px;">infinitas posibilidades.</div>
+      <p class="txt-reveal" data-d="3" style="font-family:'Jost',sans-serif;font-size:0.92rem;font-weight:300;line-height:1.85;color:rgba(255,253,248,0.68);margin-top:28px;max-width:400px;">Cada rincón de la finca está pensado para vivirse plenamente. Explora los espacios y descubre cuál es el escenario perfecto para tu celebración.</p>
+      <div class="txt-reveal" data-d="4" style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;">
+        <a href="#galeria" class="btn-accent">Ver todos los espacios</a>
+        <button class="btn-ghost" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Cotizar ahora</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ S2 · HIGHLIGHTS — 3 NÚMEROS ══════════════════════════ -->
+<section style="background:var(--verde);padding:44px 0;">
+  <div style="max-width:1500px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;">
+
+    <div class="txt-reveal" style="text-align:center;padding:0 40px;border-right:1px solid rgba(255,255,255,0.1);">
+      <div style="font-family:'Against',serif;font-size:3.2rem;color:#fffdf8;letter-spacing:-0.02em;">14+</div>
+      <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,253,248,0.55);margin-top:6px;">Espacios únicos</div>
+    </div>
+    <div class="txt-reveal" data-d="1" style="text-align:center;padding:0 40px;border-right:1px solid rgba(255,255,255,0.1);">
+      <div style="font-family:'Against',serif;font-size:3.2rem;color:#fffdf8;letter-spacing:-0.02em;">2,500 m²</div>
+      <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,253,248,0.55);margin-top:6px;">de terreno natural</div>
+    </div>
+    <div class="txt-reveal" data-d="2" style="text-align:center;padding:0 40px;">
+      <div style="font-family:'Against',serif;font-size:3.2rem;color:#fffdf8;letter-spacing:-0.02em;">30 pers.</div>
+      <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,253,248,0.55);margin-top:6px;">capacidad máxima</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ S3 · GALERÍA EDITORIAL ══════════════════════════════ -->
+<section id="galeria" style="background:var(--crema);padding:100px 0 80px;position:relative;overflow:hidden;">
+
+  <div class="arch-label" style="right:-10px;top:40px;">GALERÍA</div>
+
+  <div style="max-width:1500px;margin:0 auto;padding:0 52px;">
+
+    <!-- Header -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px;gap:40px;">
+      <div>
+        <div class="overline overline-dark txt-reveal" style="margin-bottom:14px;">Espacios del venue</div>
+        <div class="txt-reveal" data-d="1" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,3.8rem);font-weight:300;color:var(--carbon);line-height:1.05;letter-spacing:-0.02em;">Cada espacio,<br><em style="color:var(--terracota);font-style:italic;">diseñado para vivirse.</em></div>
+      </div>
+      <div class="txt-reveal" data-d="2" style="flex-shrink:0;max-width:280px;text-align:right;">
+        <p style="font-family:'Jost',sans-serif;font-size:0.82rem;font-weight:300;line-height:1.75;color:var(--muted);">Haz clic en cualquier espacio para verlo en detalle.</p>
+      </div>
+    </div>
+
+    <!-- Grid editorial asimétrico -->
+    <div class="txt-reveal" data-d="3">
+
+      <!-- Fila 1: grande izquierda + 2 derechas -->
+      <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-bottom:16px;">
+
+        <div class="espacio-card" style="height:460px;" onclick="openLb(0)">
+          <img src="assets/photo-jardines.jpg" alt="Jardines">
+          <div class="espacio-overlay"></div>
+          <div class="espacio-info">
+            <div class="espacio-name">Jardines y áreas verdes</div>
+            <div class="espacio-cap">2 jardines · al aire libre</div>
+            <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-rows:1fr 1fr;gap:16px;">
+          <div class="espacio-card" style="height:222px;" onclick="openLb(1)">
+            <img src="assets/photo-alberca.jpg" alt="Alberca">
+            <div class="espacio-overlay"></div>
+            <div class="espacio-info">
+              <div class="espacio-name">Alberca</div>
+              <div class="espacio-cap">Area de convivencia</div>
+              <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            </div>
+          </div>
+          <div class="espacio-card" style="height:222px;" onclick="openLb(2)">
+            <img src="assets/photo-terraza.jpg" alt="Terraza">
+            <div class="espacio-overlay"></div>
+            <div class="espacio-info">
+              <div class="espacio-name">Terraza continua</div>
+              <div class="espacio-cap">3.5 m de ancho · cubierta</div>
+              <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Fila 2: 3 iguales -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px;">
+
+        <div class="espacio-card" style="height:280px;" onclick="openLb(3)">
+          <img src="assets/photo-salon.jpg" alt="Salón de eventos">
+          <div class="espacio-overlay"></div>
+          <div class="espacio-info">
+            <div class="espacio-name">Salón de eventos</div>
+            <div class="espacio-cap">22×14 m · 300 m²</div>
+            <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </div>
+        </div>
+
+        <div class="espacio-card" style="height:280px;" onclick="openLb(4)">
+          <img src="assets/photo-eventos.jpg" alt="Casa principal">
+          <div class="espacio-overlay"></div>
+          <div class="espacio-info">
+            <div class="espacio-name">Casa principal</div>
+            <div class="espacio-cap">6 habitaciones · hospedaje</div>
+            <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </div>
+        </div>
+
+        <div class="espacio-card" style="height:280px;" onclick="openLb(5)">
+          <img src="assets/photo-paquete.jpg" alt="Rooftop">
+          <div class="espacio-overlay"></div>
+          <div class="espacio-info">
+            <div class="espacio-name">Rooftop / Mirador</div>
+            <div class="espacio-cap">Vistas panorámicas</div>
+            <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Fila 3: pequeña + grande derecha -->
+      <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:16px;">
+
+        <div style="display:grid;grid-template-rows:1fr 1fr;gap:16px;">
+          <div class="espacio-card" style="height:200px;" onclick="openLb(6)">
+            <img src="assets/photo-hero.jpg" alt="Área de fogata">
+            <div class="espacio-overlay"></div>
+            <div class="espacio-info">
+              <div class="espacio-name">Área de fogata</div>
+              <div class="espacio-cap">Experiencia nocturna</div>
+              <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            </div>
+          </div>
+          <div class="espacio-card" style="height:200px;" onclick="openLb(7)">
+            <img src="assets/hero-wedding.jpg" alt="Puente colgante y jardín">
+            <div class="espacio-overlay"></div>
+            <div class="espacio-info">
+              <div class="espacio-name">Puente colgante</div>
+              <div class="espacio-cap">Entorno boscoso</div>
+              <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="espacio-card" style="height:416px;" onclick="openLb(8)">
+          <img src="assets/photo-cta-dark.jpg" alt="Circuito y entorno natural">
+          <div class="espacio-overlay"></div>
+          <div class="espacio-info">
+            <div class="espacio-name">Entorno natural y circuito</div>
+            <div class="espacio-cap">Ciclopista · bosque · senderos</div>
+            <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div><!-- /txt-reveal -->
+  </div>
+</section>
+
+
+<!-- ══ S4 · LISTA COMPLETA DE ACTIVOS ══════════════════════ -->
+<section style="background:var(--crema-warm);padding:80px 0;position:relative;overflow:hidden;">
+
+  <div style="max-width:1500px;margin:0 auto;padding:0 52px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+
+      <div>
+        <div class="overline overline-dark txt-reveal" style="margin-bottom:16px;">Todo lo que incluye</div>
+        <div class="txt-reveal" data-d="1" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:300;color:var(--carbon);line-height:1.1;letter-spacing:-0.02em;margin-bottom:28px;">La finca completa,<br><em style="color:var(--terracota);font-style:italic;">a tu disposición.</em></div>
+        <p class="txt-reveal" data-d="2" style="font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;line-height:1.85;color:var(--body-clr);max-width:400px;">Cuando reservas Finca La Hermosa, todos los espacios son tuyos. Sin restricciones, sin horarios parciales.</p>
+      </div>
+
+      <div class="txt-reveal" data-d="2">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:x 12px 16px;">
+
+          <!-- Col 1 -->
+          <div style="display:flex;flex-direction:column;gap:14px;padding-right:28px;border-right:1px solid var(--crema-border);">
+            <div style="display:flex;align-items:flex-start;gap:12px;" class="txt-reveal">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Casa principal</div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">6 habitaciones · hospedaje</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">2 jardines amplios</div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Áreas verdes y descanso</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Salón de eventos</div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">22×14 m · add-on disponible</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Terraza continua</div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">3.5 m de ancho</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Alberca</div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Con área de convivencia</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Rooftop / Mirador</div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Vistas panorámicas</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Col 2 -->
+          <div style="display:flex;flex-direction:column;gap:14px;padding-left:28px;">
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Café pequeño</div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Espacio de descanso interior</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Puente colgante</div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">En entorno boscoso</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Área de fogata</div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Add-on disponible</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Columpio alto</div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Atracción única del venue</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Asador</div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Área exterior equipada</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Circuito tipo ciclopista</div>
+                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Sendero natural en el bosque</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ S5 · CTA FINAL DARK ══════════════════════════════════ -->
+<section id="cta-section" style="background:#0d1918;padding:100px 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;z-index:0;">
+    <img src="assets/photo-cta-dark.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.18;">
+    <div style="position:absolute;inset:0;background:linear-gradient(160deg,#1e3232 0%,#2d4949 30%,#1a2a1a 65%,#0e1e1e 100%);opacity:0.88;"></div>
+  </div>
+
+  <div style="position:relative;z-index:1;max-width:1500px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div class="overline overline-light txt-reveal">Reserva tu fecha</div>
+      <div class="txt-reveal" data-d="1">
+        <div style="font-family:'Against',serif;font-size:clamp(3.2rem,5.5vw,6rem);line-height:0.92;letter-spacing:-0.025em;color:#fffdf8;">La finca te espera,</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,4.5vw,5rem);font-style:italic;font-weight:300;line-height:1;color:var(--terracota);margin-top:6px;">¿cuándo celebramos?</div>
+      </div>
+      <p class="txt-reveal" data-d="2" style="font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;line-height:1.85;color:rgba(255,253,248,0.62);max-width:360px;">Cotiza tu evento, agenda una visita o escríbenos directo por WhatsApp. Respuesta en menos de 24 horas.</p>
+    </div>
+
+    <div class="txt-reveal" data-d="2" style="display:flex;flex-direction:column;gap:14px;">
+      <div class="cta-card">
+        <svg class="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        <div class="cta-card-title">Cotizar en línea</div>
+        <p class="cta-card-sub">Cuéntanos sobre tu evento y recibe una propuesta con PDF personalizado.</p>
+        <button class="btn-accent" style="font-size:0.65rem;padding:10px 20px;">Cotizar ahora</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div class="cta-card">
+          <svg class="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <div class="cta-card-title">Agendar visita</div>
+          <p class="cta-card-sub">Ven a conocer la finca antes de decidir.</p>
+          <button class="btn-accent" style="font-size:0.65rem;padding:10px 20px;">Agendar</button>
+        </div>
+        <div class="cta-card">
+          <svg class="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <div class="cta-card-title">WhatsApp</div>
+          <p class="cta-card-sub">Respuesta rápida y directa.</p>
+          <button style="padding:10px 20px;background:#25D366;color:#fff;border:none;border-radius:999px;font-family:'Jost',sans-serif;font-size:0.65rem;font-weight:300;letter-spacing:0.09em;text-transform:uppercase;cursor:pointer;transition:opacity 0.22s;" onmouseenter="this.style.opacity='0.85'" onmouseleave="this.style.opacity='1'">Escribir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <img src="assets/logo-blanco.svg" alt="Finca La Hermosa" style="height:36px;margin-bottom:16px;opacity:0.9;">
+      <p style="font-family:'Jost',sans-serif;font-size:0.78rem;font-weight:300;color:rgba(255,253,248,0.45);line-height:1.75;max-width:220px;">Una finca familiar convertida en destino de experiencias. Naturaleza, hospitalidad y celebración.</p>
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <a href="#" style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,253,248,0.15);display:flex;align-items:center;justify-content:center;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(255,253,248,0.35)'" onmouseleave="this.style.borderColor='rgba(255,253,248,0.15)'"><span style="font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:300;color:rgba(255,253,248,0.4);">ig</span></a>
+        <a href="#" style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,253,248,0.15);display:flex;align-items:center;justify-content:center;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(255,253,248,0.35)'" onmouseleave="this.style.borderColor='rgba(255,253,248,0.15)'"><span style="font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:300;color:rgba(255,253,248,0.4);">fb</span></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-head">Navegación</span>
+      <div class="footer-link-group">
+        <a href="index.html">Inicio</a>
+        <a href="experiencias.html">Experiencias</a>
+        <a href="espacios.html">Espacios</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-head">Experiencias</span>
+      <div class="footer-link-group">
+        <span>Eventos Sociales</span>
+        <span>Corporativos</span>
+        <span>Retiros</span>
+        <span>Estancia Privada</span>
+        <span>One Day Experience</span>
+      </div>
+    </div>
+    <div>
+      <span class="footer-head">Contacto</span>
+      <div class="footer-link-group">
+        <span>+52 (55) 0000-0000</span>
+        <span>hola@fincalahermosa.com</span>
+        <span style="line-height:1.6;">Isidro Fabela, Estado de México</span>
+        <button class="btn-accent" style="margin-top:8px;font-size:0.65rem;padding:10px 20px;">Agendar visita</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Finca La Hermosa. Todos los derechos reservados.</p>
+    <p class="footer-copy">Privacidad · Términos</p>
+  </div>
+</footer>
+
+
+<!-- ══ LIGHTBOX ══════════════════════════════════════════════ -->
+<div id="lightbox">
+  <button id="lb-close" onclick="closeLb()" aria-label="Cerrar">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <div id="lb-counter"></div>
+  <button id="lb-prev" onclick="lbNav(-1)" aria-label="Anterior">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+  </button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next" onclick="lbNav(1)" aria-label="Siguiente">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </button>
+  <div id="lightbox-caption">
+    <h3 id="lb-name"></h3>
+    <p id="lb-cap"></p>
+  </div>
+</div>
+
+
+<script>
+/* NAV */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav-pill').classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+/* REVEAL */
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.txt-reveal').forEach(el => el.classList.add('in'));
+      e.target.querySelectorAll('.img-reveal').forEach(el => setTimeout(() => el.classList.add('in'), 120));
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('section').forEach(s => obs.observe(s));
+setTimeout(() => {
+  const hero = document.querySelector('section');
+  if (hero) {
+    hero.querySelectorAll('.txt-reveal').forEach(el => el.classList.add('in'));
+    hero.querySelectorAll('.img-reveal').forEach(el => el.classList.add('in'));
+  }
+}, 180);
+
+/* LIGHTBOX */
+const espacios = [
+  { src: 'assets/photo-jardines.jpg',  name: 'Jardines y áreas verdes',   cap: '2 jardines · espacios al aire libre' },
+  { src: 'assets/photo-alberca.jpg',   name: 'Alberca',                   cap: 'Área de convivencia y descanso' },
+  { src: 'assets/photo-terraza.jpg',   name: 'Terraza continua',          cap: '3.5 m de ancho · cubierta' },
+  { src: 'assets/photo-salon.jpg',     name: 'Salón de eventos',          cap: '22×14 m · 300 m² · cocineta' },
+  { src: 'assets/photo-eventos.jpg',   name: 'Casa principal',            cap: '6 habitaciones · hospedaje' },
+  { src: 'assets/photo-paquete.jpg',   name: 'Rooftop / Mirador',         cap: 'Vistas panorámicas del entorno' },
+  { src: 'assets/photo-hero.jpg',      name: 'Área de fogata',            cap: 'Experiencia nocturna · add-on' },
+  { src: 'assets/hero-wedding.jpg',    name: 'Puente colgante',           cap: 'En entorno boscoso natural' },
+  { src: 'assets/photo-cta-dark.jpg',  name: 'Entorno natural y circuito', cap: 'Ciclopista · bosque · senderos' },
+];
+let lbIdx = 0;
+const lb = document.getElementById('lightbox');
+
+function openLb(i) {
+  lbIdx = i;
+  renderLb();
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+function lbNav(dir) {
+  lbIdx = (lbIdx + dir + espacios.length) % espacios.length;
+  renderLb();
+}
+function renderLb() {
+  const e = espacios[lbIdx];
+  document.getElementById('lb-img').src = e.src;
+  document.getElementById('lb-img').alt = e.name;
+  document.getElementById('lb-name').textContent = e.name;
+  document.getElementById('lb-cap').textContent = e.cap;
+  document.getElementById('lb-counter').textContent = (lbIdx + 1) + ' / ' + espacios.length;
+}
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') lbNav(-1);
+  if (e.key === 'ArrowRight') lbNav(1);
+});
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+</script>
+</body>
+</html>

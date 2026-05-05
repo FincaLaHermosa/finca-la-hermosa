@@ -1,477 +1,153 @@
 # Finca La Hermosa
 
-## ★ Resumen ejecutivo
-Venue multifuncional en Estado de México orientado a experiencias memorables en naturaleza. Objetivo de negocio: convertirse en un sistema sólido de adquisición de clientes con experiencias paquetizadas, posicionado por estética y experiencia — no por precio.
+Venue multifuncional en Isidro Fabela, EDOMEX. Objetivo: sistema de adquisición de clientes con experiencias paquetizadas, posicionado por estética — no por precio.
+
+**Para Claude Code:** Decisiones de diseño cerradas — no proponer alternativas. Sí mejoras técnicas. Velocidad sobre perfección.
 
 ---
 
-## ★ Tipo y contexto del proyecto
+## ★ FOCO ACTIVO — Fase 4: Prototipos HTML
 
-**Dominio:** Híbrido — Desarrollo web + Estrategia comercial + Contenido
+Diseño visual página por página en HTML/CSS/JS vanilla antes de migrar a Next.js.
 
-**Contexto:** Profesional-personal — negocio propio, cliente directo
+| Página | Archivo | Estado |
+|--------|---------|--------|
+| `/` Inicio | `sitio/index.html` | ✅ Completo (8 secciones, snap-scroll) |
+| `/experiencias` | `sitio/experiencias.html` | ✅ Completo (catálogo filtrable, add-ons) |
+| `/espacios` | `sitio/espacios.html` | ✅ Completo (galería editorial, lightbox) |
+| `/nosotros` | `sitio/nosotros.html` | ⏳ Pendiente |
+| `/faq` | `sitio/faq.html` | ⏳ Pendiente |
+| `/cotizar` | `sitio/cotizar.html` | ⏳ Pendiente |
 
-**Orientación para Claude Code:**
-Proyecto empresarial propio. Priorizar velocidad de ejecución, diferenciación creativa y coherencia de marca. Las decisiones de diseño están cerradas — no proponer alternativas a la identidad visual. Sí proponer mejoras técnicas y de estructura.
+**Patrones establecidos en `sitio/index.html` (reusar en todas las páginas):**
+- CSS tokens en `:root` (cremas, verdes, terracota, ease curves)
+- Nav pill glassmorphism + `.scrolled` state
+- `.txt-reveal` + IntersectionObserver para fade-in por sección
+- `.img-reveal` con cover que sube al entrar viewport
+- `.btn-primary/.btn-accent/.btn-ghost/.btn-outline-dark`
+- `.overline-dark / .overline-light`
+- `.arch-label` (texto Against de fondo decorativo)
+- `.cta-card` para sección final dark
+- Footer HTML idéntico en todas las páginas
 
----
-
-## ★ Contexto y objetivos
-
-- **Objetivo principal:** Construir sistema de adquisición de clientes + experiencias paquetizadas que generen leads constantes y conversión medible
-- **Cliente / usuario final:** Grupos de 25–30 personas buscando experiencias de escape: celebraciones, retiros, convivencias, campamentos
-- **Conversión principal:** Llenar formulario de cotización → recibir PDF personalizado por email + enlace wa.me
-- **Entregables definitivos:** Sitio web con CMS propio (Supabase), paquetes definidos, funnel digital operativo
-- **Hitos críticos:** Definición de paquetes y pricing → diseño visual (Fase 4 activa) → construcción en código → lanzamiento
-
----
-
-## ★ Subproyectos y frentes activos
-
-| Subproyecto | Descripción | Estado | Responsable |
-|-------------|-------------|--------|-------------|
-| Sitio web | Arquitectura aprobada — pasando a diseño visual (Fase 4) | 🔄 En desarrollo | Emanuel |
-| CMS con Supabase | Panel de administración custom con código | ⏳ Por iniciar | Emanuel |
-| Paquetes y pricing | Estructura de experiencias y precios escalables | ⏳ Pendiente | Emanuel |
-| Identidad visual | Branding, paleta, tipografías, sistema de diseño | ✅ Definido | Emanuel |
-| Funnel de adquisición | Leads → PDF personalizado → conversión medible | ⏳ Pendiente | Emanuel |
-| Estrategia de contenido | Redes sociales, narrativa de marca | ⏳ Pendiente | Emanuel |
+**Servidor preview:** `npx serve sitio -p 3333` — URLs sin `/sitio/` prefix (e.g. `localhost:3333/experiencias.html`)
 
 ---
 
-## ★ FOCO ACTIVO — Sitio web (Fase 4: Diseño visual)
+## ★ Fases del proyecto
 
-### Objetivo de esta fase
-Generar propuestas visuales del sitio usando Claude Design antes de construir en código. La arquitectura está aprobada — el siguiente paso es ver el diseño visual de las secciones clave para aprobar dirección antes de la Fase 6 (código).
-
-### Antecedentes y decisiones previas
-- Arquitectura completa aprobada en sesión 2026-05-04
-- Stack técnico aprobado: Next.js 15 + Tailwind CSS + Framer Motion + Embla Carousel + Supabase + Resend + React-PDF + React Hook Form + Zod
-- Sistema de cotización automatizado definido: formulario multi-step → check de disponibilidad en Supabase → PDF personalizado → Resend email + wa.me link
-- Cotizador dual: versión corta embebida en home (3–4 campos) + versión completa en `/cotizar` (multi-step con resumen lateral)
-- Estructura de 7 rutas públicas + `/admin`
-- Modelo de datos Supabase con 9 tablas definidas
-
-### Estado actual de Fase 4
-- Prototipo HTML/CSS/JS funcional de la página de inicio en `sitio/index.html` — single-file, ~1350 líneas, 8 actos completos
-- Custom scroll system (snap por sección con easeInOutCubic 950ms), animaciones `txt-reveal` con IntersectionObserver, navbar pill glassmorphism
-- S2 (Experiencias): tabs centrados, layout 56/44 con imagen 16:9 (420px), título Cormorant `clamp(3.2rem,5.5vw,5.4rem)`
-- S4 (Cómo funciona): timeline horizontal con barra de progreso 5s (verde→terracota), dots crecen 3× secuencialmente
-- S7 (Testimonios): post-it cards con rotación, pin y sombra multilayer
-- Mobile/responsive deferred al final de Fase 4
-- Siguiente acción: replicar lógica del home a las 5 páginas restantes
-
-### Orden de diseño en Claude Design
-1. `/` Inicio — prototipo HTML funcional ✅
-2. `/experiencias` — pendiente
-3. `/espacios` — pendiente
-4. `/nosotros` — pendiente
-5. `/faq` — pendiente
-6. `/cotizar` — pendiente
-
-### Entregable esperado de Fase 4
-Propuestas visuales aprobadas de las 6 páginas públicas. Al aprobar → avanzar a Fase 5 (GitHub repo) y Fase 6 (construcción en código).
-
-### Criterios y límites
-- Identidad visual cerrada: no proponer paletas ni tipografías alternativas
-- La arquitectura de páginas y secciones NO se reabre
-- Paquetes y precios aún son placeholder — no bloquean el diseño visual
-
-### Recursos disponibles
-- Design system completo: `Finca La Hermosa Design System/colors_and_type.css`
-- Assets SVG: `Finca La Hermosa Design System/assets/` (logos × 3 colores, isotipos × 3 colores)
-- Fuente display: `Finca La Hermosa Design System/fonts/against-regular.otf`
-- Prototipo HTML funcional: `Finca La Hermosa Design System/ui_kits/website/index.html`
-- Referencias de estilo: TUMA, REFORM, ARCH.MONO, CREACY
-
-### Próximos pasos
-1. Aprobar propuestas visuales de Claude Design
-2. Crear repositorio GitHub con Next.js 15 + Tailwind base (Fase 5)
-3. Configurar proyecto Supabase y aplicar schema (Fase 6 inicio)
-4. Definir paquetes y pricing (paralelo al desarrollo)
-
----
-
-## ★ Fases del proyecto global
-
-| # | Fase | Contenido | Estado | Responsable |
-|---|------|-----------|--------|-------------|
-| 1 | Estrategia | Propuesta de valor, tipologías, modelo de ingresos | ✅ Completada | Emanuel |
-| 2 | Identidad visual | Branding, paleta, tipografías, sistema de diseño | ✅ Completada | Emanuel |
-| 3 | Arquitectura | Estructura de páginas, secciones, modelo de datos, stack | ✅ Completada | Emanuel |
-| 4 | Diseño visual | Propuestas en Claude Design, aprobación de dirección visual | 🔄 En curso | Emanuel |
-| 5 | GitHub / repo base | Crear repo, estructura Next.js, variables de entorno | ⏳ Pendiente | Emanuel |
-| 5.5 | Inventario de contenido editable | Mapeo `Ubicación → Tipo (estático/Supabase/config) → Tabla.campo` para cada texto/imagen del sitio | ⏳ Pendiente | Emanuel |
-| 6 | Construcción en código | Sitio público + panel /admin + conexión Supabase | ⏳ Pendiente | Emanuel |
-| 7 | Retoques visuales | Refinamiento, responsive, animaciones | ⏳ Pendiente | Emanuel |
-| 8 | Vercel + deploy | Despliegue, dominio, variables de producción | ⏳ Pendiente | Emanuel |
-| 9 | Analytics / marketing | GTM, GA4, Meta Pixel, conversiones | ⏳ Pendiente | Emanuel |
-| 10 | Paquetes y pricing | Definición de experiencias y estructura comercial | 🔄 En curso | Emanuel |
+| # | Fase | Estado |
+|---|------|--------|
+| 1–3 | Estrategia + Identidad + Arquitectura | ✅ Completadas |
+| 4 | Diseño visual (prototipos HTML) | 🔄 En curso |
+| 5 | GitHub repo + Next.js base | ⏳ |
+| 5.5 | Inventario de contenido editable | ⏳ |
+| 6 | Construcción en código (Next.js) | ⏳ |
+| 7 | Responsive + retoques | ⏳ |
+| 8 | Vercel + deploy | ⏳ |
+| 9 | Analytics (GTM + GA4 + Meta Pixel) | ⏳ |
+| 10 | Paquetes y pricing definitivos | 🔄 En curso |
 
 ---
 
 ## ★ Stack técnico aprobado
 
-| Capa | Tecnología | Estado |
-|------|-----------|--------|
-| Framework | Next.js 15 (App Router) | Aprobado |
-| Styling | Tailwind CSS + variables CSS del design system | Aprobado |
-| Animaciones | Framer Motion (whileInView, AnimatePresence, staggerChildren) | Aprobado |
-| Carruseles | Embla Carousel | Aprobado |
-| CMS / Backend | Supabase (DB + Auth + Storage + Edge Functions) | Aprobado |
-| Email transaccional | Resend (gratis hasta 3K/mes) | Aprobado (Fase 1) |
-| WhatsApp | wa.me link con mensaje pre-armado | Aprobado (Fase 1, sin costo) |
-| PDFs | React-PDF o Puppeteer con plantilla CSS design tokens | Aprobado |
-| Formularios | React Hook Form + Zod | Aprobado |
-| Hosting | Vercel | Aprobado |
-| Analytics | GTM + GA4 + Meta Pixel (Instagram) | Pendiente de configurar |
+Next.js 15 (App Router) · Tailwind CSS · Framer Motion · Embla Carousel · Supabase (DB+Auth+Storage+Edge) · Resend (email, gratis 3K/mes) · React-PDF · React Hook Form + Zod · Vercel
 
 ---
 
-## Sistema de diseño
+## ★ Sistema de diseño
 
-**Estilo:** Minimalista, elegante, editorial tipo Apple. Fotografías full-bleed protagonistas. Glassmorphism en UI. Paleta cálida crema + verde oscuro + terracota.
+**Referencia completa:** `Finca La Hermosa Design System/colors_and_type.css`
+**Assets:** `Finca La Hermosa Design System/assets/` — logos y isotipos × 3 colores (blanco, verde, terracota)
 
-**Concepto de marca:** *"Un lugar donde los sueños se celebran."*
+**Tipografías:**
+- `Against Regular` — display/hero (local: `sitio/fonts/against-regular.otf`)
+- `Cormorant Garamond` — editorial serif, H2, cursivas emocionales
+- `Jost` — body, UI, nav, botones (Google Fonts)
 
-**Assets disponibles:** Carpeta `Finca La Hermosa Design System/` en la raíz del proyecto.
-Contiene: `colors_and_type.css` (tokens CSS listos), fuente `Against Regular`, logos SVG × 3 versiones de color, prototipo HTML funcional completo, previews HTML de cada componente.
-
----
-
-### Personalidad de marca
-
-| Rasgo | Descripción |
-|---|---|
-| Natural | Árboles, jardines, agua, fuego, cielo abierto |
-| Elegante | Refinado, limpio, nunca ostentoso |
-| Familiar | Cálido, humano, hospitalario |
-| Soñador | Nuevos comienzos, memoria, unión |
-| Versátil | Se adapta a cada tipo de evento |
-
----
-
-### Voz y tono
-
-- **Persona gramatical:** "tú" (segunda persona informal directa)
-- **Idioma:** Español. Formal-casual — no rígido, no coloquial
-- **Casing:** Navegación y overlines en MAYÚSCULAS. Títulos en sentence case con saltos de línea emocionales
-- **Emoji:** No se usan. Se prefieren íconos de línea delgada
-- **Palabras clave de marca:** celebrar · compartir · vivir · soñar · reunirse · descansar · naturaleza · experiencia · hospitalidad · jardines · momentos · recuerdos · encuentro · calma · belleza
-- **Evitar:** renta · barato · promoción · salón económico · todo incluido · paquete básico
-
-**Tono correcto:** *"Un espacio rodeado de naturaleza para celebrar, descansar y compartir momentos que se quedan en la memoria."*
-**Evitar:** ~~"¡El mejor lugar para tus eventos con alberca, salón y jardines!"~~
-
----
-
-### Paleta de colores
-
-| Token CSS | Valor | Uso |
-|---|---|---|
-| `--color-crema-clara` | `#fffdf8` | Fondo de página por defecto |
-| `--color-crema-calida` | `#f5f0e8` | Fondos de secciones alternas |
-| `--color-crema-media` | `#ede6d6` | Divisores, bordes |
-| `--color-verde-finca` | `#2d4949` | Color institucional principal — nav, botones CTA, footers |
-| `--color-verde-dark` | `#1e3232` | Footer bg, acentos profundos |
-| `--color-verde-light` | `#4a6e6e` | Hover states sobre verde |
-| `--color-terracota` | `#c07a5a` | Acento — íconos, overlines, cursivas, botones secundarios |
-| `--color-terracota-light` | `#e8c4ad` | Hover bg terracota, tags |
-| `--color-texto-cuerpo` | `#5a5040` | Todo el body copy — más cálido que negro |
-| `--color-texto-suave` | `#8c7d68` | Captions, meta, texto apagado |
-| `--color-carbon` | `#1a1a1a` | Títulos de alto contraste, énfasis |
-| `--color-frosted-header` | `rgba(39,63,61,0.78)` | Nav sticky en scroll — backdrop-blur: 12px |
-
-Secciones alternan: crema-clara ↔ crema-cálida. Secciones oscuras: verde-finca o carbon con overlay fotográfico.
-
----
-
-### Tipografías
-
-| Fuente | Rol | Uso |
-|---|---|---|
-| **Against Regular** | Display / Identidad | Títulos hero, frases CTA impactantes. Usar con moderación para máximo impacto |
-| **Cormorant Garamond** | Editorial Serif | H2 de sección, subtítulos, cursivas emocionales, pull quotes |
-| **Jost Light/Regular** | Body / UI Sans | Todo el body copy, nav links, botones, labels, descripciones |
-
-**Firma tipográfica** (patrón en todos los heroes):
+**Firma tipográfica** (todos los heroes):
 ```
-[Against — blanco, grande]        Cada experiencia,
-[Cormorant italic — terracota]    diseñada para ti
+Against blanco grande   →  "Cada experiencia,"
+Cormorant italic terra  →  "diseñada para ti."
 ```
 
-**Escala de tamaños:**
-- `--text-hero`: `clamp(3.5rem, 8vw, 7rem)` — Against hero
-- `--text-4xl`: `4rem` — H1 display
-- `--text-3xl`: `3rem` — H2 display
-- `--text-2xl`: `2.25rem` — H2 editorial
-- `--text-xl`: `1.75rem` — H3 / card headings
-- `--text-base`: `1rem` — body
+**Colores clave:**
+- Verde finca: `#2d4949` · Verde dark: `#1e3232` · Verde mid: `#4a6e6e`
+- Terracota: `#c07a5a` · Terra light: `#e8c4ad`
+- Crema: `#fffdf8` · Crema warm: `#f5f0e8` · Crema border: `#ede6d6`
+- Body text: `#5a5040` · Muted: `#8c7d68` · Carbon: `#1a1a1a`
+
+**Estilo:** Minimalista editorial tipo Apple · glassmorphism en nav · fotografía full-bleed · SVG stroke Lucide icons
+
+**Voz:** "tú" informal · español formal-casual · nav en MAYÚSCULAS · sin emojis
+Palabras OK: celebrar, compartir, naturaleza, experiencia, momentos, recuerdos
+Palabras NO: renta, barato, promoción, paquete básico, todo incluido
 
 ---
 
-### Layout y espaciado
+## ★ Arquitectura de rutas
 
-- **Ancho máximo de contenido:** ~1200px centrado
-- **Padding de sección:** 80–120px vertical — respiración generosa
-- **Grid:** 3 columnas para package cards · 4 columnas para feature cards · 2 columnas para split sections
-- **Aire:** Las secciones nunca se sienten apretadas. El espacio en blanco es intencional.
-
----
-
-### Componentes clave
-
-**Glassmorphism (nav sticky):**
-- `backdrop-filter: blur(12px)`
-- Color: `rgba(39, 63, 61, 0.78)` (verde-finca al 78% de opacidad)
-- Usos: navbar en scroll, overlay cards de CTA, overlays sobre imagen
-
-**Cards:**
-- Fondo: crema-clara
-- Sombra: `0 2px 8px rgba(45,73,73,0.08), 0 8px 24px rgba(45,73,73,0.06)`
-- Border radius: 8px (md) o 0 para full-bleed
-- Package cards: imagen arriba + cuerpo de contenido + botón CTA full-width
-
-**Border radius:**
-- `--radius-sm`: 4px (botones)
-- `--radius-md`: 8px (cards)
-- `--radius-lg`: 16px (hero overlays)
-- `--radius-pill`: 999px (tags/badges)
-
-**Animaciones e interacciones:**
-- Transiciones: sutiles, 260ms ease — nunca con rebote
-- Hover: cambio de color (verde → verde-light) o reducción de opacidad (0.8)
-- Botones: oscurecimiento leve en hover; sin transforms de escala
-- Scroll: parallax-lite en hero; fade-in por sección
-- Sin animaciones agresivas — la marca es calmada y refinada
-
-**Sistema de animaciones (Framer Motion):**
-
-| Tipo | Cuándo | Implementación |
-|------|--------|----------------|
-| Fade-in al scroll | Cada sección al entrar viewport | `whileInView` + IntersectionObserver |
-| Parallax-lite | Imágenes hero | CSS `transform` + scroll listener |
-| Cross-fade tabs | Cambio entre tipos de experiencia | `AnimatePresence` |
-| Hover lift | Cards de paquetes y espacios | CSS `transform: translateY` |
-| Stagger reveal | Listas de incluidos en paquetes | `staggerChildren` |
-| Carrusel suave | Espacios y testimonios | Embla Carousel |
-
-**Regla:** ninguna animación pasa de 420ms · ease nunca bouncy · respetar `prefers-reduced-motion`.
+**Públicas:** `/` · `/experiencias` · `/espacios` · `/nosotros` · `/faq` · `/cotizar` · `/cotizar/listo`
+**Admin:** `/admin/login` `/admin/paquetes` `/admin/espacios` `/admin/testimonios` `/admin/faq` `/admin/cotizaciones` `/admin/calendario` `/admin/config`
+**API:** `/api/cotizar` · `/api/disponibilidad?fecha=YYYY-MM-DD` · `/api/pdf/[id]`
 
 ---
 
-### Iconografía
+## ★ Sistema de cotización
 
-- **Estilo:** SVG stroke-based, peso delgado (~1.5px), minimal, orgánico. Nunca filled/solid.
-- **Librería de referencia:** Lucide icons (CDN): `https://unpkg.com/lucide@latest/dist/umd/lucide.min.js`
-- El **isotipo** (arco con motivo vegetal) funciona como: favicon, icono de redes, marca de agua, logo de footer.
+**Flujo:** tipo → fecha (check disponibilidad) → invitados → add-ons → contacto → PDF por Resend + link wa.me
+**Si fecha ocupada:** alerta + sugerencias ±3 días antes de continuar
+**PDF incluye:** nombre, fecha tentativa, precio calculado, 1–2 paquetes recomendados, CTA para visita
+**Leads:** Supabase tabla `cotizaciones` con estado `nuevo`
 
-**Assets SVG disponibles en `Finca La Hermosa Design System/assets/`:**
-- `logo-terracota.svg` — Wordmark completo en terracota
-- `logo-verde.svg` — Wordmark completo en verde finca
-- `logo-blanco.svg` — Wordmark completo en blanco
-- `isotipo-terracota.svg` — Solo isotipo en terracota
-- `isotipo-verde.svg` — Solo isotipo en verde finca
-- `isotipo-blanco.svg` — Solo isotipo en blanco
+**Cotizador dual:**
+- Corto: home S5 (3–4 campos embebidos)
+- Completo: `/cotizar` (multi-step + resumen lateral)
 
 ---
 
-### Fotografía
-
-- **Estilo:** Cálida, aspiracional, real — no muy saturada, no inmobiliaria
-- **Contenido:** Jardines con buena luz, alberca en contexto natural, salón preparado, terraza, flores, fuego, agua, caminos, personas conviviendo, tardes con luz cálida
-- **Tono de color:** Hora dorada, teroso, verdes naturales — sin tonos azul frío
-- La fotografía es esencial — la marca vive en sus imágenes
-- **Fase 1:** Placeholders con fotos reales de venues similares (Unsplash/Pexels curadas). Producción fotográfica del venue real se coordina en paralelo.
-
----
-
-## Arquitectura del sitio web (aprobada)
-
-### Rutas públicas
+## ★ Modelo de datos Supabase
 
 ```
-/                  Landing principal (80% del trabajo de conversión)
-/experiencias      Catálogo de paquetes + cotizador con tipo pre-seleccionado
-/espacios          Galería editorial de los activos del venue
-/nosotros          Historia familiar y diferenciadores
-/faq               Preguntas frecuentes con búsqueda y acordeón
-/cotizar           Cotizador completo multi-step
-/cotizar/listo     Pantalla de confirmación + opciones de contacto
-```
-
-### Rutas admin
-
-```
-/admin/login
-/admin/paquetes
-/admin/espacios
-/admin/testimonios
-/admin/faq
-/admin/cotizaciones     ← Inbox de leads
-/admin/calendario       ← Marcar fechas ocupadas
-/admin/config
-```
-
-### API routes
-
-```
-/api/cotizar            ← Recibe form, genera PDF, envía email
-/api/disponibilidad     ← Check fecha + sugerencias cercanas (±3 días)
-/api/pdf/[id]           ← Genera PDF on-demand
-```
-
-### Inicio — 8 actos de scroll-narrativa
-
-| # | Sección | Animación | Rol |
-|---|---------|-----------|-----|
-| 1 | Hero full-bleed | Parallax-lite + fade-in escalonado Against → Cormorant italic | Inspirar. CTA primario "Cotizar mi experiencia" |
-| 2 | Tipos de experiencia (tabs/pills) | Cross-fade de imagen + slide de contenido | Filtrar audiencia |
-| 3 | Espacios en un vistazo | Horizontal scroll con cards que crecen en hover | Mostrar venue sin saturar |
-| 4 | Cómo funciona (3 pasos) | Reveal numérico secuencial al scroll | Reducir fricción mental |
-| 5 | Cotizador embebido | Aparición progresiva de campos | Conversión principal in-page |
-| 6 | Paquetes destacados | Cards con hover lift + carrusel horizontal | Mostrar oferta |
-| 7 | Testimonios | Carrusel con auto-rotación sutil | Prueba social |
-| 8 | CTA final dark | Sección oscura con frosted overlay | Última oportunidad |
-
----
-
-## Sistema de cotización automatizada
-
-### Flujo
-1. Usuario llena cotizador (3–5 pasos): tipo de evento → fecha → check disponibilidad → invitados → add-ons → contacto
-2. Si fecha ocupada: alerta con sugerencias cercanas (±3 días) — debe elegir otra antes de continuar
-3. Si disponible: submit → Edge Function → identifica paquete óptimo → genera PDF → envía por Resend
-4. PDF incluye: nombre del usuario, fecha tentativa, precio calculado (invitados + add-ons), 1–2 alternativas de paquete, hoja final con CTA para agendar visita
-5. Lead queda en Supabase con estado `nuevo` para seguimiento manual
-
-### Sistema de disponibilidad
-- Tabla `eventos_confirmados` con fecha_inicio, fecha_fin, tipo, notas
-- Admin en `/admin/calendario` — vista mensual, click para marcar ocupado
-- Endpoint `/api/disponibilidad?fecha=YYYY-MM-DD` → `{ disponible: bool, sugerencias: [...] }`
-- Campo de fecha en cotizador hace fetch al endpoint en cada cambio (debounced)
-
-### PDF personalizado
-- Saludo con nombre del usuario
-- Fecha tentativa impresa + leyenda "sujeta a confirmación"
-- Precio total calculado automáticamente (invitados + add-ons)
-- 1–2 páginas con paquetes que aplican al usuario
-- Hoja final con próximo paso: link para agendar visita
-- Diseño editorial con foto fullbleed + datos del paquete
-
----
-
-## Modelo de datos Supabase
-
-```
-paquetes              (id, nombre, tipo, precio_base, incluidos[], imagen, visible, orden)
-add_ons               (id, nombre, precio, icono, visible)
-espacios              (id, nombre, descripcion, capacidad, fotos[], visible, orden)
-testimonios           (id, nombre, texto, tipo_evento, foto, visible)
-faq                   (id, pregunta, respuesta, categoria, orden, visible)
-seo                   (id, pagina, meta_title, meta_description, og_image)
-config                (id, whatsapp, instagram, facebook, email, direccion)
-cotizaciones          (id, nombre, email, telefono, tipo_evento, fecha, invitados,
-                       add_ons[], paquete_recomendado, pdf_url, estado, created_at)
-eventos_confirmados   (id, fecha_inicio, fecha_fin, tipo, notas, created_at)
+paquetes            (id, nombre, tipo, precio_base, incluidos[], imagen, visible, orden)
+add_ons             (id, nombre, precio, icono, visible)
+espacios            (id, nombre, descripcion, capacidad, fotos[], visible, orden)
+testimonios         (id, nombre, texto, tipo_evento, foto, visible)
+faq                 (id, pregunta, respuesta, categoria, orden, visible)
+seo                 (id, pagina, meta_title, meta_description, og_image)
+config              (id, whatsapp, instagram, facebook, email, direccion)
+cotizaciones        (id, nombre, email, telefono, tipo_evento, fecha, invitados, add_ons[], paquete_recomendado, pdf_url, estado, created_at)
+eventos_confirmados (id, fecha_inicio, fecha_fin, tipo, notas, created_at)
 ```
 
 ---
 
-## Activos del venue
+## ★ Modelo de ingresos
 
-- Casa principal (6 habitaciones)
-- 2 jardines amplios
-- Salón de eventos (~22 × 14 m)
-- Terraza continua (~3.5 m ancho)
-- Alberca
-- Rooftop / mirador
-- Café pequeño
-- Puente colgante
-- Área de fogata
-- Columpio alto
-- Asador
-- Estacionamiento
-- Circuito tipo ciclopista
-- Entorno boscoso
+**Tarifa base:** $13,000 MXN / día · 25–30 personas (jardines + alberca + casa + puente + estacionamiento + asador + staff)
+**Add-ons:** Salón +$8,000 · Fogata/Cine/Coffee break/AV: +$700 c/u
+**Paquetes actuales (placeholder):** Esencial $13K · Completo $21K · Premium $28K
 
 ---
 
-## Modelo de ingresos (base actual)
+## ★ Activos del venue
 
-**Tarifa base:** $13,000 MXN / día · 25–30 personas
-
-**Incluye:** Jardines, casa principal, alberca, puente colgante, estacionamiento, asador
-
-**Staff incluido:** Anfitrión principal + coordinadora de atención + asistente operativo
-
-**Add-ons:**
-- Salón de eventos + cocineta + mobiliario: +$8,000 MXN
-- Extras unitarios ($700 MXN c/u): fogata, cine al aire libre, coffee break, equipo audiovisual
-
-**Problema actual:** Sin paquetes definidos ni estructura comercial escalable. Resolver antes del lanzamiento web.
+Casa principal (6 hab) · 2 jardines · Salón 22×14 m · Terraza 3.5 m · Alberca · Rooftop/mirador · Café · Puente colgante · Fogata · Columpio · Asador · Estacionamiento · Circuito ciclopista · Entorno boscoso
 
 ---
 
-## Tipologías de uso
+## ★ Decisiones cerradas
 
-- **Eventos sociales:** graduaciones, cumpleaños, reuniones privadas, eventos familiares
-- **Eventos estructurados:** campamentos, retiros, actividades grupales
-- **Day-use:** grupos pequeños o medianos por día
-- **Hospedaje:** estancia por noche tipo Airbnb (en evaluación)
-
----
-
-## Decisiones tomadas (no reabrir)
-
-- Posicionamiento: experiencia + estética, no competencia por precio
-- Paleta de colores: verde-finca `#2d4949` + terracota `#c07a5a` + cremas `#fffdf8` / `#f5f0e8` (valores exactos del design system)
-- Tipografías: Against Regular / Cormorant Garamond / Jost (Poppins descartado)
-- Estilo: minimalista editorial tipo Apple con glassmorphism
-- Arquitectura de sitio: 7 rutas públicas + /admin (estructura aprobada en sesión 2026-05-04)
-- Backend/CMS: Supabase con código custom
-- Hosting: Vercel
-- Flujo de desarrollo: Claude Code → GitHub → Vercel
-- Cotizador dual: versión corta embebida en home + versión completa en /cotizar
-- Entrega de PDF Fase 1: Resend para email + botón wa.me (sin WhatsApp Business API por ahora)
-- Fotografía Fase 1: placeholders con fotos reales de venues similares (Unsplash/Pexels curadas); producción fotográfica real se coordina en paralelo
-- Galería /espacios: lightbox fullscreen (overlay con flechas + ESC); si no convence visualmente, alternar a carrusel horizontal
-- No saturar el venue — priorizar experiencia íntima sobre volumen
+- Stack: Next.js 15 + Supabase + Vercel + Resend + wa.me (sin WhatsApp Business API Fase 1)
+- Tipografías: Against / Cormorant / Jost (Poppins descartado)
+- `/espacios`: lightbox fullscreen implementado ✅
+- Fotografía Fase 1: placeholders Unsplash/Pexels curados
+- `colors_and_type.css` declara Poppins → actualizar a Jost antes de Fase 6
 
 ---
 
-## Principios del proyecto
+## ★ Historial
 
-- Diseñar experiencias, no rentar espacios
-- No competir por precio
-- Priorizar estética + funcionalidad en todo entregable
-- Construir marca, no solo operación
-- No saturar de gente — cuidar la experiencia
-
----
-
-## Referencias visuales del sitio
-
-- **TUMA** — venue natural editorial
-- **REFORM** — arquitectura premium, espaciado generoso
-- **ARCH.MONO** — numeración tipo (01)(02), editorial oscuro
-- **CREACY** — portafolio fotográfico, galería fullbleed
-
----
-
-## Riesgos abiertos
-
-- **Paquetes y precios sin definir** — `/experiencias` arranca con paquetes placeholder editables desde `/admin`
-- **`colors_and_type.css` declara Poppins** — actualizar a Jost antes de Fase 6
-- **Producción fotográfica** — bloqueante para lanzamiento real, no para desarrollo
-
----
-
-## Historial de cambios
-
-`2026-05-04` — Prototipo HTML/CSS/JS de la página de inicio funcional en `sitio/index.html`: 8 actos completos, custom scroll snap, animaciones IntersectionObserver, S2 layout 56/44 con imagen 16:9, S4 timeline horizontal con barra de progreso 5s, S7 post-it cards. Fase 5.5 (Inventario de contenido editable) agregada como hito explícito entre Fase 5 y Fase 6.
-`2026-05-04` — Prompt de Claude Design para página de inicio listo: 8 actos completos en orden fiel al plan aprobado. Estrategia de diseño página por página definida. FOCO ACTIVO actualizado con estado de Fase 4 y orden de diseño.
-`2026-05-04` — Arquitectura del sitio web aprobada (7 rutas + admin). Stack técnico completo definido. Sistema de cotización automatizada y modelo de datos Supabase (9 tablas) documentados. Fases del proyecto reordenadas según flujo /arqweb. FOCO ACTIVO actualizado a Fase 4 (diseño visual). Ruta de assets SVG corregida a `Finca La Hermosa Design System/assets/`. Referencias visuales agregadas.
-`2026-05-03` — Tipografía actualizada: Poppins → Jost. Ruta del design system actualizada a carpeta extraída. Poppins marcado como descartado en decisiones.
-`2026-05-02` — Sistema de diseño completo integrado. Paleta corregida a valores exactos del design system. Sección expandida con voz/tono, tipografía, componentes, iconografía y fotografía.
-`2026-05-02` — CLAUDE.md inicial generado. Contexto completo del proyecto volcado desde memoria de sesión.
+`2026-05-05` — Fase 4 avanza: `experiencias.html` (catálogo filtrable 6 paquetes + add-ons) y `espacios.html` (galería editorial asimétrica + lightbox) completados. Nav de `index.html` corregido con links reales. CLAUDE.md comprimido de 478 → ~180 líneas.
+`2026-05-04` — Prototipo `index.html` completo (8 secciones snap-scroll). Arquitectura, stack, cotizador y modelo de datos definidos.
