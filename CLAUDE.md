@@ -16,8 +16,8 @@ Diseño visual página por página en HTML/CSS/JS vanilla antes de migrar a Next
 | `/experiencias` | `sitio/experiencias.html` | ✅ Completo (catálogo filtrable, add-ons) |
 | `/espacios` | `sitio/espacios.html` | ✅ Completo (galería editorial, lightbox) |
 | `/nosotros` | `sitio/nosotros.html` | ✅ Completo (hero, historia, valores, timeline, equipo glass cards, promesa) |
-| `/faq` | `sitio/faq.html` | ⏳ Pendiente |
-| `/cotizar` | `sitio/cotizar.html` | ⏳ Pendiente |
+| `/faq` | `sitio/faq.html` | ✅ Completo (hero dark, acordeón 19 preguntas × 5 categorías, CTA) |
+| `/cotizar` | `sitio/cotizar.html` | ✅ Completo (multi-step 4 pasos, resumen lateral, check disponibilidad, success state) |
 
 **Patrones establecidos en `sitio/index.html` (reusar en todas las páginas):**
 - CSS tokens en `:root` (cremas, verdes, terracota, ease curves)
@@ -39,7 +39,7 @@ Diseño visual página por página en HTML/CSS/JS vanilla antes de migrar a Next
 | # | Fase | Estado |
 |---|------|--------|
 | 1–3 | Estrategia + Identidad + Arquitectura | ✅ Completadas |
-| 4 | Diseño visual (prototipos HTML) | 🔄 En curso |
+| 4 | Diseño visual (prototipos HTML) | ✅ Completada |
 | 5 | GitHub repo + Next.js base | ⏳ |
 | 5.5 | Inventario de contenido editable | ⏳ |
 | 6 | Construcción en código (Next.js) | ⏳ |
@@ -149,6 +149,8 @@ Casa principal (6 hab) · 2 jardines · Salón 22×14 m · Terraza 3.5 m · Albe
 
 ## ★ Historial
 
+`2026-05-05` — `cotizar.html` completo: hero compacto dark, 4 pasos (tipo evento cards, fecha+invitados con check disponibilidad simulado, add-ons con precio, datos de contacto), resumen lateral sticky con total en vivo + paquete recomendado dinámico, success state. Fase 4 HTML completada al 100%.
+`2026-05-05` — `faq.html` completo: hero dark centrado, acordeón 19 preguntas × 5 categorías (tabs filtrables), sección contacto nudge, CTA dark estándar. Skill frontend-design activada.
 `2026-05-05` — `nosotros.html` completo: 7 secciones (hero split, historia editorial, valores dark, timeline, equipo glass cards verde, promesa, CTA). Orden: valores → timeline. Cards de equipo: imagen full + glassmorphism + fondo verde degradado. Skill frontend-design activar siempre por defecto en este proyecto.
 `2026-05-05` — Fase 4 avanza: `experiencias.html` (catálogo filtrable 6 paquetes + add-ons) y `espacios.html` (galería editorial asimétrica + lightbox) completados. Nav de `index.html` corregido con links reales. CLAUDE.md comprimido de 478 → ~180 líneas.
 `2026-05-04` — Prototipo `index.html` completo (8 secciones snap-scroll). Arquitectura, stack, cotizador y modelo de datos definidos.

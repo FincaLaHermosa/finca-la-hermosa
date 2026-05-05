@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cotizar mi evento — Finca La Hermosa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ─────────────────────────────────────────────── */
+@font-face { font-family:'Against'; src:url('fonts/against-regular.otf') format('opentype'); }
+:root {
+  --crema:#fffdf8; --crema-warm:#f5f0e8; --crema-border:#ede6d6;
+  --verde:#2d4949; --verde-dark:#1e3232; --verde-mid:#4a6e6e;
+  --terracota:#c07a5a; --terra-light:#e8c4ad;
+  --body-clr:#5a5040; --muted:#8c7d68; --carbon:#1a1a1a;
+  --ease-snap:cubic-bezier(0.76,0,0.24,1); --ease-out:cubic-bezier(0.22,1,0.36,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;}
+body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr);overflow-x:hidden;}
+
+/* ── NAV ─────────────────────────────────────────────────── */
+#site-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;padding:14px 24px;pointer-events:none;}
+.nav-pill{width:100%;max-width:1500px;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-radius:999px;background:rgba(18,28,24,0.12);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 32px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.07);transition:background .4s,border-color .4s,box-shadow .4s;pointer-events:all;}
+.nav-pill.scrolled{background:rgba(28,46,44,0.88);border-color:rgba(255,255,255,0.13);box-shadow:0 8px 40px rgba(0,0,0,0.32),inset 0 1px 0 rgba(255,255,255,0.09);}
+.nav-logo img{height:32px;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,253,248,0.72);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:color .22s,border-color .22s;}
+.nav-links a:hover,.nav-links a.active{color:#fffdf8;border-color:rgba(255,253,248,0.4);}
+.nav-right{display:flex;align-items:center;gap:14px;}
+.nav-cta{font-family:'Jost',sans-serif;font-size:0.67rem;font-weight:300;letter-spacing:0.13em;text-transform:uppercase;color:#fffdf8;background:rgba(255,253,248,0.09);border:1px solid rgba(255,255,255,0.2);padding:8px 20px;border-radius:999px;cursor:pointer;text-decoration:none;transition:all .22s;}
+.nav-cta:hover{background:rgba(192,122,90,0.9);border-color:rgba(192,122,90,0.6);}
+.nav-cta.active-cta{background:var(--terracota);border-color:var(--terracota);}
+
+/* ── WA FLOAT ────────────────────────────────────────────── */
+.wa-float{position:fixed;bottom:32px;right:32px;z-index:150;width:50px;height:50px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform .26s,box-shadow .26s;text-decoration:none;}
+.wa-float:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(37,211,102,0.5);}
+
+/* ── OVERLINE ────────────────────────────────────────────── */
+.overline{font-family:'Jost',sans-serif;font-size:0.67rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;display:flex;align-items:center;gap:10px;}
+.overline::before{content:'';display:block;width:20px;height:1px;flex-shrink:0;}
+.overline-light{color:rgba(232,196,173,0.8);}
+.overline-light::before{background:rgba(232,196,173,0.5);}
+.overline-dark{color:var(--terracota);}
+.overline-dark::before{background:var(--terra-light);}
+
+/* ── TXT REVEAL ──────────────────────────────────────────── */
+.txt-reveal{opacity:0;transform:translateY(40px);transition:opacity .85s var(--ease-out),transform .85s var(--ease-out);}
+.txt-reveal[data-d="1"]{transition-delay:.1s;}
+.txt-reveal[data-d="2"]{transition-delay:.22s;}
+.txt-reveal.in{opacity:1;transform:none;}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+.site-footer{background:var(--verde-dark);padding:60px 80px 40px;}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:48px;margin-bottom:48px;}
+.footer-link-group{display:flex;flex-direction:column;gap:9px;}
+.footer-link-group a,.footer-link-group span{font-family:'Jost',sans-serif;font-size:0.82rem;font-weight:300;color:rgba(255,253,248,0.6);text-decoration:none;cursor:pointer;transition:color .2s;}
+.footer-link-group a:hover{color:#fffdf8;}
+.footer-head{font-family:'Jost',sans-serif;font-size:0.63rem;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,253,248,0.35);margin-bottom:14px;display:block;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:22px;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-family:'Jost',sans-serif;font-size:0.68rem;font-weight:300;color:rgba(255,253,248,0.3);}
+
+/* ══ COTIZAR ESTILOS ═════════════════════════════════════════ */
+
+/* ── Hero compacto ──────────────────────────────────────── */
+.hero-cotizar{
+  min-height:44vh; background:var(--verde-dark);
+  position:relative; overflow:hidden;
+  display:flex; align-items:flex-end;
+  padding:0 80px 60px;
+}
+.hero-cotizar-bg{position:absolute;inset:0;z-index:0;}
+.hero-cotizar-bg img{width:100%;height:100%;object-fit:cover;opacity:0.12;}
+.hero-cotizar-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,var(--verde-dark) 0%,rgba(30,50,50,0.6) 40%,var(--verde-dark) 100%);}
+.hero-cotizar-glow{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 70% 40%,rgba(192,122,90,0.08) 0%,transparent 60%);pointer-events:none;}
+.hero-cotizar-content{position:relative;z-index:2;max-width:1500px;width:100%;}
+.arch-bg{font-family:'Against',serif;font-size:clamp(9rem,14vw,18rem);line-height:0.85;letter-spacing:-0.04em;color:rgba(255,253,248,0.025);position:absolute;right:0;bottom:-20px;pointer-events:none;user-select:none;white-space:nowrap;}
+
+/* ── Main layout ────────────────────────────────────────── */
+.cotizar-main{
+  max-width:1500px; margin:0 auto;
+  padding:64px 80px 100px;
+  display:grid; grid-template-columns:1fr 380px; gap:48px;
+  align-items:start;
+}
+
+/* ── Progress bar ───────────────────────────────────────── */
+.progress-wrap{margin-bottom:44px;}
+.progress-steps{display:flex;align-items:center;gap:0;margin-bottom:20px;}
+.progress-step{display:flex;align-items:center;flex:1;}
+.step-dot{
+  width:32px;height:32px;border-radius:50%;border:1.5px solid var(--crema-border);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  font-family:'Jost',sans-serif;font-size:0.7rem;font-weight:400;
+  color:var(--muted);background:var(--crema);
+  transition:all .35s var(--ease-out);
+}
+.progress-step.done .step-dot{background:var(--verde);border-color:var(--verde);color:#fff;}
+.progress-step.active .step-dot{background:var(--terracota);border-color:var(--terracota);color:#fff;box-shadow:0 0 0 4px rgba(192,122,90,0.15);}
+.step-line{flex:1;height:1px;background:var(--crema-border);transition:background .35s;}
+.progress-step.done .step-line{background:var(--verde);}
+.step-label{font-family:'Jost',sans-serif;font-size:0.61rem;font-weight:300;letter-spacing:0.08em;color:var(--muted);text-transform:uppercase;margin-top:8px;text-align:center;}
+.progress-step.active .step-label,.progress-step.done .step-label{color:var(--verde);}
+.progress-labels{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+
+.step-heading{
+  font-family:'Jost',sans-serif;font-size:0.62rem;font-weight:400;
+  letter-spacing:0.14em;text-transform:uppercase;color:var(--terracota);
+  margin-bottom:6px;
+}
+.step-title{
+  font-family:'Against',serif;font-size:clamp(1.8rem,2.5vw,2.6rem);
+  line-height:0.95;letter-spacing:-0.02em;color:var(--verde-dark);
+  margin-bottom:4px;
+}
+.step-sub{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,1.6vw,1.4rem);
+  font-style:italic;font-weight:300;color:var(--terracota);
+  margin-bottom:32px;
+}
+
+/* ── Step panels ────────────────────────────────────────── */
+.step-panel{display:none;}
+.step-panel.active{display:block;}
+
+/* Step 1 — Tipo evento */
+.tipo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.tipo-card{
+  border:1.5px solid var(--crema-border);border-radius:10px;
+  padding:22px 18px;cursor:pointer;
+  display:flex;flex-direction:column;gap:10px;
+  background:var(--crema);
+  transition:all .22s ease;
+  position:relative;
+}
+.tipo-card:hover{border-color:var(--terra-light);background:var(--crema-warm);}
+.tipo-card.selected{border-color:var(--verde);background:#f0f5f5;box-shadow:0 0 0 3px rgba(45,73,73,0.1);}
+.tipo-card input[type=radio]{position:absolute;opacity:0;pointer-events:none;}
+.tipo-icon{width:36px;height:36px;border-radius:8px;background:var(--crema-warm);display:flex;align-items:center;justify-content:center;color:var(--verde-mid);transition:all .22s;}
+.tipo-card.selected .tipo-icon{background:var(--verde);color:#fff;}
+.tipo-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;color:var(--verde-dark);}
+.tipo-desc{font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);line-height:1.55;}
+.tipo-check{position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;background:var(--verde);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .22s;}
+.tipo-card.selected .tipo-check{opacity:1;}
+
+/* Step 2 — Fecha e invitados */
+.field-group{display:flex;flex-direction:column;gap:7px;margin-bottom:28px;}
+.field-label{font-family:'Jost',sans-serif;font-size:0.68rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--verde);}
+.field-input{
+  font-family:'Jost',sans-serif;font-size:0.9rem;font-weight:300;
+  color:var(--carbon);background:var(--crema);
+  border:1.5px solid var(--crema-border);border-radius:8px;
+  padding:13px 16px;outline:none;width:100%;
+  transition:border-color .22s,box-shadow .22s;
+  appearance:none;-webkit-appearance:none;
+}
+.field-input:focus{border-color:var(--verde);box-shadow:0 0 0 3px rgba(45,73,73,0.08);}
+.field-input::placeholder{color:var(--muted);}
+.availability-badge{
+  display:none;align-items:center;gap:8px;padding:11px 14px;
+  border-radius:8px;font-family:'Jost',sans-serif;font-size:0.78rem;font-weight:300;
+  margin-top:4px;
+}
+.availability-badge.ok{display:flex;background:#edf5f0;color:#2d5a3d;border:1px solid #c4dece;}
+.availability-badge.busy{display:flex;background:#fdf0eb;color:#8a3a20;border:1px solid #f0c4b0;}
+.suggestions{margin-top:10px;display:none;flex-wrap:wrap;gap:8px;}
+.suggestions.show{display:flex;}
+.suggestion-chip{
+  font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;
+  padding:6px 14px;border-radius:999px;
+  border:1px solid var(--crema-border);background:var(--crema);
+  color:var(--verde);cursor:pointer;transition:all .2s;
+}
+.suggestion-chip:hover{border-color:var(--verde);background:#f0f5f5;}
+
+/* Invitados counter */
+.counter-row{display:flex;align-items:center;gap:0;border:1.5px solid var(--crema-border);border-radius:8px;overflow:hidden;background:var(--crema);}
+.counter-btn{
+  width:48px;height:48px;border:none;background:transparent;
+  font-family:'Jost',sans-serif;font-size:1.2rem;color:var(--verde);
+  cursor:pointer;transition:background .18s;flex-shrink:0;
+}
+.counter-btn:hover{background:var(--crema-warm);}
+.counter-val{
+  flex:1;text-align:center;font-family:'Against',serif;
+  font-size:1.6rem;color:var(--verde-dark);line-height:1;
+  border:none;outline:none;background:transparent;
+  width:100%;padding:0;
+}
+
+/* Step 3 — Add-ons */
+.addon-list{display:flex;flex-direction:column;gap:10px;}
+.addon-item{
+  display:flex;align-items:center;gap:16px;
+  border:1.5px solid var(--crema-border);border-radius:10px;
+  padding:16px 18px;cursor:pointer;
+  background:var(--crema);transition:all .22s;
+  position:relative;
+}
+.addon-item:hover{border-color:var(--terra-light);background:var(--crema-warm);}
+.addon-item.selected{border-color:var(--verde);background:#f0f5f5;}
+.addon-item input[type=checkbox]{position:absolute;opacity:0;pointer-events:none;}
+.addon-checkbox{
+  width:20px;height:20px;border-radius:5px;border:1.5px solid var(--crema-border);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  transition:all .22s;background:var(--crema);
+}
+.addon-item.selected .addon-checkbox{background:var(--verde);border-color:var(--verde);}
+.addon-icon{width:36px;height:36px;border-radius:8px;background:var(--crema-warm);display:flex;align-items:center;justify-content:center;color:var(--verde-mid);flex-shrink:0;transition:all .22s;}
+.addon-item.selected .addon-icon{background:rgba(45,73,73,0.1);}
+.addon-info{flex:1;}
+.addon-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;color:var(--verde-dark);}
+.addon-sub{font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);}
+.addon-price{font-family:'Jost',sans-serif;font-size:0.8rem;font-weight:400;color:var(--terracota);white-space:nowrap;}
+
+/* Step 4 — Contacto */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.form-row.full{grid-template-columns:1fr;}
+textarea.field-input{resize:vertical;min-height:100px;line-height:1.65;}
+.privacy-note{font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);line-height:1.7;margin-top:16px;}
+.privacy-note a{color:var(--verde);}
+
+/* ── Nav buttons ────────────────────────────────────────── */
+.step-nav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;padding-top:28px;border-top:1px solid var(--crema-border);}
+.btn-prev{
+  font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);background:transparent;border:1px solid var(--crema-border);
+  padding:13px 24px;border-radius:999px;cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  transition:all .22s;
+}
+.btn-prev:hover{border-color:var(--verde-mid);color:var(--verde);}
+.btn-next{
+  font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:#fffdf8;background:var(--verde);border:none;
+  padding:13px 28px;border-radius:999px;cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  transition:all .22s;
+}
+.btn-next:hover{background:var(--verde-mid);transform:scale(1.03);}
+.btn-submit{
+  font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:#fffdf8;background:var(--terracota);border:none;
+  padding:13px 32px;border-radius:999px;cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  transition:all .22s;
+}
+.btn-submit:hover{background:#a8664a;transform:scale(1.03);}
+
+/* ── Resumen lateral ────────────────────────────────────── */
+.summary-wrap{position:sticky;top:100px;}
+.summary-card{
+  background:var(--verde-dark);border-radius:16px;
+  padding:28px;color:#fffdf8;
+  box-shadow:0 20px 60px rgba(30,50,50,0.2);
+}
+.summary-title{
+  font-family:'Against',serif;font-size:1.5rem;
+  line-height:0.95;letter-spacing:-0.02em;color:#fffdf8;
+  margin-bottom:4px;
+}
+.summary-sub{
+  font-family:'Cormorant Garamond',serif;font-size:1rem;
+  font-style:italic;font-weight:300;color:var(--terracota);
+  margin-bottom:24px;
+}
+.summary-sep{height:1px;background:rgba(255,255,255,0.08);margin:16px 0;}
+.summary-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px;}
+.summary-key{font-family:'Jost',sans-serif;font-size:0.7rem;font-weight:300;letter-spacing:0.06em;color:rgba(255,253,248,0.45);}
+.summary-val{font-family:'Jost',sans-serif;font-size:0.82rem;font-weight:300;color:rgba(255,253,248,0.85);text-align:right;}
+.summary-val.empty{color:rgba(255,253,248,0.2);font-style:italic;}
+.summary-total-row{display:flex;justify-content:space-between;align-items:baseline;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.12);}
+.summary-total-key{font-family:'Jost',sans-serif;font-size:0.67rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,253,248,0.5);}
+.summary-total-val{font-family:'Against',serif;font-size:1.9rem;line-height:1;color:#fffdf8;}
+.summary-total-sub{font-family:'Jost',sans-serif;font-size:0.62rem;font-weight:300;color:rgba(255,253,248,0.3);text-align:right;margin-top:2px;}
+
+/* Paquete recomendado */
+.paquete-rec{
+  margin-top:20px;padding:16px 18px;
+  border-radius:10px;background:rgba(192,122,90,0.12);
+  border:1px solid rgba(192,122,90,0.25);
+}
+.paquete-rec-label{font-family:'Jost',sans-serif;font-size:0.61rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:rgba(192,122,90,0.8);margin-bottom:6px;}
+.paquete-rec-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:#fffdf8;}
+.paquete-rec-desc{font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:rgba(255,253,248,0.5);line-height:1.55;margin-top:4px;}
+
+/* Trust badges */
+.trust-badges{margin-top:20px;display:flex;flex-direction:column;gap:9px;}
+.trust-item{display:flex;align-items:center;gap:10px;font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:rgba(255,253,248,0.45);}
+.trust-item svg{flex-shrink:0;color:rgba(255,253,248,0.3);}
+
+/* ── Success state ──────────────────────────────────────── */
+.success-panel{
+  display:none;padding:48px;text-align:center;
+  background:var(--crema);border-radius:16px;
+}
+.success-panel.show{display:block;}
+.success-icon{width:64px;height:64px;border-radius:50%;background:#edf5f0;border:2px solid #c4dece;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════════ -->
+<nav id="site-nav">
+  <div class="nav-pill" id="nav-pill">
+    <div class="nav-logo"><img src="assets/logo-blanco.svg" alt="Finca La Hermosa"></div>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="experiencias.html">Experiencias</a>
+      <a href="espacios.html">Espacios</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a href="cotizar.html" class="nav-cta active-cta">Cotizar ahora</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ WA FLOAT ══════════════════════════════════════════════ -->
+<a href="https://wa.me/5215500000000" class="wa-float" title="WhatsApp" target="_blank" rel="noopener">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+
+<!-- ══ HERO ══════════════════════════════════════════════════ -->
+<section class="hero-cotizar">
+  <div class="hero-cotizar-bg">
+    <img src="assets/photo-cta-dark.jpg" alt="">
+  </div>
+  <div class="hero-cotizar-glow"></div>
+  <div class="arch-bg">COTIZAR</div>
+
+  <div class="hero-cotizar-content">
+    <div class="txt-reveal" style="margin-bottom:14px;">
+      <div class="overline overline-light">Tu propuesta personalizada</div>
+    </div>
+    <div class="txt-reveal" data-d="1">
+      <div style="font-family:'Against',serif;font-size:clamp(2.8rem,5vw,5.5rem);line-height:0.92;letter-spacing:-0.025em;color:#fffdf8;">Cuéntanos sobre</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,4.4rem);font-style:italic;font-weight:300;line-height:1;color:var(--terracota);margin-top:4px;">tu celebración.</div>
+    </div>
+    <p class="txt-reveal" data-d="2" style="font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;line-height:1.85;color:rgba(255,253,248,0.5);max-width:440px;margin-top:16px;">
+      Responde 4 preguntas y en menos de 24 horas recibirás una propuesta con PDF personalizado — precio exacto, paquete recomendado y próximos pasos.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══ COTIZADOR ═════════════════════════════════════════════ -->
+<main>
+  <div class="cotizar-main">
+
+    <!-- ══ FORM COLUMN ══ -->
+    <div class="form-column">
+
+      <!-- Progress -->
+      <div class="progress-wrap">
+        <div class="progress-steps" id="progress-steps">
+          <div class="progress-step active" id="ps-1">
+            <div class="step-dot">1</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="progress-step" id="ps-2">
+            <div class="step-dot">2</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="progress-step" id="ps-3">
+            <div class="step-dot">3</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="progress-step" id="ps-4">
+            <div class="step-dot" style="border-right:none;">4</div>
+          </div>
+        </div>
+        <div class="progress-labels">
+          <div class="step-label" id="sl-1" style="text-align:left;">Tu evento</div>
+          <div class="step-label" id="sl-2" style="text-align:center;">Fecha</div>
+          <div class="step-label" id="sl-3" style="text-align:center;">Extras</div>
+          <div class="step-label" id="sl-4" style="text-align:right;">Tus datos</div>
+        </div>
+      </div>
+
+      <!-- ─ STEP 1: Tipo de evento ─────────────────────── -->
+      <div class="step-panel active" id="step-1">
+        <div class="step-heading">Paso 1 de 4</div>
+        <div class="step-title">¿Qué vas</div>
+        <div class="step-sub">a celebrar?</div>
+
+        <div class="tipo-grid">
+
+          <label class="tipo-card" id="tc-boda">
+            <input type="radio" name="tipo" value="Boda">
+            <div class="tipo-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="tipo-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <div class="tipo-name">Boda</div>
+            <div class="tipo-desc">Ceremonia y recepción en entorno natural privado.</div>
+          </label>
+
+          <label class="tipo-card" id="tc-xv">
+            <input type="radio" name="tipo" value="XV Años">
+            <div class="tipo-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="tipo-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="tipo-name">XV Años</div>
+            <div class="tipo-desc">Una celebración única, digna de la protagonista.</div>
+          </label>
+
+          <label class="tipo-card" id="tc-corp">
+            <input type="radio" name="tipo" value="Corporativo">
+            <div class="tipo-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="tipo-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <div class="tipo-name">Corporativo</div>
+            <div class="tipo-desc">Retiros de equipo, convivios y eventos de empresa.</div>
+          </label>
+
+          <label class="tipo-card" id="tc-fam">
+            <input type="radio" name="tipo" value="Reunión familiar">
+            <div class="tipo-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="tipo-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="tipo-name">Reunión familiar</div>
+            <div class="tipo-desc">Cumpleaños, aniversarios, graduaciones, posadas.</div>
+          </label>
+
+          <label class="tipo-card" id="tc-ret">
+            <input type="radio" name="tipo" value="Retiro">
+            <div class="tipo-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="tipo-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="tipo-name">Retiro</div>
+            <div class="tipo-desc">Fin de semana de descanso, bienestar o creatividad.</div>
+          </label>
+
+          <label class="tipo-card" id="tc-otro">
+            <input type="radio" name="tipo" value="Otro">
+            <div class="tipo-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="tipo-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div class="tipo-name">Otro</div>
+            <div class="tipo-desc">Sesión fotográfica, baby shower u ocasión especial.</div>
+          </label>
+
+        </div>
+
+        <div class="step-nav">
+          <div></div>
+          <button class="btn-next" onclick="nextStep(1)" id="btn-next-1">
+            Continuar
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ─ STEP 2: Fecha e invitados ──────────────────── -->
+      <div class="step-panel" id="step-2">
+        <div class="step-heading">Paso 2 de 4</div>
+        <div class="step-title">Fecha e</div>
+        <div class="step-sub">invitados.</div>
+
+        <div class="field-group">
+          <label class="field-label" for="fecha-input">Fecha tentativa del evento</label>
+          <input class="field-input" type="date" id="fecha-input" min="">
+          <div class="availability-badge ok" id="avail-ok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Fecha disponible — ¡perfecto!
+          </div>
+          <div class="availability-badge busy" id="avail-busy">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Esa fecha ya está reservada. Fechas cercanas disponibles:
+          </div>
+          <div class="suggestions" id="suggestions"></div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Número de invitados estimado</label>
+          <div class="counter-row">
+            <button class="counter-btn" onclick="changeGuests(-10)" type="button">−</button>
+            <input class="counter-val" type="number" id="guests-val" value="50" min="15" max="300" readonly>
+            <button class="counter-btn" onclick="changeGuests(10)" type="button">+</button>
+          </div>
+          <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);margin-top:6px;">
+            Capacidad mínima 15 · máxima 200 personas
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="duracion-select">Duración del evento</label>
+          <select class="field-input" id="duracion-select">
+            <option value="dia">Un día (8:00 – 22:00 h)</option>
+            <option value="finde">Fin de semana completo (vie–dom)</option>
+          </select>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-prev" onclick="prevStep(2)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Atrás
+          </button>
+          <button class="btn-next" onclick="nextStep(2)">
+            Continuar
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ─ STEP 3: Add-ons ─────────────────────────────── -->
+      <div class="step-panel" id="step-3">
+        <div class="step-heading">Paso 3 de 4</div>
+        <div class="step-title">Personaliza</div>
+        <div class="step-sub">tu experiencia.</div>
+        <p style="font-family:'Jost',sans-serif;font-size:0.82rem;font-weight:300;color:var(--muted);line-height:1.75;margin-bottom:24px;">
+          Todo es opcional. Selecciona lo que necesitas y el precio se ajusta automáticamente.
+        </p>
+
+        <div class="addon-list">
+
+          <label class="addon-item" id="ai-salon">
+            <input type="checkbox" name="addon" value="Salón techado" data-price="8000">
+            <div class="addon-checkbox"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="addon-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            </div>
+            <div class="addon-info">
+              <div class="addon-name">Salón techado 22×14 m</div>
+              <div class="addon-sub">Espacio cubierto climatizado · hasta 200 personas · montaje incluido</div>
+            </div>
+            <div class="addon-price">+$8,000</div>
+          </label>
+
+          <label class="addon-item" id="ai-fogata">
+            <input type="checkbox" name="addon" value="Fogata" data-price="700">
+            <div class="addon-checkbox"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="addon-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 3z"/></svg>
+            </div>
+            <div class="addon-info">
+              <div class="addon-name">Noche de fogata</div>
+              <div class="addon-sub">Área de fogata preparada con leña · ambiente nocturno perfecto</div>
+            </div>
+            <div class="addon-price">+$700</div>
+          </label>
+
+          <label class="addon-item" id="ai-cine">
+            <input type="checkbox" name="addon" value="Cine al aire libre" data-price="700">
+            <div class="addon-checkbox"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="addon-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+            </div>
+            <div class="addon-info">
+              <div class="addon-name">Cine al aire libre</div>
+              <div class="addon-sub">Pantalla grande · proyector · ideal para cierre de noche</div>
+            </div>
+            <div class="addon-price">+$700</div>
+          </label>
+
+          <label class="addon-item" id="ai-coffee">
+            <input type="checkbox" name="addon" value="Coffee break" data-price="700">
+            <div class="addon-checkbox"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="addon-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            </div>
+            <div class="addon-info">
+              <div class="addon-name">Coffee break</div>
+              <div class="addon-sub">Servicio de café, infusiones y snacks · montaje en mesa</div>
+            </div>
+            <div class="addon-price">+$700</div>
+          </label>
+
+          <label class="addon-item" id="ai-av">
+            <input type="checkbox" name="addon" value="Audio y proyección" data-price="700">
+            <div class="addon-checkbox"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="addon-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+            </div>
+            <div class="addon-info">
+              <div class="addon-name">Audio y proyección</div>
+              <div class="addon-sub">Sistema de sonido · micrófono · pantalla · ideal para presentaciones</div>
+            </div>
+            <div class="addon-price">+$700</div>
+          </label>
+
+          <label class="addon-item" id="ai-hospedaje">
+            <input type="checkbox" name="addon" value="Hospedaje" data-price="0">
+            <div class="addon-checkbox"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="addon-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+            </div>
+            <div class="addon-info">
+              <div class="addon-name">Hospedaje (casa principal)</div>
+              <div class="addon-sub">6 habitaciones · hasta 16 personas · cotizamos según noches</div>
+            </div>
+            <div class="addon-price" style="color:var(--muted);">A cotizar</div>
+          </label>
+
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-prev" onclick="prevStep(3)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Atrás
+          </button>
+          <button class="btn-next" onclick="nextStep(3)">
+            Continuar
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ─ STEP 4: Contacto ───────────────────────────── -->
+      <div class="step-panel" id="step-4">
+        <div class="step-heading">Paso 4 de 4</div>
+        <div class="step-title">Casi listo —</div>
+        <div class="step-sub">¿a dónde enviamos tu propuesta?</div>
+
+        <div class="form-row">
+          <div class="field-group" style="margin-bottom:0;">
+            <label class="field-label" for="inp-nombre">Nombre completo</label>
+            <input class="field-input" type="text" id="inp-nombre" placeholder="Tu nombre">
+          </div>
+          <div class="field-group" style="margin-bottom:0;">
+            <label class="field-label" for="inp-tel">WhatsApp / Teléfono</label>
+            <input class="field-input" type="tel" id="inp-tel" placeholder="55 1234 5678">
+          </div>
+        </div>
+        <div class="form-row full" style="margin-top:16px;">
+          <div class="field-group" style="margin-bottom:0;">
+            <label class="field-label" for="inp-email">Correo electrónico</label>
+            <input class="field-input" type="email" id="inp-email" placeholder="tuemail@ejemplo.com">
+          </div>
+        </div>
+        <div class="form-row full" style="margin-top:16px;">
+          <div class="field-group" style="margin-bottom:0;">
+            <label class="field-label" for="inp-notas">Cuéntanos más <span style="font-weight:200;text-transform:none;letter-spacing:0;color:var(--muted);">(opcional)</span></label>
+            <textarea class="field-input" id="inp-notas" placeholder="Alguna petición especial, duda o contexto que quieras que sepamos…"></textarea>
+          </div>
+        </div>
+
+        <div class="privacy-note">
+          Tu información es confidencial y solo se usará para preparar tu propuesta. No hacemos spam.
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-prev" onclick="prevStep(4)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Atrás
+          </button>
+          <button class="btn-submit" onclick="submitForm()">
+            Solicitar mi propuesta
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ─ SUCCESS ─────────────────────────────────────── -->
+      <div class="success-panel" id="success-panel">
+        <div class="success-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d5a3d" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div style="font-family:'Against',serif;font-size:2.2rem;line-height:0.95;letter-spacing:-0.02em;color:var(--verde-dark);margin-bottom:8px;">¡Recibimos tu solicitud!</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;font-weight:300;color:var(--terracota);margin-bottom:20px;">En menos de 24 horas tendrás tu propuesta.</div>
+        <p style="font-family:'Jost',sans-serif;font-size:0.86rem;font-weight:300;color:var(--muted);line-height:1.8;max-width:420px;margin:0 auto 32px;">
+          Prepararemos un PDF personalizado con el paquete que mejor se adapta a tu evento, con precio exacto y todos los detalles. Te lo enviamos a tu correo y por WhatsApp.
+        </p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <a href="https://wa.me/5215500000000" target="_blank" rel="noopener" style="font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:#fffdf8;background:var(--verde);border:none;padding:13px 24px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escribir por WhatsApp
+          </a>
+          <a href="index.html" style="font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:var(--terracota);background:transparent;border:1px solid var(--terra-light);padding:13px 24px;border-radius:999px;text-decoration:none;">Volver al inicio</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══ SUMMARY COLUMN ══ -->
+    <div class="summary-wrap">
+      <div class="summary-card">
+        <div class="summary-title">Tu</div>
+        <div class="summary-sub">cotización.</div>
+
+        <div class="summary-sep"></div>
+
+        <div class="summary-row">
+          <span class="summary-key">Tipo de evento</span>
+          <span class="summary-val empty" id="s-tipo">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-key">Fecha tentativa</span>
+          <span class="summary-val empty" id="s-fecha">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-key">Invitados</span>
+          <span class="summary-val empty" id="s-guests">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-key">Duración</span>
+          <span class="summary-val empty" id="s-duracion">—</span>
+        </div>
+
+        <div class="summary-sep"></div>
+
+        <div style="margin-bottom:4px;">
+          <div class="summary-row" style="margin-bottom:4px;">
+            <span class="summary-key">Finca (base)</span>
+            <span class="summary-val">$13,000</span>
+          </div>
+          <div id="addons-list" style="display:flex;flex-direction:column;gap:4px;"></div>
+        </div>
+
+        <div class="summary-total-row">
+          <div>
+            <div class="summary-total-key">Estimado total</div>
+            <div class="summary-total-sub">MXN · sujeto a confirmación</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="summary-total-val" id="s-total">$13,000</div>
+          </div>
+        </div>
+
+        <!-- Paquete recomendado -->
+        <div class="paquete-rec" id="paquete-rec">
+          <div class="paquete-rec-label">Paquete sugerido</div>
+          <div class="paquete-rec-name" id="pr-name">Esencial</div>
+          <div class="paquete-rec-desc" id="pr-desc">Finca completa, un día, hasta 80 personas. Incluye todo el acceso base.</div>
+        </div>
+
+        <!-- Trust badges -->
+        <div class="trust-badges">
+          <div class="trust-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg>
+            PDF personalizado en 24 horas
+          </div>
+          <div class="trust-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Sin compromiso de compra
+          </div>
+          <div class="trust-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Precio exacto, sin cargos ocultos
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+
+<!-- ══ FOOTER ══════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <img src="assets/logo-blanco.svg" alt="Finca La Hermosa" style="height:36px;margin-bottom:16px;opacity:0.9;">
+      <p style="font-family:'Jost',sans-serif;font-size:0.78rem;font-weight:300;color:rgba(255,253,248,0.45);line-height:1.75;max-width:220px;">Una finca familiar convertida en destino de experiencias. Naturaleza, hospitalidad y celebración.</p>
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <a href="#" style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,253,248,0.15);display:flex;align-items:center;justify-content:center;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(255,253,248,0.35)'" onmouseleave="this.style.borderColor='rgba(255,253,248,0.15)'"><span style="font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:300;color:rgba(255,253,248,0.4);">ig</span></a>
+        <a href="#" style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,253,248,0.15);display:flex;align-items:center;justify-content:center;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(255,253,248,0.35)'" onmouseleave="this.style.borderColor='rgba(255,253,248,0.15)'"><span style="font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:300;color:rgba(255,253,248,0.4);">fb</span></a>
+        <a href="#" style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,253,248,0.15);display:flex;align-items:center;justify-content:center;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(255,253,248,0.35)'" onmouseleave="this.style.borderColor='rgba(255,253,248,0.15)'"><span style="font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:300;color:rgba(255,253,248,0.4);">tk</span></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-head">Páginas</span>
+      <div class="footer-link-group">
+        <a href="index.html">Inicio</a>
+        <a href="experiencias.html">Experiencias</a>
+        <a href="espacios.html">Espacios</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="faq.html">Preguntas frecuentes</a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-head">Contacto</span>
+      <div class="footer-link-group">
+        <span>Isidro Fabela, EDOMEX</span>
+        <span>contacto@fincalahermosa.mx</span>
+        <span>WhatsApp disponible</span>
+        <span>Lun–Dom · 9–19 h</span>
+      </div>
+    </div>
+    <div>
+      <span class="footer-head">Acciones</span>
+      <div class="footer-link-group">
+        <a href="cotizar.html">Solicitar cotización</a>
+        <a href="espacios.html">Ver espacios</a>
+        <a href="experiencias.html">Ver paquetes</a>
+        <a href="faq.html">Preguntas frecuentes</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Finca La Hermosa · Isidro Fabela, Estado de México</span>
+    <span class="footer-copy">Hecho con cuidado</span>
+  </div>
+</footer>
+
+
+<script>
+/* ═══════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════ */
+let currentStep = 1;
+const state = {
+  tipo: '', fecha: '', guests: 50, duracion: 'dia', addons: []
+};
+
+/* ═══════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════ */
+const pill = document.getElementById('nav-pill');
+window.addEventListener('scroll', () => {
+  pill.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+/* ═══════════════════════════════════════════════
+   HERO REVEAL
+═══════════════════════════════════════════════ */
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.hero-cotizar .txt-reveal').forEach(el => el.classList.add('in'));
+  document.getElementById('fecha-input').min = new Date().toISOString().split('T')[0];
+});
+
+/* ═══════════════════════════════════════════════
+   TIPO CARDS
+═══════════════════════════════════════════════ */
+document.querySelectorAll('.tipo-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.tipo-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    state.tipo = card.querySelector('input').value;
+    updateSummary();
+    updatePaquete();
+  });
+});
+
+/* ═══════════════════════════════════════════════
+   GUESTS COUNTER
+═══════════════════════════════════════════════ */
+function changeGuests(delta) {
+  const val = parseInt(document.getElementById('guests-val').value);
+  const newVal = Math.max(15, Math.min(300, val + delta));
+  document.getElementById('guests-val').value = newVal;
+  state.guests = newVal;
+  updateSummary();
+  updatePaquete();
+}
+
+/* ═══════════════════════════════════════════════
+   AVAILABILITY CHECK (simulado)
+═══════════════════════════════════════════════ */
+// Fechas ocupadas de ejemplo
+const busyDates = ['2025-07-05','2025-07-12','2025-07-19','2025-07-26',
+  '2025-08-09','2025-08-16','2025-09-06','2025-09-13','2025-12-20','2025-12-27'];
+
+function addDays(dateStr, n) {
+  const d = new Date(dateStr);
+  d.setDate(d.getDate() + n);
+  return d.toISOString().split('T')[0];
+}
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  const [y,m,d] = dateStr.split('-');
+  const months = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  return `${parseInt(d)} ${months[parseInt(m)-1]} ${y}`;
+}
+
+document.getElementById('fecha-input').addEventListener('change', function() {
+  const val = this.value;
+  state.fecha = val;
+  const ok = document.getElementById('avail-ok');
+  const busy = document.getElementById('avail-busy');
+  const sugg = document.getElementById('suggestions');
+
+  if (!val) { ok.classList.remove('ok'); busy.classList.remove('busy'); sugg.classList.remove('show'); return; }
+
+  if (busyDates.includes(val)) {
+    ok.className = 'availability-badge';
+    busy.className = 'availability-badge busy';
+    // Generate suggestions
+    sugg.innerHTML = '';
+    [-7,-14,7,14].forEach(offset => {
+      const d = addDays(val, offset);
+      if (!busyDates.includes(d) && d >= new Date().toISOString().split('T')[0]) {
+        const chip = document.createElement('button');
+        chip.className = 'suggestion-chip';
+        chip.textContent = formatDate(d);
+        chip.type = 'button';
+        chip.addEventListener('click', () => {
+          document.getElementById('fecha-input').value = d;
+          document.getElementById('fecha-input').dispatchEvent(new Event('change'));
+        });
+        sugg.appendChild(chip);
+      }
+    });
+    sugg.classList.add('show');
+  } else {
+    busy.className = 'availability-badge';
+    ok.className = 'availability-badge ok';
+    sugg.classList.remove('show');
+  }
+  updateSummary();
+});
+
+document.getElementById('duracion-select').addEventListener('change', function() {
+  state.duracion = this.value;
+  updateSummary();
+});
+
+/* ═══════════════════════════════════════════════
+   ADD-ONS
+═══════════════════════════════════════════════ */
+document.querySelectorAll('.addon-item').forEach(item => {
+  item.addEventListener('click', () => {
+    item.classList.toggle('selected');
+    const inp = item.querySelector('input');
+    const name = inp.value;
+    const price = parseInt(inp.dataset.price) || 0;
+    if (item.classList.contains('selected')) {
+      if (!state.addons.find(a => a.name === name)) state.addons.push({name, price});
+    } else {
+      state.addons = state.addons.filter(a => a.name !== name);
+    }
+    updateSummary();
+    updatePaquete();
+  });
+});
+
+/* ═══════════════════════════════════════════════
+   SUMMARY UPDATE
+═══════════════════════════════════════════════ */
+function updateSummary() {
+  const sTipo = document.getElementById('s-tipo');
+  const sFecha = document.getElementById('s-fecha');
+  const sGuests = document.getElementById('s-guests');
+  const sDuracion = document.getElementById('s-duracion');
+  const sTotal = document.getElementById('s-total');
+  const addonsList = document.getElementById('addons-list');
+
+  sTipo.textContent = state.tipo || '—';
+  sTipo.className = state.tipo ? 'summary-val' : 'summary-val empty';
+
+  sFecha.textContent = state.fecha ? formatDate(state.fecha) : '—';
+  sFecha.className = state.fecha ? 'summary-val' : 'summary-val empty';
+
+  sGuests.textContent = state.guests ? `${state.guests} personas` : '—';
+  sGuests.className = 'summary-val';
+
+  sDuracion.textContent = state.duracion === 'finde' ? 'Fin de semana' : 'Un día';
+  sDuracion.className = 'summary-val';
+
+  // Addons list
+  addonsList.innerHTML = '';
+  let total = 13000;
+  if (state.duracion === 'finde') total += 13000;
+  state.addons.forEach(addon => {
+    total += addon.price;
+    if (addon.price > 0) {
+      const row = document.createElement('div');
+      row.className = 'summary-row';
+      row.style.cssText = 'margin-bottom:4px;';
+      row.innerHTML = `<span class="summary-key" style="padding-left:8px;">+ ${addon.name}</span><span class="summary-val">+$${addon.price.toLocaleString()}</span>`;
+      addonsList.appendChild(row);
+    } else {
+      const row = document.createElement('div');
+      row.className = 'summary-row';
+      row.style.cssText = 'margin-bottom:4px;';
+      row.innerHTML = `<span class="summary-key" style="padding-left:8px;">+ ${addon.name}</span><span class="summary-val" style="color:rgba(255,253,248,0.35);">A cotizar</span>`;
+      addonsList.appendChild(row);
+    }
+  });
+
+  sTotal.textContent = `$${total.toLocaleString()}`;
+}
+
+/* ═══════════════════════════════════════════════
+   PAQUETE RECOMENDADO
+═══════════════════════════════════════════════ */
+function updatePaquete() {
+  const name = document.getElementById('pr-name');
+  const desc = document.getElementById('pr-desc');
+  const addon_count = state.addons.length;
+  const guests = state.guests;
+
+  if (guests > 150 || addon_count >= 3) {
+    name.textContent = 'Premium';
+    desc.textContent = 'Finca completa con salón, add-ons seleccionados y capacidad extendida. La experiencia más completa.';
+  } else if (guests > 80 || addon_count >= 1) {
+    name.textContent = 'Completo';
+    desc.textContent = 'Finca completa con los extras que necesitas. Ideal para grupos medianos y eventos con personalización.';
+  } else {
+    name.textContent = 'Esencial';
+    desc.textContent = 'Finca completa un día, hasta 80 personas. Todo el acceso base incluido, sin extras.';
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   STEP NAVIGATION
+═══════════════════════════════════════════════ */
+function goToStep(step) {
+  // Hide all panels
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(`step-${step}`).classList.add('active');
+
+  // Update progress indicators
+  for (let i = 1; i <= 4; i++) {
+    const ps = document.getElementById(`ps-${i}`);
+    const sl = document.getElementById(`sl-${i}`);
+    ps.classList.remove('active','done');
+    sl.classList.remove('active','done');
+    if (i < step) { ps.classList.add('done'); sl.classList.add('done'); }
+    if (i === step) { ps.classList.add('active'); sl.classList.add('active'); }
+  }
+
+  currentStep = step;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function nextStep(from) {
+  // Validations
+  if (from === 1 && !state.tipo) {
+    alert('Selecciona el tipo de evento para continuar.');
+    return;
+  }
+  if (from === 2) {
+    if (!state.fecha) { alert('Selecciona una fecha tentativa.'); return; }
+    if (busyDates.includes(state.fecha)) { alert('Esa fecha no está disponible. Elige una fecha alternativa.'); return; }
+  }
+  if (from < 4) goToStep(from + 1);
+}
+
+function prevStep(from) {
+  if (from > 1) goToStep(from - 1);
+}
+
+/* ═══════════════════════════════════════════════
+   SUBMIT
+═══════════════════════════════════════════════ */
+function submitForm() {
+  const nombre = document.getElementById('inp-nombre').value.trim();
+  const email = document.getElementById('inp-email').value.trim();
+  const tel = document.getElementById('inp-tel').value.trim();
+
+  if (!nombre) { alert('Por favor ingresa tu nombre.'); return; }
+  if (!email || !email.includes('@')) { alert('Por favor ingresa un correo válido.'); return; }
+  if (!tel) { alert('Por favor ingresa tu número de WhatsApp o teléfono.'); return; }
+
+  // Hide form steps, show success
+  document.getElementById('step-4').classList.remove('active');
+  document.getElementById('success-panel').classList.add('show');
+
+  // Update progress — all done
+  for (let i = 1; i <= 4; i++) {
+    const ps = document.getElementById(`ps-${i}`);
+    ps.classList.remove('active');
+    ps.classList.add('done');
+    document.getElementById(`sl-${i}`).classList.add('done');
+  }
+
+  window.scrollTo({top: 0, behavior:'smooth'});
+}
+
+/* Initial state */
+updateSummary();
+updatePaquete();
+</script>
+
+</body>
+</html>

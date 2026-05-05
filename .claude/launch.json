@@ -4,8 +4,9 @@
     {
       "name": "finca-preview",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "sitio", "-p", "3333", "--no-clipboard"],
-      "port": 3333
+      "runtimeArgs": ["serve", "sitio", "--no-clipboard"],
+      "port": 3333,
+      "autoPort": true
     }
   ]
 }
