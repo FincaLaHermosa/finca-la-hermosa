@@ -14,7 +14,7 @@ Diseño visual página por página en HTML/CSS/JS vanilla antes de migrar a Next
 |--------|---------|--------|
 | `/` Inicio | `sitio/index.html` | ✅ Completo (8 secciones, snap-scroll) |
 | `/experiencias` | `sitio/experiencias.html` | ✅ Completo (catálogo filtrable, add-ons) |
-| `/espacios` | `sitio/espacios.html` | ✅ Completo (galería editorial, lightbox) |
+| `/espacios` | `sitio/espacios.html` | ✅ Completo (v2 FOLIO editorial: hero crema, stats verde-dark compacto, galería wheel-hijack con snap por dirección, bullets por espacio, inventario, CTA) |
 | `/nosotros` | `sitio/nosotros.html` | ✅ Completo (hero, historia, valores, timeline, equipo glass cards, promesa) |
 | `/faq` | `sitio/faq.html` | ✅ Completo (hero dark, acordeón 19 preguntas × 5 categorías, CTA) |
 | `/cotizar` | `sitio/cotizar.html` | ✅ Completo (multi-step 4 pasos, resumen lateral, check disponibilidad, success state) |
@@ -141,7 +141,7 @@ Casa principal (6 hab) · 2 jardines · Salón 22×14 m · Terraza 3.5 m · Albe
 
 - Stack: Next.js 15 + Supabase + Vercel + Resend + wa.me (sin WhatsApp Business API Fase 1)
 - Tipografías: Against / Cormorant / Jost (Poppins descartado)
-- `/espacios`: lightbox fullscreen implementado ✅
+- `/espacios`: v2 FOLIO editorial con galería scroll-driven (panel sticky, índice flotante, 9 espacios) ✅ — lightbox descartado
 - Fotografía Fase 1: placeholders Unsplash/Pexels curados
 - `colors_and_type.css` declara Poppins → actualizar a Jost antes de Fase 6
 
@@ -149,6 +149,8 @@ Casa principal (6 hab) · 2 jardines · Salón 22×14 m · Terraza 3.5 m · Albe
 
 ## ★ Historial
 
+`2026-05-05` — `espacios.html` refinado: stats verde-dark compacto sin título/quote, galería con wheel-hijack (derecha=carrusel, izquierda=scroll normal), snap por dirección, bullets por espacio (3 características), clic en lista instantáneo, transiciones de lista aceleradas.
+`2026-05-05` — `espacios.html` consolidado a v2 FOLIO editorial (scroll-driven gallery sticky panel, 9 espacios, stats terra, inventario). v1 y v3 eliminadas.
 `2026-05-05` — `cotizar.html` completo: hero compacto dark, 4 pasos (tipo evento cards, fecha+invitados con check disponibilidad simulado, add-ons con precio, datos de contacto), resumen lateral sticky con total en vivo + paquete recomendado dinámico, success state. Fase 4 HTML completada al 100%.
 `2026-05-05` — `faq.html` completo: hero dark centrado, acordeón 19 preguntas × 5 categorías (tabs filtrables), sección contacto nudge, CTA dark estándar. Skill frontend-design activada.
 `2026-05-05` — `nosotros.html` completo: 7 secciones (hero split, historia editorial, valores dark, timeline, equipo glass cards verde, promesa, CTA). Orden: valores → timeline. Cards de equipo: imagen full + glassmorphism + fondo verde degradado. Skill frontend-design activar siempre por defecto en este proyecto.

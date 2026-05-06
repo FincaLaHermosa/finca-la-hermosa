@@ -22,7 +22,7 @@
 html{font-size:16px;scroll-behavior:smooth;}
 body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr);overflow-x:hidden;}
 
-/* NAV */
+/* ── NAV ──────────────────────────────────────── */
 #site-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;padding:14px 24px;pointer-events:none;}
 .nav-pill{width:100%;max-width:1500px;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-radius:999px;background:rgba(18,28,24,0.12);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 32px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.07);transition:background 0.4s,border-color 0.4s;pointer-events:all;}
 .nav-pill.scrolled{background:rgba(28,46,44,0.92);border-color:rgba(255,255,255,0.13);box-shadow:0 8px 40px rgba(0,0,0,0.32);}
@@ -34,19 +34,19 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 .nav-cta{font-family:'Jost',sans-serif;font-size:0.67rem;font-weight:300;letter-spacing:0.13em;text-transform:uppercase;color:#fffdf8;background:rgba(255,253,248,0.09);border:1px solid rgba(255,255,255,0.2);padding:8px 20px;border-radius:999px;cursor:pointer;transition:all 0.22s;}
 .nav-cta:hover{background:rgba(192,122,90,0.9);border-color:rgba(192,122,90,0.6);}
 
-/* WA */
+/* ── WA ────────────────────────────────────────── */
 .wa-float{position:fixed;bottom:32px;right:32px;z-index:150;width:50px;height:50px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.26s,box-shadow 0.26s;text-decoration:none;}
 .wa-float:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(37,211,102,0.5);}
 
-/* BUTTONS */
+/* ── BUTTONS ───────────────────────────────────── */
 .btn-accent{font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:#fffdf8;background:var(--terracota);border:none;padding:13px 28px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.22s;}
 .btn-accent:hover{background:#a8664a;transform:scale(1.04);}
 .btn-ghost{font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,253,248,0.75);background:transparent;border:1px solid rgba(255,255,255,0.2);padding:13px 28px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.22s;}
 .btn-ghost:hover{color:#fffdf8;border-color:rgba(255,255,255,0.5);}
-.btn-primary{font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:#fffdf8;background:var(--verde);border:none;padding:13px 28px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.22s;}
-.btn-primary:hover{background:var(--verde-mid);transform:scale(1.04);}
+.btn-outline-dark{font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:var(--verde);background:transparent;border:1px solid rgba(45,73,73,0.35);padding:12px 26px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.22s;}
+.btn-outline-dark:hover{border-color:var(--verde);background:rgba(45,73,73,0.06);}
 
-/* OVERLINE */
+/* ── OVERLINE ──────────────────────────────────── */
 .overline{font-family:'Jost',sans-serif;font-size:0.67rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;display:flex;align-items:center;gap:10px;}
 .overline::before{content:'';display:block;width:20px;height:1px;flex-shrink:0;}
 .overline-dark{color:var(--terracota);}
@@ -54,7 +54,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 .overline-light{color:rgba(232,196,173,0.8);}
 .overline-light::before{background:rgba(232,196,173,0.5);}
 
-/* REVEAL */
+/* ── REVEAL ────────────────────────────────────── */
 .txt-reveal{opacity:0;transform:translateY(28px);transition:opacity 0.85s var(--ease-snap),transform 0.85s var(--ease-snap);}
 .txt-reveal.in{opacity:1;transform:translateY(0);}
 .txt-reveal[data-d="1"]{transition-delay:0.10s;}
@@ -67,46 +67,14 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 .img-reveal .img-bg{transform:scale(1.08);transition:transform 1.6s var(--ease-snap);}
 .img-reveal.in .img-bg{transform:scale(1);}
 
-/* ARCH LABEL */
-.arch-label{font-family:'Against',serif;font-size:clamp(5rem,8vw,9rem);line-height:0.9;letter-spacing:-0.03em;color:rgba(45,73,73,0.04);pointer-events:none;user-select:none;position:absolute;}
-
-/* ESPACIO CARDS */
-.espacio-card{position:relative;overflow:hidden;border-radius:10px;cursor:pointer;display:block;}
-.espacio-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.55s var(--ease-out);}
-.espacio-card:hover img{transform:scale(1.06);}
-.espacio-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,26,24,0.75) 0%,transparent 55%);opacity:0;transition:opacity 0.32s;}
-.espacio-card:hover .espacio-overlay{opacity:1;}
-.espacio-info{position:absolute;bottom:0;left:0;right:0;padding:22px 20px;transform:translateY(8px);transition:transform 0.32s var(--ease-out);}
-.espacio-card:hover .espacio-info{transform:translateY(0);}
-.espacio-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:#fffdf8;line-height:1.2;}
-.espacio-cap{font-family:'Jost',sans-serif;font-size:0.65rem;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,253,248,0.6);margin-top:4px;}
-.espacio-cta{font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:var(--terra-light);margin-top:8px;display:flex;align-items:center;gap:5px;}
-.espacio-cta svg{transition:transform 0.22s;}
-.espacio-card:hover .espacio-cta svg{transform:translateX(4px);}
-
-/* LIGHTBOX */
-#lightbox{position:fixed;inset:0;z-index:500;background:rgba(10,18,16,0.96);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s;}
-#lightbox.open{opacity:1;pointer-events:all;}
-#lightbox img{max-width:90vw;max-height:82vh;object-fit:contain;border-radius:6px;box-shadow:0 24px 80px rgba(0,0,0,0.5);}
-#lightbox-caption{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);text-align:center;}
-#lightbox-caption h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:#fffdf8;}
-#lightbox-caption p{font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;letter-spacing:0.1em;color:rgba(255,253,248,0.45);margin-top:4px;}
-#lb-close{position:absolute;top:24px;right:28px;background:transparent;border:1px solid rgba(255,255,255,0.18);border-radius:999px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,253,248,0.7);transition:all 0.22s;}
-#lb-close:hover{background:rgba(255,255,255,0.08);color:#fffdf8;}
-#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:999px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,253,248,0.7);transition:all 0.22s;}
-#lb-prev:hover,#lb-next:hover{background:rgba(255,255,255,0.13);color:#fffdf8;}
-#lb-prev{left:24px;}
-#lb-next{right:24px;}
-#lb-counter{position:absolute;top:28px;left:50%;transform:translateX(-50%);font-family:'Jost',sans-serif;font-size:0.65rem;font-weight:300;letter-spacing:0.12em;color:rgba(255,253,248,0.35);}
-
-/* CTA CARDS */
+/* ── CTA CARDS ─────────────────────────────────── */
 .cta-card{padding:28px 24px;background:rgba(255,255,255,0.07);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.11);border-radius:12px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;transition:background 0.26s,border-color 0.26s;}
 .cta-card:hover{background:rgba(255,255,255,0.11);border-color:rgba(255,255,255,0.18);}
 .cta-card-icon{width:26px;height:26px;color:rgba(255,253,248,0.7);}
 .cta-card-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;color:#fff;}
 .cta-card-sub{font-family:'Jost',sans-serif;font-size:0.75rem;font-weight:300;color:rgba(255,253,248,0.52);line-height:1.65;flex:1;}
 
-/* FOOTER */
+/* ── FOOTER ────────────────────────────────────── */
 .site-footer{background:var(--verde-dark);padding:60px 80px 40px;}
 .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:48px;margin-bottom:48px;}
 .footer-link-group{display:flex;flex-direction:column;gap:9px;}
@@ -116,7 +84,897 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 .footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:22px;display:flex;justify-content:space-between;align-items:center;}
 .footer-copy{font-family:'Jost',sans-serif;font-size:0.68rem;font-weight:300;color:rgba(255,253,248,0.3);}
 
-@media(prefers-reduced-motion:reduce){.txt-reveal{transition-duration:0.3s;}.img-reveal .reveal-cover{transition-duration:0.4s;}}
+/* ══════════════════════════════════════════════
+   HERO FOLIO
+══════════════════════════════════════════════ */
+.hero-folio {
+  background: var(--crema);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.hero-folio-ghost {
+  font-family: 'Against', serif;
+  font-size: clamp(12rem, 22vw, 26rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: rgba(45, 73, 73, 0.04);
+  position: absolute;
+  right: -40px;
+  bottom: -30px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+.hero-folio-container {
+  max-width: 1500px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 100px 60px 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+.hero-folio-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid rgba(45, 73, 73, 0.14);
+  padding-bottom: 16px;
+}
+.hero-folio-bar span { margin-right: 28px; }
+.hero-folio-bar-spacer { flex: 1; }
+.hero-folio-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: start;
+  flex: 1;
+}
+.hero-folio-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: 20px;
+}
+.hero-folio-id {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terracota);
+  margin-bottom: 18px;
+}
+.hero-folio-display {
+  font-family: 'Against', serif;
+  font-size: clamp(4rem, 7.5vw, 8.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--carbon);
+  display: block;
+}
+.hero-folio-italic {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(2.8rem, 5.5vw, 6.2rem);
+  line-height: 1;
+  color: var(--terracota);
+  display: block;
+  margin-top: 4px;
+}
+.hero-folio-body {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 420px;
+  margin-top: 28px;
+}
+.hero-folio-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+.hero-folio-photo-col {
+  padding-top: 30px;
+}
+.hero-photo-frame {
+  position: relative;
+  background: var(--crema-warm);
+  border-radius: 4px;
+  transform: rotate(-1.2deg);
+  box-shadow: 0 30px 60px -25px rgba(45,73,73,0.28);
+  overflow: hidden;
+}
+.hero-photo-inner {
+  position: relative;
+}
+.hero-photo-inner img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+.hero-photo-corner {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: rgba(255,253,248,0.78);
+  background: rgba(14,26,24,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 10px;
+  z-index: 2;
+}
+.hero-photo-meta {
+  background: var(--crema-warm);
+  padding: 12px 18px;
+  border-top: 1px solid var(--crema-border);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--body-clr);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.hero-photo-meta span:first-child { color: var(--terracota); }
+.hero-photo-caption-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--body-clr);
+  line-height: 1.3;
+  margin-top: 22px;
+  padding-left: 4px;
+}
+.hero-photo-caption-text em {
+  font-style: italic;
+  color: var(--terracota);
+}
+.hero-toc-strip {
+  border-top: 1px solid rgba(45,73,73,0.18);
+  padding: 22px 4px 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px 32px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--body-clr);
+}
+.hero-toc-strip span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 9px;
+  transition: color 0.3s;
+  cursor: default;
+}
+.hero-toc-strip span:hover { color: var(--terracota); }
+.hero-toc-strip i {
+  font-family: 'Jost', sans-serif;
+  font-style: normal;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--terracota);
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+/* ══════════════════════════════════════════════
+   STATS TERRA
+══════════════════════════════════════════════ */
+.stats-terra {
+  background: var(--verde-dark);
+  padding: 72px 0 68px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.stats-terra::before,.stats-terra::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: rgba(255,253,248,0.18);
+}
+.stats-terra::before { top: 0; }
+.stats-terra::after { bottom: 0; }
+.stats-terra-container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 52px;
+}
+.stats-terra-head {
+  text-align: center;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,253,248,0.85);
+  margin-bottom: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+.stats-terra-head::before,.stats-terra-head::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: rgba(255,253,248,0.5);
+}
+.stats-terra-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  align-items: end;
+}
+.stat-terra {
+  text-align: center;
+  padding: 0 20px;
+  position: relative;
+}
+.stat-terra:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 14%; bottom: 14%;
+  width: 1px;
+  background: rgba(255,253,248,0.3);
+}
+.stat-terra-num {
+  font-family: 'Against', serif;
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #fffdf8;
+}
+.stat-terra-num em {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.42em;
+  vertical-align: super;
+  margin-left: 4px;
+  letter-spacing: 0;
+  color: rgba(255,253,248,0.85);
+}
+.stat-terra-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,253,248,0.6);
+  margin-top: 6px;
+}
+.stats-terra-quote {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+  color: rgba(255,253,248,0.92);
+  margin: 44px auto 0;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255,253,248,0.2);
+  max-width: 600px;
+  line-height: 1.5;
+}
+.stats-terra-quote::before { content: '"'; opacity: 0.5; margin-right: 4px; }
+.stats-terra-quote::after  { content: '"'; opacity: 0.5; margin-left: 4px; }
+
+/* ══════════════════════════════════════════════
+   SCROLL GALLERY
+══════════════════════════════════════════════ */
+.sg-section { position: relative; background: var(--crema); }
+#sg-track   { position: relative; }
+
+.sg-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+
+/* ── LEFT ── */
+.sg-left {
+  background: var(--crema);
+  display: flex;
+  flex-direction: column;
+  padding: 72px 52px 60px 60px;
+  position: relative;
+  overflow: hidden;
+  border-right: 1px solid var(--crema-border);
+}
+.sg-header { margin-bottom: 36px; flex-shrink: 0; }
+.sg-header-overline {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--terracota);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.sg-header-overline::before {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: var(--terra-light);
+  flex-shrink: 0;
+}
+.sg-header-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  font-weight: 300;
+  color: var(--carbon);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.sg-header-title em { font-style: italic; color: var(--terracota); }
+
+.sg-list-viewport {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+}
+#sg-list {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  transition: transform 0.45s var(--ease-snap);
+}
+.sg-list-item {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  padding: 0 6px;
+  opacity: 0.22;
+  transition: opacity 0.28s var(--ease-snap);
+  user-select: none;
+}
+.sg-list-item.near  { opacity: 0.55; }
+.sg-list-item.active { opacity: 1; }
+
+.sg-item-num {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--terracota);
+  min-width: 22px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  flex-shrink: 0;
+}
+.sg-list-item.active .sg-item-num { opacity: 1; }
+
+.sg-item-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--muted);
+  transition: font-size 0.25s var(--ease-snap), color 0.22s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1;
+  line-height: 1.1;
+}
+.sg-list-item.active .sg-item-name {
+  white-space: normal;
+  overflow: visible;
+}
+.sg-list-item.near .sg-item-name  { font-size: 1.65rem; color: var(--body-clr); }
+.sg-list-item.active .sg-item-name { font-size: 2.3rem; color: var(--carbon); }
+.sg-list-item:hover:not(.active) .sg-item-name { color: var(--body-clr); }
+
+.sg-item-bar {
+  width: 2px;
+  height: 0;
+  background: var(--terracota);
+  border-radius: 2px;
+  flex-shrink: 0;
+  transition: height 0.22s var(--ease-snap);
+}
+.sg-list-item.active .sg-item-bar { height: 28px; }
+
+.sg-desc-area {
+  flex-shrink: 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--crema-border);
+  margin-top: 8px;
+  min-height: 110px;
+}
+#sg-desc-text {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--muted);
+  list-style: none;
+  padding: 0;
+  transition: opacity 0.3s;
+}
+#sg-desc-text li::before {
+  content: '—';
+  margin-right: 8px;
+  color: var(--terracota);
+  opacity: 0.7;
+}
+#sg-desc-cap {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.63rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracota);
+  margin-top: 10px;
+  transition: opacity 0.3s;
+}
+
+/* ── RIGHT ── */
+.sg-right {
+  background: var(--verde-dark);
+  position: relative;
+  overflow: hidden;
+}
+#sg-img-track {
+  display: flex;
+  height: 100%;
+  will-change: transform;
+}
+.sg-img-slide {
+  min-width: 88%;
+  height: 100%;
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.sg-img-slide img {
+  width: 100%;
+  height: 112%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+  transform-origin: center center;
+  transform: translateY(-6%);
+}
+.sg-img-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(14,26,24,0.72) 0%, rgba(14,26,24,0.1) 40%, transparent 65%);
+  z-index: 2;
+  pointer-events: none;
+}
+.sg-img-peek-hint {
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: 80px;
+  background: linear-gradient(to right, transparent, rgba(14,26,24,0.5));
+  z-index: 3;
+  pointer-events: none;
+}
+.sg-img-caption {
+  position: absolute;
+  bottom: 44px;
+  left: 44px;
+  z-index: 4;
+  pointer-events: none;
+}
+#sg-caption-num {
+  font-family: 'Against', serif;
+  font-size: 5rem;
+  line-height: 1;
+  color: rgba(255,253,248,0.07);
+  letter-spacing: -0.05em;
+  margin-bottom: -6px;
+  display: block;
+}
+#sg-caption-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.7rem;
+  font-weight: 300;
+  color: #fffdf8;
+  line-height: 1.1;
+  display: block;
+  transition: opacity 0.3s;
+}
+#sg-caption-sub {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.64rem;
+  font-weight: 300;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(255,253,248,0.45);
+  margin-top: 8px;
+  display: block;
+  transition: opacity 0.3s;
+}
+.sg-progress {
+  position: absolute;
+  top: 50%;
+  right: 28px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 4;
+}
+.sg-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255,253,248,0.2);
+  cursor: pointer;
+  transition: all 0.4s var(--ease-snap);
+}
+.sg-dot.active { background: var(--terracota); height: 22px; }
+.sg-dot:hover:not(.active) { background: rgba(255,253,248,0.45); }
+
+.sg-scroll-hint {
+  position: absolute;
+  bottom: 44px;
+  right: 60px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.45;
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+.sg-scroll-hint.hidden { opacity: 0; }
+.sg-scroll-hint-text {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,253,248,0.7);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.sg-scroll-hint-line {
+  width: 1px;
+  height: 40px;
+  background: rgba(255,253,248,0.35);
+  position: relative;
+  overflow: hidden;
+}
+.sg-scroll-hint-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0; right: 0;
+  height: 100%;
+  background: rgba(255,253,248,0.7);
+  animation: scrollLine 1.8s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0%   { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* ══════════════════════════════════════════════
+   INVENTARIO SHEET
+══════════════════════════════════════════════ */
+.inventario-section {
+  background: var(--crema);
+  padding: 130px 0 120px;
+  position: relative;
+  overflow: hidden;
+}
+.inventario-ghost {
+  position: absolute;
+  top: 60px;
+  right: -60px;
+  font-family: 'Against', serif;
+  font-size: clamp(8rem, 16vw, 18rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: rgba(45,73,73,0.04);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+.inventario-sheet {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 1;
+}
+.inv-eyebrow {
+  text-align: center;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--terracota);
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.inv-eyebrow::before,.inv-eyebrow::after {
+  content: '';
+  display: block;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--terracota);
+}
+.inv-title {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(2.4rem, 4.4vw, 3.6rem);
+  color: var(--carbon);
+  line-height: 1.05;
+  margin-bottom: 18px;
+  letter-spacing: -0.01em;
+}
+.inv-title em { font-style: italic; color: var(--terracota); }
+.inv-sub {
+  text-align: center;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 460px;
+  margin: 0 auto 56px;
+  line-height: 1.75;
+}
+.inv-rule {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 32px 0;
+}
+.inv-rule::before,.inv-rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(45,73,73,0.18);
+}
+.inv-rule-mark {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--terracota);
+}
+.inv-list { border-top: 1px solid rgba(45,73,73,0.15); }
+.inv-row {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(45,73,73,0.08);
+  transition: padding 0.3s var(--ease-out);
+}
+.inv-row:hover { padding-left: 8px; }
+.inv-num {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: var(--terracota);
+  font-weight: 400;
+  min-width: 28px;
+  flex-shrink: 0;
+}
+.inv-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.22rem;
+  font-weight: 400;
+  color: var(--carbon);
+  flex-shrink: 0;
+  letter-spacing: -0.005em;
+}
+.inv-leader {
+  flex: 1;
+  border-bottom: 1px dotted rgba(45,73,73,0.32);
+  margin-bottom: 4px;
+}
+.inv-detail {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--muted);
+  flex-shrink: 0;
+  text-align: right;
+}
+.inv-promise {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  color: var(--muted);
+  line-height: 1.55;
+  margin-top: 20px;
+}
+.inv-promise em { color: var(--terracota); }
+
+/* ══════════════════════════════════════════════
+   CTA POSTER
+══════════════════════════════════════════════ */
+.cta-poster {
+  background: var(--verde-dark);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.cta-poster-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.cta-poster-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.1;
+}
+.cta-poster-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 110px 52px 80px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+.cta-poster-eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,253,248,0.5);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.cta-poster-eyebrow::before,.cta-poster-eyebrow::after {
+  content: '';
+  display: block;
+  width: 28px; height: 1px;
+  background: rgba(255,253,248,0.3);
+}
+.cta-poster-display {
+  font-family: 'Against', serif;
+  font-size: clamp(3.5rem, 7vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: #fffdf8;
+}
+.cta-poster-italic {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(2.6rem, 5.5vw, 6.4rem);
+  line-height: 1.05;
+  color: var(--terracota);
+  margin-top: 8px;
+  letter-spacing: -0.01em;
+}
+.cta-poster-body {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: rgba(255,253,248,0.62);
+  max-width: 480px;
+  margin: 38px auto 0;
+}
+.cta-poster-rule {
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,253,248,0.28), transparent);
+  margin: 56px auto 42px;
+}
+.cta-text-links {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+.cta-text-link {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.6rem, 2.3vw, 2rem);
+  color: rgba(255,253,248,0.92);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  transition: color 0.3s, gap 0.3s;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  letter-spacing: -0.01em;
+  padding: 4px 12px;
+}
+.cta-text-link::before {
+  content: '→';
+  font-family: 'Jost', sans-serif;
+  font-size: 1.2rem;
+  font-style: normal;
+  color: var(--terracota);
+  transition: transform 0.3s;
+  display: inline-block;
+}
+.cta-text-link:hover { color: #fffdf8; gap: 26px; }
+.cta-text-link:hover::before { transform: translateX(4px); }
+.cta-poster-folio {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255,253,248,0.4);
+  padding: 26px 32px;
+  border-top: 1px solid rgba(255,253,248,0.1);
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+.cta-poster-folio span:not(:last-child)::after {
+  content: '/';
+  margin: 0 22px;
+  color: var(--terracota);
+  opacity: 0.5;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .txt-reveal{transition-duration:0.3s;}
+  .img-reveal .reveal-cover{transition-duration:0.4s;}
+  #sg-list{transition:none;}
+  .sg-dot{transition:none;}
+}
 </style>
 </head>
 <body>
@@ -144,347 +1002,187 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 </a>
 
 
-<!-- ══ S1 · HERO ══════════════════════════════════════════════ -->
-<section style="min-height:62vh;background:var(--verde-dark);display:flex;align-items:center;position:relative;overflow:hidden;padding-top:86px;">
+<!-- ══ S1 · HERO FOLIO ════════════════════════════════════════ -->
+<section class="hero-folio">
+  <div class="hero-folio-ghost" aria-hidden="true">ESPACIOS</div>
 
-  <div class="img-reveal" style="position:absolute;right:0;top:0;bottom:0;width:55%;z-index:0;">
-    <div class="reveal-cover"></div>
-    <div class="img-bg" style="position:absolute;inset:0;">
-      <img src="assets/photo-jardines.jpg" alt="Espacios Finca La Hermosa" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;">
+  <div class="hero-folio-container">
+
+    <div class="hero-folio-bar txt-reveal">
+      <span>Folio 03</span>
+      <span>Estudio del venue</span>
+      <span>IX rincones</span>
+      <span class="hero-folio-bar-spacer"></span>
+      <span>Edición 2026</span>
     </div>
-    <div style="position:absolute;inset:0;background:linear-gradient(to right,var(--verde-dark) 0%,transparent 38%);z-index:1;"></div>
-    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(14,26,24,0.45) 100%);z-index:1;"></div>
+
+    <div class="hero-folio-grid">
+
+      <div class="hero-folio-text">
+        <div class="hero-folio-id txt-reveal">I. El venue</div>
+        <h1 style="margin:0;font-weight:400;">
+          <span class="hero-folio-display txt-reveal" data-d="1">Espacios</span>
+          <span class="hero-folio-italic txt-reveal" data-d="2">que cuentan historias.</span>
+        </h1>
+        <p class="hero-folio-body txt-reveal" data-d="3">Cada rincón de la finca está pensado para vivirse plenamente. Desplázate por los nueve espacios y encuentra el escenario perfecto para tu celebración.</p>
+        <div class="hero-folio-actions txt-reveal" data-d="4">
+          <a href="#sg-section" class="btn-accent" id="hero-explore-btn">Explorar espacios</a>
+          <button class="btn-outline-dark" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Cotizar ahora <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+
+      <div class="hero-folio-photo-col">
+        <div class="hero-photo-frame img-reveal">
+          <div class="reveal-cover" style="background:var(--terracota);"></div>
+          <div class="img-bg hero-photo-inner">
+            <img src="assets/photo-jardines.jpg" alt="Jardines de la finca">
+            <div class="hero-photo-corner">01 / 09</div>
+          </div>
+          <div class="hero-photo-meta">
+            <span>Pl. 01</span>
+            <span>—</span>
+            <span>Jardines norte</span>
+          </div>
+        </div>
+        <div class="hero-photo-caption-text txt-reveal" data-d="3">
+          <em>Naturaleza</em><br>como escenario.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hero-toc-strip txt-reveal">
+      <span><i>I</i>Jardines</span>
+      <span><i>II</i>Casa</span>
+      <span><i>III</i>Salón</span>
+      <span><i>IV</i>Terraza</span>
+      <span><i>V</i>Alberca</span>
+      <span><i>VI</i>Rooftop</span>
+      <span><i>VII</i>Puente</span>
+      <span><i>VIII</i>Fogata</span>
+      <span><i>IX</i>Entorno</span>
+    </div>
+
   </div>
+</section>
 
-  <div style="font-family:'Against',serif;font-size:clamp(6rem,10vw,12rem);line-height:0.9;letter-spacing:-0.03em;color:rgba(255,253,248,0.03);position:absolute;right:-10px;bottom:0;pointer-events:none;user-select:none;">ESPACIOS</div>
 
-  <div style="position:relative;z-index:2;max-width:1500px;width:100%;margin:0 auto;padding:60px 52px 72px;">
-    <div style="max-width:540px;">
-      <div class="overline overline-light txt-reveal" style="margin-bottom:24px;">El venue</div>
-      <div class="txt-reveal" data-d="1" style="font-family:'Against',serif;font-size:clamp(3.8rem,6.2vw,6.8rem);line-height:0.92;letter-spacing:-0.025em;color:#fffdf8;">Un lugar,</div>
-      <div class="txt-reveal" data-d="2" style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5.2vw,5.6rem);font-style:italic;font-weight:300;line-height:1;color:var(--terracota);margin-top:4px;">infinitas posibilidades.</div>
-      <p class="txt-reveal" data-d="3" style="font-family:'Jost',sans-serif;font-size:0.92rem;font-weight:300;line-height:1.85;color:rgba(255,253,248,0.68);margin-top:28px;max-width:400px;">Cada rincón de la finca está pensado para vivirse plenamente. Explora los espacios y descubre cuál es el escenario perfecto para tu celebración.</p>
-      <div class="txt-reveal" data-d="4" style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;">
-        <a href="#galeria" class="btn-accent">Ver todos los espacios</a>
-        <button class="btn-ghost" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Cotizar ahora</button>
+<!-- ══ S2 · STATS TERRA ═══════════════════════════════════════ -->
+<section class="stats-terra">
+  <div class="stats-terra-container">
+    <div class="stats-terra-grid">
+      <div class="stat-terra txt-reveal">
+        <div class="stat-terra-num">9</div>
+        <div class="stat-terra-label">Espacios únicos</div>
+      </div>
+      <div class="stat-terra txt-reveal" data-d="1">
+        <div class="stat-terra-num">2,500<em>m²</em></div>
+        <div class="stat-terra-label">Terreno natural</div>
+      </div>
+      <div class="stat-terra txt-reveal" data-d="2">
+        <div class="stat-terra-num">30<em>pers.</em></div>
+        <div class="stat-terra-label">Capacidad máxima</div>
       </div>
     </div>
   </div>
 </section>
 
 
-<!-- ══ S2 · HIGHLIGHTS — 3 NÚMEROS ══════════════════════════ -->
-<section style="background:var(--verde);padding:44px 0;">
-  <div style="max-width:1500px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;">
+<!-- ══ S3 · SCROLL GALLERY ═══════════════════════════════════ -->
+<section class="sg-section" id="sg-section">
+  <div id="sg-track">
+    <div class="sg-sticky">
 
-    <div class="txt-reveal" style="text-align:center;padding:0 40px;border-right:1px solid rgba(255,255,255,0.1);">
-      <div style="font-family:'Against',serif;font-size:3.2rem;color:#fffdf8;letter-spacing:-0.02em;">14+</div>
-      <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,253,248,0.55);margin-top:6px;">Espacios únicos</div>
-    </div>
-    <div class="txt-reveal" data-d="1" style="text-align:center;padding:0 40px;border-right:1px solid rgba(255,255,255,0.1);">
-      <div style="font-family:'Against',serif;font-size:3.2rem;color:#fffdf8;letter-spacing:-0.02em;">2,500 m²</div>
-      <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,253,248,0.55);margin-top:6px;">de terreno natural</div>
-    </div>
-    <div class="txt-reveal" data-d="2" style="text-align:center;padding:0 40px;">
-      <div style="font-family:'Against',serif;font-size:3.2rem;color:#fffdf8;letter-spacing:-0.02em;">30 pers.</div>
-      <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,253,248,0.55);margin-top:6px;">capacidad máxima</div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ══ S3 · GALERÍA EDITORIAL ══════════════════════════════ -->
-<section id="galeria" style="background:var(--crema);padding:100px 0 80px;position:relative;overflow:hidden;">
-
-  <div class="arch-label" style="right:-10px;top:40px;">GALERÍA</div>
-
-  <div style="max-width:1500px;margin:0 auto;padding:0 52px;">
-
-    <!-- Header -->
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px;gap:40px;">
-      <div>
-        <div class="overline overline-dark txt-reveal" style="margin-bottom:14px;">Espacios del venue</div>
-        <div class="txt-reveal" data-d="1" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,3.8rem);font-weight:300;color:var(--carbon);line-height:1.05;letter-spacing:-0.02em;">Cada espacio,<br><em style="color:var(--terracota);font-style:italic;">diseñado para vivirse.</em></div>
-      </div>
-      <div class="txt-reveal" data-d="2" style="flex-shrink:0;max-width:280px;text-align:right;">
-        <p style="font-family:'Jost',sans-serif;font-size:0.82rem;font-weight:300;line-height:1.75;color:var(--muted);">Haz clic en cualquier espacio para verlo en detalle.</p>
-      </div>
-    </div>
-
-    <!-- Grid editorial asimétrico -->
-    <div class="txt-reveal" data-d="3">
-
-      <!-- Fila 1: grande izquierda + 2 derechas -->
-      <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-bottom:16px;">
-
-        <div class="espacio-card" style="height:460px;" onclick="openLb(0)">
-          <img src="assets/photo-jardines.jpg" alt="Jardines">
-          <div class="espacio-overlay"></div>
-          <div class="espacio-info">
-            <div class="espacio-name">Jardines y áreas verdes</div>
-            <div class="espacio-cap">2 jardines · al aire libre</div>
-            <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-          </div>
+      <div class="sg-left">
+        <div class="sg-header">
+          <div class="sg-header-overline">Espacios del venue</div>
+          <div class="sg-header-title">Cada rincón,<br><em>diseñado para vivirse.</em></div>
         </div>
-
-        <div style="display:grid;grid-template-rows:1fr 1fr;gap:16px;">
-          <div class="espacio-card" style="height:222px;" onclick="openLb(1)">
-            <img src="assets/photo-alberca.jpg" alt="Alberca">
-            <div class="espacio-overlay"></div>
-            <div class="espacio-info">
-              <div class="espacio-name">Alberca</div>
-              <div class="espacio-cap">Area de convivencia</div>
-              <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-            </div>
-          </div>
-          <div class="espacio-card" style="height:222px;" onclick="openLb(2)">
-            <img src="assets/photo-terraza.jpg" alt="Terraza">
-            <div class="espacio-overlay"></div>
-            <div class="espacio-info">
-              <div class="espacio-name">Terraza continua</div>
-              <div class="espacio-cap">3.5 m de ancho · cubierta</div>
-              <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-            </div>
-          </div>
+        <div class="sg-list-viewport">
+          <div id="sg-list"></div>
         </div>
-
-      </div>
-
-      <!-- Fila 2: 3 iguales -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px;">
-
-        <div class="espacio-card" style="height:280px;" onclick="openLb(3)">
-          <img src="assets/photo-salon.jpg" alt="Salón de eventos">
-          <div class="espacio-overlay"></div>
-          <div class="espacio-info">
-            <div class="espacio-name">Salón de eventos</div>
-            <div class="espacio-cap">22×14 m · 300 m²</div>
-            <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-          </div>
-        </div>
-
-        <div class="espacio-card" style="height:280px;" onclick="openLb(4)">
-          <img src="assets/photo-eventos.jpg" alt="Casa principal">
-          <div class="espacio-overlay"></div>
-          <div class="espacio-info">
-            <div class="espacio-name">Casa principal</div>
-            <div class="espacio-cap">6 habitaciones · hospedaje</div>
-            <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-          </div>
-        </div>
-
-        <div class="espacio-card" style="height:280px;" onclick="openLb(5)">
-          <img src="assets/photo-paquete.jpg" alt="Rooftop">
-          <div class="espacio-overlay"></div>
-          <div class="espacio-info">
-            <div class="espacio-name">Rooftop / Mirador</div>
-            <div class="espacio-cap">Vistas panorámicas</div>
-            <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Fila 3: pequeña + grande derecha -->
-      <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:16px;">
-
-        <div style="display:grid;grid-template-rows:1fr 1fr;gap:16px;">
-          <div class="espacio-card" style="height:200px;" onclick="openLb(6)">
-            <img src="assets/photo-hero.jpg" alt="Área de fogata">
-            <div class="espacio-overlay"></div>
-            <div class="espacio-info">
-              <div class="espacio-name">Área de fogata</div>
-              <div class="espacio-cap">Experiencia nocturna</div>
-              <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-            </div>
-          </div>
-          <div class="espacio-card" style="height:200px;" onclick="openLb(7)">
-            <img src="assets/hero-wedding.jpg" alt="Puente colgante y jardín">
-            <div class="espacio-overlay"></div>
-            <div class="espacio-info">
-              <div class="espacio-name">Puente colgante</div>
-              <div class="espacio-cap">Entorno boscoso</div>
-              <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="espacio-card" style="height:416px;" onclick="openLb(8)">
-          <img src="assets/photo-cta-dark.jpg" alt="Circuito y entorno natural">
-          <div class="espacio-overlay"></div>
-          <div class="espacio-info">
-            <div class="espacio-name">Entorno natural y circuito</div>
-            <div class="espacio-cap">Ciclopista · bosque · senderos</div>
-            <div class="espacio-cta">Ver espacio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-          </div>
-        </div>
-
-      </div>
-
-    </div><!-- /txt-reveal -->
-  </div>
-</section>
-
-
-<!-- ══ S4 · LISTA COMPLETA DE ACTIVOS ══════════════════════ -->
-<section style="background:var(--crema-warm);padding:80px 0;position:relative;overflow:hidden;">
-
-  <div style="max-width:1500px;margin:0 auto;padding:0 52px;">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
-
-      <div>
-        <div class="overline overline-dark txt-reveal" style="margin-bottom:16px;">Todo lo que incluye</div>
-        <div class="txt-reveal" data-d="1" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:300;color:var(--carbon);line-height:1.1;letter-spacing:-0.02em;margin-bottom:28px;">La finca completa,<br><em style="color:var(--terracota);font-style:italic;">a tu disposición.</em></div>
-        <p class="txt-reveal" data-d="2" style="font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;line-height:1.85;color:var(--body-clr);max-width:400px;">Cuando reservas Finca La Hermosa, todos los espacios son tuyos. Sin restricciones, sin horarios parciales.</p>
-      </div>
-
-      <div class="txt-reveal" data-d="2">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:x 12px 16px;">
-
-          <!-- Col 1 -->
-          <div style="display:flex;flex-direction:column;gap:14px;padding-right:28px;border-right:1px solid var(--crema-border);">
-            <div style="display:flex;align-items:flex-start;gap:12px;" class="txt-reveal">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
-              <div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Casa principal</div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">6 habitaciones · hospedaje</div>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
-              <div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">2 jardines amplios</div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Áreas verdes y descanso</div>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
-              <div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Salón de eventos</div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">22×14 m · add-on disponible</div>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
-              <div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Terraza continua</div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">3.5 m de ancho</div>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
-              <div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Alberca</div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Con área de convivencia</div>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
-              <div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Rooftop / Mirador</div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Vistas panorámicas</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Col 2 -->
-          <div style="display:flex;flex-direction:column;gap:14px;padding-left:28px;">
-            <div style="display:flex;align-items:flex-start;gap:12px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
-              <div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Café pequeño</div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Espacio de descanso interior</div>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
-              <div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Puente colgante</div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">En entorno boscoso</div>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
-              <div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Área de fogata</div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Add-on disponible</div>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
-              <div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Columpio alto</div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Atracción única del venue</div>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
-              <div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Asador</div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Área exterior equipada</div>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:2px;color:var(--terracota);"><polyline points="20 6 9 17 4 12"/></svg>
-              <div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:400;color:var(--carbon);">Circuito tipo ciclopista</div>
-                <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Sendero natural en el bosque</div>
-              </div>
-            </div>
-          </div>
-
+        <div class="sg-desc-area">
+          <ul id="sg-desc-text"></ul>
+          <div id="sg-desc-cap"></div>
         </div>
       </div>
+
+      <div class="sg-right">
+        <div id="sg-img-track"></div>
+        <div class="sg-img-gradient"></div>
+        <div class="sg-img-peek-hint"></div>
+        <div class="sg-img-caption">
+          <span id="sg-caption-num">01</span>
+          <span id="sg-caption-name"></span>
+          <span id="sg-caption-sub"></span>
+        </div>
+        <div class="sg-progress" id="sg-progress"></div>
+        <div class="sg-scroll-hint" id="sg-scroll-hint">
+          <div class="sg-scroll-hint-text">Scroll</div>
+          <div class="sg-scroll-hint-line"></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
 
-<!-- ══ S5 · CTA FINAL DARK ══════════════════════════════════ -->
-<section id="cta-section" style="background:#0d1918;padding:100px 0;position:relative;overflow:hidden;">
-  <div style="position:absolute;inset:0;z-index:0;">
-    <img src="assets/photo-cta-dark.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.18;">
-    <div style="position:absolute;inset:0;background:linear-gradient(160deg,#1e3232 0%,#2d4949 30%,#1a2a1a 65%,#0e1e1e 100%);opacity:0.88;"></div>
-  </div>
-
-  <div style="position:relative;z-index:1;max-width:1500px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
-    <div style="display:flex;flex-direction:column;gap:20px;">
-      <div class="overline overline-light txt-reveal">Reserva tu fecha</div>
-      <div class="txt-reveal" data-d="1">
-        <div style="font-family:'Against',serif;font-size:clamp(3.2rem,5.5vw,6rem);line-height:0.92;letter-spacing:-0.025em;color:#fffdf8;">La finca te espera,</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,4.5vw,5rem);font-style:italic;font-weight:300;line-height:1;color:var(--terracota);margin-top:6px;">¿cuándo celebramos?</div>
-      </div>
-      <p class="txt-reveal" data-d="2" style="font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;line-height:1.85;color:rgba(255,253,248,0.62);max-width:360px;">Cotiza tu evento, agenda una visita o escríbenos directo por WhatsApp. Respuesta en menos de 24 horas.</p>
+<!-- ══ S4 · INVENTARIO ═══════════════════════════════════════ -->
+<section class="inventario-section">
+  <div class="inventario-ghost" aria-hidden="true">INVENTARIO</div>
+  <div class="inventario-sheet">
+    <div class="inv-eyebrow txt-reveal">Inventario completo</div>
+    <div class="inv-title txt-reveal" data-d="1">La finca completa,<br><em>a tu disposición.</em></div>
+    <p class="inv-sub txt-reveal" data-d="2">Cuando reservas Finca La Hermosa, todos los espacios son tuyos. Doce activos pensados para vivirse de noche y de día.</p>
+    <div class="inv-rule txt-reveal" data-d="2"><span class="inv-rule-mark">·  Activos del venue  ·</span></div>
+    <div class="inv-list txt-reveal" data-d="3">
+      <div class="inv-row"><span class="inv-num">01</span><span class="inv-name">Casa principal</span><span class="inv-leader"></span><span class="inv-detail">6 habitaciones · hospedaje</span></div>
+      <div class="inv-row"><span class="inv-num">02</span><span class="inv-name">Jardines amplios</span><span class="inv-leader"></span><span class="inv-detail">2 áreas verdes</span></div>
+      <div class="inv-row"><span class="inv-num">03</span><span class="inv-name">Salón de eventos</span><span class="inv-leader"></span><span class="inv-detail">22×14 m · add-on</span></div>
+      <div class="inv-row"><span class="inv-num">04</span><span class="inv-name">Terraza continua</span><span class="inv-leader"></span><span class="inv-detail">3.5 m de ancho</span></div>
+      <div class="inv-row"><span class="inv-num">05</span><span class="inv-name">Alberca</span><span class="inv-leader"></span><span class="inv-detail">área de convivencia</span></div>
+      <div class="inv-row"><span class="inv-num">06</span><span class="inv-name">Rooftop / Mirador</span><span class="inv-leader"></span><span class="inv-detail">vistas panorámicas</span></div>
+      <div class="inv-row"><span class="inv-num">07</span><span class="inv-name">Café interior</span><span class="inv-leader"></span><span class="inv-detail">espacio de descanso</span></div>
+      <div class="inv-row"><span class="inv-num">08</span><span class="inv-name">Puente colgante</span><span class="inv-leader"></span><span class="inv-detail">entorno boscoso</span></div>
+      <div class="inv-row"><span class="inv-num">09</span><span class="inv-name">Área de fogata</span><span class="inv-leader"></span><span class="inv-detail">experiencia nocturna · add-on</span></div>
+      <div class="inv-row"><span class="inv-num">10</span><span class="inv-name">Columpio alto</span><span class="inv-leader"></span><span class="inv-detail">atracción única</span></div>
+      <div class="inv-row"><span class="inv-num">11</span><span class="inv-name">Asador</span><span class="inv-leader"></span><span class="inv-detail">área exterior equipada</span></div>
+      <div class="inv-row"><span class="inv-num">12</span><span class="inv-name">Circuito ciclopista</span><span class="inv-leader"></span><span class="inv-detail">sendero natural · bosque</span></div>
     </div>
-
-    <div class="txt-reveal" data-d="2" style="display:flex;flex-direction:column;gap:14px;">
-      <div class="cta-card">
-        <svg class="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
-        <div class="cta-card-title">Cotizar en línea</div>
-        <p class="cta-card-sub">Cuéntanos sobre tu evento y recibe una propuesta con PDF personalizado.</p>
-        <button class="btn-accent" style="font-size:0.65rem;padding:10px 20px;">Cotizar ahora</button>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-        <div class="cta-card">
-          <svg class="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <div class="cta-card-title">Agendar visita</div>
-          <p class="cta-card-sub">Ven a conocer la finca antes de decidir.</p>
-          <button class="btn-accent" style="font-size:0.65rem;padding:10px 20px;">Agendar</button>
-        </div>
-        <div class="cta-card">
-          <svg class="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          <div class="cta-card-title">WhatsApp</div>
-          <p class="cta-card-sub">Respuesta rápida y directa.</p>
-          <button style="padding:10px 20px;background:#25D366;color:#fff;border:none;border-radius:999px;font-family:'Jost',sans-serif;font-size:0.65rem;font-weight:300;letter-spacing:0.09em;text-transform:uppercase;cursor:pointer;transition:opacity 0.22s;" onmouseenter="this.style.opacity='0.85'" onmouseleave="this.style.opacity='1'">Escribir</button>
-        </div>
-      </div>
-    </div>
+    <div class="inv-rule"><span class="inv-rule-mark">·  XII activos  ·</span></div>
+    <div class="inv-promise txt-reveal" data-d="3">"Cuando reservas, todos los espacios son tuyos. <em>Sin restricciones.</em>"</div>
   </div>
 </section>
 
 
-<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<!-- ══ S5 · CTA POSTER ════════════════════════════════════════ -->
+<section id="cta-section" class="cta-poster">
+  <div class="cta-poster-bg"><img src="assets/photo-cta-dark.jpg" alt=""></div>
+  <div class="cta-poster-inner">
+    <div class="cta-poster-eyebrow txt-reveal">Reserva tu fecha</div>
+    <div class="txt-reveal" data-d="1">
+      <div class="cta-poster-display">Escribe el siguiente</div>
+      <div class="cta-poster-italic">capítulo en la finca.</div>
+    </div>
+    <p class="cta-poster-body txt-reveal" data-d="2">Cotiza tu evento, agenda una visita o escríbenos directo. Respuesta en menos de 24 horas.</p>
+    <div class="cta-poster-rule txt-reveal" data-d="3"></div>
+    <div class="cta-text-links txt-reveal" data-d="3">
+      <a href="cotizar.html" class="cta-text-link">Cotizar en línea</a>
+      <button class="cta-text-link">Agendar una visita</button>
+      <a href="https://wa.me/5215500000000" class="cta-text-link" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    </div>
+  </div>
+  <div class="cta-poster-folio txt-reveal" data-d="4">
+    <span>Est. 2024</span>
+    <span>Folio 03 / IX</span>
+    <span>Isidro Fabela, Edomex</span>
+    <span>hola@fincalahermosa.com</span>
+  </div>
+</section>
+
+
+<!-- ══ FOOTER ══════════════════════════════════════════════════ -->
 <footer class="site-footer">
   <div class="footer-grid">
     <div>
@@ -498,28 +1196,21 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
     <div>
       <span class="footer-head">Navegación</span>
       <div class="footer-link-group">
-        <a href="index.html">Inicio</a>
-        <a href="experiencias.html">Experiencias</a>
-        <a href="espacios.html">Espacios</a>
-        <a href="nosotros.html">Nosotros</a>
-        <a href="faq.html">FAQ</a>
+        <a href="index.html">Inicio</a><a href="experiencias.html">Experiencias</a>
+        <a href="espacios.html">Espacios</a><a href="nosotros.html">Nosotros</a><a href="faq.html">FAQ</a>
       </div>
     </div>
     <div>
       <span class="footer-head">Experiencias</span>
       <div class="footer-link-group">
-        <span>Eventos Sociales</span>
-        <span>Corporativos</span>
-        <span>Retiros</span>
-        <span>Estancia Privada</span>
-        <span>One Day Experience</span>
+        <span>Eventos Sociales</span><span>Corporativos</span><span>Retiros</span>
+        <span>Estancia Privada</span><span>One Day Experience</span>
       </div>
     </div>
     <div>
       <span class="footer-head">Contacto</span>
       <div class="footer-link-group">
-        <span>+52 (55) 0000-0000</span>
-        <span>hola@fincalahermosa.com</span>
+        <span>+52 (55) 0000-0000</span><span>hola@fincalahermosa.com</span>
         <span style="line-height:1.6;">Isidro Fabela, Estado de México</span>
         <button class="btn-accent" style="margin-top:8px;font-size:0.65rem;padding:10px 20px;">Agendar visita</button>
       </div>
@@ -532,34 +1223,229 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 </footer>
 
 
-<!-- ══ LIGHTBOX ══════════════════════════════════════════════ -->
-<div id="lightbox">
-  <button id="lb-close" onclick="closeLb()" aria-label="Cerrar">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-  </button>
-  <div id="lb-counter"></div>
-  <button id="lb-prev" onclick="lbNav(-1)" aria-label="Anterior">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-  </button>
-  <img id="lb-img" src="" alt="">
-  <button id="lb-next" onclick="lbNav(1)" aria-label="Siguiente">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-  </button>
-  <div id="lightbox-caption">
-    <h3 id="lb-name"></h3>
-    <p id="lb-cap"></p>
-  </div>
-</div>
-
-
 <script>
-/* NAV */
+const ESPACIOS = [
+  { nombre:'Jardines y áreas verdes', bullets:['Dos jardines con árboles maduros', 'Zonas de descanso y convivencia', 'Ideal para ceremonias al aire libre'],          capacidad:'2 jardines · espacios al aire libre',   img:'assets/photo-jardines.jpg', caption:'Naturaleza como escenario' },
+  { nombre:'Casa principal',          bullets:['6 habitaciones completamente equipadas', 'Hospedaje para anfitriones e invitados VIP', 'Sin salir de la finca'],        capacidad:'6 habitaciones · hospedaje completo',   img:'assets/photo-eventos.jpg',  caption:'Tu hogar durante la celebración' },
+  { nombre:'Salón de eventos',        bullets:['300 m² versátiles y adaptables', 'Bodas, corporativos y celebraciones', 'Disponible como add-on'],                      capacidad:'22×14 m · 300 m² · add-on',            img:'assets/photo-salon.jpg',    caption:'300 m² de posibilidades' },
+  { nombre:'Terraza continua',        bullets:['3.5 m de ancho a lo largo de la fachada', 'Transición fluida entre interior y jardín', 'Cubierta y protegida'],        capacidad:'3.5 m de ancho · cubierta',            img:'assets/photo-terraza.jpg',  caption:'Entre lo interior y lo exterior' },
+  { nombre:'Alberca',                 bullets:['El corazón social de la finca', 'Área de convivencia y descanso', 'Perfecta para reuniones en verano'],                 capacidad:'Área de convivencia y descanso',        img:'assets/photo-alberca.jpg',  caption:'Donde el tiempo se detiene' },
+  { nombre:'Rooftop y mirador',       bullets:['El punto más alto de la finca', 'Vistas panorámicas del bosque de Isidro Fabela', 'Cierre memorable para cualquier evento'], capacidad:'Vistas panorámicas · acceso libre', img:'assets/photo-paquete.jpg',  caption:'El mejor panorama del bosque' },
+  { nombre:'Puente colgante',         bullets:['Experiencia única en el bosque', 'El elemento más fotogénico de la finca', 'Acceso libre incluido'],                    capacidad:'En entorno boscoso natural',            img:'assets/hero-wedding.jpg',   caption:'El momento más memorable' },
+  { nombre:'Área de fogata',          bullets:['Cierre nocturno de cualquier evento', 'Ambiente íntimo y memorable', 'Disponible como add-on'],                         capacidad:'Experiencia nocturna · add-on',         img:'assets/photo-hero.jpg',     caption:'Noches que no se olvidan' },
+  { nombre:'Entorno natural',         bullets:['Ciclopista y senderos forestales', 'Hectáreas de bosque alrededor', 'La finca como destino completo'],                  capacidad:'Ciclopista · bosque · senderos',        img:'assets/photo-cta-dark.jpg', caption:'La naturaleza como anfitriona' }
+];
+
+const N      = ESPACIOS.length;
+const ITEM_H = 80;
+const SLIDE_W = 88;
+
+const sgTrack      = document.getElementById('sg-track');
+const sgList       = document.getElementById('sg-list');
+const sgListVP     = document.querySelector('.sg-list-viewport');
+const imgTrack     = document.getElementById('sg-img-track');
+const progressWrap = document.getElementById('sg-progress');
+const descText     = document.getElementById('sg-desc-text');
+const descCap      = document.getElementById('sg-desc-cap');
+const captionNum   = document.getElementById('sg-caption-num');
+const captionName  = document.getElementById('sg-caption-name');
+const captionSub   = document.getElementById('sg-caption-sub');
+const scrollHint   = document.getElementById('sg-scroll-hint');
+
+sgTrack.style.height = (N * 100) + 'vh';
+
+ESPACIOS.forEach((esp, i) => {
+  const item = document.createElement('div');
+  item.className = 'sg-list-item';
+  item.dataset.idx = i;
+  item.innerHTML = `
+    <span class="sg-item-num">${String(i + 1).padStart(2, '0')}</span>
+    <div class="sg-item-bar"></div>
+    <span class="sg-item-name">${esp.nombre}</span>
+  `;
+  item.addEventListener('click', () => scrollToSpace(i));
+  sgList.appendChild(item);
+});
+
+ESPACIOS.forEach((esp, i) => {
+  const slide = document.createElement('div');
+  slide.className = 'sg-img-slide';
+  slide.innerHTML = `<img src="${esp.img}" alt="${esp.nombre}" loading="${i === 0 ? 'eager' : 'lazy'}">`;
+  imgTrack.appendChild(slide);
+});
+
+ESPACIOS.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'sg-dot';
+  dot.addEventListener('click', () => scrollToSpace(i));
+  progressWrap.appendChild(dot);
+});
+
+const listItems = document.querySelectorAll('.sg-list-item');
+const dots      = document.querySelectorAll('.sg-dot');
+const slides    = imgTrack.querySelectorAll('.sg-img-slide img');
+
+function scrollToSpace(idx) {
+  const totalScroll = sgTrack.offsetHeight - window.innerHeight;
+  const progress = N > 1 ? idx / (N - 1) : 0;
+  const targetScroll = sgTrack.getBoundingClientRect().top + window.scrollY + progress * totalScroll;
+  isSnapping  = true;
+  snapFromIdx = idx;
+  window.scrollTo({ top: targetScroll }); // instant — la imagen salta de inmediato
+  setTimeout(() => { isSnapping = false; }, 60);
+}
+
+let lastActive = -1;
+
+function setActive(activeIdx) {
+  if (activeIdx === lastActive) return;
+  lastActive = activeIdx;
+
+  listItems.forEach((item, i) => {
+    const d = Math.abs(i - activeIdx);
+    item.classList.toggle('active', d === 0);
+    item.classList.toggle('near',   d === 1);
+  });
+
+  dots.forEach((dot, i) => dot.classList.toggle('active', i === activeIdx));
+
+  descText.style.opacity = '0';
+  descCap.style.opacity  = '0';
+  setTimeout(() => {
+    descText.innerHTML = ESPACIOS[activeIdx].bullets.map(b => `<li>${b}</li>`).join('');
+    descCap.textContent   = ESPACIOS[activeIdx].capacidad;
+    descText.style.opacity = '1';
+    descCap.style.opacity  = '1';
+  }, 200);
+
+  captionNum.textContent  = String(activeIdx + 1).padStart(2, '0');
+  captionName.textContent = ESPACIOS[activeIdx].nombre;
+  captionSub.textContent  = ESPACIOS[activeIdx].caption;
+}
+
+function onScroll() {
+  const rect        = sgTrack.getBoundingClientRect();
+  const totalScroll = sgTrack.offsetHeight - window.innerHeight;
+  const scrolled    = Math.max(0, Math.min(totalScroll, -rect.top));
+  const progress    = totalScroll > 0 ? scrolled / totalScroll : 0;
+  const rawIdx      = progress * (N - 1);
+  const activeIdx   = Math.round(rawIdx);
+
+  imgTrack.style.transform = `translateX(-${rawIdx * SLIDE_W}%)`;
+
+  slides.forEach((img, i) => {
+    const dist = rawIdx - i;
+    const py   = Math.max(-7, Math.min(7, dist * 5));
+    img.style.transform = `translateY(calc(-6% + ${py}%))`;
+  });
+
+  const viewportMid = sgListVP.offsetHeight / 2;
+  const activeMid   = rawIdx * ITEM_H + ITEM_H / 2;
+  sgList.style.transform = `translateY(${viewportMid - activeMid}px)`;
+
+  listItems.forEach((item, i) => {
+    const d = Math.abs(i - rawIdx);
+    const opacity = d < 0.5 ? 1 : d < 1.5 ? 0.55 : Math.max(0.18, 0.55 - (d - 1.5) * 0.1);
+    item.style.opacity = opacity;
+    item.classList.remove('active', 'near');
+  });
+  const ai = Math.round(rawIdx);
+  listItems.forEach((item, i) => {
+    item.classList.toggle('active', i === ai);
+    item.classList.toggle('near',   Math.abs(i - ai) === 1);
+  });
+
+  setActive(activeIdx);
+
+  if (!isSnapping) { snapFromIdx = activeIdx; }
+  if (progress > 0.05) scrollHint.classList.add('hidden');
+  else scrollHint.classList.remove('hidden');
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+
+/* ── SNAP helpers ── */
+let isSnapping  = false;
+let snapFromIdx = 0;
+
+function snapTo(idx) {
+  const totalScroll = sgTrack.offsetHeight - window.innerHeight;
+  const targetScrolled = (idx / (N - 1)) * totalScroll;
+  const trackTop = sgTrack.getBoundingClientRect().top + window.scrollY;
+  isSnapping  = true;
+  snapFromIdx = idx;
+  window.scrollTo({ top: trackTop + targetScrolled, behavior: 'smooth' });
+  setTimeout(() => { isSnapping = false; }, 600);
+}
+
+function insideGallery() {
+  const rect        = sgTrack.getBoundingClientRect();
+  const totalScroll = sgTrack.offsetHeight - window.innerHeight;
+  const scrolled    = -rect.top;
+  return scrolled >= 0 && scrolled <= totalScroll;
+}
+
+/* ── WHEEL HIJACK — solo sobre panel derecho (imágenes) ── */
+const sgRight = document.querySelector('.sg-right');
+const sgLeft  = document.querySelector('.sg-left');
+let overRight = false;
+let overLeft  = false;
+let wheelAccum = 0;
+let wheelTimer = null;
+
+sgRight.addEventListener('mouseenter', () => { overRight = true; });
+sgRight.addEventListener('mouseleave', () => { overRight = false; });
+sgLeft.addEventListener('mouseenter',  () => { overLeft  = true; });
+sgLeft.addEventListener('mouseleave',  () => { overLeft  = false; });
+
+sgRight.addEventListener('wheel', (e) => {
+  if (!insideGallery()) return; // fuera del track → scroll normal
+
+  e.preventDefault();
+  if (isSnapping) return;
+
+  // acumula delta y avanza solo cuando supera umbral
+  wheelAccum += e.deltaY;
+  clearTimeout(wheelTimer);
+  wheelTimer = setTimeout(() => { wheelAccum = 0; }, 300);
+
+  if (Math.abs(wheelAccum) < 60) return; // umbral: ignora micro-scrolls
+  const dir  = wheelAccum > 0 ? 1 : -1;
+  wheelAccum = 0;
+  clearTimeout(wheelTimer);
+
+  const next = Math.max(0, Math.min(N - 1, snapFromIdx + dir));
+  if (next === snapFromIdx) return;
+  snapTo(next);
+}, { passive: false });
+
+/* ── PAGE SCROLL SNAP — solo cuando cursor está en columna izquierda ── */
+let snapTimer     = null;
+let gestureStartY = window.scrollY;
+let gestureActive = false;
+
 window.addEventListener('scroll', () => {
-  document.getElementById('nav-pill').classList.toggle('scrolled', window.scrollY > 60);
+  if (isSnapping || overRight || overLeft) return;
+  if (!gestureActive) { gestureStartY = window.scrollY; gestureActive = true; }
+  clearTimeout(snapTimer);
+  snapTimer = setTimeout(() => {
+    gestureActive = false;
+    if (!insideGallery()) return;
+    const dir  = window.scrollY > gestureStartY ? 1 : -1;
+    const next = Math.max(0, Math.min(N - 1, snapFromIdx + dir));
+    snapTo(next);
+  }, 180);
 }, { passive: true });
 
-/* REVEAL */
-const obs = new IntersectionObserver((entries) => {
+document.getElementById('hero-explore-btn').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('sg-section').scrollIntoView({ behavior: 'smooth' });
+});
+
+/* NAV scroll state — force dark since hero is light */
+document.getElementById('nav-pill').classList.add('scrolled');
+
+const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.querySelectorAll('.txt-reveal').forEach(el => el.classList.add('in'));
@@ -567,7 +1453,8 @@ const obs = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.12 });
-document.querySelectorAll('section').forEach(s => obs.observe(s));
+document.querySelectorAll('section:not(.sg-section)').forEach(s => revealObs.observe(s));
+
 setTimeout(() => {
   const hero = document.querySelector('section');
   if (hero) {
@@ -576,50 +1463,21 @@ setTimeout(() => {
   }
 }, 180);
 
-/* LIGHTBOX */
-const espacios = [
-  { src: 'assets/photo-jardines.jpg',  name: 'Jardines y áreas verdes',   cap: '2 jardines · espacios al aire libre' },
-  { src: 'assets/photo-alberca.jpg',   name: 'Alberca',                   cap: 'Área de convivencia y descanso' },
-  { src: 'assets/photo-terraza.jpg',   name: 'Terraza continua',          cap: '3.5 m de ancho · cubierta' },
-  { src: 'assets/photo-salon.jpg',     name: 'Salón de eventos',          cap: '22×14 m · 300 m² · cocineta' },
-  { src: 'assets/photo-eventos.jpg',   name: 'Casa principal',            cap: '6 habitaciones · hospedaje' },
-  { src: 'assets/photo-paquete.jpg',   name: 'Rooftop / Mirador',         cap: 'Vistas panorámicas del entorno' },
-  { src: 'assets/photo-hero.jpg',      name: 'Área de fogata',            cap: 'Experiencia nocturna · add-on' },
-  { src: 'assets/hero-wedding.jpg',    name: 'Puente colgante',           cap: 'En entorno boscoso natural' },
-  { src: 'assets/photo-cta-dark.jpg',  name: 'Entorno natural y circuito', cap: 'Ciclopista · bosque · senderos' },
-];
-let lbIdx = 0;
-const lb = document.getElementById('lightbox');
+setActive(0);
+descText.textContent = ESPACIOS[0].descripcion;
+descCap.textContent  = ESPACIOS[0].capacidad;
+captionNum.textContent  = '01';
+captionName.textContent = ESPACIOS[0].nombre;
+captionSub.textContent  = ESPACIOS[0].caption;
+listItems[0].classList.add('active');
+dots[0].classList.add('active');
 
-function openLb(i) {
-  lbIdx = i;
-  renderLb();
-  lb.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeLb() {
-  lb.classList.remove('open');
-  document.body.style.overflow = '';
-}
-function lbNav(dir) {
-  lbIdx = (lbIdx + dir + espacios.length) % espacios.length;
-  renderLb();
-}
-function renderLb() {
-  const e = espacios[lbIdx];
-  document.getElementById('lb-img').src = e.src;
-  document.getElementById('lb-img').alt = e.name;
-  document.getElementById('lb-name').textContent = e.name;
-  document.getElementById('lb-cap').textContent = e.cap;
-  document.getElementById('lb-counter').textContent = (lbIdx + 1) + ' / ' + espacios.length;
-}
-document.addEventListener('keydown', e => {
-  if (!lb.classList.contains('open')) return;
-  if (e.key === 'Escape') closeLb();
-  if (e.key === 'ArrowLeft') lbNav(-1);
-  if (e.key === 'ArrowRight') lbNav(1);
+requestAnimationFrame(() => {
+  const viewportMid = sgListVP.offsetHeight / 2;
+  sgList.style.transition = 'none';
+  sgList.style.transform = `translateY(${viewportMid - ITEM_H / 2}px)`;
+  requestAnimationFrame(() => { sgList.style.transition = ''; });
 });
-lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
 </script>
 </body>
 </html>
