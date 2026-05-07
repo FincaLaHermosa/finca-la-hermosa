@@ -403,8 +403,8 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 /* ══════════════════════════════════════════════
    SCROLL GALLERY
 ══════════════════════════════════════════════ */
-.sg-section { position: relative; background: var(--crema); }
-#sg-track   { position: relative; }
+.sg-section { position: relative; background: var(--crema); height: 100vh; overflow: hidden; }
+#sg-track   { position: relative; height: 100%; }
 
 .sg-sticky {
   position: sticky;
@@ -571,6 +571,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
   display: flex;
   height: 100%;
   will-change: transform;
+  transition: transform 0.52s var(--ease-snap);
 }
 .sg-img-slide {
   min-width: 88%;
@@ -1215,8 +1216,6 @@ const captionName  = document.getElementById('sg-caption-name');
 const captionSub   = document.getElementById('sg-caption-sub');
 const scrollHint   = document.getElementById('sg-scroll-hint');
 
-sgTrack.style.height = (N * 100) + 'vh';
-
 ESPACIOS.forEach((esp, i) => {
   const item = document.createElement('div');
   item.className = 'sg-list-item';
@@ -1226,7 +1225,7 @@ ESPACIOS.forEach((esp, i) => {
     <div class="sg-item-bar"></div>
     <span class="sg-item-name">${esp.nombre}</span>
   `;
-  item.addEventListener('click', () => scrollToSpace(i));
+  item.addEventListener('click', () => goTo(i));
   sgList.appendChild(item);
 });
 
@@ -1240,25 +1239,19 @@ ESPACIOS.forEach((esp, i) => {
 ESPACIOS.forEach((_, i) => {
   const dot = document.createElement('div');
   dot.className = 'sg-dot';
-  dot.addEventListener('click', () => scrollToSpace(i));
+  dot.addEventListener('click', () => goTo(i));
   progressWrap.appendChild(dot);
 });
 
 const listItems = document.querySelectorAll('.sg-list-item');
 const dots      = document.querySelectorAll('.sg-dot');
 const slides    = imgTrack.querySelectorAll('.sg-img-slide img');
-
-function scrollToSpace(idx) {
-  const totalScroll = sgTrack.offsetHeight - window.innerHeight;
-  const progress = N > 1 ? idx / (N - 1) : 0;
-  const targetScroll = sgTrack.getBoundingClientRect().top + window.scrollY + progress * totalScroll;
-  isSnapping  = true;
-  snapFromIdx = idx;
-  window.scrollTo({ top: targetScroll }); // instant — la imagen salta de inmediato
-  setTimeout(() => { isSnapping = false; }, 60);
-}
+const sgLeft    = document.querySelector('.sg-left');
 
 let lastActive = -1;
+let currentIdx = 0;
+let wheelAccum = 0;
+let wheelTimer = null;
 
 function setActive(activeIdx) {
   if (activeIdx === lastActive) return;
@@ -1286,119 +1279,46 @@ function setActive(activeIdx) {
   captionSub.textContent  = ESPACIOS[activeIdx].caption;
 }
 
-function onScroll() {
-  const rect        = sgTrack.getBoundingClientRect();
-  const totalScroll = sgTrack.offsetHeight - window.innerHeight;
-  const scrolled    = Math.max(0, Math.min(totalScroll, -rect.top));
-  const progress    = totalScroll > 0 ? scrolled / totalScroll : 0;
-  const rawIdx      = progress * (N - 1);
-  const activeIdx   = Math.round(rawIdx);
+function goTo(idx) {
+  const target = Math.max(0, Math.min(N - 1, idx));
+  if (target === currentIdx) return;
+  currentIdx = target;
 
-  imgTrack.style.transform = `translateX(-${rawIdx * SLIDE_W}%)`;
+  imgTrack.style.transform = `translateX(-${currentIdx * SLIDE_W}%)`;
+
+  const viewportMid = sgListVP.offsetHeight / 2;
+  const activeMid   = currentIdx * ITEM_H + ITEM_H / 2;
+  sgList.style.transform = `translateY(${viewportMid - activeMid}px)`;
 
   slides.forEach((img, i) => {
-    const dist = rawIdx - i;
+    const dist = currentIdx - i;
     const py   = Math.max(-7, Math.min(7, dist * 5));
     img.style.transform = `translateY(calc(-6% + ${py}%))`;
   });
 
-  const viewportMid = sgListVP.offsetHeight / 2;
-  const activeMid   = rawIdx * ITEM_H + ITEM_H / 2;
-  sgList.style.transform = `translateY(${viewportMid - activeMid}px)`;
-
-  listItems.forEach((item, i) => {
-    const d = Math.abs(i - rawIdx);
-    const opacity = d < 0.5 ? 1 : d < 1.5 ? 0.55 : Math.max(0.18, 0.55 - (d - 1.5) * 0.1);
-    item.style.opacity = opacity;
-    item.classList.remove('active', 'near');
-  });
-  const ai = Math.round(rawIdx);
-  listItems.forEach((item, i) => {
-    item.classList.toggle('active', i === ai);
-    item.classList.toggle('near',   Math.abs(i - ai) === 1);
-  });
-
-  setActive(activeIdx);
-
-  if (!isSnapping) { snapFromIdx = activeIdx; }
-  if (progress > 0.05) scrollHint.classList.add('hidden');
-  else scrollHint.classList.remove('hidden');
+  setActive(currentIdx);
+  scrollHint.classList.toggle('hidden', currentIdx > 0);
 }
 
-window.addEventListener('scroll', onScroll, { passive: true });
-
-/* ── SNAP helpers ── */
-let isSnapping  = false;
-let snapFromIdx = 0;
-
-function snapTo(idx) {
-  const totalScroll = sgTrack.offsetHeight - window.innerHeight;
-  const targetScrolled = (idx / (N - 1)) * totalScroll;
-  const trackTop = sgTrack.getBoundingClientRect().top + window.scrollY;
-  isSnapping  = true;
-  snapFromIdx = idx;
-  window.scrollTo({ top: trackTop + targetScrolled, behavior: 'smooth' });
-  setTimeout(() => { isSnapping = false; }, 600);
-}
-
-function insideGallery() {
-  const rect        = sgTrack.getBoundingClientRect();
-  const totalScroll = sgTrack.offsetHeight - window.innerHeight;
-  const scrolled    = -rect.top;
-  return scrolled >= 0 && scrolled <= totalScroll;
-}
-
-/* ── WHEEL HIJACK — solo sobre panel derecho (imágenes) ── */
-const sgRight = document.querySelector('.sg-right');
-const sgLeft  = document.querySelector('.sg-left');
-let overRight = false;
-let overLeft  = false;
-let wheelAccum = 0;
-let wheelTimer = null;
-
-sgRight.addEventListener('mouseenter', () => { overRight = true; });
-sgRight.addEventListener('mouseleave', () => { overRight = false; });
-sgLeft.addEventListener('mouseenter',  () => { overLeft  = true; });
-sgLeft.addEventListener('mouseleave',  () => { overLeft  = false; });
-
-sgRight.addEventListener('wheel', (e) => {
-  if (!insideGallery()) return; // fuera del track → scroll normal
-
+/* Wheel sobre panel izquierdo → navega lista; no afecta scroll de página */
+sgLeft.addEventListener('wheel', (e) => {
   e.preventDefault();
-  if (isSnapping) return;
 
-  // acumula delta y avanza solo cuando supera umbral
   wheelAccum += e.deltaY;
   clearTimeout(wheelTimer);
-  wheelTimer = setTimeout(() => { wheelAccum = 0; }, 300);
+  wheelTimer = setTimeout(() => { wheelAccum = 0; }, 250);
 
-  if (Math.abs(wheelAccum) < 60) return; // umbral: ignora micro-scrolls
-  const dir  = wheelAccum > 0 ? 1 : -1;
+  if (Math.abs(wheelAccum) < 50) return;
+  const dir = wheelAccum > 0 ? 1 : -1;
   wheelAccum = 0;
   clearTimeout(wheelTimer);
 
-  const next = Math.max(0, Math.min(N - 1, snapFromIdx + dir));
-  if (next === snapFromIdx) return;
-  snapTo(next);
+  goTo(currentIdx + dir);
 }, { passive: false });
 
-/* ── PAGE SCROLL SNAP — solo cuando cursor está en columna izquierda ── */
-let snapTimer     = null;
-let gestureStartY = window.scrollY;
-let gestureActive = false;
-
-window.addEventListener('scroll', () => {
-  if (isSnapping || overRight || overLeft) return;
-  if (!gestureActive) { gestureStartY = window.scrollY; gestureActive = true; }
-  clearTimeout(snapTimer);
-  snapTimer = setTimeout(() => {
-    gestureActive = false;
-    if (!insideGallery()) return;
-    const dir  = window.scrollY > gestureStartY ? 1 : -1;
-    const next = Math.max(0, Math.min(N - 1, snapFromIdx + dir));
-    snapTo(next);
-  }, 180);
-}, { passive: true });
+/* Init */
+setActive(0);
+scrollHint.classList.remove('hidden');
 
 document.getElementById('hero-explore-btn').addEventListener('click', (e) => {
   e.preventDefault();
