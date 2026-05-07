@@ -146,6 +146,7 @@ Casa principal (6 hab) · 2 jardines · Salón 22×14 m · Terraza 3.5 m · Albe
 
 ## ★ Historial
 
+`2026-05-07` — Footer canónico unificado en las 6 páginas. sg-section reescrita: 100vh + wheel solo en panel izquierdo + goTo() CSS transition, sin hijack de página.
 `2026-05-06` — Se crearon `PRODUCT.md` y `DESIGN.md`; se aplicó critique de `/nosotros` y se unificaron botones, WA float y tipografía Jost en los prototipos HTML.
 `2026-05-05` — Fase 4 completada: prototipos HTML de inicio, experiencias, espacios, nosotros, FAQ y cotizar terminados en `sitio/`.
 `2026-05-05` — `espacios.html` consolidado a v2 FOLIO editorial con galería scroll-driven, 9 espacios, stats e inventario.
