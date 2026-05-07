@@ -1,54 +1,45 @@
-# SESSION — 2026-05-07 (handoff para Codex)
+# SESSION — 2026-05-07
 
 ## Objetivo actual
 
-Responsive mobile de los 6 prototipos HTML en `sitio/`. Única tarea pendiente antes de migrar a Next.js.
+Responsive mobile/tablet de los 6 prototipos HTML en `sitio/`, siguiendo `$impeccable adapt`.
 
 ## Estatus
 
-Fase 4 completada. Critique completo aplicado (funcional crítico + polish). Scroll-snap eliminado de `index.html`. Capacidades unificadas. Validación inline en cotizar. Todos los cambios commiteados en `master`. Solo queda responsive (Codex).
+Responsive aplicado y verificado en navegador local. Rama activa: `codex/responsive-site-adapt`.
 
-## Qué se hizo en esta sesión
+## Qué se hizo
 
-- **Footer unificado:** `espacios.html` canónico; footer CSS + HTML replicado en `cotizar`, `experiencias`, `faq`, `nosotros`, `index`.
-- **sg-section reescrita** en `espacios.html`: 100vh sin scroll hijack, wheel solo en `.sg-left`, goTo() con `transform: translateX` + transición 0.52s.
-- **Scroll-snap eliminado** de `index.html`: removido JS wheel hijack completo + `body overflow:hidden` + `#scroll-wrap` rules. `.snap-section { height:100vh }` → `min-height:100vh`. IntersectionObserver `root: scrollWrap` → viewport. `bg-breathe` animation corregida a `infinite alternate`.
-- **Capacidades unificadas:** 220 personas (eventos) y 30 personas (hospedaje) en `experiencias`, `espacios`, `faq`, `cotizar`.
-- **JS init bug:** `espacios.html` JS init `ESPACIOS[0].descripcion` → `ESPACIOS[0].bullets.map(...)`.
-- **Nav links:** `experiencias.html` tenía 3 `href="#"` → corregidos a `espacios.html`, `nosotros.html`, `faq.html`.
-- **Validación inline:** `cotizar.html` reemplazó 5 `alert()` con `.field-error` CSS + `showErr()` JS.
+- Se enlazó la capa responsive compartida y el hamburger nav en las páginas faltantes: `index.html`, `experiencias.html`, `faq.html`, `nosotros.html` y `espacios.html`.
+- Se creó `sitio/responsive.css` como capa responsive compartida para navegación móvil, grids, formularios, FAQ, timelines, tarjetas, secciones hero, footer y layouts de `espacios`, `cotizar`, `experiencias`, `faq`, `nosotros` e `index`.
+- Se creó `sitio/mobile-nav.js` para abrir/cerrar el menú móvil con estado `aria-expanded`.
+- Se agregó swipe horizontal en la galería `sg-section` de `espacios.html`, sin bloquear el scroll vertical.
+- Se ajustaron tamaños de títulos y contenedores móviles para evitar texto recortado o desbordes.
+
+## Verificación
+
+- Servidor local usado: `http://127.0.0.1:8765/`.
+- Playwright CLI en móvil `390x844`, tablet `768x1024` y escritorio `1440x900`.
+- Páginas verificadas: `index.html`, `espacios.html`, `experiencias.html`, `cotizar.html`, `faq.html`, `nosotros.html`.
+- Resultado final: `overflow` horizontal `0` y textos clave sin recorte en los tres tamaños.
+- Interacciones verificadas: hamburger nav abre/cierra; swipe en `espacios.html` cambia a la lámina 02.
 
 ## Archivos modificados
 
-- `sitio/index.html` — scroll-snap eliminado, bg-breathe corregida, overflow normalizado
-- `sitio/experiencias.html` — nav links, capacidad 220 personas
-- `sitio/espacios.html` — stats 220 personas, JS init bullets, footer, sg-section
-- `sitio/faq.html` — capacidades 220 / 30 personas
-- `sitio/cotizar.html` — validación inline, capacidad 220 / 30 personas, footer
-- `sitio/nosotros.html` — footer, polish hero button weight
+- `sitio/responsive.css`
+- `sitio/mobile-nav.js`
+- `sitio/index.html`
+- `sitio/espacios.html`
+- `sitio/experiencias.html`
+- `sitio/faq.html`
+- `sitio/nosotros.html`
 
-## Decisiones tomadas
+## Decisiones
 
-- Capacidad definitiva: **220 personas** (eventos) · **30 personas** (hospedaje casa principal).
-- Paquetes siguen siendo placeholders; no unificar hasta pricing definitivo.
-- Scroll-snap quitado: no había datos que respaldaran el comportamiento.
-
-## Pendientes (solo responsive)
-
-**Rama activa:** `codex/mobile-responsive-prototypes`
-**Assets creados pero no verificados visualmente:**
-- `sitio/responsive.css` — capa compartida responsive inicial
-- `sitio/mobile-nav.js` — JS hamburger nav inicial
-- Enlazados solo en `cotizar.html` y `espacios.html`; faltan: `index`, `experiencias`, `faq`, `nosotros`, y `mobile-nav.js` en `espacios`.
-
-**Tareas Codex:**
-1. Verificar y completar `responsive.css` y `mobile-nav.js` visualmente en navegador.
-2. Enlazar ambos assets en las páginas faltantes: `index`, `experiencias`, `faq`, `nosotros`.
-3. Enlazar `mobile-nav.js` en `espacios.html`.
-4. Implementar touch/swipe para `sg-section` en `espacios.html` (actualmente solo wheel).
-5. Revisar y ajustar scroll de `index.html` en mobile (scroll-snap ya eliminado; verificar que `min-height:100vh` funcione bien en móvil).
-6. Verificar layouts multi-columna en < 768 px en todas las páginas.
+- Mantener la adaptación como capa CSS/JS compartida para no reescribir los prototipos antes de migrar a Next.js.
+- En móvil, los carruseles existentes conservan scroll horizontal interno, pero sin generar scroll horizontal de página.
+- La galería de espacios usa swipe horizontal; el scroll vertical de página queda libre.
 
 ## Próximo paso recomendado
 
-Continuar en rama `codex/mobile-responsive-prototypes`. Primero probar en Chrome DevTools mobile las páginas con los assets actuales para saber qué funciona y qué rompe antes de escribir código nuevo.
+Hacer review visual humano en el navegador, especialmente el hero de inicio y el formulario de cotización, y luego pasar a la migración a Next.js si el responsive queda aprobado.

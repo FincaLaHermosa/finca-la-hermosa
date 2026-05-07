@@ -1253,6 +1253,8 @@ let lastActive = -1;
 let currentIdx = 0;
 let wheelAccum = 0;
 let wheelTimer = null;
+let touchStartX = 0;
+let touchStartY = 0;
 
 function setActive(activeIdx) {
   if (activeIdx === lastActive) return;
@@ -1317,6 +1319,28 @@ sgLeft.addEventListener('wheel', (e) => {
   goTo(currentIdx + dir);
 }, { passive: false });
 
+function handleTouchStart(e) {
+  const touch = e.changedTouches[0];
+  touchStartX = touch.clientX;
+  touchStartY = touch.clientY;
+}
+
+function handleTouchEnd(e) {
+  const touch = e.changedTouches[0];
+  const dx = touch.clientX - touchStartX;
+  const dy = touch.clientY - touchStartY;
+  const absX = Math.abs(dx);
+  const absY = Math.abs(dy);
+
+  if (absX < 36 || absX < absY) return;
+  goTo(currentIdx + (dx < 0 ? 1 : -1));
+}
+
+[sgLeft, imgTrack].forEach((el) => {
+  el.addEventListener('touchstart', handleTouchStart, { passive: true });
+  el.addEventListener('touchend', handleTouchEnd, { passive: true });
+});
+
 /* Init */
 setActive(0);
 scrollHint.classList.remove('hidden');
@@ -1363,5 +1387,6 @@ requestAnimationFrame(() => {
   requestAnimationFrame(() => { sgList.style.transition = ''; });
 });
 </script>
+<script src="mobile-nav.js"></script>
 </body>
 </html>
