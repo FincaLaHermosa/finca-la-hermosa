@@ -75,14 +75,27 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 .cta-card-sub{font-family:'Jost',sans-serif;font-size:0.75rem;font-weight:300;color:rgba(255,253,248,0.52);line-height:1.65;flex:1;}
 
 /* ── FOOTER ────────────────────────────────────── */
-.site-footer{background:var(--verde-dark);padding:60px 80px 40px;}
-.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:48px;margin-bottom:48px;}
-.footer-link-group{display:flex;flex-direction:column;gap:9px;}
-.footer-link-group a,.footer-link-group span{font-family:'Jost',sans-serif;font-size:0.82rem;font-weight:300;color:rgba(255,253,248,0.6);text-decoration:none;cursor:pointer;transition:color 0.2s;}
-.footer-link-group a:hover{color:#fffdf8;}
-.footer-head{font-family:'Jost',sans-serif;font-size:0.63rem;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,253,248,0.35);margin-bottom:14px;display:block;}
-.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:22px;display:flex;justify-content:space-between;align-items:center;}
-.footer-copy{font-family:'Jost',sans-serif;font-size:0.68rem;font-weight:300;color:rgba(255,253,248,0.3);}
+.site-footer{background:var(--verde-dark);padding:88px 80px 40px;position:relative;z-index:5;}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1.2fr;gap:72px;margin:0 auto 56px;max-width:1500px;align-items:start;}
+.footer-brand{display:flex;flex-direction:column;}
+.footer-brand img{height:38px;margin-bottom:22px;opacity:0.92;}
+.footer-brand p{font-family:'Jost',sans-serif;font-size:0.82rem;font-weight:300;color:rgba(255,253,248,0.5);line-height:1.78;max-width:300px;}
+.footer-head{font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,253,248,0.4);margin-bottom:24px;display:block;}
+.footer-social-group{display:flex;flex-direction:column;}
+.social-row{display:flex;gap:14px;}
+.social-circle{width:50px;height:50px;border-radius:50%;border:1px solid rgba(255,253,248,0.18);display:flex;align-items:center;justify-content:center;color:rgba(255,253,248,0.7);transition:background 0.32s var(--ease-out),border-color 0.32s var(--ease-out),color 0.32s var(--ease-out),transform 0.32s var(--ease-out);text-decoration:none;}
+.social-circle svg{width:19px;height:19px;transition:transform 0.32s var(--ease-out);}
+.social-circle:hover{background:var(--terracota);border-color:var(--terracota);color:#fffdf8;transform:translateY(-3px);}
+.social-circle:hover svg{transform:scale(1.08);}
+.footer-contact-group{display:flex;flex-direction:column;}
+.footer-contact-line{font-family:'Jost',sans-serif;font-size:0.84rem;font-weight:300;color:rgba(255,253,248,0.62);line-height:1.85;display:block;}
+.footer-contact-line a{color:inherit;text-decoration:none;transition:color 0.22s;border-bottom:1px solid transparent;padding-bottom:1px;}
+.footer-contact-line a:hover{color:var(--terra-light);border-bottom-color:rgba(232,196,173,0.4);}
+.footer-bottom{border-top:1px solid rgba(255,253,248,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;max-width:1500px;margin:0 auto;}
+.footer-copy{font-family:'Jost',sans-serif;font-size:0.68rem;font-weight:300;letter-spacing:0.04em;color:rgba(255,253,248,0.3);}
+.footer-copy a{color:inherit;text-decoration:none;transition:color 0.2s;}
+.footer-copy a:hover{color:rgba(255,253,248,0.65);}
+@media(max-width:900px){.site-footer{padding:64px 32px 32px;}.footer-grid{grid-template-columns:1fr;gap:48px;}.footer-bottom{flex-direction:column;gap:10px;align-items:flex-start;}}
 
 /* ══════════════════════════════════════════════
    HERO FOLIO
@@ -692,282 +705,195 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 }
 
 /* ══════════════════════════════════════════════
-   INVENTARIO SHEET
+   INVENTARIO — SPLIT ARCHIVE
 ══════════════════════════════════════════════ */
 .inventario-section {
-  background: var(--crema);
-  padding: 130px 0 120px;
+  display: grid;
+  grid-template-columns: 42% 58%;
+  min-height: 68vh;
+}
+.inv-left {
+  background: var(--verde-dark);
+  padding: 96px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
   overflow: hidden;
 }
-.inventario-ghost {
-  position: absolute;
-  top: 60px;
-  right: -60px;
+.inv-left::after {
+  content: '12';
   font-family: 'Against', serif;
-  font-size: clamp(8rem, 16vw, 18rem);
-  line-height: 0.9;
+  font-size: clamp(9rem, 16vw, 20rem);
+  line-height: 0.85;
   letter-spacing: -0.04em;
-  color: rgba(45,73,73,0.04);
+  color: rgba(255,253,248,0.04);
+  position: absolute;
+  bottom: -16px;
+  right: -12px;
   pointer-events: none;
   user-select: none;
-  z-index: 0;
 }
-.inventario-sheet {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 32px;
-  position: relative;
-  z-index: 1;
-}
-.inv-eyebrow {
-  text-align: center;
+.inv-left-eyebrow {
   font-family: 'Jost', sans-serif;
   font-size: 0.6rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--terracota);
-  margin-bottom: 22px;
+  color: var(--terra-light);
+  margin-bottom: 26px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 14px;
+  gap: 12px;
+  opacity: 0.7;
 }
-.inv-eyebrow::before,.inv-eyebrow::after {
+.inv-left-eyebrow::before {
   content: '';
   display: block;
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: var(--terracota);
-}
-.inv-title {
-  text-align: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(2.4rem, 4.4vw, 3.6rem);
-  color: var(--carbon);
-  line-height: 1.05;
-  margin-bottom: 18px;
-  letter-spacing: -0.01em;
-}
-.inv-title em { font-style: italic; color: var(--terracota); }
-.inv-sub {
-  text-align: center;
-  font-family: 'Jost', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 300;
-  color: var(--muted);
-  max-width: 460px;
-  margin: 0 auto 56px;
-  line-height: 1.75;
-}
-.inv-rule {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin: 32px 0;
-}
-.inv-rule::before,.inv-rule::after {
-  content: '';
-  flex: 1;
+  width: 22px;
   height: 1px;
-  background: rgba(45,73,73,0.18);
-}
-.inv-rule-mark {
-  font-family: 'Jost', sans-serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--terracota);
-}
-.inv-list { border-top: 1px solid rgba(45,73,73,0.15); }
-.inv-row {
-  display: flex;
-  align-items: baseline;
-  gap: 18px;
-  padding: 16px 0;
-  border-bottom: 1px solid rgba(45,73,73,0.08);
-  transition: padding 0.3s var(--ease-out);
-}
-.inv-row:hover { padding-left: 8px; }
-.inv-num {
-  font-family: 'Jost', sans-serif;
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
-  color: var(--terracota);
-  font-weight: 400;
-  min-width: 28px;
+  background: var(--terra-light);
   flex-shrink: 0;
 }
-.inv-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.22rem;
-  font-weight: 400;
-  color: var(--carbon);
-  flex-shrink: 0;
-  letter-spacing: -0.005em;
-}
-.inv-leader {
-  flex: 1;
-  border-bottom: 1px dotted rgba(45,73,73,0.32);
-  margin-bottom: 4px;
-}
-.inv-detail {
-  font-family: 'Jost', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 300;
-  color: var(--muted);
-  flex-shrink: 0;
-  text-align: right;
-}
-.inv-promise {
-  text-align: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
-  color: var(--muted);
-  line-height: 1.55;
-  margin-top: 20px;
-}
-.inv-promise em { color: var(--terracota); }
-
-/* ══════════════════════════════════════════════
-   CTA POSTER
-══════════════════════════════════════════════ */
-.cta-poster {
-  background: var(--verde-dark);
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-.cta-poster-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.cta-poster-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.1;
-}
-.cta-poster-inner {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  padding: 110px 52px 80px;
-  max-width: 900px;
-  margin: 0 auto;
-  width: 100%;
-}
-.cta-poster-eyebrow {
-  font-family: 'Jost', sans-serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: rgba(255,253,248,0.5);
-  margin-bottom: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
-.cta-poster-eyebrow::before,.cta-poster-eyebrow::after {
-  content: '';
-  display: block;
-  width: 28px; height: 1px;
-  background: rgba(255,253,248,0.3);
-}
-.cta-poster-display {
+.inv-left-display {
   font-family: 'Against', serif;
-  font-size: clamp(3.5rem, 7vw, 8rem);
-  line-height: 0.9;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.6rem, 4vw, 4.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
   color: #fffdf8;
 }
-.cta-poster-italic {
+.inv-left-italic {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(2.6rem, 5.5vw, 6.4rem);
-  line-height: 1.05;
+  font-size: clamp(2rem, 3.2vw, 3.8rem);
+  line-height: 1;
   color: var(--terracota);
   margin-top: 8px;
-  letter-spacing: -0.01em;
 }
-.cta-poster-body {
+.inv-left-body {
   font-family: 'Jost', sans-serif;
+  font-size: 0.84rem;
   font-weight: 300;
-  font-size: 0.95rem;
-  line-height: 1.85;
-  color: rgba(255,253,248,0.62);
-  max-width: 480px;
-  margin: 38px auto 0;
+  line-height: 1.8;
+  color: rgba(255,253,248,0.5);
+  max-width: 320px;
+  margin-top: 24px;
 }
-.cta-poster-rule {
-  width: 60%;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(255,253,248,0.28), transparent);
-  margin: 56px auto 42px;
+.inv-left-tally {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 38px;
+  padding-top: 26px;
+  border-top: 1px solid rgba(255,253,248,0.1);
 }
-.cta-text-links {
+.inv-tally-num {
+  font-family: 'Against', serif;
+  font-size: 2.6rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--terracota);
+}
+.inv-tally-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.66rem;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,253,248,0.35);
+  line-height: 1.5;
+}
+.inv-right {
+  background: var(--crema);
+  padding: 80px 64px 80px 68px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  align-items: center;
+  justify-content: center;
 }
-.cta-text-link {
+.inv-section-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--terracota);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+.inv-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(45,73,73,0.13);
+}
+.inv-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 44px;
+}
+.inv-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(45,73,73,0.06);
+  transition: padding-left 0.22s var(--ease-out);
+  cursor: default;
+}
+.inv-item:hover { padding-left: 5px; }
+.inv-item-num {
+  font-family: 'Against', serif;
+  font-size: 1rem;
+  line-height: 1;
+  color: rgba(192,122,90,0.5);
+  flex-shrink: 0;
+  min-width: 24px;
+  letter-spacing: -0.01em;
+}
+.inv-item-body { flex: 1; min-width: 0; }
+.inv-item-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.06rem;
+  font-weight: 400;
+  color: var(--carbon);
+  line-height: 1.2;
+  display: block;
+}
+.inv-item-detail {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.67rem;
+  font-weight: 300;
+  color: var(--muted);
+  display: block;
+  margin-top: 2px;
+  line-height: 1.3;
+}
+.inv-addon {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--terracota);
+  background: rgba(192,122,90,0.09);
+  padding: 2px 7px;
+  border-radius: 99px;
+  flex-shrink: 0;
+  align-self: center;
+}
+.inv-footer-line {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(45,73,73,0.1);
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(1.6rem, 2.3vw, 2rem);
-  color: rgba(255,253,248,0.92);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 18px;
-  transition: color 0.3s, gap 0.3s;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  letter-spacing: -0.01em;
-  padding: 4px 12px;
+  font-size: clamp(0.95rem, 1.25vw, 1.15rem);
+  color: var(--muted);
+  line-height: 1.6;
 }
-.cta-text-link::before {
-  content: '→';
-  font-family: 'Jost', sans-serif;
-  font-size: 1.2rem;
-  font-style: normal;
-  color: var(--terracota);
-  transition: transform 0.3s;
-  display: inline-block;
-}
-.cta-text-link:hover { color: #fffdf8; gap: 26px; }
-.cta-text-link:hover::before { transform: translateX(4px); }
-.cta-poster-folio {
-  font-family: 'Jost', sans-serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: rgba(255,253,248,0.4);
-  padding: 26px 32px;
-  border-top: 1px solid rgba(255,253,248,0.1);
-  display: flex;
-  justify-content: center;
-  gap: 0;
-  flex-wrap: wrap;
-  position: relative;
-  z-index: 1;
-}
-.cta-poster-folio span:not(:last-child)::after {
-  content: '/';
-  margin: 0 22px;
-  color: var(--terracota);
-  opacity: 0.5;
-}
+.inv-footer-line em { color: var(--terracota); }
 
 @media(prefers-reduced-motion:reduce){
   .txt-reveal{transition-duration:0.3s;}
@@ -1011,7 +937,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
     <div class="hero-folio-bar txt-reveal">
       <span>Folio 03</span>
       <span>Estudio del venue</span>
-      <span>IX rincones</span>
+      <span>9 rincones</span>
       <span class="hero-folio-bar-spacer"></span>
       <span>Edición 2026</span>
     </div>
@@ -1019,7 +945,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
     <div class="hero-folio-grid">
 
       <div class="hero-folio-text">
-        <div class="hero-folio-id txt-reveal">I. El venue</div>
+        <div class="hero-folio-id txt-reveal">El venue</div>
         <h1 style="margin:0;font-weight:400;">
           <span class="hero-folio-display txt-reveal" data-d="1">Espacios</span>
           <span class="hero-folio-italic txt-reveal" data-d="2">que cuentan historias.</span>
@@ -1052,15 +978,15 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
     </div>
 
     <div class="hero-toc-strip txt-reveal">
-      <span><i>I</i>Jardines</span>
-      <span><i>II</i>Casa</span>
-      <span><i>III</i>Salón</span>
-      <span><i>IV</i>Terraza</span>
-      <span><i>V</i>Alberca</span>
-      <span><i>VI</i>Rooftop</span>
-      <span><i>VII</i>Puente</span>
-      <span><i>VIII</i>Fogata</span>
-      <span><i>IX</i>Entorno</span>
+      <span><i>01</i>Jardines</span>
+      <span><i>02</i>Casa</span>
+      <span><i>03</i>Salón</span>
+      <span><i>04</i>Terraza</span>
+      <span><i>05</i>Alberca</span>
+      <span><i>06</i>Rooftop</span>
+      <span><i>07</i>Puente</span>
+      <span><i>08</i>Fogata</span>
+      <span><i>09</i>Entorno</span>
     </div>
 
   </div>
@@ -1130,54 +1056,85 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 
 <!-- ══ S4 · INVENTARIO ═══════════════════════════════════════ -->
 <section class="inventario-section">
-  <div class="inventario-ghost" aria-hidden="true">INVENTARIO</div>
-  <div class="inventario-sheet">
-    <div class="inv-eyebrow txt-reveal">Inventario completo</div>
-    <div class="inv-title txt-reveal" data-d="1">La finca completa,<br><em>a tu disposición.</em></div>
-    <p class="inv-sub txt-reveal" data-d="2">Cuando reservas Finca La Hermosa, todos los espacios son tuyos. Doce activos pensados para vivirse de noche y de día.</p>
-    <div class="inv-rule txt-reveal" data-d="2"><span class="inv-rule-mark">·  Activos del venue  ·</span></div>
-    <div class="inv-list txt-reveal" data-d="3">
-      <div class="inv-row"><span class="inv-num">01</span><span class="inv-name">Casa principal</span><span class="inv-leader"></span><span class="inv-detail">6 habitaciones · hospedaje</span></div>
-      <div class="inv-row"><span class="inv-num">02</span><span class="inv-name">Jardines amplios</span><span class="inv-leader"></span><span class="inv-detail">2 áreas verdes</span></div>
-      <div class="inv-row"><span class="inv-num">03</span><span class="inv-name">Salón de eventos</span><span class="inv-leader"></span><span class="inv-detail">22×14 m · add-on</span></div>
-      <div class="inv-row"><span class="inv-num">04</span><span class="inv-name">Terraza continua</span><span class="inv-leader"></span><span class="inv-detail">3.5 m de ancho</span></div>
-      <div class="inv-row"><span class="inv-num">05</span><span class="inv-name">Alberca</span><span class="inv-leader"></span><span class="inv-detail">área de convivencia</span></div>
-      <div class="inv-row"><span class="inv-num">06</span><span class="inv-name">Rooftop / Mirador</span><span class="inv-leader"></span><span class="inv-detail">vistas panorámicas</span></div>
-      <div class="inv-row"><span class="inv-num">07</span><span class="inv-name">Café interior</span><span class="inv-leader"></span><span class="inv-detail">espacio de descanso</span></div>
-      <div class="inv-row"><span class="inv-num">08</span><span class="inv-name">Puente colgante</span><span class="inv-leader"></span><span class="inv-detail">entorno boscoso</span></div>
-      <div class="inv-row"><span class="inv-num">09</span><span class="inv-name">Área de fogata</span><span class="inv-leader"></span><span class="inv-detail">experiencia nocturna · add-on</span></div>
-      <div class="inv-row"><span class="inv-num">10</span><span class="inv-name">Columpio alto</span><span class="inv-leader"></span><span class="inv-detail">atracción única</span></div>
-      <div class="inv-row"><span class="inv-num">11</span><span class="inv-name">Asador</span><span class="inv-leader"></span><span class="inv-detail">área exterior equipada</span></div>
-      <div class="inv-row"><span class="inv-num">12</span><span class="inv-name">Circuito ciclopista</span><span class="inv-leader"></span><span class="inv-detail">sendero natural · bosque</span></div>
+
+  <div class="inv-left txt-reveal">
+    <div class="inv-left-eyebrow">Inventario completo</div>
+    <div>
+      <div class="inv-left-display">La finca completa,</div>
+      <div class="inv-left-italic">a tu disposición.</div>
     </div>
-    <div class="inv-rule"><span class="inv-rule-mark">·  XII activos  ·</span></div>
-    <div class="inv-promise txt-reveal" data-d="3">"Cuando reservas, todos los espacios son tuyos. <em>Sin restricciones.</em>"</div>
+    <p class="inv-left-body">Cuando reservas Finca La Hermosa, todos los espacios son tuyos. Sin restricciones, sin exclusiones.</p>
+    <div class="inv-left-tally">
+      <span class="inv-tally-num">12</span>
+      <span class="inv-tally-label">activos<br>del venue</span>
+    </div>
   </div>
+
+  <div class="inv-right">
+    <div class="inv-section-label txt-reveal">Activos del venue</div>
+    <div class="inv-cols txt-reveal" data-d="1">
+      <div>
+        <div class="inv-item"><span class="inv-item-num">01</span><div class="inv-item-body"><span class="inv-item-name">Casa principal</span><span class="inv-item-detail">6 habitaciones · hospedaje</span></div></div>
+        <div class="inv-item"><span class="inv-item-num">02</span><div class="inv-item-body"><span class="inv-item-name">Jardines amplios</span><span class="inv-item-detail">2 áreas verdes</span></div></div>
+        <div class="inv-item"><span class="inv-item-num">03</span><div class="inv-item-body"><span class="inv-item-name">Salón de eventos</span><span class="inv-item-detail">22×14 m</span></div><span class="inv-addon">add-on</span></div>
+        <div class="inv-item"><span class="inv-item-num">04</span><div class="inv-item-body"><span class="inv-item-name">Terraza continua</span><span class="inv-item-detail">3.5 m de ancho</span></div></div>
+        <div class="inv-item"><span class="inv-item-num">05</span><div class="inv-item-body"><span class="inv-item-name">Alberca</span><span class="inv-item-detail">área de convivencia</span></div></div>
+        <div class="inv-item"><span class="inv-item-num">06</span><div class="inv-item-body"><span class="inv-item-name">Rooftop / Mirador</span><span class="inv-item-detail">vistas panorámicas</span></div></div>
+      </div>
+      <div>
+        <div class="inv-item"><span class="inv-item-num">07</span><div class="inv-item-body"><span class="inv-item-name">Café interior</span><span class="inv-item-detail">espacio de descanso</span></div></div>
+        <div class="inv-item"><span class="inv-item-num">08</span><div class="inv-item-body"><span class="inv-item-name">Puente colgante</span><span class="inv-item-detail">entorno boscoso</span></div></div>
+        <div class="inv-item"><span class="inv-item-num">09</span><div class="inv-item-body"><span class="inv-item-name">Área de fogata</span><span class="inv-item-detail">experiencia nocturna</span></div><span class="inv-addon">add-on</span></div>
+        <div class="inv-item"><span class="inv-item-num">10</span><div class="inv-item-body"><span class="inv-item-name">Columpio alto</span><span class="inv-item-detail">atracción única</span></div></div>
+        <div class="inv-item"><span class="inv-item-num">11</span><div class="inv-item-body"><span class="inv-item-name">Asador</span><span class="inv-item-detail">área exterior equipada</span></div></div>
+        <div class="inv-item"><span class="inv-item-num">12</span><div class="inv-item-body"><span class="inv-item-name">Circuito ciclopista</span><span class="inv-item-detail">sendero natural · bosque</span></div></div>
+      </div>
+    </div>
+    <p class="inv-footer-line txt-reveal" data-d="2">"Cuando reservas, todos los espacios son tuyos. <em>Sin restricciones.</em>"</p>
+  </div>
+
 </section>
 
 
-<!-- ══ S5 · CTA POSTER ════════════════════════════════════════ -->
-<section id="cta-section" class="cta-poster">
-  <div class="cta-poster-bg"><img src="assets/photo-cta-dark.jpg" alt=""></div>
-  <div class="cta-poster-inner">
-    <div class="cta-poster-eyebrow txt-reveal">Reserva tu fecha</div>
-    <div class="txt-reveal" data-d="1">
-      <div class="cta-poster-display">Escribe el siguiente</div>
-      <div class="cta-poster-italic">capítulo en la finca.</div>
-    </div>
-    <p class="cta-poster-body txt-reveal" data-d="2">Cotiza tu evento, agenda una visita o escríbenos directo. Respuesta en menos de 24 horas.</p>
-    <div class="cta-poster-rule txt-reveal" data-d="3"></div>
-    <div class="cta-text-links txt-reveal" data-d="3">
-      <a href="cotizar.html" class="cta-text-link">Cotizar en línea</a>
-      <button class="cta-text-link">Agendar una visita</button>
-      <a href="https://wa.me/5215500000000" class="cta-text-link" target="_blank" rel="noopener">Escribir por WhatsApp</a>
-    </div>
+<!-- ══ S5 · CTA FINAL DARK ════════════════════════════════════ -->
+<section id="cta-section" style="background:var(--verde-dark);padding:100px 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;z-index:0;">
+    <img src="assets/photo-cta-dark.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.12;">
+    <div style="position:absolute;inset:0;background:linear-gradient(160deg,var(--verde-dark) 0%,var(--verde) 30%,rgba(26,42,26,1) 65%,rgba(14,30,30,1) 100%);opacity:0.9;"></div>
   </div>
-  <div class="cta-poster-folio txt-reveal" data-d="4">
-    <span>Est. 2024</span>
-    <span>Folio 03 / IX</span>
-    <span>Isidro Fabela, Edomex</span>
-    <span>hola@fincalahermosa.com</span>
+
+  <div style="position:relative;z-index:1;max-width:1500px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div class="overline overline-light txt-reveal">Reserva tu fecha</div>
+      <div class="txt-reveal" data-d="1">
+        <div style="font-family:'Against',serif;font-size:clamp(3.2rem,5.5vw,6rem);line-height:0.92;letter-spacing:-0.025em;color:#fffdf8;">La finca te espera,</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,4.5vw,5rem);font-style:italic;font-weight:300;line-height:1;color:var(--terracota);margin-top:6px;">¿cuándo celebramos?</div>
+      </div>
+      <p class="txt-reveal" data-d="2" style="font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;line-height:1.85;color:rgba(255,253,248,0.62);max-width:360px;">Cotiza tu evento, agenda una visita o escríbenos directo por WhatsApp. Respuesta en menos de 24 horas.</p>
+    </div>
+
+    <div class="txt-reveal" data-d="2" style="display:flex;flex-direction:column;gap:14px;">
+      <div class="cta-card">
+        <svg class="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        <div class="cta-card-title">Cotizar en línea</div>
+        <p class="cta-card-sub">Cuéntanos sobre tu evento y recibe una propuesta personalizada.</p>
+        <a href="cotizar.html" class="btn-accent" style="font-size:0.65rem;padding:10px 20px;">Cotizar ahora</a>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div class="cta-card">
+          <svg class="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <div class="cta-card-title">Agendar visita</div>
+          <p class="cta-card-sub">Ven a conocer la finca antes de decidir.</p>
+          <button class="btn-accent" style="font-size:0.65rem;padding:10px 20px;">Agendar</button>
+        </div>
+        <div class="cta-card">
+          <svg class="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <div class="cta-card-title">WhatsApp</div>
+          <p class="cta-card-sub">Respuesta rápida y directa.</p>
+          <a href="https://wa.me/5215500000000" class="btn-accent" target="_blank" rel="noopener" style="font-size:0.65rem;padding:10px 20px;background:#25D366;">Escribir</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1185,40 +1142,46 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 <!-- ══ FOOTER ══════════════════════════════════════════════════ -->
 <footer class="site-footer">
   <div class="footer-grid">
-    <div>
-      <img src="assets/logo-blanco.svg" alt="Finca La Hermosa" style="height:36px;margin-bottom:16px;opacity:0.9;">
-      <p style="font-family:'Jost',sans-serif;font-size:0.78rem;font-weight:300;color:rgba(255,253,248,0.45);line-height:1.75;max-width:220px;">Una finca familiar convertida en destino de experiencias. Naturaleza, hospitalidad y celebración.</p>
-      <div style="display:flex;gap:12px;margin-top:20px;">
-        <a href="#" style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,253,248,0.15);display:flex;align-items:center;justify-content:center;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(255,253,248,0.35)'" onmouseleave="this.style.borderColor='rgba(255,253,248,0.15)'"><span style="font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:300;color:rgba(255,253,248,0.4);">ig</span></a>
-        <a href="#" style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,253,248,0.15);display:flex;align-items:center;justify-content:center;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(255,253,248,0.35)'" onmouseleave="this.style.borderColor='rgba(255,253,248,0.15)'"><span style="font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:300;color:rgba(255,253,248,0.4);">fb</span></a>
+
+    <div class="footer-brand">
+      <img src="assets/logo-blanco.svg" alt="Finca La Hermosa">
+      <p>Una finca familiar convertida en destino de experiencias. Naturaleza, hospitalidad y celebración.</p>
+    </div>
+
+    <div class="footer-social-group">
+      <span class="footer-head">Síguenos</span>
+      <div class="social-row">
+        <a href="https://instagram.com/" class="social-circle" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://facebook.com/" class="social-circle" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M14 9h3.2l.4-3.6h-3.6V3.6c0-1 .3-1.7 1.8-1.7H17.8V-.4C17.4-.4 16-.6 14.6-.6c-3 0-5 1.8-5 5.2v3.4H6.4V12h3.2v9.6h4V12z" transform="translate(0 1)"/>
+          </svg>
+        </a>
+        <a href="https://wa.me/5215500000000" class="social-circle" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/>
+          </svg>
+        </a>
       </div>
     </div>
-    <div>
-      <span class="footer-head">Navegación</span>
-      <div class="footer-link-group">
-        <a href="index.html">Inicio</a><a href="experiencias.html">Experiencias</a>
-        <a href="espacios.html">Espacios</a><a href="nosotros.html">Nosotros</a><a href="faq.html">FAQ</a>
-      </div>
-    </div>
-    <div>
-      <span class="footer-head">Experiencias</span>
-      <div class="footer-link-group">
-        <span>Eventos Sociales</span><span>Corporativos</span><span>Retiros</span>
-        <span>Estancia Privada</span><span>One Day Experience</span>
-      </div>
-    </div>
-    <div>
+
+    <div class="footer-contact-group">
       <span class="footer-head">Contacto</span>
-      <div class="footer-link-group">
-        <span>+52 (55) 0000-0000</span><span>hola@fincalahermosa.com</span>
-        <span style="line-height:1.6;">Isidro Fabela, Estado de México</span>
-        <button class="btn-accent" style="margin-top:8px;font-size:0.65rem;padding:10px 20px;">Agendar visita</button>
-      </div>
+      <span class="footer-contact-line"><a href="mailto:hola@fincalahermosa.com">hola@fincalahermosa.com</a></span>
+      <span class="footer-contact-line"><a href="tel:+5215500000000">+52 (55) 0000-0000</a></span>
+      <span class="footer-contact-line">Isidro Fabela, Estado de México</span>
     </div>
+
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">© 2026 Finca La Hermosa. Todos los derechos reservados.</p>
-    <p class="footer-copy">Privacidad · Términos</p>
+    <p class="footer-copy">© 2026 Finca La Hermosa</p>
+    <p class="footer-copy"><a href="#">Privacidad</a> · <a href="#">Términos</a></p>
   </div>
 </footer>
 
