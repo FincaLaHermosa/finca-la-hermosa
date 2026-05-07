@@ -6,34 +6,6 @@ Venue multifuncional en Isidro Fabela, EDOMEX. Objetivo: sistema de adquisición
 
 ---
 
-## ★ FOCO ACTIVO — Fase 4: Prototipos HTML
-
-Diseño visual página por página en HTML/CSS/JS vanilla antes de migrar a Next.js.
-
-| Página | Archivo | Estado |
-|--------|---------|--------|
-| `/` Inicio | `sitio/index.html` | ✅ Completo (8 secciones, snap-scroll) |
-| `/experiencias` | `sitio/experiencias.html` | ✅ Completo (catálogo filtrable, add-ons) |
-| `/espacios` | `sitio/espacios.html` | ✅ Completo (v2 FOLIO editorial: hero crema, stats verde-dark compacto, galería wheel-hijack con snap por dirección, bullets por espacio, inventario, CTA) |
-| `/nosotros` | `sitio/nosotros.html` | ✅ Completo (hero, historia, valores, timeline, equipo glass cards, promesa) |
-| `/faq` | `sitio/faq.html` | ✅ Completo (hero dark, acordeón 19 preguntas × 5 categorías, CTA) |
-| `/cotizar` | `sitio/cotizar.html` | ✅ Completo (multi-step 4 pasos, resumen lateral, check disponibilidad, success state) |
-
-**Patrones establecidos en `sitio/index.html` (reusar en todas las páginas):**
-- CSS tokens en `:root` (cremas, verdes, terracota, ease curves)
-- Nav pill glassmorphism + `.scrolled` state
-- `.txt-reveal` + IntersectionObserver para fade-in por sección
-- `.img-reveal` con cover que sube al entrar viewport
-- `.btn-primary/.btn-accent/.btn-ghost/.btn-outline-dark`
-- `.overline-dark / .overline-light`
-- `.arch-label` (texto Against de fondo decorativo)
-- `.cta-card` para sección final dark
-- Footer HTML idéntico en todas las páginas
-
-**Servidor preview:** `npx serve sitio -p 3333` — URLs sin `/sitio/` prefix (e.g. `localhost:3333/experiencias.html`)
-
----
-
 ## ★ Fases del proyecto
 
 | # | Fase | Estado |
@@ -47,6 +19,34 @@ Diseño visual página por página en HTML/CSS/JS vanilla antes de migrar a Next
 | 8 | Vercel + deploy | ⏳ |
 | 9 | Analytics (GTM + GA4 + Meta Pixel) | ⏳ |
 | 10 | Paquetes y pricing definitivos | 🔄 En curso |
+
+---
+
+## ★ Base / referencias estables
+
+**Prototipos HTML:** `sitio/` contiene los prototipos visuales completos para migración futura a Next.js.
+
+| Página | Archivo | Estado |
+|--------|---------|--------|
+| `/` Inicio | `sitio/index.html` | Completo |
+| `/experiencias` | `sitio/experiencias.html` | Completo |
+| `/espacios` | `sitio/espacios.html` | Completo |
+| `/nosotros` | `sitio/nosotros.html` | Completo |
+| `/faq` | `sitio/faq.html` | Completo |
+| `/cotizar` | `sitio/cotizar.html` | Completo |
+
+**Patrones base en `sitio/index.html` (reusar en migración):**
+- CSS tokens en `:root` (cremas, verdes, terracota, ease curves)
+- Nav pill glassmorphism + `.scrolled` state
+- `.txt-reveal` + IntersectionObserver para fade-in por sección
+- `.img-reveal` con cover que sube al entrar viewport
+- `.btn-primary/.btn-accent/.btn-ghost/.btn-outline-dark`
+- `.overline-dark / .overline-light`
+- `.arch-label` como texto Against decorativo de fondo
+- `.cta-card` para sección final dark
+- Footer HTML idéntico en todas las páginas
+
+**Servidor preview:** `npx serve sitio -p 3333` — URLs sin `/sitio/` prefix (e.g. `localhost:3333/experiencias.html`)
 
 ---
 
@@ -67,7 +67,7 @@ Next.js 15 (App Router) · Tailwind CSS · Framer Motion · Embla Carousel · Su
 - `Jost` — body, UI, nav, botones (Google Fonts)
 
 **Firma tipográfica** (todos los heroes):
-```
+```txt
 Against blanco grande   →  "Cada experiencia,"
 Cormorant italic terra  →  "diseñada para ti."
 ```
@@ -109,7 +109,7 @@ Palabras NO: renta, barato, promoción, paquete básico, todo incluido
 
 ## ★ Modelo de datos Supabase
 
-```
+```txt
 paquetes            (id, nombre, tipo, precio_base, incluidos[], imagen, visible, orden)
 add_ons             (id, nombre, precio, icono, visible)
 espacios            (id, nombre, descripcion, capacidad, fotos[], visible, orden)
@@ -147,13 +147,15 @@ Casa principal (6 hab) · 2 jardines · Salón 22×14 m · Terraza 3.5 m · Albe
 
 ---
 
+## ★ Pendientes estables
+
+- Definir paquetes y pricing definitivos antes de publicar.
+- Migrar prototipos HTML a Next.js 15 con el sistema visual aprobado.
+
+---
+
 ## ★ Historial
 
-`2026-05-06` — Critique `/nosotros` + unificación global: PRODUCT.md y DESIGN.md creados. Fixes: pull-quote sin border-left (fondo crema), equipo gradient→verde-dark sólido, grid asimétrico 1.4fr. Botones unificados 0.69→0.75rem, weight 300→500; btn-outline-dark hover→terracota real en los 6 HTMLs. Poppins→Jost corregido en colors_and_type.css.
-`2026-05-05` — `espacios.html` refinado: stats verde-dark compacto sin título/quote, galería con wheel-hijack (derecha=carrusel, izquierda=scroll normal), snap por dirección, bullets por espacio (3 características), clic en lista instantáneo, transiciones de lista aceleradas.
-`2026-05-05` — `espacios.html` consolidado a v2 FOLIO editorial (scroll-driven gallery sticky panel, 9 espacios, stats terra, inventario). v1 y v3 eliminadas.
-`2026-05-05` — `cotizar.html` completo: hero compacto dark, 4 pasos (tipo evento cards, fecha+invitados con check disponibilidad simulado, add-ons con precio, datos de contacto), resumen lateral sticky con total en vivo + paquete recomendado dinámico, success state. Fase 4 HTML completada al 100%.
-`2026-05-05` — `faq.html` completo: hero dark centrado, acordeón 19 preguntas × 5 categorías (tabs filtrables), sección contacto nudge, CTA dark estándar. Skill frontend-design activada.
-
-
-
+`2026-05-06` — Se crearon `PRODUCT.md` y `DESIGN.md`; se aplicó critique de `/nosotros` y se unificaron botones, WA float y tipografía Jost en los prototipos HTML.
+`2026-05-05` — Fase 4 completada: prototipos HTML de inicio, experiencias, espacios, nosotros, FAQ y cotizar terminados en `sitio/`.
+`2026-05-05` — `espacios.html` consolidado a v2 FOLIO editorial con galería scroll-driven, 9 espacios, stats e inventario.
