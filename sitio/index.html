@@ -129,15 +129,15 @@ body {
   border-radius: 50%;
   background: #25D366;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   transition: transform 0.26s, box-shadow 0.26s;
   text-decoration: none;
 }
-.wa-float:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(37,211,102,0.5); }
+.wa-float:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.28); }
 
 /* ── BUTTONS ─────────────────────────────────────────────── */
 .btn-glass {
-  font-family: 'Jost', sans-serif; font-size: 0.69rem; font-weight: 300;
+  font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 400;
   letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,253,248,0.92);
   background: rgba(255,253,248,0.1); backdrop-filter: blur(16px);
   border: 1px solid rgba(255,255,255,0.18); padding: 13px 28px; border-radius: 999px;
@@ -147,7 +147,7 @@ body {
 .btn-glass:hover { background: rgba(255,253,248,0.18); transform: scale(1.04); }
 
 .btn-primary {
-  font-family: 'Jost', sans-serif; font-size: 0.69rem; font-weight: 300;
+  font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: #fffdf8; background: var(--verde); border: none;
   padding: 13px 28px; border-radius: 999px; cursor: pointer;
@@ -156,7 +156,7 @@ body {
 .btn-primary:hover { background: var(--verde-mid); transform: scale(1.04); }
 
 .btn-accent {
-  font-family: 'Jost', sans-serif; font-size: 0.69rem; font-weight: 300;
+  font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: #fffdf8; background: var(--terracota); border: none;
   padding: 13px 28px; border-radius: 999px; cursor: pointer;
@@ -165,7 +165,7 @@ body {
 .btn-accent:hover { background: #a8664a; transform: scale(1.04); }
 
 .btn-outline {
-  font-family: 'Jost', sans-serif; font-size: 0.69rem; font-weight: 300;
+  font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 400;
   letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,253,248,0.65);
   background: transparent; border: 1px solid rgba(255,255,255,0.22);
   padding: 13px 28px; border-radius: 999px; cursor: pointer;
@@ -174,13 +174,13 @@ body {
 .btn-outline:hover { color: #fffdf8; border-color: rgba(255,255,255,0.5); transform: scale(1.04); }
 
 .btn-outline-dark {
-  font-family: 'Jost', sans-serif; font-size: 0.69rem; font-weight: 300;
+  font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--terracota);
   background: transparent; border: 1px solid var(--terra-light);
   padding: 13px 28px; border-radius: 999px; cursor: pointer;
   transition: all 0.22s ease;
 }
-.btn-outline-dark:hover { background: var(--terra-light); color: var(--verde-dark); transform: scale(1.04); }
+.btn-outline-dark:hover { background: var(--terracota); color: #fffdf8; transform: scale(1.04); }
 
 /* ── OVERLINE ─────────────────────────────────────────────── */
 .overline {

@@ -112,15 +112,15 @@ body {
   border-radius: 50%;
   background: #25D366;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   transition: transform 0.26s, box-shadow 0.26s;
   text-decoration: none;
 }
-.wa-float:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(37,211,102,0.5); }
+.wa-float:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.28); }
 
 /* ── BUTTONS ─────────────────────────────────────────────── */
 .btn-primary {
-  font-family: 'Jost', sans-serif; font-size: 0.69rem; font-weight: 300;
+  font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: #fffdf8; background: var(--verde); border: none;
   padding: 13px 28px; border-radius: 999px; cursor: pointer;
@@ -130,7 +130,7 @@ body {
 .btn-primary:hover { background: var(--verde-mid); transform: scale(1.04); }
 
 .btn-accent {
-  font-family: 'Jost', sans-serif; font-size: 0.69rem; font-weight: 300;
+  font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: #fffdf8; background: var(--terracota); border: none;
   padding: 13px 28px; border-radius: 999px; cursor: pointer;
@@ -140,14 +140,14 @@ body {
 .btn-accent:hover { background: #a8664a; transform: scale(1.04); }
 
 .btn-outline-dark {
-  font-family: 'Jost', sans-serif; font-size: 0.69rem; font-weight: 300;
+  font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--terracota);
   background: transparent; border: 1px solid var(--terra-light);
   padding: 13px 28px; border-radius: 999px; cursor: pointer;
   text-decoration: none; display: inline-block;
   transition: all 0.22s ease;
 }
-.btn-outline-dark:hover { background: var(--terra-light); color: var(--verde-dark); transform: scale(1.04); }
+.btn-outline-dark:hover { background: var(--terracota); color: #fffdf8; transform: scale(1.04); }
 
 /* ── OVERLINE ─────────────────────────────────────────────── */
 .overline {
@@ -326,8 +326,9 @@ body {
   font-weight: 300;
   color: var(--verde);
   line-height: 1.45;
-  padding-left: 24px;
-  border-left: 2px solid var(--terracota);
+  padding: 20px 24px;
+  background: var(--crema-warm);
+  border-radius: 2px;
 }
 
 /* ── Timeline ────────────────────────────────────────── */
@@ -987,7 +988,7 @@ body {
 <!-- ══════════════════════════════════════════════════════════
   S6 · EQUIPO
 ══════════════════════════════════════════════════════════ -->
-<section class="team-section" style="padding:80px 0;background:linear-gradient(160deg,#1e3232 0%,#2d4949 50%,#1a2e2e 100%);position:relative;overflow:hidden;">
+<section class="team-section" style="padding:80px 0;background:var(--verde-dark);position:relative;overflow:hidden;">
 
   <!-- BG glow decorativo -->
   <div style="position:absolute;top:-20%;left:20%;width:700px;height:500px;background:radial-gradient(ellipse,rgba(192,122,90,0.07) 0%,transparent 65%);border-radius:50%;pointer-events:none;"></div>
@@ -1003,11 +1004,11 @@ body {
       <p style="font-family:'Jost',sans-serif;font-size:0.8rem;font-weight:300;color:rgba(255,253,248,0.45);max-width:300px;line-height:1.8;align-self:flex-end;">Cada persona conoce la finca de memoria. Eso se nota en cada evento.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:16px;align-items:start;">
 
-      <!-- Card 1 — Dirección -->
-      <div class="team-glass-card txt-reveal">
-        <div class="team-glass-img">
+      <!-- Card 1 — Dirección (más prominente) -->
+      <div class="team-glass-card txt-reveal" style="aspect-ratio:auto;">
+        <div class="team-glass-img" style="aspect-ratio:4/5;">
           <img src="assets/photo-jardines.jpg" alt="Dirección">
           <div class="team-glass-overlay"></div>
         </div>
