@@ -1,45 +1,54 @@
-# SESSION — 2026-05-07
+# SESSION — 2026-05-07 (handoff para Codex)
 
 ## Objetivo actual
 
-Preparar los prototipos HTML para migración a Next.js: responsive mobile y polish final completados antes de pasar a Fase 5.
+Responsive mobile de los 6 prototipos HTML en `sitio/`. Única tarea pendiente antes de migrar a Next.js.
 
 ## Estatus
 
-Fase 4 completa. Se hicieron mejoras post-fase en los prototipos HTML (footer, scroll sg-section). Pendiente: responsive mobile (Prioridad 3) y polish final (Prioridad 4). Fase 5 (Next.js) queda después.
-
-Nota de handoff Codex: se inició `$impeccable adapt`, pero se pausó a petición del usuario para continuar en Claude. No asumir responsive completo.
+Fase 4 completada. Critique completo aplicado (funcional crítico + polish). Scroll-snap eliminado de `index.html`. Capacidades unificadas. Validación inline en cotizar. Todos los cambios commiteados en `master`. Solo queda responsive (Codex).
 
 ## Qué se hizo en esta sesión
 
-- **Footer unificado:** `espacios.html` como referencia canónica; CSS + HTML del footer aplicado a `cotizar`, `experiencias`, `faq`, `nosotros` e `index`. Estructura: 3 columnas (1.5fr 1fr 1.2fr), íconos SVG inline para IG/FB/WA, © 2026, email y teléfono correctos.
-- **sg-section reescrita** en `espacios.html`: eliminada la pista de 900vh + sticky + scroll de página. Nueva implementación: sección `100vh overflow:hidden`, wheel listener exclusivo en `.sg-left`, función `goTo()` con `transform: translateX` + transición CSS `0.52s ease-snap`. Sin pausas, sin hijack de página, lista para touch en siguiente sesión.
+- **Footer unificado:** `espacios.html` canónico; footer CSS + HTML replicado en `cotizar`, `experiencias`, `faq`, `nosotros`, `index`.
+- **sg-section reescrita** en `espacios.html`: 100vh sin scroll hijack, wheel solo en `.sg-left`, goTo() con `transform: translateX` + transición 0.52s.
+- **Scroll-snap eliminado** de `index.html`: removido JS wheel hijack completo + `body overflow:hidden` + `#scroll-wrap` rules. `.snap-section { height:100vh }` → `min-height:100vh`. IntersectionObserver `root: scrollWrap` → viewport. `bg-breathe` animation corregida a `infinite alternate`.
+- **Capacidades unificadas:** 220 personas (eventos) y 30 personas (hospedaje) en `experiencias`, `espacios`, `faq`, `cotizar`.
+- **JS init bug:** `espacios.html` JS init `ESPACIOS[0].descripcion` → `ESPACIOS[0].bullets.map(...)`.
+- **Nav links:** `experiencias.html` tenía 3 `href="#"` → corregidos a `espacios.html`, `nosotros.html`, `faq.html`.
+- **Validación inline:** `cotizar.html` reemplazó 5 `alert()` con `.field-error` CSS + `showErr()` JS.
 
 ## Archivos modificados
 
-- `sitio/espacios.html` — footer CSS, sg-section CSS (3 reglas), sg-section JS (bloque completo reemplazado)
-- `sitio/cotizar.html` — footer CSS + HTML
-- `sitio/experiencias.html` — footer CSS + HTML
-- `sitio/faq.html` — footer CSS + HTML
-- `sitio/nosotros.html` — footer CSS + HTML
-- `sitio/index.html` — footer CSS + HTML (wrapper `<section data-sec="footer">` conservado)
-- `sitio/responsive.css` — creado por Codex como capa responsive compartida inicial; no verificado visualmente.
-- `sitio/mobile-nav.js` — creado por Codex como JS compartido inicial para hamburger nav; no verificado visualmente.
-- `sitio/cotizar.html` — Codex enlazó `responsive.css` y `mobile-nav.js`.
-- `sitio/espacios.html` — Codex enlazó solo `responsive.css`; falta enlazar `mobile-nav.js`.
+- `sitio/index.html` — scroll-snap eliminado, bg-breathe corregida, overflow normalizado
+- `sitio/experiencias.html` — nav links, capacidad 220 personas
+- `sitio/espacios.html` — stats 220 personas, JS init bullets, footer, sg-section
+- `sitio/faq.html` — capacidades 220 / 30 personas
+- `sitio/cotizar.html` — validación inline, capacidad 220 / 30 personas, footer
+- `sitio/nosotros.html` — footer, polish hero button weight
 
 ## Decisiones tomadas
 
-- Footer de `espacios.html` es el canónico. Las demás páginas lo replican exactamente.
-- sg-section: diseño visual intacto, solo función de scroll cambiada. Wheel en `sg-left`, no en imagen ni en página.
-- `sgTrack` const en JS queda declarada pero sin uso (inofensivo; se limpiará en polish).
+- Capacidad definitiva: **220 personas** (eventos) · **30 personas** (hospedaje casa principal).
+- Paquetes siguen siendo placeholders; no unificar hasta pricing definitivo.
+- Scroll-snap quitado: no había datos que respaldaran el comportamiento.
 
-## Pendientes
+## Pendientes (solo responsive)
 
-- **Responsive (Codex):** rama `codex/mobile-responsive-prototypes` con trabajo iniciado (`responsive.css`, `mobile-nav.js`, enlazado en cotizar y espacios). No verificado visualmente aún.
-- Revisar o reemplazar la capa inicial `responsive.css`/`mobile-nav.js` antes de continuar. No fue probada en navegador.
-- Enlazar assets responsive en las páginas faltantes si se conserva este enfoque: `index`, `experiencias`, `faq`, `nosotros`, y `mobile-nav.js` en `espacios`.
+**Rama activa:** `codex/mobile-responsive-prototypes`
+**Assets creados pero no verificados visualmente:**
+- `sitio/responsive.css` — capa compartida responsive inicial
+- `sitio/mobile-nav.js` — JS hamburger nav inicial
+- Enlazados solo en `cotizar.html` y `espacios.html`; faltan: `index`, `experiencias`, `faq`, `nosotros`, y `mobile-nav.js` en `espacios`.
+
+**Tareas Codex:**
+1. Verificar y completar `responsive.css` y `mobile-nav.js` visualmente en navegador.
+2. Enlazar ambos assets en las páginas faltantes: `index`, `experiencias`, `faq`, `nosotros`.
+3. Enlazar `mobile-nav.js` en `espacios.html`.
+4. Implementar touch/swipe para `sg-section` en `espacios.html` (actualmente solo wheel).
+5. Revisar y ajustar scroll de `index.html` en mobile (scroll-snap ya eliminado; verificar que `min-height:100vh` funcione bien en móvil).
+6. Verificar layouts multi-columna en < 768 px en todas las páginas.
 
 ## Próximo paso recomendado
 
-Continuar Prioridad 3 en Claude: `$impeccable adapt todo a móvil`. Primero decidir si conservar la capa compartida iniciada por Codex; luego completar enlaces, touch/swipe en `espacios.html` y desactivar/ajustar scroll-snap de `index.html` en mobile.
+Continuar en rama `codex/mobile-responsive-prototypes`. Primero probar en Chrome DevTools mobile las páginas con los assets actuales para saber qué funciona y qué rompe antes de escribir código nuevo.
