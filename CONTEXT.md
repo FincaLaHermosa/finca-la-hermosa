@@ -25,6 +25,8 @@ Venue multifuncional en Isidro Fabela, EDOMEX. Objetivo: sistema de adquisición
 ## ★ Base / referencias estables
 
 **Prototipos HTML:** `sitio/` contiene los prototipos visuales completos para migración futura a Next.js.
+**Estrategia de marca/producto:** `PRODUCT.md` es la fuente para register, usuarios, propósito, personalidad, anti-referencias y accesibilidad.
+**Sistema visual detallado:** `DESIGN.md` es la fuente para tokens, componentes, color, tipografía, elevación, motion y reglas UI.
 
 | Página | Archivo | Estado |
 |--------|---------|--------|
@@ -60,29 +62,16 @@ Next.js 15 (App Router) · Tailwind CSS · Framer Motion · Embla Carousel · Su
 
 **Referencia completa:** `Finca La Hermosa Design System/colors_and_type.css`
 **Assets:** `Finca La Hermosa Design System/assets/` — logos y isotipos × 3 colores (blanco, verde, terracota)
+**Contexto Impeccable:** usar `PRODUCT.md` para estrategia/marca y `DESIGN.md` para sistema visual detallado. No duplicar esos archivos completos en `CONTEXT.md`.
 
 **Tipografías:**
 - `Against Regular` — display/hero (local: `sitio/fonts/against-regular.otf`)
 - `Cormorant Garamond` — editorial serif, H2, cursivas emocionales
 - `Jost` — body, UI, nav, botones (Google Fonts)
 
-**Firma tipográfica** (todos los heroes):
-```txt
-Against blanco grande   →  "Cada experiencia,"
-Cormorant italic terra  →  "diseñada para ti."
-```
+**Resumen estable:** minimalismo editorial cálido, fotografía full-bleed, crema/verde/terracota, nav pill con glassmorphism, SVG stroke Lucide icons y firma hero Against + Cormorant italic.
 
-**Colores clave:**
-- Verde finca: `#2d4949` · Verde dark: `#1e3232` · Verde mid: `#4a6e6e`
-- Terracota: `#c07a5a` · Terra light: `#e8c4ad`
-- Crema: `#fffdf8` · Crema warm: `#f5f0e8` · Crema border: `#ede6d6`
-- Body text: `#5a5040` · Muted: `#8c7d68` · Carbon: `#1a1a1a`
-
-**Estilo:** Minimalista editorial tipo Apple · glassmorphism en nav · fotografía full-bleed · SVG stroke Lucide icons
-
-**Voz:** "tú" informal · español formal-casual · nav en MAYÚSCULAS · sin emojis
-Palabras OK: celebrar, compartir, naturaleza, experiencia, momentos, recuerdos
-Palabras NO: renta, barato, promoción, paquete básico, todo incluido
+**Voz:** "tú" informal · español formal-casual · nav en MAYÚSCULAS · sin emojis. Detalle completo en `PRODUCT.md`.
 
 ---
 
@@ -143,7 +132,8 @@ Casa principal (6 hab) · 2 jardines · Salón 22×14 m · Terraza 3.5 m · Albe
 - Tipografías: Against / Cormorant / Jost (Poppins descartado; `colors_and_type.css` ya corregido a Jost)
 - `/espacios`: v2 FOLIO editorial con galería scroll-driven (panel sticky, índice flotante, 9 espacios) ✅ — lightbox descartado
 - Fotografía Fase 1: placeholders Unsplash/Pexels curados
-- Sistema de diseño documentado en `PRODUCT.md` (estrategia/marca) y `DESIGN.md` (tokens/componentes Stitch) — usar con `/impeccable`
+- Sistema de diseño documentado en `PRODUCT.md` (estrategia/marca) y `DESIGN.md` (tokens/componentes) — usar con `/impeccable`
+- Para tareas visuales/frontend/marca/copy, leer `PRODUCT.md` y `DESIGN.md`; para tareas backend puras, no cargarlos salvo necesidad.
 
 ---
 
