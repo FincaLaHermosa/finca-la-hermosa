@@ -1,53 +1,53 @@
 # SESSION — 2026-05-06
 
-## Qué se hizo
+## Objetivo actual
 
-Critique de `/nosotros` con skill `/impeccable`. Antes de poder correr critique, se crearon los archivos de contexto requeridos:
+Preparar el proyecto para Fase 5: crear repo público en GitHub, montar base Next.js 15 y migrar los prototipos HTML aprobados.
 
-- **PRODUCT.md**: estrategia de marca (register=brand, personalidad, anti-references, principios)
-- **DESIGN.md**: sistema de diseño en formato Stitch (colores, tipografía, elevación, componentes, reglas nombradas)
+## Estatus
 
-Fixes aplicados en **nosotros.html** (5 issues del critique):
-1. Pull-quote: `border-left` eliminado (ban absoluto) → fondo crema warm
-2. Team section: gradient eliminado → `var(--verde-dark)` sólido
-3. Team grid: `1fr 1fr 1fr 1fr` → `1.4fr 1fr 1fr 1fr` + primera card `aspect-ratio: 4/5`
-4. WA float: glow verde neón → sombra neutral `rgba(0,0,0,0.2)`
-5. Botones: `0.69rem/300` → `0.75rem/500` en acciones primarias
+Fase 4 está completada: los 6 prototipos HTML viven en `sitio/` y sirven como referencia visual para migración. La fase activa operativa es Fase 5: repo GitHub + scaffold Next.js 15 + migración inicial de tokens/componentes. `CONTEXT.md` ya conserva la tabla de fases y referencias estables; este archivo conserva el handoff operativo.
 
-Unificación cross-site en **todos los HTMLs** (index, experiencias, faq, espacios, cotizar):
-- Mismos fixes de botones y wa-float
-- `btn-outline-dark:hover` cambia de `terra-light` deslavado → terracota real `#c07a5a`
-- `cotizar.html` tenía clases propias (`.btn-prev/.btn-next/.btn-submit`) + 2 inline buttons — todos corregidos
+## Qué se hizo en esta sesión
 
-Fix en **colors_and_type.css**: Poppins → Jost (`@import` y `--font-body`)
+- Se reestructuró la memoria híbrida del proyecto para separar contexto estable y estado temporal.
+- `CONTEXT.md` dejó de usar `FOCO ACTIVO` como tablero operativo.
+- Se agregó `Base / referencias estables` en `CONTEXT.md`.
+- Se compactó el historial de `CONTEXT.md` a hitos breves.
+- `SESSION.md` adoptó `Estatus` como resumen operativo de 2-3 líneas.
+- Se mantuvo la tabla de fases en `CONTEXT.md` para registrar avances de fase.
+- Se adaptó la skill global `hybrid-context-manager` para reconocer `PRODUCT.md` y `DESIGN.md` como módulos opcionales de marca/diseño, sin duplicarlos en `CONTEXT.md`.
+- Se ajustaron `AGENTS.md`, `CLAUDE.md` y `CONTEXT.md` para leer `PRODUCT.md`/`DESIGN.md` en tareas visuales, frontend, marca o copy.
 
-## Archivos tocados
+## Archivos modificados
 
-- `PRODUCT.md` — creado
-- `DESIGN.md` — creado
-- `sitio/nosotros.html` — 5 fixes de critique
-- `sitio/index.html` — botones + wa-float + outline hover
-- `sitio/experiencias.html` — botones + wa-float
-- `sitio/faq.html` — botones + wa-float + outline hover
-- `sitio/espacios.html` — botones + wa-float + outline hover
-- `sitio/cotizar.html` — btn-prev/next/submit + 2 inline + wa-float
-- `Finca La Hermosa Design System/colors_and_type.css` — Poppins → Jost
+- `CONTEXT.md` — estructura ajustada: fases + referencias estables + historial compacto.
+- `SESSION.md` — estructura ajustada con `Estatus` operativo.
+- `AGENTS.md` — router mínimo actualizado para módulos de marca/diseño.
+- `CLAUDE.md` — router mínimo actualizado para módulos de marca/diseño.
+- `C:\Users\limin\.codex\skills\hybrid-context-manager\SKILL.md` — skill compactada y extendida.
 
-## Commit
+## Decisiones tomadas
 
-`3e3b96b` — "Critique nosotros + unificación de botones en los 6 prototipos"
+- La tabla de fases permanece en `CONTEXT.md` y se actualiza cuando una fase cambie de estado o se cierre.
+- El estado o fase actual operativa vive en `SESSION.md` bajo `Estatus`.
+- `CONTEXT.md` no debe funcionar como tablero operativo ni bitácora detallada.
+- El historial de `CONTEXT.md` debe quedar compacto, máximo 5 entradas.
+- `PRODUCT.md` es fuente para estrategia/marca; `DESIGN.md` es fuente para sistema visual. `CONTEXT.md` solo los resume y referencia.
 
-## Decisiones
+## Problemas encontrados
 
-- `btn-outline-dark:hover` usa terracota sólido (`#c07a5a`) en todo el sitio — no terra-light
-- Equipo: fotos reales de personas con su rol, sin nombre. Grid asimétrico como solución temporal; readaptar cuando lleguen fotos reales.
-- `/impeccable` operativo en este proyecto: PRODUCT.md + DESIGN.md ya existen
+- `CONTEXT.md` tenía `FOCO ACTIVO — Fase 4` aunque la Fase 4 ya estaba completada.
+- El historial de `CONTEXT.md` repetía detalles operativos que pertenecen a `SESSION.md`.
+- Existe un cambio previo no relacionado en `sitio/espacios.html`; no se tocó en este ajuste.
 
 ## Pendientes
 
-- Verificación visual en browser (preview server: `npx serve sitio -p 3333`)
-- Fase 5: GitHub repo público + Next.js base + migración de prototipos HTML
+- Verificación visual en browser (preview server: `npx serve sitio -p 3333`).
+- Fase 5: crear repo público en GitHub.
+- Fase 5: scaffold Next.js 15 (App Router) y migrar tokens CSS a Tailwind config.
 
 ## Próximo paso recomendado
 
-Iniciar Fase 5: crear repo público en GitHub, scaffold Next.js 15 (App Router), migrar tokens CSS a Tailwind config.
+- Iniciar Fase 5 con repo GitHub público y base Next.js 15.
+- Migrar primero layout, tokens, tipografías y navegación global.
