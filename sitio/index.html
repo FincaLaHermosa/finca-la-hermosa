@@ -39,21 +39,11 @@ body {
   font-family: 'Jost', sans-serif;
   background: var(--verde-dark);
   color: var(--body-clr);
-  overflow: hidden;
-  height: 100vh;
+  overflow: auto;
 }
-
-/* ── SCROLL WRAP — snap por sección ─────────────────────── */
-#scroll-wrap {
-  height: 100vh;
-  overflow-y: scroll;
-  overscroll-behavior-y: contain;
-  scrollbar-width: none;
-}
-#scroll-wrap::-webkit-scrollbar { display: none; }
 
 .snap-section {
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -217,7 +207,7 @@ body {
   0%   { transform: scale(1.04); }
   100% { transform: scale(1.14); }
 }
-.bg-breathe { animation: breathe 20s ease-out forwards; }
+.bg-breathe { animation: breathe 20s ease-in-out infinite alternate; }
 
 .txt-reveal {
   opacity: 0;
@@ -1224,53 +1214,11 @@ body {
 
 
 <script>
-/* ── SCROLL SYSTEM ───────────────────────────────────────── */
-const scrollWrap  = document.getElementById('scroll-wrap');
-const navPill     = document.getElementById('nav-pill');
-const allSecs     = [...document.querySelectorAll('[data-sec]')];
-let   currentIdx  = 0;
-let   isAnimating = false;
-let   wheelBuf    = 0;
-const THRESHOLD   = 120;  // px de delta antes de activar
-const DURATION    = 950;  // ms de animación
-
-function easeInOutCubic(t) {
-  return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
-}
-
-function scrollToSection(idx) {
-  idx = Math.max(0, Math.min(allSecs.length - 1, idx));
-  if (isAnimating || idx === currentIdx) return;
-  currentIdx  = idx;
-  isAnimating = true;
-  wheelBuf    = 0;
-
-  const from  = scrollWrap.scrollTop;
-  const to    = allSecs[idx].offsetTop;
-  const start = performance.now();
-
-  function step(now) {
-    const t = Math.min((now - start) / DURATION, 1);
-    scrollWrap.scrollTop = from + (to - from) * easeInOutCubic(t);
-    if (t < 1) requestAnimationFrame(step);
-    else { isAnimating = false; }
-  }
-  requestAnimationFrame(step);
-}
-
-scrollWrap.addEventListener('wheel', (e) => {
-  e.preventDefault();
-  if (isAnimating) return;
-  wheelBuf += e.deltaY;
-  if (Math.abs(wheelBuf) >= THRESHOLD) {
-    scrollToSection(currentIdx + (wheelBuf > 0 ? 1 : -1));
-  }
-}, { passive: false });
-
-// Nav pill state via scroll position
-scrollWrap.addEventListener('scroll', () => {
-  navPill.classList.toggle('scrolled', scrollWrap.scrollTop > 80);
-});
+/* ── NAV SCROLL STATE ────────────────────────────────────── */
+const navPill = document.getElementById('nav-pill');
+window.addEventListener('scroll', () => {
+  navPill.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
 
 /* ── REVEAL ON SCROLL ────────────────────────────────────── */
 const sections = document.querySelectorAll('[data-sec]');
@@ -1285,7 +1233,7 @@ const revealObs = new IntersectionObserver((entries) => {
       if (entry.target.dataset.sec === 'cta') setTimeout(startIllum, 400);
     }
   });
-}, { root: scrollWrap, threshold: 0.3 });
+}, { threshold: 0.3 });
 
 sections.forEach(s => revealObs.observe(s));
 
@@ -1322,7 +1270,7 @@ const ctaSec = document.querySelector('[data-sec="cta"]');
 if (ctaSec) {
   new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) startIllum();
-  }, { root: scrollWrap, threshold: 0.4 }).observe(ctaSec);
+  }, { threshold: 0.4 }).observe(ctaSec);
 }
 
 /* ── S2 TABS ─────────────────────────────────────────────── */

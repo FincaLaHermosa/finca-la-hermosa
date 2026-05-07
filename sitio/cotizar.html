@@ -160,6 +160,8 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 
 /* Step 2 — Fecha e invitados */
 .field-group{display:flex;flex-direction:column;gap:7px;margin-bottom:28px;}
+.field-error{font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:400;color:#8a3a20;background:#fdf0eb;border:1px solid #f0c4b0;border-radius:6px;padding:8px 12px;display:none;margin-top:4px;}
+.field-error.show{display:block;}
 .field-label{font-family:'Jost',sans-serif;font-size:0.68rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--verde);}
 .field-input{
   font-family:'Jost',sans-serif;font-size:0.9rem;font-weight:300;
@@ -315,6 +317,7 @@ textarea.field-input{resize:vertical;min-height:100px;line-height:1.65;}
 .success-panel.show{display:block;}
 .success-icon{width:64px;height:64px;border-radius:50%;background:#edf5f0;border:2px solid #c4dece;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;}
 </style>
+<link rel="stylesheet" href="responsive.css">
 </head>
 <body>
 
@@ -468,6 +471,7 @@ textarea.field-input{resize:vertical;min-height:100px;line-height:1.65;}
 
         </div>
 
+        <div class="field-error" id="err-step-1">Selecciona el tipo de evento para continuar.</div>
         <div class="step-nav">
           <div></div>
           <button class="btn-next" onclick="nextStep(1)" id="btn-next-1">
@@ -501,11 +505,11 @@ textarea.field-input{resize:vertical;min-height:100px;line-height:1.65;}
           <label class="field-label">Número de invitados estimado</label>
           <div class="counter-row">
             <button class="counter-btn" onclick="changeGuests(-10)" type="button">−</button>
-            <input class="counter-val" type="number" id="guests-val" value="50" min="15" max="300" readonly>
+            <input class="counter-val" type="number" id="guests-val" value="50" min="15" max="220" readonly>
             <button class="counter-btn" onclick="changeGuests(10)" type="button">+</button>
           </div>
           <div style="font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:var(--muted);margin-top:6px;">
-            Capacidad mínima 15 · máxima 200 personas
+            Capacidad mínima 15 · máxima 220 personas
           </div>
         </div>
 
@@ -517,6 +521,7 @@ textarea.field-input{resize:vertical;min-height:100px;line-height:1.65;}
           </select>
         </div>
 
+        <div class="field-error" id="err-step-2">Selecciona una fecha tentativa para continuar.</div>
         <div class="step-nav">
           <button class="btn-prev" onclick="prevStep(2)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
@@ -548,7 +553,7 @@ textarea.field-input{resize:vertical;min-height:100px;line-height:1.65;}
             </div>
             <div class="addon-info">
               <div class="addon-name">Salón techado 22×14 m</div>
-              <div class="addon-sub">Espacio cubierto climatizado · hasta 200 personas · montaje incluido</div>
+              <div class="addon-sub">Espacio cubierto climatizado · hasta 220 personas · montaje incluido</div>
             </div>
             <div class="addon-price">+$8,000</div>
           </label>
@@ -613,7 +618,7 @@ textarea.field-input{resize:vertical;min-height:100px;line-height:1.65;}
             </div>
             <div class="addon-info">
               <div class="addon-name">Hospedaje (casa principal)</div>
-              <div class="addon-sub">6 habitaciones · hasta 16 personas · cotizamos según noches</div>
+              <div class="addon-sub">6 habitaciones · hasta 30 personas · cotizamos según noches</div>
             </div>
             <div class="addon-price" style="color:var(--muted);">A cotizar</div>
           </label>
@@ -665,6 +670,7 @@ textarea.field-input{resize:vertical;min-height:100px;line-height:1.65;}
           Tu información es confidencial y solo se usará para preparar tu propuesta. No hacemos spam.
         </div>
 
+        <div class="field-error" id="err-step-4"></div>
         <div class="step-nav">
           <button class="btn-prev" onclick="prevStep(4)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
@@ -862,7 +868,7 @@ document.querySelectorAll('.tipo-card').forEach(card => {
 ═══════════════════════════════════════════════ */
 function changeGuests(delta) {
   const val = parseInt(document.getElementById('guests-val').value);
-  const newVal = Math.max(15, Math.min(300, val + delta));
+  const newVal = Math.max(15, Math.min(220, val + delta));
   document.getElementById('guests-val').value = newVal;
   state.guests = newVal;
   updateSummary();
@@ -1039,15 +1045,22 @@ function goToStep(step) {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
+function showErr(id, msg) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 4000);
+}
+
 function nextStep(from) {
-  // Validations
   if (from === 1 && !state.tipo) {
-    alert('Selecciona el tipo de evento para continuar.');
+    showErr('err-step-1', 'Selecciona el tipo de evento para continuar.');
     return;
   }
   if (from === 2) {
-    if (!state.fecha) { alert('Selecciona una fecha tentativa.'); return; }
-    if (busyDates.includes(state.fecha)) { alert('Esa fecha no está disponible. Elige una fecha alternativa.'); return; }
+    if (!state.fecha) { showErr('err-step-2', 'Selecciona una fecha tentativa.'); return; }
+    if (busyDates.includes(state.fecha)) { showErr('err-step-2', 'Esa fecha no está disponible. Elige una fecha alternativa.'); return; }
   }
   if (from < 4) goToStep(from + 1);
 }
@@ -1064,9 +1077,9 @@ function submitForm() {
   const email = document.getElementById('inp-email').value.trim();
   const tel = document.getElementById('inp-tel').value.trim();
 
-  if (!nombre) { alert('Por favor ingresa tu nombre.'); return; }
-  if (!email || !email.includes('@')) { alert('Por favor ingresa un correo válido.'); return; }
-  if (!tel) { alert('Por favor ingresa tu número de WhatsApp o teléfono.'); return; }
+  if (!nombre) { showErr('err-step-4', 'Por favor ingresa tu nombre.'); return; }
+  if (!email || !email.includes('@')) { showErr('err-step-4', 'Por favor ingresa un correo válido.'); return; }
+  if (!tel) { showErr('err-step-4', 'Por favor ingresa tu número de WhatsApp o teléfono.'); return; }
 
   // Hide form steps, show success
   document.getElementById('step-4').classList.remove('active');
@@ -1088,5 +1101,6 @@ updateSummary();
 updatePaquete();
 </script>
 
+<script src="mobile-nav.js"></script>
 </body>
 </html>

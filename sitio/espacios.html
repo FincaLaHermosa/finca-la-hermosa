@@ -903,6 +903,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
   .sg-dot{transition:none;}
 }
 </style>
+<link rel="stylesheet" href="responsive.css">
 </head>
 <body>
 
@@ -1007,7 +1008,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
         <div class="stat-terra-label">Terreno natural</div>
       </div>
       <div class="stat-terra txt-reveal" data-d="2">
-        <div class="stat-terra-num">30<em>pers.</em></div>
+        <div class="stat-terra-num">220<em>pers.</em></div>
         <div class="stat-terra-label">Capacidad máxima</div>
       </div>
     </div>
@@ -1347,7 +1348,7 @@ setTimeout(() => {
 }, 180);
 
 setActive(0);
-descText.textContent = ESPACIOS[0].descripcion;
+descText.innerHTML = ESPACIOS[0].bullets.map(b => `<li>${b}</li>`).join('');
 descCap.textContent  = ESPACIOS[0].capacidad;
 captionNum.textContent  = '01';
 captionName.textContent = ESPACIOS[0].nombre;
