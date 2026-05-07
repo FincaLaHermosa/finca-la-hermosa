@@ -8,6 +8,8 @@ Preparar los prototipos HTML para migración a Next.js: responsive mobile y poli
 
 Fase 4 completa. Se hicieron mejoras post-fase en los prototipos HTML (footer, scroll sg-section). Pendiente: responsive mobile (Prioridad 3) y polish final (Prioridad 4). Fase 5 (Next.js) queda después.
 
+Nota de handoff Codex: se inició `$impeccable adapt`, pero se pausó a petición del usuario para continuar en Claude. No asumir responsive completo.
+
 ## Qué se hizo en esta sesión
 
 - **Footer unificado:** `espacios.html` como referencia canónica; CSS + HTML del footer aplicado a `cotizar`, `experiencias`, `faq`, `nosotros` e `index`. Estructura: 3 columnas (1.5fr 1fr 1.2fr), íconos SVG inline para IG/FB/WA, © 2026, email y teléfono correctos.
@@ -21,6 +23,10 @@ Fase 4 completa. Se hicieron mejoras post-fase en los prototipos HTML (footer, s
 - `sitio/faq.html` — footer CSS + HTML
 - `sitio/nosotros.html` — footer CSS + HTML
 - `sitio/index.html` — footer CSS + HTML (wrapper `<section data-sec="footer">` conservado)
+- `sitio/responsive.css` — creado por Codex como capa responsive compartida inicial; no verificado visualmente.
+- `sitio/mobile-nav.js` — creado por Codex como JS compartido inicial para hamburger nav; no verificado visualmente.
+- `sitio/cotizar.html` — Codex enlazó `responsive.css` y `mobile-nav.js`.
+- `sitio/espacios.html` — Codex enlazó solo `responsive.css`; falta enlazar `mobile-nav.js`.
 
 ## Decisiones tomadas
 
@@ -30,9 +36,10 @@ Fase 4 completa. Se hicieron mejoras post-fase en los prototipos HTML (footer, s
 
 ## Pendientes
 
-- **Prioridad 3:** `/impeccable adapt` — responsive mobile para las 6 páginas. sg-section necesita touch/swipe equivalente al wheel. Nav necesita hamburger. Todos los layouts multi-columna a single-column.
-- **Prioridad 4:** `/impeccable polish` — quality pass final antes de migración.
+- **Responsive (Codex):** rama `codex/mobile-responsive-prototypes` con trabajo iniciado (`responsive.css`, `mobile-nav.js`, enlazado en cotizar y espacios). No verificado visualmente aún.
+- Revisar o reemplazar la capa inicial `responsive.css`/`mobile-nav.js` antes de continuar. No fue probada en navegador.
+- Enlazar assets responsive en las páginas faltantes si se conserva este enfoque: `index`, `experiencias`, `faq`, `nosotros`, y `mobile-nav.js` en `espacios`.
 
 ## Próximo paso recomendado
 
-Iniciar Prioridad 3: `/impeccable adapt todo a móvil`. Empezar por `index.html` (scroll-snap body → verificar si sigue activo) y `espacios.html` (touch para sg-section).
+Continuar Prioridad 3 en Claude: `$impeccable adapt todo a móvil`. Primero decidir si conservar la capa compartida iniciada por Codex; luego completar enlaces, touch/swipe en `espacios.html` y desactivar/ajustar scroll-snap de `index.html` en mobile.
