@@ -1,41 +1,53 @@
-# Session - Finca La Hermosa
+# SESSION — 2026-05-06
 
-## Objetivo actual
-Mantener continuidad entre Claude Code y Codex durante el desarrollo del proyecto Finca La Hermosa.
+## Qué se hizo
 
-## Estado del proyecto
-- Fases 1-3 completadas: estrategia, identidad y arquitectura.
-- Fase 4 completada: prototipos HTML en `sitio/`.
-- Proxima fase principal: GitHub repo + base Next.js, inventario de contenido editable y migracion a Next.js.
-- Paquetes y pricing definitivos siguen en curso.
+Critique de `/nosotros` con skill `/impeccable`. Antes de poder correr critique, se crearon los archivos de contexto requeridos:
 
-## Que se hizo en esta sesion
-- Se migro el contexto estable desde `CLAUDE.md` hacia `CONTEXT.md`.
-- Se dejo `CLAUDE.md` como archivo minimo de entrada para Claude Code.
-- Se creo/actualizo `AGENTS.md` como archivo minimo de entrada para Codex.
-- Se creo `SESSION.md` como bitacora temporal para handoff entre agentes.
+- **PRODUCT.md**: estrategia de marca (register=brand, personalidad, anti-references, principios)
+- **DESIGN.md**: sistema de diseño en formato Stitch (colores, tipografía, elevación, componentes, reglas nombradas)
 
-## Archivos modificados
-- `CONTEXT.md`
-- `CLAUDE.md`
-- `AGENTS.md`
-- `SESSION.md`
+Fixes aplicados en **nosotros.html** (5 issues del critique):
+1. Pull-quote: `border-left` eliminado (ban absoluto) → fondo crema warm
+2. Team section: gradient eliminado → `var(--verde-dark)` sólido
+3. Team grid: `1fr 1fr 1fr 1fr` → `1.4fr 1fr 1fr 1fr` + primera card `aspect-ratio: 4/5`
+4. WA float: glow verde neón → sombra neutral `rgba(0,0,0,0.2)`
+5. Botones: `0.69rem/300` → `0.75rem/500` en acciones primarias
 
-## Decisiones tomadas
-- `CONTEXT.md` es la fuente de verdad compartida para reglas estables del proyecto.
-- `SESSION.md` guarda estado temporal, pendientes y proximo paso.
-- `CLAUDE.md` y `AGENTS.md` no deben duplicar contexto; solo deben apuntar a `CONTEXT.md` y `SESSION.md`.
+Unificación cross-site en **todos los HTMLs** (index, experiencias, faq, espacios, cotizar):
+- Mismos fixes de botones y wa-float
+- `btn-outline-dark:hover` cambia de `terra-light` deslavado → terracota real `#c07a5a`
+- `cotizar.html` tenía clases propias (`.btn-prev/.btn-next/.btn-submit`) + 2 inline buttons — todos corregidos
 
-## Problemas encontrados
-- El proyecto correcto esta en `C:\Users\limin\OneDrive\PROYECTOS\FINCA LA HERMOSA`, no en la carpeta temporal de Codex.
-- Ya existia `AGENTS.md` con contexto similar pero menos actualizado que `CLAUDE.md`; se reemplazo por entrada minima y el contexto estable quedo centralizado en `CONTEXT.md`.
+Fix en **colors_and_type.css**: Poppins → Jost (`@import` y `--font-body`)
+
+## Archivos tocados
+
+- `PRODUCT.md` — creado
+- `DESIGN.md` — creado
+- `sitio/nosotros.html` — 5 fixes de critique
+- `sitio/index.html` — botones + wa-float + outline hover
+- `sitio/experiencias.html` — botones + wa-float
+- `sitio/faq.html` — botones + wa-float + outline hover
+- `sitio/espacios.html` — botones + wa-float + outline hover
+- `sitio/cotizar.html` — btn-prev/next/submit + 2 inline + wa-float
+- `Finca La Hermosa Design System/colors_and_type.css` — Poppins → Jost
+
+## Commit
+
+`3e3b96b` — "Critique nosotros + unificación de botones en los 6 prototipos"
+
+## Decisiones
+
+- `btn-outline-dark:hover` usa terracota sólido (`#c07a5a`) en todo el sitio — no terra-light
+- Equipo: fotos reales de personas con su rol, sin nombre. Grid asimétrico como solución temporal; readaptar cuando lleguen fotos reales.
+- `/impeccable` operativo en este proyecto: PRODUCT.md + DESIGN.md ya existen
 
 ## Pendientes
-- En la siguiente sesion, leer primero `CONTEXT.md` y luego `SESSION.md`.
-- Antes de Fase 6, actualizar `colors_and_type.css` de Poppins a Jost.
-- Continuar con Fase 5: GitHub repo + base Next.js.
-- Definir paquetes y pricing definitivos.
 
-## Proximo paso recomendado
-Iniciar Fase 5: crear o consolidar el repositorio/base Next.js 15 con Tailwind, estructura de rutas aprobada y sistema de diseño migrado desde los prototipos HTML.
+- Verificación visual en browser (preview server: `npx serve sitio -p 3333`)
+- Fase 5: GitHub repo público + Next.js base + migración de prototipos HTML
 
+## Próximo paso recomendado
+
+Iniciar Fase 5: crear repo público en GitHub, scaffold Next.js 15 (App Router), migrar tokens CSS a Tailwind config.

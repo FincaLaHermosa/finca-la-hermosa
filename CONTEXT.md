@@ -140,22 +140,20 @@ Casa principal (6 hab) · 2 jardines · Salón 22×14 m · Terraza 3.5 m · Albe
 ## ★ Decisiones cerradas
 
 - Stack: Next.js 15 + Supabase + Vercel + Resend + wa.me (sin WhatsApp Business API Fase 1)
-- Tipografías: Against / Cormorant / Jost (Poppins descartado)
+- Tipografías: Against / Cormorant / Jost (Poppins descartado; `colors_and_type.css` ya corregido a Jost)
 - `/espacios`: v2 FOLIO editorial con galería scroll-driven (panel sticky, índice flotante, 9 espacios) ✅ — lightbox descartado
 - Fotografía Fase 1: placeholders Unsplash/Pexels curados
-- `colors_and_type.css` declara Poppins → actualizar a Jost antes de Fase 6
+- Sistema de diseño documentado en `PRODUCT.md` (estrategia/marca) y `DESIGN.md` (tokens/componentes Stitch) — usar con `/impeccable`
 
 ---
 
 ## ★ Historial
 
+`2026-05-06` — Critique `/nosotros` + unificación global: PRODUCT.md y DESIGN.md creados. Fixes: pull-quote sin border-left (fondo crema), equipo gradient→verde-dark sólido, grid asimétrico 1.4fr. Botones unificados 0.69→0.75rem, weight 300→500; btn-outline-dark hover→terracota real en los 6 HTMLs. Poppins→Jost corregido en colors_and_type.css.
 `2026-05-05` — `espacios.html` refinado: stats verde-dark compacto sin título/quote, galería con wheel-hijack (derecha=carrusel, izquierda=scroll normal), snap por dirección, bullets por espacio (3 características), clic en lista instantáneo, transiciones de lista aceleradas.
 `2026-05-05` — `espacios.html` consolidado a v2 FOLIO editorial (scroll-driven gallery sticky panel, 9 espacios, stats terra, inventario). v1 y v3 eliminadas.
 `2026-05-05` — `cotizar.html` completo: hero compacto dark, 4 pasos (tipo evento cards, fecha+invitados con check disponibilidad simulado, add-ons con precio, datos de contacto), resumen lateral sticky con total en vivo + paquete recomendado dinámico, success state. Fase 4 HTML completada al 100%.
 `2026-05-05` — `faq.html` completo: hero dark centrado, acordeón 19 preguntas × 5 categorías (tabs filtrables), sección contacto nudge, CTA dark estándar. Skill frontend-design activada.
-`2026-05-05` — `nosotros.html` completo: 7 secciones (hero split, historia editorial, valores dark, timeline, equipo glass cards verde, promesa, CTA). Orden: valores → timeline. Cards de equipo: imagen full + glassmorphism + fondo verde degradado. Skill frontend-design activar siempre por defecto en este proyecto.
-`2026-05-05` — Fase 4 avanza: `experiencias.html` (catálogo filtrable 6 paquetes + add-ons) y `espacios.html` (galería editorial asimétrica + lightbox) completados. Nav de `index.html` corregido con links reales.
-`2026-05-04` — Prototipo `index.html` completo (8 secciones snap-scroll). Arquitectura, stack, cotizador y modelo de datos definidos.
 
 
 
