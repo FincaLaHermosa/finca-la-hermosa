@@ -1,60 +1,49 @@
-# SESSION — 2026-05-07
+# SESSION — 2026-05-07 (sesión 2)
 
 ## Objetivo actual
 
-Cerrar la adaptación responsive de los 6 prototipos HTML en `sitio/` y dejar handoff para revisar/aprobar antes de mergear a `master`.
+Continuar adaptación responsive página por página. Esta sesión: `index.html` completado. Próxima sesión: `experiencias.html`.
 
 ## Estatus
 
-Rama activa: `codex/responsive-site-adapt`. Working tree limpio antes de este handoff. `master` todavía no contiene el responsive. Solo quedan dos ramas locales: `master` y `codex/responsive-site-adapt`.
+Rama activa: `codex/responsive-site-adapt`. `index.html` mobile revisado y ajustado. Footer extraído a partial compartido.
 
-## Commits relevantes
+## Qué se hizo (esta sesión)
 
-- `25003e5` — `Adapt site prototypes for responsive layouts`
-- `da949c0` — `chore: add impeccable context loader wrapper`
+**CTA section:**
+- Corregido layout mobile: outer grid colapsa a 1 col (`cta-outer`), inner grid Agendar+WhatsApp se preserva en 2 col (`cta-small-grid`).
+- Causa raíz: regla global `div[style*="grid-template-columns"]` colapsaba todo — solución con clases explícitas.
+- Botones unificados con `btn-accent`; WhatsApp conserva verde con clase `btn-wa`.
+- Icono WhatsApp reemplazado por logo real SVG.
 
-## Qué se hizo
+**Footer:**
+- Extraído a `sitio/partials/footer.html` (fuente única).
+- CSS del footer extraído a `sitio/partials/footer.css`.
+- Loader: `sitio/partials/footer.js` (fetch + inject).
+- Las 6 páginas ahora cargan el footer vía JS — sin duplicación.
+- Footer alineado a izquierda en mobile (`align-items: flex-start` en `.footer-brand`).
+- Logo más grande en mobile (56px).
+- Link a Google Maps en dirección (placeholder — reemplazar con URL exacta).
 
-- Se aplicó `$impeccable adapt` para responsive mobile/tablet/desktop.
-- Se agregó `sitio/responsive.css` como capa compartida responsive.
-- Se agregó `sitio/mobile-nav.js` para hamburger nav móvil con `aria-expanded`.
-- Se enlazaron ambos assets en `index.html`, `espacios.html`, `experiencias.html`, `faq.html`, `nosotros.html`; `cotizar.html` ya estaba enlazado.
-- Se agregó swipe horizontal en la galería `sg-section` de `espacios.html`, sin bloquear el scroll vertical.
-- Se creó el wrapper del loader Impeccable en `.agents/skills/impeccable/scripts/load-context.mjs`, apuntando al loader formal de Claude.
-- Se eliminaron ramas viejas/interrumpidas: `codex/mobile-responsive-prototypes` y `Version`.
+**Sección proceso:**
+- Botón "Quiero cotizar ahora" → "Cotizar ahora".
+- Flecha scroll-down con animación `arrow-pulse` (1.8s, translateY + opacity).
+- Gap botón↔flecha: 12px. Padding inferior de sección: 32px.
 
-## Verificación
+**Sección paquetes:**
+- Botones de tarjetas: "Solicitar cotización" → "Ver más".
 
-- Servidor local usado: `http://127.0.0.1:8765/index.html`.
-- Playwright CLI verificó móvil `390x844`, tablet `768x1024` y escritorio `1440x900`.
-- Páginas verificadas: `index.html`, `espacios.html`, `experiencias.html`, `cotizar.html`, `faq.html`, `nosotros.html`.
-- Resultado final medido: `overflow` horizontal `0` y textos clave sin recorte en los tres tamaños.
-- Interacciones verificadas: hamburger nav abre/cierra; swipe en `espacios.html` cambia a la lámina 02.
-- Nota: en esta sesión Codex no expuso el visor local interno; el sitio sí abrió en navegador local externo.
+## Archivos modificados
 
-## Archivos principales modificados
-
-- `sitio/responsive.css`
-- `sitio/mobile-nav.js`
 - `sitio/index.html`
-- `sitio/espacios.html`
-- `sitio/experiencias.html`
-- `sitio/faq.html`
-- `sitio/nosotros.html`
-- `.agents/skills/impeccable/scripts/load-context.mjs`
-- `SESSION.md`
+- `sitio/responsive.css`
+- `sitio/espacios.html`, `experiencias.html`, `nosotros.html`, `faq.html`, `cotizar.html` (footer partial)
+- `sitio/partials/footer.html` (nuevo)
+- `sitio/partials/footer.css` (nuevo)
+- `sitio/partials/footer.js` (nuevo)
 
-## Decisiones
+## Próximo paso
 
-- Mantener la adaptación como capa CSS/JS compartida para no reescribir prototipos antes de migrar a Next.js.
-- En móvil, los carruseles existentes conservan scroll horizontal interno, pero sin generar scroll horizontal de página.
-- La galería de espacios usa swipe horizontal; el scroll vertical de página queda libre.
-- `SESSION.md` puede divergir por rama; el `SESSION.md` oficial debería quedar en `master` después del merge.
-
-## Próximo paso recomendado
-
-1. Abrir `codex/responsive-site-adapt` y revisar visualmente el sitio responsive.
-2. Si está aprobado, hacer merge de `codex/responsive-site-adapt` hacia `master`.
-3. Revisar/ajustar `SESSION.md` ya en `master` como estado oficial.
-4. Commit de cierre en `master` si se ajusta `SESSION.md`.
-5. Eliminar `codex/responsive-site-adapt` después del merge.
+1. Abrir nueva sesión para revisar mobile de `experiencias.html`.
+2. Continuar con `espacios.html`, `nosotros.html`, `faq.html`, `cotizar.html`.
+3. Al terminar todas las páginas → merge `codex/responsive-site-adapt` → `master`.

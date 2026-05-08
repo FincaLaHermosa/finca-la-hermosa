@@ -46,6 +46,127 @@
 @media (max-width: 760px) {
   html { font-size: 16px; }
 
+  /* Padding lateral mobile: sobreescribe inline styles del HTML */
+  [style*="padding:0 52px"],
+  [style*="padding:0 80px"] {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  /* Títulos con space-between: apila verticalmente en mobile */
+  .snap-section[data-sec="espacios"] [style*="justify-content:space-between"],
+  .snap-section[data-sec="proceso"] [style*="justify-content:space-between"],
+  .snap-section[data-sec="experiencias"] [style*="justify-content:space-between"],
+  .snap-section[data-sec="paquetes"] [style*="justify-content:space-between"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  /* Testimonios: menos espacio entre cita y autor */
+  .postit {
+    gap: 10px !important;
+    padding: 20px 16px 16px !important;
+  }
+
+  /* Testimonios: reduce espaciado exterior */
+  .snap-section[data-sec="testimonios"] [style*="margin-bottom:32px"] {
+    margin-bottom: 0 !important;
+  }
+  .snap-section[data-sec="testimonios"] {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+
+  /* Testimonios: copy más pequeño en mobile */
+  .postit-q {
+    font-size: 0.95rem !important;
+  }
+  .postit-author strong {
+    font-size: 0.68rem !important;
+  }
+  .postit-author span {
+    font-size: 0.58rem !important;
+  }
+
+  /* Testimonios: 2 filas con scroll horizontal, borde a borde */
+  .snap-section[data-sec="testimonios"] [style*="grid-template-columns:repeat(4"] {
+    grid-template-rows: 1fr 1fr !important;
+    grid-template-columns: unset !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: 52vw !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    scrollbar-width: none !important;
+    gap: 12px !important;
+    padding: 40px 20px !important;
+    margin-left: -20px !important;
+    margin-right: -20px !important;
+    width: calc(100% + 40px) !important;
+  }
+
+  /* Proceso: copy derecho → izquierda en mobile */
+  .snap-section[data-sec="proceso"] { padding-bottom: 32px !important; }
+
+  .snap-section[data-sec="proceso"] [style*="text-align:right"] {
+    text-align: left !important;
+    max-width: 100% !important;
+  }
+
+  /* Cotizador: colapsa grid a una columna */
+  .snap-section[data-sec="cotizador"] [style*="grid-template-columns:1fr 1fr"][style*="gap:80px"] {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* Cotizador: título no se desborda */
+  .snap-section[data-sec="cotizador"] [style*="font-family:'Against'"] {
+    font-size: clamp(2.5rem, 9vw, 3.2rem) !important;
+  }
+
+  /* CTA: colapsa outer grid, preserva inner 2-col (Agendar+WhatsApp), oculta copys */
+  .snap-section[data-sec="cta"] .cta-outer {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .snap-section[data-sec="cta"] .cta-small-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 14px !important;
+  }
+  .snap-section[data-sec="cta"] .cta-card-sub {
+    display: none !important;
+  }
+
+  /* CTA: "Tu momento perfecto" más chico */
+  .snap-section[data-sec="cta"] #illum-text {
+    font-size: clamp(2.5rem, 9vw, 3.2rem) !important;
+  }
+
+
+  /* Cotizador: botones quiz en 2 columnas con gap reducido */
+  #q-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+
+  /* Cotizador: acerca solo "en 3 minutos" al título */
+  .snap-section[data-sec="cotizador"] [style*="flex-direction:column"][style*="gap:20px"] > [style*="Cormorant Garamond"] {
+    margin-top: -12px !important;
+  }
+
+
+  /* Carrusel espacios: sin padding para llegar a los bordes */
+  #s3-carousel {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Cards más angostas en mobile para mostrar peek de la siguiente */
+  #s3-carousel > div {
+    flex: 0 0 85vw !important;
+    width: 85vw !important;
+  }
+
   body {
     overflow-x: hidden;
   }
@@ -167,16 +288,32 @@
 
   .site-footer {
     padding: 56px 22px 30px !important;
+    text-align: left !important;
   }
 
   .footer-grid {
     grid-template-columns: 1fr !important;
     gap: 36px !important;
     margin-bottom: 38px !important;
+    justify-items: start !important;
+  }
+
+  .footer-brand {
+    align-items: flex-start !important;
+  }
+
+  .footer-brand img {
+    height: 56px !important;
+    width: auto !important;
   }
 
   .footer-brand p {
     max-width: none !important;
+  }
+
+  .footer-social-group,
+  .footer-contact-group {
+    text-align: left !important;
   }
 
   .footer-bottom {
@@ -197,13 +334,6 @@
     gap: 32px !important;
   }
 
-  div[style*="padding:0 80px"],
-  div[style*="padding:0 52px"],
-  section[style*="padding:0 80px"],
-  section[style*="padding:0 52px"] {
-    padding-left: 22px !important;
-    padding-right: 22px !important;
-  }
 }
 
 @media (max-width: 760px) {
@@ -692,10 +822,6 @@
     max-width: 148px;
   }
 
-  .snap-section {
-    padding-left: 22px !important;
-    padding-right: 22px !important;
-  }
 
   .hero-cotizar-content,
   .faq-inner,

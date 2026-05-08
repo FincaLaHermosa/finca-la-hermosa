@@ -153,6 +153,8 @@ body {
   transition: all 0.22s ease;
 }
 .btn-accent:hover { background: #a8664a; transform: scale(1.04); }
+.btn-wa { background: #25D366 !important; }
+.btn-wa:hover { background: #1ebe5d !important; }
 
 .btn-outline {
   font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 400;
@@ -203,6 +205,12 @@ body {
 }
 
 /* ── ANIMATIONS ──────────────────────────────────────────── */
+@keyframes arrow-pulse {
+  0%, 100% { transform: translateY(0);   opacity: 0.5; }
+  50%       { transform: translateY(7px); opacity: 1;   }
+}
+.scroll-arrow { animation: arrow-pulse 1.8s ease-in-out infinite; }
+
 @keyframes breathe {
   0%   { transform: scale(1.04); }
   100% { transform: scale(1.14); }
@@ -296,6 +304,9 @@ body {
 }
 .tab-btn:hover { border-color: var(--terracota); color: var(--terracota); }
 .tab-btn.active { background: var(--verde); color: var(--crema); border-color: var(--verde); }
+.tab-btn--special { background: transparent; color: var(--terracota); border-color: var(--terracota); }
+.tab-btn--special:hover { background: transparent; border-color: var(--terracota); color: var(--terracota); opacity: 0.75; }
+.tab-btn--special.active { background: var(--verde); border-color: var(--verde); color: var(--crema); opacity: 1; }
 
 .tab2-panel { display: none; }
 .tab2-panel.active { display: grid; grid-template-columns: 56fr 44fr; gap: 64px; align-items: center; }
@@ -455,28 +466,6 @@ body {
 .dot { width:7px; height:7px; border-radius:50%; background:var(--crema-border); border:none; padding:0; cursor:pointer; transition:all 0.22s; }
 .dot.active { background:var(--terracota); width:22px; border-radius:4px; }
 
-/* ── FOOTER ────────────────────────────────────── */
-.site-footer{background:var(--verde-dark);padding:88px 80px 40px;position:relative;z-index:5;}
-.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1.2fr;gap:72px;margin:0 auto 56px;max-width:1500px;align-items:start;}
-.footer-brand{display:flex;flex-direction:column;}
-.footer-brand img{height:38px;margin-bottom:22px;opacity:0.92;}
-.footer-brand p{font-family:'Jost',sans-serif;font-size:0.82rem;font-weight:300;color:rgba(255,253,248,0.5);line-height:1.78;max-width:300px;}
-.footer-head{font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,253,248,0.4);margin-bottom:24px;display:block;}
-.footer-social-group{display:flex;flex-direction:column;}
-.social-row{display:flex;gap:14px;}
-.social-circle{width:50px;height:50px;border-radius:50%;border:1px solid rgba(255,253,248,0.18);display:flex;align-items:center;justify-content:center;color:rgba(255,253,248,0.7);transition:background 0.32s var(--ease-out),border-color 0.32s var(--ease-out),color 0.32s var(--ease-out),transform 0.32s var(--ease-out);text-decoration:none;}
-.social-circle svg{width:19px;height:19px;transition:transform 0.32s var(--ease-out);}
-.social-circle:hover{background:var(--terracota);border-color:var(--terracota);color:#fffdf8;transform:translateY(-3px);}
-.social-circle:hover svg{transform:scale(1.08);}
-.footer-contact-group{display:flex;flex-direction:column;}
-.footer-contact-line{font-family:'Jost',sans-serif;font-size:0.84rem;font-weight:300;color:rgba(255,253,248,0.62);line-height:1.85;display:block;}
-.footer-contact-line a{color:inherit;text-decoration:none;transition:color 0.22s;border-bottom:1px solid transparent;padding-bottom:1px;}
-.footer-contact-line a:hover{color:var(--terra-light);border-bottom-color:rgba(232,196,173,0.4);}
-.footer-bottom{border-top:1px solid rgba(255,253,248,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;max-width:1500px;margin:0 auto;}
-.footer-copy{font-family:'Jost',sans-serif;font-size:0.68rem;font-weight:300;letter-spacing:0.04em;color:rgba(255,253,248,0.3);}
-.footer-copy a{color:inherit;text-decoration:none;transition:color 0.2s;}
-.footer-copy a:hover{color:rgba(255,253,248,0.65);}
-@media(max-width:900px){.site-footer{padding:64px 32px 32px;}.footer-grid{grid-template-columns:1fr;gap:48px;}.footer-bottom{flex-direction:column;gap:10px;align-items:flex-start;}}
 
 /* ── PHOTO UTIL ──────────────────────────────────────────── */
 .photo-cover {
@@ -491,6 +480,7 @@ body {
   .bg-breathe { animation-duration:30s; }
 }
 </style>
+<link rel="stylesheet" href="partials/footer.css">
 <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
@@ -541,14 +531,8 @@ body {
   <!-- Content -->
   <div style="position:relative;z-index:2;max-width:1500px;width:100%;margin:0 auto;padding:100px 52px 0;">
     <!-- Meta row -->
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:48px;">
-      <div class="sec-num txt-reveal">
-        <span style="font-size:0.58rem;color:rgba(255,253,248,0.35);letter-spacing:0.1em;">01 / 08</span>
-        <span style="color:rgba(255,253,248,0.35);">Bienvenidos</span>
-      </div>
-      <div class="txt-reveal" data-d="1" style="text-align:right;">
-        <div class="overline overline-light" style="justify-content:flex-end;">Estado de México · Isidro Fabela</div>
-      </div>
+    <div class="txt-reveal" data-d="1" style="margin-bottom:16px;">
+      <div class="overline overline-light">VENUE Y EXPERIENCIAS - MÉXICO</div>
     </div>
 
     <!-- Hero type -->
@@ -589,16 +573,16 @@ body {
     <!-- Header centrado -->
     <div class="txt-reveal" data-d="1" style="text-align:center;margin-bottom:16px;">
       <div class="overline overline-dark" style="justify-content:center;margin-bottom:10px;">Experiencias</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,5.5vw,5.4rem);font-weight:300;letter-spacing:-0.02em;color:var(--carbon);line-height:1.05;">¿Qué quieres celebrar?</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.4rem,6vw,5.2rem);font-weight:300;letter-spacing:-0.02em;color:var(--carbon);line-height:1.05;">¿Qué quieres celebrar?</div>
     </div>
 
     <!-- Tabs bar -->
     <div class="tabs-bar txt-reveal" data-d="2">
       <button class="tab-btn active" onclick="switchTab(0,this)">Eventos Sociales</button>
       <button class="tab-btn" onclick="switchTab(1,this)">Corporativos</button>
-      <button class="tab-btn" onclick="switchTab(2,this)">Retiros</button>
+      <button class="tab-btn" onclick="switchTab(2,this)">Retiros/Campamentos</button>
       <button class="tab-btn" onclick="switchTab(3,this)">Estancia Privada</button>
-      <button class="tab-btn" onclick="switchTab(4,this)">One Day</button>
+      <button class="tab-btn tab-btn--special" onclick="switchTab(4,this)">One Day Experience</button>
     </div>
 
     <!-- Tab panels -->
@@ -644,7 +628,7 @@ body {
         </div>
       </div>
 
-      <!-- Panel 2: Retiros -->
+      <!-- Panel 2: Retiros/Campamentos -->
       <div class="tab2-panel" data-panel="2">
         <div style="border-radius:12px;overflow:hidden;height:420px;position:relative;">
           <img src="assets/photo-jardines.jpg" alt="Retiros" style="width:100%;height:100%;object-fit:cover;">
@@ -716,13 +700,9 @@ body {
   <div style="max-width:1500px;width:100%;margin:0 auto;padding:0 52px;">
     <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;">
       <div>
-        <div class="sec-num txt-reveal" style="margin-bottom:12px;">
-          <span style="font-size:0.58rem;color:var(--muted);letter-spacing:0.1em;">03 / 08</span>
-          <span>Espacios</span>
-        </div>
         <div class="txt-reveal" data-d="1" style="line-height:1.0;">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,5.5vw,5.4rem);font-weight:300;letter-spacing:-0.02em;color:var(--carbon);">Un venue,</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,5.5vw,5.4rem);font-style:italic;font-weight:300;color:var(--terracota);">infinitas posibilidades</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.4rem,6vw,5.2rem);font-weight:300;letter-spacing:-0.02em;color:var(--carbon);">Un venue,</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,3.8rem);font-style:italic;font-weight:300;color:var(--terracota);">infinitas posibilidades</div>
         </div>
       </div>
       <div class="txt-reveal" data-d="2">
@@ -735,14 +715,14 @@ body {
   </div>
 
   <div style="position:relative;">
-    <button onclick="scrollCarousel(-1)" style="position:absolute;top:45%;left:60px;transform:translateY(-50%);z-index:5;width:42px;height:42px;border-radius:50%;background:rgba(255,253,248,0.9);border:1px solid var(--crema-border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--verde);box-shadow:0 2px 12px rgba(45,73,73,0.1);transition:all 0.22s;">
+    <button onclick="scrollCarousel(-1)" style="position:absolute;top:45%;left:10px;transform:translateY(-50%);z-index:5;width:42px;height:42px;border-radius:50%;background:rgba(255,253,248,0.9);border:1px solid var(--crema-border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--verde);box-shadow:0 2px 12px rgba(45,73,73,0.1);transition:all 0.22s;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
     </button>
 
-    <div id="s3-carousel" style="display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 80px 20px;scroll-padding-left:80px;">
+    <div id="s3-carousel" style="display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 0 20px;scroll-padding-left:0;">
 
       <!-- Jardines -->
-      <div style="flex:0 0 270px;scroll-snap-align:start;border-radius:8px;overflow:hidden;background:var(--crema);box-shadow:0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05);cursor:pointer;transition:transform 0.26s var(--ease-out),box-shadow 0.26s;" onmouseenter="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 40px rgba(45,73,73,0.14)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05)'">
+      <div style="flex:0 0 340px;scroll-snap-align:start;border-radius:8px;overflow:hidden;background:var(--crema);box-shadow:0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05);cursor:pointer;transition:transform 0.26s var(--ease-out),box-shadow 0.26s;" onmouseenter="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 40px rgba(45,73,73,0.14)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05)'">
         <div style="height:320px;overflow:hidden;position:relative;">
           <img src="assets/photo-jardines.jpg" alt="Jardines" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" onmouseenter="this.style.transform='scale(1.06)'" onmouseleave="this.style.transform='scale(1)'">
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(10,18,10,0.5) 100%);"></div>
@@ -752,7 +732,7 @@ body {
       </div>
 
       <!-- Alberca -->
-      <div style="flex:0 0 270px;scroll-snap-align:start;border-radius:8px;overflow:hidden;background:var(--crema);box-shadow:0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05);cursor:pointer;transition:transform 0.26s var(--ease-out),box-shadow 0.26s;" onmouseenter="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 40px rgba(45,73,73,0.14)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05)'">
+      <div style="flex:0 0 340px;scroll-snap-align:start;border-radius:8px;overflow:hidden;background:var(--crema);box-shadow:0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05);cursor:pointer;transition:transform 0.26s var(--ease-out),box-shadow 0.26s;" onmouseenter="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 40px rgba(45,73,73,0.14)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05)'">
         <div style="height:320px;overflow:hidden;position:relative;">
           <img src="assets/photo-alberca.jpg" alt="Alberca" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" onmouseenter="this.style.transform='scale(1.06)'" onmouseleave="this.style.transform='scale(1)'">
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(10,18,10,0.5) 100%);"></div>
@@ -762,7 +742,7 @@ body {
       </div>
 
       <!-- Salón de Eventos -->
-      <div style="flex:0 0 270px;scroll-snap-align:start;border-radius:8px;overflow:hidden;background:var(--crema);box-shadow:0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05);cursor:pointer;transition:transform 0.26s var(--ease-out),box-shadow 0.26s;" onmouseenter="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 40px rgba(45,73,73,0.14)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05)'">
+      <div style="flex:0 0 340px;scroll-snap-align:start;border-radius:8px;overflow:hidden;background:var(--crema);box-shadow:0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05);cursor:pointer;transition:transform 0.26s var(--ease-out),box-shadow 0.26s;" onmouseenter="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 40px rgba(45,73,73,0.14)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05)'">
         <div style="height:320px;overflow:hidden;position:relative;">
           <img src="assets/photo-salon.jpg" alt="Salón de eventos" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" onmouseenter="this.style.transform='scale(1.06)'" onmouseleave="this.style.transform='scale(1)'">
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(20,12,5,0.5) 100%);"></div>
@@ -772,7 +752,7 @@ body {
       </div>
 
       <!-- Terraza -->
-      <div style="flex:0 0 270px;scroll-snap-align:start;border-radius:8px;overflow:hidden;background:var(--crema);box-shadow:0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05);cursor:pointer;transition:transform 0.26s var(--ease-out),box-shadow 0.26s;" onmouseenter="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 40px rgba(45,73,73,0.14)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05)'">
+      <div style="flex:0 0 340px;scroll-snap-align:start;border-radius:8px;overflow:hidden;background:var(--crema);box-shadow:0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05);cursor:pointer;transition:transform 0.26s var(--ease-out),box-shadow 0.26s;" onmouseenter="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 40px rgba(45,73,73,0.14)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05)'">
         <div style="height:320px;overflow:hidden;position:relative;">
           <img src="assets/photo-terraza.jpg" alt="Terraza" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" onmouseenter="this.style.transform='scale(1.06)'" onmouseleave="this.style.transform='scale(1)'">
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(10,18,10,0.5) 100%);"></div>
@@ -782,7 +762,7 @@ body {
       </div>
 
       <!-- Rooftop -->
-      <div style="flex:0 0 270px;scroll-snap-align:start;border-radius:8px;overflow:hidden;background:var(--crema);box-shadow:0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05);cursor:pointer;transition:transform 0.26s var(--ease-out),box-shadow 0.26s;" onmouseenter="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 40px rgba(45,73,73,0.14)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05)'">
+      <div style="flex:0 0 340px;scroll-snap-align:start;border-radius:8px;overflow:hidden;background:var(--crema);box-shadow:0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05);cursor:pointer;transition:transform 0.26s var(--ease-out),box-shadow 0.26s;" onmouseenter="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 40px rgba(45,73,73,0.14)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05)'">
         <div style="height:320px;overflow:hidden;position:relative;background:linear-gradient(135deg,#1e2d1e 0%,#3a5028 20%,#607040 40%,#a09050 60%,#c8b060 75%,#3d4a2a 100%);">
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(10,18,10,0.5) 100%);"></div>
           <div style="position:absolute;bottom:14px;left:16px;font-family:'Jost',sans-serif;font-size:0.62rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,253,248,0.65);">Exterior · Noches especiales</div>
@@ -791,7 +771,7 @@ body {
       </div>
 
       <!-- Puente colgante -->
-      <div style="flex:0 0 270px;scroll-snap-align:start;border-radius:8px;overflow:hidden;background:var(--crema);box-shadow:0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05);cursor:pointer;transition:transform 0.26s var(--ease-out),box-shadow 0.26s;" onmouseenter="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 40px rgba(45,73,73,0.14)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05)'">
+      <div style="flex:0 0 340px;scroll-snap-align:start;border-radius:8px;overflow:hidden;background:var(--crema);box-shadow:0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05);cursor:pointer;transition:transform 0.26s var(--ease-out),box-shadow 0.26s;" onmouseenter="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 40px rgba(45,73,73,0.14)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05)'">
         <div style="height:320px;overflow:hidden;position:relative;background:linear-gradient(160deg,#2d4020 0%,#4a6a30 25%,#3a5525 50%,#6a8a40 70%,#2d4020 100%);">
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(10,18,10,0.5) 100%);"></div>
           <div style="position:absolute;bottom:14px;left:16px;font-family:'Jost',sans-serif;font-size:0.62rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,253,248,0.65);">Exterior · Aventura</div>
@@ -801,7 +781,7 @@ body {
 
     </div>
 
-    <button onclick="scrollCarousel(1)" style="position:absolute;top:45%;right:60px;transform:translateY(-50%);z-index:5;width:42px;height:42px;border-radius:50%;background:rgba(255,253,248,0.9);border:1px solid var(--crema-border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--verde);box-shadow:0 2px 12px rgba(45,73,73,0.1);transition:all 0.22s;">
+    <button onclick="scrollCarousel(1)" style="position:absolute;top:45%;right:10px;transform:translateY(-50%);z-index:5;width:42px;height:42px;border-radius:50%;background:rgba(255,253,248,0.9);border:1px solid var(--crema-border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--verde);box-shadow:0 2px 12px rgba(45,73,73,0.1);transition:all 0.22s;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </button>
   </div>
@@ -815,13 +795,9 @@ body {
   <div style="max-width:1500px;width:100%;margin:0 auto;padding:0 52px;">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:56px;">
       <div>
-        <div class="sec-num txt-reveal" style="margin-bottom:14px;">
-          <span style="font-size:0.58rem;color:var(--muted);letter-spacing:0.1em;">04 / 08</span>
-          <span>El Proceso</span>
-        </div>
         <div class="txt-reveal" data-d="1" style="line-height:1.0;">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,5.5vw,5.4rem);font-weight:300;letter-spacing:-0.02em;color:var(--carbon);">De la idea</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,5.5vw,5.4rem);font-style:italic;font-weight:300;color:var(--terracota);">a la celebración.</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.4rem,6vw,5.2rem);font-weight:300;letter-spacing:-0.02em;color:var(--carbon);">De la idea</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,3.8rem);font-style:italic;font-weight:300;color:var(--terracota);">a la celebración.</div>
         </div>
       </div>
       <p class="txt-reveal" data-d="2" style="font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;color:var(--muted);max-width:280px;text-align:right;margin-top:auto;line-height:1.7;">Sin complicaciones. En 3 pasos.<br>Tu evento, tu ritmo.</p>
@@ -859,8 +835,9 @@ body {
       </div>
     </div>
 
-    <div class="txt-reveal" data-d="4" style="margin-top:52px;display:flex;justify-content:center;">
-      <button class="btn-primary">Quiero cotizar ahora</button>
+    <div class="txt-reveal" data-d="4" style="margin-top:52px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+      <button class="btn-primary">Cotizar ahora</button>
+      <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:28px;height:28px;color:var(--verde-mid);opacity:0.7;"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </div>
   </div>
 </section>
@@ -876,10 +853,6 @@ body {
   <div style="position:relative;z-index:1;max-width:1500px;width:100%;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
     <!-- Left copy -->
     <div style="display:flex;flex-direction:column;gap:20px;">
-      <div class="sec-num txt-reveal" style="color:rgba(255,253,248,0.3);">
-        <span style="font-size:0.58rem;letter-spacing:0.1em;">05 / 08</span>
-        <span>Cotiza en línea</span>
-      </div>
       <div class="txt-reveal" data-d="1" style="font-family:'Against',serif;font-size:clamp(3rem,5vw,5.5rem);font-weight:400;line-height:0.92;letter-spacing:-0.025em;color:#fff;">Tu experiencia,</div>
       <div class="txt-reveal" data-d="2" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,4.2rem);font-style:italic;font-weight:300;line-height:1;color:var(--terracota);margin-top:2px;">en 3 minutos.</div>
       <p class="txt-reveal" data-d="3" style="font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;line-height:1.8;color:rgba(255,253,248,0.65);max-width:380px;">Recibe una cotización personalizada con el paquete que mejor se adapta a tu evento.</p>
@@ -939,13 +912,9 @@ body {
   <div style="max-width:1500px;width:100%;margin:0 auto;padding:0 52px;">
     <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;">
       <div>
-        <div class="sec-num txt-reveal" style="margin-bottom:12px;">
-          <span style="font-size:0.58rem;color:var(--muted);letter-spacing:0.1em;">06 / 08</span>
-          <span>Paquetes</span>
-        </div>
         <div class="txt-reveal" data-d="1" style="line-height:1.0;">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,5.5vw,5.4rem);font-weight:300;letter-spacing:-0.02em;color:var(--carbon);">Experiencias</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,5.5vw,5.4rem);font-style:italic;font-weight:300;color:var(--terracota);">para cada ocasión</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.4rem,6vw,5.2rem);font-weight:300;letter-spacing:-0.02em;color:var(--carbon);">Experiencias</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,3.8rem);font-style:italic;font-weight:300;color:var(--terracota);">para cada ocasión</div>
         </div>
       </div>
       <div class="txt-reveal" data-d="2" style="text-align:right;">
@@ -977,7 +946,7 @@ body {
             <li>Asador y estacionamiento</li>
             <li>Staff incluido</li>
           </ul>
-          <div class="pkg-btn-wrap"><button class="pkg-btn">Solicitar cotización</button></div>
+          <div class="pkg-btn-wrap"><button class="pkg-btn">Ver más</button></div>
         </div>
       </div>
 
@@ -998,7 +967,7 @@ body {
             <li>Cocineta y mobiliario</li>
             <li>Rooftop y terraza</li>
           </ul>
-          <div class="pkg-btn-wrap"><button class="pkg-btn">Solicitar cotización</button></div>
+          <div class="pkg-btn-wrap"><button class="pkg-btn">Ver más</button></div>
         </div>
       </div>
 
@@ -1019,7 +988,7 @@ body {
             <li>Coffee break incluido</li>
             <li>Equipo audiovisual</li>
           </ul>
-          <div class="pkg-btn-wrap"><button class="pkg-btn">Solicitar cotización</button></div>
+          <div class="pkg-btn-wrap"><button class="pkg-btn">Ver más</button></div>
         </div>
       </div>
 
@@ -1036,13 +1005,9 @@ body {
 
     <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;">
       <div>
-        <div class="sec-num txt-reveal" style="margin-bottom:10px;">
-          <span style="font-size:0.58rem;color:var(--muted);letter-spacing:0.1em;">07 / 08</span>
-          <span>Testimonios</span>
-        </div>
         <div class="txt-reveal" data-d="1" style="line-height:1.0;">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,5.5vw,5.4rem);font-weight:300;letter-spacing:-0.02em;color:var(--carbon);">Lo que dicen</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,5.5vw,5.4rem);font-style:italic;font-weight:300;color:var(--terracota);">quienes ya celebraron aquí.</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.4rem,6vw,5.2rem);font-weight:300;letter-spacing:-0.02em;color:var(--carbon);">Lo que dicen</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,3.8rem);font-style:italic;font-weight:300;color:var(--terracota);">quienes ya celebraron aquí.</div>
         </div>
       </div>
       <div class="overline overline-dark txt-reveal" data-d="2">+50 eventos realizados</div>
@@ -1118,14 +1083,10 @@ body {
   <!-- ARCH.MONO label -->
   <div class="arch-label" style="left:-40px;bottom:60px;color:rgba(255,253,248,0.03);">CELEBRA</div>
 
-  <div style="position:relative;z-index:1;max-width:1500px;width:100%;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+  <div class="cta-outer" style="position:relative;z-index:1;max-width:1500px;width:100%;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
 
     <!-- Left copy -->
     <div style="display:flex;flex-direction:column;gap:20px;">
-      <div class="sec-num txt-reveal" style="color:rgba(255,253,248,0.3);">
-        <span style="font-size:0.58rem;letter-spacing:0.1em;">08 / 08</span>
-        <span>Empieza a planear</span>
-      </div>
       <div class="txt-reveal" data-d="1">
         <div id="illum-text" style="font-family:'Against',serif;font-size:clamp(3.5rem,6vw,6.5rem);line-height:0.92;letter-spacing:-0.025em;"></div>
         <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,5rem);font-style:italic;font-weight:300;line-height:1;color:var(--terracota);margin-top:6px;" class="txt-reveal" data-d="2">comienza aquí.</div>
@@ -1141,7 +1102,7 @@ body {
         <p class="cta-card-sub">Cuéntanos sobre tu evento y recibe una propuesta personalizada en menos de 24 horas.</p>
         <button class="btn-accent" style="font-size:0.65rem;padding:10px 20px;">Cotizar ahora</button>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div class="cta-small-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
         <div class="cta-card">
           <svg class="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
           <div class="cta-card-title">Agendar visita</div>
@@ -1149,10 +1110,10 @@ body {
           <button class="btn-accent" style="font-size:0.65rem;padding:10px 20px;">Agendar</button>
         </div>
         <div class="cta-card">
-          <svg class="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          <svg class="cta-card-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
           <div class="cta-card-title">WhatsApp</div>
           <p class="cta-card-sub">Respuesta rápida y sin complicaciones.</p>
-          <button style="padding:10px 20px;background:#25D366;color:#fff;border:none;border-radius:999px;font-family:'Jost',sans-serif;font-size:0.65rem;font-weight:300;letter-spacing:0.09em;text-transform:uppercase;cursor:pointer;transition:opacity 0.22s;" onmouseenter="this.style.opacity='0.85'" onmouseleave="this.style.opacity='1'">Escribir</button>
+          <button class="btn-accent btn-wa" style="font-size:0.65rem;padding:10px 20px;">Escribir</button>
         </div>
       </div>
     </div>
@@ -1161,54 +1122,8 @@ body {
 </section>
 
 
-<!-- ────────────────────────────────────────────────────────
-  FOOTER
-──────────────────────────────────────────────────────── -->
 <section data-sec="footer" style="background:var(--verde-dark);">
-<footer class="site-footer">
-  <div class="footer-grid">
-
-    <div class="footer-brand">
-      <img src="assets/logo-blanco.svg" alt="Finca La Hermosa">
-      <p>Una finca familiar convertida en destino de experiencias. Naturaleza, hospitalidad y celebración.</p>
-    </div>
-
-    <div class="footer-social-group">
-      <span class="footer-head">Síguenos</span>
-      <div class="social-row">
-        <a href="https://instagram.com/" class="social-circle" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="3" width="18" height="18" rx="5"/>
-            <circle cx="12" cy="12" r="4"/>
-            <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/>
-          </svg>
-        </a>
-        <a href="https://facebook.com/" class="social-circle" target="_blank" rel="noopener" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M14 9h3.2l.4-3.6h-3.6V3.6c0-1 .3-1.7 1.8-1.7H17.8V-.4C17.4-.4 16-.6 14.6-.6c-3 0-5 1.8-5 5.2v3.4H6.4V12h3.2v9.6h4V12z" transform="translate(0 1)"/>
-          </svg>
-        </a>
-        <a href="https://wa.me/5215500000000" class="social-circle" target="_blank" rel="noopener" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="footer-contact-group">
-      <span class="footer-head">Contacto</span>
-      <span class="footer-contact-line"><a href="mailto:hola@fincalahermosa.com">hola@fincalahermosa.com</a></span>
-      <span class="footer-contact-line"><a href="tel:+5215500000000">+52 (55) 0000-0000</a></span>
-      <span class="footer-contact-line">Isidro Fabela, Estado de México</span>
-    </div>
-
-  </div>
-  <div class="footer-bottom">
-    <p class="footer-copy">© 2026 Finca La Hermosa</p>
-    <p class="footer-copy"><a href="#">Privacidad</a> · <a href="#">Términos</a></p>
-  </div>
-</footer>
+  <div id="footer-partial"></div>
 </section>
 
 </div><!-- /scroll-wrap -->
@@ -1338,11 +1253,11 @@ if (procFill) {
     if (entries[0].isIntersecting && !procFired) {
       procFired = true;
       setTimeout(() => {
-        procFill.style.transition = 'width 5s linear';
+        procFill.style.transition = 'width 2s linear';
         procFill.style.width = '100%';
         setTimeout(() => document.getElementById('proc-dot-1').classList.add('active'), 100);
-        setTimeout(() => document.getElementById('proc-dot-2').classList.add('active'), 2600);
-        setTimeout(() => document.getElementById('proc-dot-3').classList.add('active'), 5100);
+        setTimeout(() => document.getElementById('proc-dot-2').classList.add('active'), 1100);
+        setTimeout(() => document.getElementById('proc-dot-3').classList.add('active'), 2100);
       }, 600);
     }
   }, { threshold: 0.5 }).observe(tl);
@@ -1350,5 +1265,42 @@ if (procFill) {
 </script>
 
 <script src="mobile-nav.js"></script>
+<script src="partials/footer.js"></script>
+
+<script>
+/* ── TESTIMONIOS AUTO-SCROLL (mobile only) ─────────────────── */
+if (window.innerWidth <= 760) {
+  const testiGrid = document.querySelector('[data-sec="testimonios"] [style*="grid-template-columns:repeat(4"]');
+  if (testiGrid) {
+    let scrolling = false;
+    let paused = false;
+    let animId;
+
+    function autoScroll() {
+      if (!paused) {
+        testiGrid.scrollLeft += 0.4;
+        if (testiGrid.scrollLeft + testiGrid.clientWidth >= testiGrid.scrollWidth - 2) {
+          testiGrid.scrollLeft = 0;
+        }
+      }
+      animId = requestAnimationFrame(autoScroll);
+    }
+
+    testiGrid.addEventListener('touchstart', () => { paused = true; });
+    testiGrid.addEventListener('touchend', () => { setTimeout(() => { paused = false; }, 2500); });
+    testiGrid.addEventListener('click', () => { paused = true; });
+
+    new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !scrolling) {
+        scrolling = true;
+        autoScroll();
+      } else if (!entries[0].isIntersecting) {
+        cancelAnimationFrame(animId);
+        scrolling = false;
+      }
+    }, { threshold: 0.3 }).observe(testiGrid);
+  }
+}
+</script>
 </body>
 </html>
