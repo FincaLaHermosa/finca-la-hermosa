@@ -463,7 +463,7 @@ body {
             <li>Anfitrión + coordinadora de atención</li>
           </ul>
           <div class="pkg-btn-wrap">
-            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Cotizar este paquete</button>
+            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Día y celebración</button>
           </div>
         </div>
       </div>
@@ -489,7 +489,7 @@ body {
             <li>Staff respetuoso de tu espacio</li>
           </ul>
           <div class="pkg-btn-wrap">
-            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Cotizar este paquete</button>
+            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Reconectar en calma</button>
           </div>
         </div>
       </div>
@@ -515,7 +515,7 @@ body {
             <li>Coordinadora para logística del día</li>
           </ul>
           <div class="pkg-btn-wrap">
-            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Cotizar este paquete</button>
+            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Crear en equipo</button>
           </div>
         </div>
       </div>
@@ -542,7 +542,7 @@ body {
             <li>Staff ampliado: anfitrión + 2 asistentes</li>
           </ul>
           <div class="pkg-btn-wrap">
-            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Cotizar este paquete</button>
+            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Celebrar y conectar</button>
           </div>
         </div>
       </div>
@@ -568,7 +568,7 @@ body {
             <li>Staff disponible sin interrumpir</li>
           </ul>
           <div class="pkg-btn-wrap">
-            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Cotizar este paquete</button>
+            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Escapar en familia</button>
           </div>
         </div>
       </div>
@@ -594,7 +594,7 @@ body {
             <li>Prioridad en fechas y check-in anticipado</li>
           </ul>
           <div class="pkg-btn-wrap">
-            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Cotizar este paquete</button>
+            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Experiencia total</button>
           </div>
         </div>
       </div>
@@ -819,6 +819,11 @@ function filterPkgs(type, btn) {
   });
 
   document.getElementById('pkg-empty').style.display = visible === 0 ? 'block' : 'none';
+
+  const grid = document.getElementById('pkg-grid');
+  if (grid && window.matchMedia('(max-width: 760px)').matches) {
+    grid.scrollTo({ left: 0, behavior: 'smooth' });
+  }
 }
 </script>
 

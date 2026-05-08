@@ -947,10 +947,33 @@
     font-size: 0.68rem !important;
   }
 
-  #pkg-grid,
   .exp-addons-grid {
     grid-template-columns: 1fr !important;
     gap: 18px !important;
+  }
+
+  #pkg-grid {
+    display: flex !important;
+    grid-template-columns: none !important;
+    gap: 14px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 22px;
+    margin-left: -22px;
+    margin-right: -22px;
+    padding: 0 22px 14px !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  #pkg-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  #pkg-grid .pkg-card {
+    flex: 0 0 min(82vw, 340px);
+    scroll-snap-align: start;
   }
 
   .pkg-card {
