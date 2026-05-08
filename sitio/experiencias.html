@@ -431,8 +431,7 @@ body {
 
     <!-- Filter tabs -->
     <div class="tabs-bar txt-reveal" data-d="2" style="margin-bottom:40px;">
-      <button class="tab-btn active" onclick="filterPkgs('todos',this)">Todos</button>
-      <button class="tab-btn" onclick="filterPkgs('social',this)">Eventos Sociales</button>
+      <button class="tab-btn active" onclick="filterPkgs('social',this)">Eventos Sociales</button>
       <button class="tab-btn" onclick="filterPkgs('corporativo',this)">Corporativos</button>
       <button class="tab-btn" onclick="filterPkgs('retiro',this)">Retiros</button>
       <button class="tab-btn" onclick="filterPkgs('privado',this)">Estancia Privada</button>
@@ -463,7 +462,7 @@ body {
             <li>Anfitrión + coordinadora de atención</li>
           </ul>
           <div class="pkg-btn-wrap">
-            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Día y celebración</button>
+            <button class="pkg-btn" onclick="askPackage('Esencial')">Preguntar evento</button>
           </div>
         </div>
       </div>
@@ -489,7 +488,7 @@ body {
             <li>Staff respetuoso de tu espacio</li>
           </ul>
           <div class="pkg-btn-wrap">
-            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Reconectar en calma</button>
+            <button class="pkg-btn" onclick="askPackage('Retiro Bosque')">Preguntar retiro</button>
           </div>
         </div>
       </div>
@@ -515,7 +514,7 @@ body {
             <li>Coordinadora para logística del día</li>
           </ul>
           <div class="pkg-btn-wrap">
-            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Crear en equipo</button>
+            <button class="pkg-btn" onclick="askPackage('Corporativo Creativo')">Pedir detalles</button>
           </div>
         </div>
       </div>
@@ -542,7 +541,7 @@ body {
             <li>Staff ampliado: anfitrión + 2 asistentes</li>
           </ul>
           <div class="pkg-btn-wrap">
-            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Celebrar y conectar</button>
+            <button class="pkg-btn" onclick="askPackage('Completo con Salón')">Preguntar evento</button>
           </div>
         </div>
       </div>
@@ -568,7 +567,7 @@ body {
             <li>Staff disponible sin interrumpir</li>
           </ul>
           <div class="pkg-btn-wrap">
-            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Escapar en familia</button>
+            <button class="pkg-btn" onclick="askPackage('Estancia Privada')">Preguntar estancia</button>
           </div>
         </div>
       </div>
@@ -594,7 +593,7 @@ body {
             <li>Prioridad en fechas y check-in anticipado</li>
           </ul>
           <div class="pkg-btn-wrap">
-            <button class="pkg-btn" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Experiencia total</button>
+            <button class="pkg-btn" onclick="askPackage('Premium All-In')">Pedir propuesta</button>
           </div>
         </div>
       </div>
@@ -633,7 +632,7 @@ body {
       <div>
         <div class="overline overline-dark txt-reveal" style="margin-bottom:14px;">Personaliza tu experiencia</div>
         <div class="txt-reveal" data-d="1" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,3.8vw,3.5rem);font-weight:300;color:var(--carbon);line-height:1.1;letter-spacing:-0.02em;">
-          Haz cada detalle,<br><em style="color:var(--terracota);font-style:italic;">exactamente tuyo.</em>
+          Cada detalle,<br><em style="color:var(--terracota);font-style:italic;">solamente tuyo.</em>
         </div>
       </div>
       <div class="txt-reveal" data-d="2">
@@ -707,22 +706,24 @@ body {
 
   <!-- BG foto -->
   <div style="position:absolute;inset:0;z-index:0;">
-    <img src="assets/photo-cta-dark.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.18;">
-    <div style="position:absolute;inset:0;background:linear-gradient(160deg,#1e3232 0%,#2d4949 30%,#1a2a1a 65%,#0e1e1e 100%);opacity:0.88;"></div>
+    <img src="assets/photo-cta-dark.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.22;">
+    <div style="position:absolute;inset:0;background:linear-gradient(160deg,#1e3232 0%,#2d4949 28%,#1a2a1a 60%,#0e1e1e 100%);opacity:0.85;"></div>
   </div>
   <!-- Warm glow -->
-  <div style="position:absolute;bottom:15%;left:45%;width:500px;height:280px;background:radial-gradient(ellipse,rgba(240,160,60,0.08) 0%,transparent 70%);border-radius:50%;z-index:0;pointer-events:none;"></div>
+  <div style="position:absolute;bottom:20%;left:50%;transform:translateX(-50%);width:400px;height:250px;background:radial-gradient(ellipse,rgba(240,160,60,0.1) 0%,transparent 70%);border-radius:50%;z-index:0;pointer-events:none;"></div>
+  <!-- ARCH.MONO label -->
+  <div class="arch-label" style="left:-40px;bottom:60px;color:rgba(255,253,248,0.03);">CELEBRA</div>
 
-  <div class="exp-cta-inner" style="position:relative;z-index:1;max-width:1500px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+  <div class="cta-outer exp-cta-inner" style="position:relative;z-index:1;max-width:1500px;width:100%;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
 
     <!-- Left copy -->
     <div style="display:flex;flex-direction:column;gap:20px;">
       <div class="overline overline-light txt-reveal">Empieza a planear</div>
-      <div class="txt-reveal" data-d="1">
-        <div style="font-family:'Against',serif;font-size:clamp(3.2rem,5.5vw,6rem);line-height:0.92;letter-spacing:-0.025em;color:#fffdf8;">Tu experiencia,</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,4.5vw,5rem);font-style:italic;font-weight:300;line-height:1;color:var(--terracota);margin-top:6px;">empieza aquí.</div>
+      <div>
+        <div style="font-family:'Against',serif;font-size:clamp(3.5rem,6vw,6.5rem);line-height:0.92;letter-spacing:-0.025em;color:#fffdf8;">Tu experiencia,</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,5rem);font-style:italic;font-weight:300;line-height:1;color:var(--terracota);margin-top:6px;">empieza aquí.</div>
       </div>
-      <p class="txt-reveal" data-d="2" style="font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;line-height:1.85;color:rgba(255,253,248,0.62);max-width:360px;">
+      <p class="txt-reveal" data-d="2" style="font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;line-height:1.8;color:rgba(255,253,248,0.62);max-width:380px;">
         Cuéntanos sobre tu evento, elige tu paquete y recibe una propuesta personalizada en menos de 24 horas.
       </p>
       <div class="txt-reveal exp-cta-proof" data-d="3" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
@@ -749,7 +750,7 @@ body {
         <p class="cta-card-sub">Cuéntanos sobre tu evento y recibe una propuesta con PDF personalizado.</p>
         <button class="btn-accent" style="font-size:0.65rem;padding:10px 20px;">Cotizar ahora</button>
       </div>
-      <div class="exp-cta-card-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div class="cta-small-grid exp-cta-card-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
         <div class="cta-card">
           <svg class="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           <div class="cta-card-title">Agendar visita</div>
@@ -803,6 +804,11 @@ setTimeout(() => {
 }, 180);
 
 /* ── FILTER PAQUETES ─────────────────────────────────────── */
+function askPackage(packageName) {
+  const message = `Hola, quiero más información sobre el paquete ${packageName} de Finca La Hermosa.`;
+  window.open(`https://wa.me/5215500000000?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+}
+
 function filterPkgs(type, btn) {
   /* Update active tab */
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -813,7 +819,7 @@ function filterPkgs(type, btn) {
 
   cards.forEach(card => {
     const types = card.dataset.type || '';
-    const show = type === 'todos' || types.split(' ').includes(type);
+    const show = types.split(' ').includes(type);
     card.classList.toggle('hidden', !show);
     if (show) visible++;
   });
@@ -825,6 +831,11 @@ function filterPkgs(type, btn) {
     grid.scrollTo({ left: 0, behavior: 'smooth' });
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const activeTab = document.querySelector('.tabs-bar .tab-btn.active');
+  if (activeTab) filterPkgs('social', activeTab);
+});
 </script>
 
 <script src="mobile-nav.js"></script>

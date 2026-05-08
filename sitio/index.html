@@ -926,7 +926,7 @@ body {
       </div>
     </div>
 
-    <div class="txt-reveal" data-d="2" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+    <div class="txt-reveal pkg-featured-grid" data-d="2" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
 
       <!-- Esencial -->
       <div class="pkg-card">
@@ -1087,9 +1087,9 @@ body {
 
     <!-- Left copy -->
     <div style="display:flex;flex-direction:column;gap:20px;">
-      <div class="txt-reveal" data-d="1">
-        <div id="illum-text" style="font-family:'Against',serif;font-size:clamp(3.5rem,6vw,6.5rem);line-height:0.92;letter-spacing:-0.025em;"></div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,5rem);font-style:italic;font-weight:300;line-height:1;color:var(--terracota);margin-top:6px;" class="txt-reveal" data-d="2">comienza aquí.</div>
+      <div>
+        <div id="illum-text" style="font-family:'Against',serif;font-size:clamp(3.5rem,6vw,6.5rem);line-height:0.92;letter-spacing:-0.025em;color:#fffdf8;">Tu momento perfecto,</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,5rem);font-style:italic;font-weight:300;line-height:1;color:var(--terracota);margin-top:6px;">comienza aquí.</div>
       </div>
       <p class="txt-reveal" data-d="3" style="font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;line-height:1.8;color:rgba(255,253,248,0.62);max-width:380px;">Agenda una visita, resuelve tus dudas o recibe tu cotización ahora mismo.</p>
     </div>
@@ -1146,7 +1146,6 @@ const revealObs = new IntersectionObserver((entries) => {
       entry.target.querySelectorAll('.img-reveal').forEach(el => {
         setTimeout(() => el.classList.add('in'), 100);
       });
-      if (entry.target.dataset.sec === 'cta') setTimeout(startIllum, 400);
     }
   });
 }, { threshold: 0.3 });
@@ -1161,33 +1160,6 @@ setTimeout(() => {
     hero.querySelectorAll('.img-reveal').forEach(el => el.classList.add('in'));
   }
 }, 200);
-
-/* ── TEXT ILLUMINATION S8 ────────────────────────────────── */
-const illumPhrase = 'Tu momento perfecto,';
-let illumDone = false;
-
-function buildIllumText() {
-  const container = document.getElementById('illum-text');
-  if (!container) return;
-  container.innerHTML = illumPhrase.split(' ').map((word, i) =>
-    '<span class="illum-word" data-wi="' + i + '">' + word + '&nbsp;</span>'
-  ).join('');
-}
-
-function startIllum() {
-  illumDone = false;
-  buildIllumText();
-  document.querySelectorAll('.illum-word').forEach((w, i) => {
-    setTimeout(() => w.classList.add('lit'), i * 180 + 200);
-  });
-}
-
-const ctaSec = document.querySelector('[data-sec="cta"]');
-if (ctaSec) {
-  new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) startIllum();
-  }, { threshold: 0.4 }).observe(ctaSec);
-}
 
 /* ── S2 TABS ─────────────────────────────────────────────── */
 function switchTab(idx, btn) {
