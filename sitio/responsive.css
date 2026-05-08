@@ -815,6 +815,249 @@
   textarea {
     font-size: 16px !important;
   }
+
+  .exp-hero {
+    min-height: auto !important;
+    padding-top: 86px !important;
+    align-items: flex-start !important;
+  }
+
+  .experiencias-page .txt-reveal,
+  .experiencias-page .img-reveal,
+  .experiencias-page .img-reveal .img-bg {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .experiencias-page .img-reveal .reveal-cover {
+    display: none !important;
+  }
+
+  .exp-hero-media {
+    inset: 0 !important;
+    width: 100% !important;
+  }
+
+  .exp-hero-media img {
+    object-position: 58% 30% !important;
+  }
+
+  .exp-hero-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(to bottom, rgba(30, 50, 50, 0.26) 0%, rgba(30, 50, 50, 0.68) 52%, var(--verde-dark) 100%),
+      linear-gradient(to right, rgba(30, 50, 50, 0.76), rgba(30, 50, 50, 0.18));
+    pointer-events: none;
+  }
+
+  .exp-hero-inner {
+    padding: 30px 22px 42px !important;
+  }
+
+  .exp-hero-copy {
+    max-width: 100% !important;
+  }
+
+  .exp-hero-copy [style*="font-family:'Against'"] {
+    font-size: clamp(2.1rem, 10.7vw, 2.72rem) !important;
+    line-height: 0.94 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .exp-hero-copy [style*="font-family:'Cormorant Garamond'"] {
+    font-size: clamp(2.35rem, 10.5vw, 3rem) !important;
+    line-height: 0.96 !important;
+  }
+
+  .exp-hero-copy p {
+    max-width: 32rem !important;
+    font-size: 0.98rem !important;
+    line-height: 1.7 !important;
+    color: rgba(255, 253, 248, 0.78) !important;
+  }
+
+  .exp-hero-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    margin-top: 28px !important;
+  }
+
+  .exp-hero-actions .btn-accent,
+  .exp-hero-actions .btn-ghost {
+    width: 100%;
+  }
+
+  .exp-social-proof {
+    align-items: flex-start !important;
+    margin-top: 28px !important;
+    padding-top: 22px !important;
+  }
+
+  .exp-catalog,
+  .exp-addons,
+  .exp-cta {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
+
+  .exp-container,
+  .exp-cta-inner {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+  }
+
+  .exp-section-header,
+  .exp-addons-header,
+  .exp-cta-inner {
+    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 22px !important;
+    margin-bottom: 34px !important;
+  }
+
+  .exp-section-header p,
+  .exp-addons-header p {
+    max-width: none !important;
+    text-align: left !important;
+  }
+
+  .exp-section-header [style*="font-family:'Cormorant Garamond'"],
+  .exp-addons-header [style*="font-family:'Cormorant Garamond'"] {
+    font-size: clamp(2.25rem, 11vw, 3rem) !important;
+    line-height: 1.04 !important;
+  }
+
+  .tabs-bar {
+    margin-bottom: 28px !important;
+    scrollbar-width: none;
+  }
+
+  .tabs-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-btn {
+    min-height: 42px;
+    padding: 9px 16px !important;
+    font-size: 0.68rem !important;
+  }
+
+  #pkg-grid,
+  .exp-addons-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  .pkg-card {
+    border-radius: 10px !important;
+  }
+
+  .pkg-img-wrap {
+    height: 190px !important;
+  }
+
+  .pkg-body {
+    padding: 21px 20px 22px !important;
+    gap: 6px !important;
+  }
+
+  .pkg-title {
+    font-size: 1.58rem !important;
+    overflow-wrap: normal !important;
+  }
+
+  .pkg-features {
+    gap: 6px !important;
+  }
+
+  .pkg-features li {
+    font-size: 0.84rem !important;
+    line-height: 1.42 !important;
+  }
+
+  .pkg-btn {
+    min-height: 44px;
+  }
+
+  .exp-pricing-note {
+    margin-top: 30px !important;
+    padding: 18px 16px !important;
+    gap: 12px !important;
+  }
+
+  .addon-card {
+    padding: 22px 20px !important;
+    border-radius: 10px !important;
+    gap: 10px !important;
+  }
+
+  .addon-icon {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .addon-name {
+    font-size: 1.28rem !important;
+  }
+
+  .addon-desc {
+    font-size: 0.86rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .exp-addon-note {
+    margin-top: 34px !important;
+    text-align: left !important;
+  }
+
+  .exp-addon-note .btn-primary {
+    width: 100%;
+  }
+
+  .exp-cta-inner {
+    gap: 34px !important;
+  }
+
+  .exp-cta-inner [style*="font-family:'Against'"] {
+    font-size: clamp(2.05rem, 10.5vw, 2.6rem) !important;
+    line-height: 0.95 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .exp-cta-inner [style*="font-family:'Cormorant Garamond'"] {
+    font-size: clamp(2.35rem, 11vw, 3.35rem) !important;
+    line-height: 0.98 !important;
+  }
+
+  .exp-cta-proof {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+
+  .exp-cta-card-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+
+  .exp-cta-card-grid .cta-card {
+    padding: 18px 14px !important;
+  }
+
+  .exp-cta-card-grid .cta-card-sub {
+    display: none !important;
+  }
+
+  .cta-card button {
+    width: 100%;
+    min-height: 42px;
+    white-space: normal;
+  }
 }
 
 @media (max-width: 520px) {

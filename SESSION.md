@@ -1,49 +1,39 @@
-# SESSION — 2026-05-07 (sesión 2)
+# SESSION — 2026-05-07 (sesión 3)
 
 ## Objetivo actual
 
-Continuar adaptación responsive página por página. Esta sesión: `index.html` completado. Próxima sesión: `experiencias.html`.
+Continuar adaptación responsive página por página. Esta sesión: `experiencias.html` mobile completado con `$impeccable adapt`.
 
 ## Estatus
 
-Rama activa: `codex/responsive-site-adapt`. `index.html` mobile revisado y ajustado. Footer extraído a partial compartido.
+Rama activa: `codex/responsive-site-adapt`. `experiencias.html` mobile revisado y ajustado. Quedan pendientes las páginas `espacios.html`, `nosotros.html`, `faq.html` y `cotizar.html`.
 
-## Qué se hizo (esta sesión)
+## Qué se hizo
 
-**CTA section:**
-- Corregido layout mobile: outer grid colapsa a 1 col (`cta-outer`), inner grid Agendar+WhatsApp se preserva en 2 col (`cta-small-grid`).
-- Causa raíz: regla global `div[style*="grid-template-columns"]` colapsaba todo — solución con clases explícitas.
-- Botones unificados con `btn-accent`; WhatsApp conserva verde con clase `btn-wa`.
-- Icono WhatsApp reemplazado por logo real SVG.
+**Experiencias mobile:**
+- Se agregaron clases semánticas en `sitio/experiencias.html` para controlar hero, catálogo, add-ons y CTA sin depender solo de selectores por estilos inline.
+- Hero mobile convertido a imagen full-bleed con overlay oscuro, texto visible en el primer viewport y CTAs a ancho completo.
+- Ajustada escala tipográfica para evitar recortes en 390px y 320px.
+- Catálogo adaptado a una columna, tabs táctiles con scroll horizontal y tarjetas de paquete compactas.
+- Add-ons adaptados a una columna con cards más legibles y botón final a ancho completo.
+- CTA final ajustado para mobile, con prueba social en vertical y títulos sin desbordar.
+- En mobile de `experiencias`, los elementos `.txt-reveal` quedan visibles por defecto para evitar pantallas en blanco por IntersectionObserver y mejorar rendimiento.
 
-**Footer:**
-- Extraído a `sitio/partials/footer.html` (fuente única).
-- CSS del footer extraído a `sitio/partials/footer.css`.
-- Loader: `sitio/partials/footer.js` (fetch + inject).
-- Las 6 páginas ahora cargan el footer vía JS — sin duplicación.
-- Footer alineado a izquierda en mobile (`align-items: flex-start` en `.footer-brand`).
-- Logo más grande en mobile (56px).
-- Link a Google Maps en dirección (placeholder — reemplazar con URL exacta).
+## Verificación
 
-**Sección proceso:**
-- Botón "Quiero cotizar ahora" → "Cotizar ahora".
-- Flecha scroll-down con animación `arrow-pulse` (1.8s, translateY + opacity).
-- Gap botón↔flecha: 12px. Padding inferior de sección: 32px.
-
-**Sección paquetes:**
-- Botones de tarjetas: "Solicitar cotización" → "Ver más".
+- Servidor local: `http://127.0.0.1:3333/experiencias.html`.
+- Playwright CLI verificó capturas en `390x844` y `320x844`.
+- Resultado visual: sin recorte en hero, tabs, cards, add-ons ni CTA final en 320px.
+- Capturas temporales generadas en `output/` no deben commitearse.
 
 ## Archivos modificados
 
-- `sitio/index.html`
+- `sitio/experiencias.html`
 - `sitio/responsive.css`
-- `sitio/espacios.html`, `experiencias.html`, `nosotros.html`, `faq.html`, `cotizar.html` (footer partial)
-- `sitio/partials/footer.html` (nuevo)
-- `sitio/partials/footer.css` (nuevo)
-- `sitio/partials/footer.js` (nuevo)
+- `SESSION.md`
 
 ## Próximo paso
 
-1. Abrir nueva sesión para revisar mobile de `experiencias.html`.
-2. Continuar con `espacios.html`, `nosotros.html`, `faq.html`, `cotizar.html`.
-3. Al terminar todas las páginas → merge `codex/responsive-site-adapt` → `master`.
+1. Revisar `espacios.html` mobile.
+2. Continuar con `nosotros.html`, `faq.html` y `cotizar.html`.
+3. Al terminar todas las páginas, mergear `codex/responsive-site-adapt` hacia `master`.

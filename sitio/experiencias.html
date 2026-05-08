@@ -318,7 +318,7 @@ body {
   <link rel="stylesheet" href="partials/footer.css">
   <link rel="stylesheet" href="responsive.css">
 </head>
-<body>
+<body class="experiencias-page">
 
 <!-- ══ NAV PILL ════════════════════════════════════════════ -->
 <nav id="site-nav">
@@ -348,10 +348,10 @@ body {
 <!-- ══════════════════════════════════════════════════════════
   S1 · HERO SPLIT
 ══════════════════════════════════════════════════════════ -->
-<section style="min-height:65vh;background:var(--verde-dark);display:flex;align-items:center;position:relative;overflow:hidden;padding-top:86px;">
+<section class="exp-hero" style="min-height:65vh;background:var(--verde-dark);display:flex;align-items:center;position:relative;overflow:hidden;padding-top:86px;">
 
   <!-- BG fotográfico lado derecho -->
-  <div class="img-reveal" style="position:absolute;right:0;top:0;bottom:0;width:52%;z-index:0;">
+  <div class="img-reveal exp-hero-media" style="position:absolute;right:0;top:0;bottom:0;width:52%;z-index:0;">
     <div class="reveal-cover"></div>
     <div class="img-bg" style="position:absolute;inset:0;">
       <img src="assets/hero-wedding.jpg" alt="Experiencias en Finca La Hermosa" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
@@ -366,8 +366,8 @@ body {
   <div class="arch-label" style="right:0;bottom:0;color:rgba(255,253,248,0.03);font-size:clamp(6rem,10vw,12rem);">EXPERIENCIAS</div>
 
   <!-- Content -->
-  <div style="position:relative;z-index:2;max-width:1500px;width:100%;margin:0 auto;padding:60px 52px 72px;">
-    <div style="max-width:560px;">
+  <div class="exp-hero-inner" style="position:relative;z-index:2;max-width:1500px;width:100%;margin:0 auto;padding:60px 52px 72px;">
+    <div class="exp-hero-copy" style="max-width:560px;">
 
       <div class="overline overline-light txt-reveal" style="margin-bottom:24px;">Catálogo de paquetes</div>
 
@@ -382,13 +382,13 @@ body {
         Elige el paquete que mejor se adapta a tu evento. Cada experiencia incluye atención personalizada, espacios únicos y todo el entorno natural de la finca.
       </p>
 
-      <div class="txt-reveal" data-d="4" style="display:flex;gap:12px;margin-top:36px;flex-wrap:wrap;">
+      <div class="txt-reveal exp-hero-actions" data-d="4" style="display:flex;gap:12px;margin-top:36px;flex-wrap:wrap;">
         <a href="#catalogo" class="btn-accent">Ver todos los paquetes</a>
         <button class="btn-ghost" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Cotizar ahora</button>
       </div>
 
       <!-- Social proof mini -->
-      <div class="txt-reveal" data-d="5" style="display:flex;align-items:center;gap:14px;margin-top:40px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.1);">
+      <div class="txt-reveal exp-social-proof" data-d="5" style="display:flex;align-items:center;gap:14px;margin-top:40px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.1);">
         <div style="display:flex;">
           <div style="width:32px;height:32px;border-radius:50%;background:rgba(192,122,90,0.6);border:2px solid var(--verde-dark);margin-right:-8px;display:flex;align-items:center;justify-content:center;font-family:Jost,sans-serif;font-size:0.55rem;font-weight:300;color:#fff;letter-spacing:0.04em;">V·D</div>
           <div style="width:32px;height:32px;border-radius:50%;background:rgba(74,110,110,0.6);border:2px solid var(--verde-dark);margin-right:-8px;display:flex;align-items:center;justify-content:center;font-family:Jost,sans-serif;font-size:0.55rem;font-weight:300;color:#fff;letter-spacing:0.04em;">F·S</div>
@@ -408,14 +408,14 @@ body {
 <!-- ══════════════════════════════════════════════════════════
   S2 · CATÁLOGO DE PAQUETES
 ══════════════════════════════════════════════════════════ -->
-<section id="catalogo" style="background:var(--crema);padding:100px 0 80px;position:relative;overflow:hidden;">
+<section id="catalogo" class="exp-catalog" style="background:var(--crema);padding:100px 0 80px;position:relative;overflow:hidden;">
 
   <div class="arch-label" style="right:-20px;top:40px;">PAQUETES</div>
 
-  <div style="max-width:1500px;margin:0 auto;padding:0 52px;">
+  <div class="exp-container" style="max-width:1500px;margin:0 auto;padding:0 52px;">
 
     <!-- Header -->
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;gap:40px;">
+    <div class="exp-section-header" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;gap:40px;">
       <div>
         <div class="overline overline-dark txt-reveal" style="margin-bottom:14px;">Nuestros paquetes</div>
         <div class="txt-reveal" data-d="1" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,3.8rem);font-weight:300;color:var(--carbon);line-height:1.05;letter-spacing:-0.02em;">
@@ -608,7 +608,7 @@ body {
     </div>
 
     <!-- Nota de pricing -->
-    <div class="txt-reveal" style="margin-top:44px;padding:22px 28px;background:var(--crema-warm);border-radius:10px;border:1px solid var(--crema-border);display:flex;gap:16px;align-items:flex-start;">
+    <div class="txt-reveal exp-pricing-note" style="margin-top:44px;padding:22px 28px;background:var(--crema-warm);border-radius:10px;border:1px solid var(--crema-border);display:flex;gap:16px;align-items:flex-start;">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;color:var(--terracota);"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       <p style="font-family:'Jost',sans-serif;font-size:0.8rem;font-weight:300;line-height:1.75;color:var(--muted);">
         Todos los precios son por día completo e incluyen el staff dedicado del venue. Los add-ons se contratan por separado. Precios sujetos a disponibilidad — cotiza tu fecha para confirmar.
@@ -622,14 +622,14 @@ body {
 <!-- ══════════════════════════════════════════════════════════
   S3 · ADD-ONS
 ══════════════════════════════════════════════════════════ -->
-<section style="background:var(--crema-warm);padding:100px 0;position:relative;overflow:hidden;">
+<section class="exp-addons" style="background:var(--crema-warm);padding:100px 0;position:relative;overflow:hidden;">
 
   <div class="arch-label" style="left:-20px;bottom:0;color:rgba(45,73,73,0.035);">ADD·ONS</div>
 
-  <div style="max-width:1500px;margin:0 auto;padding:0 52px;">
+  <div class="exp-container" style="max-width:1500px;margin:0 auto;padding:0 52px;">
 
     <!-- Header -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-end;margin-bottom:56px;">
+    <div class="exp-addons-header" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-end;margin-bottom:56px;">
       <div>
         <div class="overline overline-dark txt-reveal" style="margin-bottom:14px;">Personaliza tu experiencia</div>
         <div class="txt-reveal" data-d="1" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,3.8vw,3.5rem);font-weight:300;color:var(--carbon);line-height:1.1;letter-spacing:-0.02em;">
@@ -644,7 +644,7 @@ body {
     </div>
 
     <!-- Add-ons grid -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;" class="txt-reveal" data-d="3">
+    <div class="txt-reveal exp-addons-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;" data-d="3">
 
       <div class="addon-card">
         <svg class="addon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
@@ -691,7 +691,7 @@ body {
     </div>
 
     <!-- CTA nota -->
-    <div class="txt-reveal" style="margin-top:44px;text-align:center;">
+    <div class="txt-reveal exp-addon-note" style="margin-top:44px;text-align:center;">
       <p style="font-family:'Jost',sans-serif;font-size:0.82rem;font-weight:300;color:var(--muted);margin-bottom:18px;">Los add-ons se agregan en el proceso de cotización. Precio por evento, no por persona.</p>
       <button class="btn-primary" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'})">Cotizar con add-ons</button>
     </div>
@@ -703,7 +703,7 @@ body {
 <!-- ══════════════════════════════════════════════════════════
   S4 · CTA FINAL DARK
 ══════════════════════════════════════════════════════════ -->
-<section id="cta-section" style="background:#0d1918;padding:100px 0;position:relative;overflow:hidden;">
+<section id="cta-section" class="exp-cta" style="background:#0d1918;padding:100px 0;position:relative;overflow:hidden;">
 
   <!-- BG foto -->
   <div style="position:absolute;inset:0;z-index:0;">
@@ -713,7 +713,7 @@ body {
   <!-- Warm glow -->
   <div style="position:absolute;bottom:15%;left:45%;width:500px;height:280px;background:radial-gradient(ellipse,rgba(240,160,60,0.08) 0%,transparent 70%);border-radius:50%;z-index:0;pointer-events:none;"></div>
 
-  <div style="position:relative;z-index:1;max-width:1500px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+  <div class="exp-cta-inner" style="position:relative;z-index:1;max-width:1500px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
 
     <!-- Left copy -->
     <div style="display:flex;flex-direction:column;gap:20px;">
@@ -725,7 +725,7 @@ body {
       <p class="txt-reveal" data-d="2" style="font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;line-height:1.85;color:rgba(255,253,248,0.62);max-width:360px;">
         Cuéntanos sobre tu evento, elige tu paquete y recibe una propuesta personalizada en menos de 24 horas.
       </p>
-      <div class="txt-reveal" data-d="3" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
+      <div class="txt-reveal exp-cta-proof" data-d="3" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
         <div style="display:flex;align-items:center;gap:8px;font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:300;color:rgba(255,253,248,0.5);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg>
           Respuesta en 24 h
@@ -749,7 +749,7 @@ body {
         <p class="cta-card-sub">Cuéntanos sobre tu evento y recibe una propuesta con PDF personalizado.</p>
         <button class="btn-accent" style="font-size:0.65rem;padding:10px 20px;">Cotizar ahora</button>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div class="exp-cta-card-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
         <div class="cta-card">
           <svg class="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           <div class="cta-card-title">Agendar visita</div>
