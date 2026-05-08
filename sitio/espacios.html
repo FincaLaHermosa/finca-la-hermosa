@@ -1140,6 +1140,8 @@ const ESPACIOS = [
 const N      = ESPACIOS.length;
 const ITEM_H = 80;
 const SLIDE_W = 88;
+const mobileMQ = window.matchMedia('(max-width: 760px)');
+const getSlideWidth = () => mobileMQ.matches ? 100 : SLIDE_W;
 
 const sgTrack      = document.getElementById('sg-track');
 const sgList       = document.getElementById('sg-list');
@@ -1223,7 +1225,7 @@ function goTo(idx) {
   if (target === currentIdx) return;
   currentIdx = target;
 
-  imgTrack.style.transform = `translateX(-${currentIdx * SLIDE_W}%)`;
+  imgTrack.style.transform = `translateX(-${currentIdx * getSlideWidth()}%)`;
 
   const viewportMid = sgListVP.offsetHeight / 2;
   const activeMid   = currentIdx * ITEM_H + ITEM_H / 2;
@@ -1271,6 +1273,8 @@ function handleTouchEnd(e) {
   if (absX < 36 || absX < absY) return;
   goTo(currentIdx + (dx < 0 ? 1 : -1));
 }
+
+mobileMQ.addEventListener('change', () => goTo(currentIdx));
 
 [sgLeft, imgTrack].forEach((el) => {
   el.addEventListener('touchstart', handleTouchStart, { passive: true });
