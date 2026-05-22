@@ -21,6 +21,12 @@ La carpeta en OneDrive queda como referencia/backup. El desarrollo debe continua
 - Se agregó `fincalahermosa.com` y `www.fincalahermosa.com` a Vercel.
 - Se configuró DNS en Cloudflare con registros `A` DNS-only a `76.76.21.21` para raíz y `www`.
 - Se asignaron aliases Vercel para `https://fincalahermosa.com` y `https://www.fincalahermosa.com`; ambos responden HTTP 200.
+- Se agregó redirect canónico en Next: `www.fincalahermosa.com/*` redirige permanentemente a `https://fincalahermosa.com/*`.
+- Se creó worktree de referencia en `C:\dev\finca-la-hermosa-reference` apuntando al commit `9b7b444`.
+- Side-by-side local activo:
+  - Referencia visual: `http://localhost:8083`
+  - Migración React: `http://localhost:8084`
+  - Ambos abiertos en Google Chrome para comparación.
 - Se mantuvo la rama `nextjs-site-migration`.
 - Se reemplazó el scaffold genérico de Next por un adaptador de prototipos:
   - `lib/prototype.ts`
@@ -43,8 +49,8 @@ La carpeta en OneDrive queda como referencia/backup. El desarrollo debe continua
 ## Verificación realizada
 
 - `npm run build` pasa correctamente.
-- Servidor local Next activo en `http://localhost:8083/`.
-- URL LAN Wi-Fi esperada: `http://192.168.100.7:8083/`.
+- Servidor local de referencia activo en `http://localhost:8083/`.
+- Servidor local de migración activo en `http://localhost:8084/`.
 - Browser integrado validó:
   - home mobile sin overflow horizontal y con hero/nav del prototipo;
   - menú móvil abre y cierra con el botón visible;
@@ -62,4 +68,4 @@ La carpeta en OneDrive queda como referencia/backup. El desarrollo debe continua
 
 ## Siguiente paso recomendado
 
-Hacer una ronda de `$impeccable polish` ya sobre el sitio real en Next: revisar página por página contra `sitio/*.html`, pulir microdiferencias de motion/responsive y después iniciar el inventario de contenido editable para el CMS.
+Empezar la migración final por partes usando side-by-side: primero extraer `Navbar`, `Footer` y WhatsApp globales en React, comparando contra `http://localhost:8083` antes de avanzar a `/experiencias`, `/faq` y `/cotizar`.
