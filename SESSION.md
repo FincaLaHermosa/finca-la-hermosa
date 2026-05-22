@@ -6,10 +6,10 @@ Migrar los prototipos HTML aprobados de `sitio/` a Next.js 15 con fidelidad visu
 
 ## Workspace activo
 
-Ruta activa: `C:\dev\finca-la-hermosa`.
+Ruta activa: `C:\Users\limin\dev\finca-la-hermosa`.
 Rama activa: `nextjs-site-migration`.
 
-La carpeta en OneDrive queda como referencia/backup. El desarrollo debe continuar en la ruta local para evitar errores de sync con `node_modules`, `.next`, watchers y builds.
+La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\dev` fue retirada; el desarrollo debe continuar en `C:\Users\limin\dev\finca-la-hermosa` para evitar errores de sync con `node_modules`, `.next`, watchers y builds.
 
 ## Hecho
 
@@ -25,7 +25,8 @@ La carpeta en OneDrive queda como referencia/backup. El desarrollo debe continua
 - Se verificó dominio productivo:
   - `https://fincalahermosa.com` responde HTTP 200.
   - `https://www.fincalahermosa.com` redirige HTTP 308 a `https://fincalahermosa.com/`.
-- Se creó worktree de referencia en `C:\dev\finca-la-hermosa-reference` apuntando al commit `9b7b444`.
+- Se movió el proyecto activo a `C:\Users\limin\dev\finca-la-hermosa`.
+- Se creó worktree de referencia en `C:\Users\limin\dev\finca-la-hermosa-reference` apuntando al commit `9b7b444`.
 - Side-by-side local activo:
   - Referencia visual: `http://localhost:8083`
   - Migración React: `http://localhost:8084`
