@@ -2,54 +2,55 @@
 
 ## Objetivo actual
 
-Migrar los prototipos HTML aprobados de `sitio/` a una base Next.js 15 en carpeta local fuera de OneDrive.
+Migrar los prototipos HTML aprobados de `sitio/` a Next.js 15 con fidelidad visual y funcional, trabajando fuera de OneDrive.
 
 ## Workspace activo
 
 Ruta activa: `C:\dev\finca-la-hermosa`.
 Rama activa: `nextjs-site-migration`.
 
-La carpeta anterior en OneDrive queda como referencia/backup, pero el desarrollo debe continuar en la ruta local para evitar problemas de sync con `node_modules`, `.next`, watchers y builds.
+La carpeta en OneDrive queda como referencia/backup. El desarrollo debe continuar en la ruta local para evitar errores de sync con `node_modules`, `.next`, watchers y builds.
 
 ## Hecho
 
-- `master` en el repo de OneDrive recibió por fast-forward la rama `codex/responsive-site-adapt`.
-- Se eliminó la rama `codex/responsive-site-adapt`.
-- Se clonó el proyecto a `C:\dev\finca-la-hermosa`.
-- Se creó la rama `nextjs-site-migration`.
-- Se montó base Next.js 15.5.18 con App Router.
-- Se instalaron dependencias base: React 19, Framer Motion, Embla, Lucide, Supabase, React Hook Form, Zod, React PDF y Tailwind/PostCSS.
-- Se copiaron assets aprobados a `public/assets` y `public/fonts`.
-- Se crearon rutas públicas iniciales:
+- Se mantuvo la rama `nextjs-site-migration`.
+- Se reemplazó el scaffold genérico de Next por un adaptador de prototipos:
+  - `lib/prototype.ts`
+  - `components/PrototypePage.tsx`
+  - `components/PrototypeScriptRunner.tsx`
+- Las rutas públicas ahora renderizan directamente los HTML aprobados de `sitio/`:
   - `/`
   - `/experiencias`
   - `/espacios`
   - `/nosotros`
   - `/faq`
   - `/cotizar`
-  - `/cotizar/listo`
-- Se creó contenido estructurado inicial en `data/site.ts`.
-- Se crearon componentes base: nav, footer, hero, headers, cards, FAQ y cotizador.
-- Commit creado: `b39a47c Start Next.js site migration`.
+- Se normalizaron rutas de assets, fuentes, enlaces internos y footer parcial para funcionar en Next.
+- Se reactivaron scripts inline del prototipo dentro del ciclo de vida de React/Next.
+- Se corrigió la inicialización de scripts que dependían de `document.DOMContentLoaded`.
+- Se añadieron handlers robustos para tabs, filtros, FAQ, carruseles básicos, cotizador multi-step y envío simulado del cotizador.
+- Se dejó `/cotizar/listo` con una pantalla de confirmación visualmente alineada a la marca.
+- Se eliminó el scaffold visual anterior que no respetaba los prototipos: componentes genéricos de cards, nav, footer, hero, FAQ, cotizador y `data/site.ts`.
 
 ## Verificación realizada
 
 - `npm run build` pasa correctamente.
 - Servidor local Next activo en `http://localhost:8083/`.
-- URL LAN Wi-Fi: `http://192.168.100.7:8083/`.
+- URL LAN Wi-Fi esperada: `http://192.168.100.7:8083/`.
 - Browser integrado validó:
-  - rutas principales renderizan sin overlay;
-  - `/cotizar` no tiene overflow horizontal en 390x844;
-  - el hero mobile no se encima con el nav;
-  - el cotizador avanza de paso 1 a paso 2;
-  - el copy quedó como `Fecha invitados.` sin la `e`.
+  - home mobile sin overflow horizontal y con hero/nav del prototipo;
+  - menú móvil abre y cierra con el botón visible;
+  - `/experiencias` inicializa filtros en `Eventos Sociales` y filtra a `Corporativos` con click visible;
+  - `/faq` inicializa en `Reservaciones` y filtra a `Espacios` con click visible;
+  - `/cotizar` avanza de paso 1 a paso 2, actualiza resumen y no tiene overflow horizontal;
+  - `/espacios` inicializa la galería con 9 elementos, caption y dots.
 
 ## No incluir / pendientes locales
 
-- `AGENTS.md` y `CLAUDE.md` siguen modificados localmente por instrucciones del proyecto; no se incluyeron en el commit de migración.
-- El servidor genera logs `output-next-8083.*.log`, ya ignorados por `.gitignore`.
-- `npm audit` reporta 2 vulnerabilidades moderadas transitivas; no se aplicó `audit fix --force` porque puede subir majors.
+- `AGENTS.md` y `CLAUDE.md` siguen modificados localmente por instrucciones del proyecto; no pertenecen al commit de migración.
+- Los logs `output-next-8083.*.log` son artefactos locales del servidor y no se deben versionar.
+- El CMS sigue pendiente; la migración actual prioriza fidelidad del sitio público.
 
 ## Siguiente paso recomendado
 
-Hacer una pasada de fidelidad visual página por página contra los prototipos de `sitio/`, empezando por `/cotizar` y `/espacios`, y después preparar el inventario de contenido editable para el CMS.
+Hacer una ronda de `$impeccable polish` ya sobre el sitio real en Next: revisar página por página contra `sitio/*.html`, pulir microdiferencias de motion/responsive y después iniciar el inventario de contenido editable para el CMS.

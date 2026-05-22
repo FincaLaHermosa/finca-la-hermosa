@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
-import { Footer } from "@/components/Footer";
-import { SiteNav } from "@/components/SiteNav";
-import { WhatsappButton } from "@/components/WhatsappButton";
 import "./globals.css";
 
 const jost = Jost({
@@ -26,10 +23,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="es" className={`${jost.variable} ${cormorant.variable}`}>
       <body>
-        <SiteNav />
         {children}
-        <Footer />
-        <WhatsappButton />
       </body>
     </html>
   );
