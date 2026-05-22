@@ -53,7 +53,7 @@ La carpeta en OneDrive queda como referencia/backup. El desarrollo debe continua
 
 - `AGENTS.md` y `CLAUDE.md` siguen modificados localmente por instrucciones del proyecto; no pertenecen al commit de migración.
 - Los logs `output-next-8083.*.log` son artefactos locales del servidor y no se deben versionar.
-- Vercel CLI no está instalado localmente; el plugin de Vercel sí está disponible y ve el team personal `emacevedo17-1600s-projects`.
+- Vercel CLI no está instalado localmente y `npx vercel whoami` requiere login interactivo; se abrió el import web para `FincaLaHermosa/finca-la-hermosa`.
 - El CMS sigue pendiente; la migración actual prioriza fidelidad del sitio público.
 
 ## Siguiente paso recomendado
