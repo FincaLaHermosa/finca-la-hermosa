@@ -18,6 +18,9 @@ La carpeta en OneDrive queda como referencia/backup. El desarrollo debe continua
 - Se configuró `origin` y se subieron `main` y `nextjs-site-migration`.
 - Se agregó `.env.example` con variables previstas para URLs públicas, WhatsApp, Supabase, Resend y analytics.
 - Se creó el proyecto Vercel `finca-la-hermosa` y quedó `READY` en `https://finca-la-hermosa-6oum5z4we-emacevedo17-1600s-projects.vercel.app/`.
+- Se agregó `fincalahermosa.com` y `www.fincalahermosa.com` a Vercel.
+- Se configuró DNS en Cloudflare con registros `A` DNS-only a `76.76.21.21` para raíz y `www`.
+- Se asignaron aliases Vercel para `https://fincalahermosa.com` y `https://www.fincalahermosa.com`; ambos responden HTTP 200.
 - Se mantuvo la rama `nextjs-site-migration`.
 - Se reemplazó el scaffold genérico de Next por un adaptador de prototipos:
   - `lib/prototype.ts`
