@@ -22,6 +22,9 @@ La carpeta en OneDrive queda como referencia/backup. El desarrollo debe continua
 - Se configuró DNS en Cloudflare con registros `A` DNS-only a `76.76.21.21` para raíz y `www`.
 - Se asignaron aliases Vercel para `https://fincalahermosa.com` y `https://www.fincalahermosa.com`; ambos responden HTTP 200.
 - Se agregó redirect canónico en Next: `www.fincalahermosa.com/*` redirige permanentemente a `https://fincalahermosa.com/*`.
+- Se verificó dominio productivo:
+  - `https://fincalahermosa.com` responde HTTP 200.
+  - `https://www.fincalahermosa.com` redirige HTTP 308 a `https://fincalahermosa.com/`.
 - Se creó worktree de referencia en `C:\dev\finca-la-hermosa-reference` apuntando al commit `9b7b444`.
 - Side-by-side local activo:
   - Referencia visual: `http://localhost:8083`
@@ -45,10 +48,19 @@ La carpeta en OneDrive queda como referencia/backup. El desarrollo debe continua
 - Se añadieron handlers robustos para tabs, filtros, FAQ, carruseles básicos, cotizador multi-step y envío simulado del cotizador.
 - Se dejó `/cotizar/listo` con una pantalla de confirmación visualmente alineada a la marca.
 - Se eliminó el scaffold visual anterior que no respetaba los prototipos: componentes genéricos de cards, nav, footer, hero, FAQ, cotizador y `data/site.ts`.
+- Se inició la migración final por partes:
+  - `components/SiteHeader.tsx` contiene la navegación React con estado mobile, activo por ruta y CTA contextual.
+  - `components/WhatsAppFloat.tsx` contiene el botón flotante global.
+  - `components/SiteFooter.tsx` contiene el footer React.
+  - `app/layout.tsx` monta header, WhatsApp y footer globales.
+  - `lib/prototype.ts` ya no inyecta nav, WhatsApp ni footer desde los HTML.
 
 ## Verificación realizada
 
 - `npm run build` pasa correctamente.
+- Tras extraer chrome global, `npm run build` vuelve a pasar correctamente.
+- DOM real en `http://localhost:8084/experiencias` verificado: 1 `site-nav`, 1 `site-footer`, 1 `wa-float`.
+- Comparación headless Chrome contra `http://localhost:8083/experiencias` en mobile 390×844 y desktop 1440×1000 se mantiene visualmente alineada.
 - Servidor local de referencia activo en `http://localhost:8083/`.
 - Servidor local de migración activo en `http://localhost:8084/`.
 - Browser integrado validó:
@@ -68,4 +80,4 @@ La carpeta en OneDrive queda como referencia/backup. El desarrollo debe continua
 
 ## Siguiente paso recomendado
 
-Empezar la migración final por partes usando side-by-side: primero extraer `Navbar`, `Footer` y WhatsApp globales en React, comparando contra `http://localhost:8083` antes de avanzar a `/experiencias`, `/faq` y `/cotizar`.
+Continuar migración por partes usando side-by-side: convertir `/experiencias` a componentes React reales, empezando por filtros de paquetes y cards, manteniendo comparación contra `http://localhost:8083`.

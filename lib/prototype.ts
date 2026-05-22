@@ -31,10 +31,8 @@ const htmlRouteMap: Record<string, string> = {
 export function loadPrototype(route: PrototypeRoute): PrototypePayload {
   const root = process.cwd();
   const source = fs.readFileSync(path.join(root, "sitio", routeMap[route]), "utf8");
-  const footer = fs.readFileSync(path.join(root, "sitio", "partials", "footer.html"), "utf8");
   const footerCss = fs.readFileSync(path.join(root, "sitio", "partials", "footer.css"), "utf8");
   const responsiveCss = fs.readFileSync(path.join(root, "sitio", "responsive.css"), "utf8");
-  const mobileNav = fs.readFileSync(path.join(root, "sitio", "mobile-nav.js"), "utf8");
 
   const title = source.match(/<title>([\s\S]*?)<\/title>/i)?.[1]?.trim() || "Finca La Hermosa";
   const inlineStyles = Array.from(source.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi))
@@ -46,17 +44,24 @@ export function loadPrototype(route: PrototypeRoute): PrototypePayload {
 
   const body = source.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || "";
   const bodyWithoutScripts = body.replace(/<script[\s\S]*?<\/script>/gi, "");
-  const htmlWithFooter = bodyWithoutScripts.replace('<div id="footer-partial"></div>', normalizeMarkup(footer));
+  const htmlWithoutChrome = stripGlobalChrome(bodyWithoutScripts);
 
-  const scripts = normalizeMarkup(`${inlineScripts}\n\n${mobileNav}`);
+  const scripts = normalizeMarkup(inlineScripts);
   const styles = normalizeCss(`${inlineStyles}\n\n${footerCss}\n\n${responsiveCss}`);
 
   return {
-    html: normalizeMarkup(htmlWithFooter),
+    html: normalizeMarkup(htmlWithoutChrome),
     scripts: wrapPrototypeScripts(scripts),
     styles,
     title,
   };
+}
+
+function stripGlobalChrome(input: string) {
+  return input
+    .replace(/<nav id="site-nav">[\s\S]*?<\/nav>/i, "")
+    .replace(/<!-- ══ WA FLOAT[\s\S]*?<\/a>/i, "")
+    .replace('<div id="footer-partial"></div>', "");
 }
 
 function normalizeMarkup(input: string) {

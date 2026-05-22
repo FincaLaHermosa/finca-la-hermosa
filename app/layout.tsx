@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
+import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import "./globals.css";
 
 const jost = Jost({
@@ -23,7 +26,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="es" className={`${jost.variable} ${cormorant.variable}`}>
       <body>
+        <SiteHeader />
+        <WhatsAppFloat />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );
