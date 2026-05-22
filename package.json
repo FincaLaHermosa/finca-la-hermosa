@@ -1,0 +1,36 @@
+{
+  "name": "finca-la-hermosa",
+  "version": "1.0.0",
+  "description": "Sitio web de Finca La Hermosa",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "private": true,
+  "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
+    "@react-pdf/renderer": "^4.5.1",
+    "@supabase/supabase-js": "^2.106.1",
+    "embla-carousel-react": "^8.6.0",
+    "framer-motion": "^12.40.0",
+    "lucide-react": "^1.16.0",
+    "next": "^15.5.18",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-hook-form": "^7.76.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
+    "@types/node": "^24.12.4",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^15.5.18",
+    "postcss": "^8.5.15",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^5.9.3"
+  }
+}

@@ -7,6 +7,7 @@ ejemplos estilo de sitio web/
 # Node / Next.js (cuando se cree el proyecto)
 node_modules/
 .next/
+output*.log
 .env
 .env.local
 .env.production
