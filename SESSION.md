@@ -55,6 +55,11 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
   - `components/SiteFooter.tsx` contiene el footer React.
   - `app/layout.tsx` monta header, WhatsApp y footer globales.
   - `lib/prototype.ts` ya no inyecta nav, WhatsApp ni footer desde los HTML.
+- Se migró `/experiencias` a React real:
+  - `app/experiencias/page.tsx` ya no usa `PrototypePage`.
+  - `components/ExperienciasContent.tsx` renderiza hero, filtros, cards, add-ons y CTA.
+  - `lib/experiencias-data.ts` centraliza paquetes, filtros y add-ons para futuro CMS.
+  - Se conserva el CSS del prototipo como capa visual temporal para mantener fidelidad.
 
 ## Verificación realizada
 
@@ -62,6 +67,7 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 - Tras extraer chrome global, `npm run build` vuelve a pasar correctamente.
 - DOM real en `http://localhost:8084/experiencias` verificado: 1 `site-nav`, 1 `site-footer`, 1 `wa-float`.
 - Comparación headless Chrome contra `http://localhost:8083/experiencias` en mobile 390×844 y desktop 1440×1000 se mantiene visualmente alineada.
+- En `/experiencias`, filtro React validado en Chrome: Social muestra `Esencial | Completo con Salón | Premium All-In`; al cambiar a Corporativos muestra `Corporativo Creativo | Completo con Salón | Premium All-In`.
 - Servidor local de referencia activo en `http://localhost:8083/`.
 - Servidor local de migración activo en `http://localhost:8084/`.
 - Browser integrado validó:
@@ -81,4 +87,4 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 
 ## Siguiente paso recomendado
 
-Continuar migración por partes usando side-by-side: convertir `/experiencias` a componentes React reales, empezando por filtros de paquetes y cards, manteniendo comparación contra `http://localhost:8083`.
+Continuar migración por partes usando side-by-side: revisar `/experiencias` manualmente en Chrome y después migrar `/faq` a React real.

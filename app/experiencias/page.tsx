@@ -1,5 +1,13 @@
-import { PrototypePage } from "@/components/PrototypePage";
+import { ExperienciasContent } from "@/components/ExperienciasContent";
+import { loadPrototype } from "@/lib/prototype";
 
 export default function ExperienciasPage() {
-  return <PrototypePage route="experiencias" />;
+  const payload = loadPrototype("experiencias");
+
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: payload.styles }} />
+      <ExperienciasContent />
+    </>
+  );
 }
