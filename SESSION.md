@@ -17,6 +17,7 @@ La carpeta en OneDrive queda como referencia/backup. El desarrollo debe continua
 - Se creó el repo privado `FincaLaHermosa/finca-la-hermosa`.
 - Se configuró `origin` y se subieron `main` y `nextjs-site-migration`.
 - Se agregó `.env.example` con variables previstas para URLs públicas, WhatsApp, Supabase, Resend y analytics.
+- Se creó el proyecto Vercel `finca-la-hermosa` y quedó `READY` en `https://finca-la-hermosa-6oum5z4we-emacevedo17-1600s-projects.vercel.app/`.
 - Se mantuvo la rama `nextjs-site-migration`.
 - Se reemplazó el scaffold genérico de Next por un adaptador de prototipos:
   - `lib/prototype.ts`
@@ -53,7 +54,7 @@ La carpeta en OneDrive queda como referencia/backup. El desarrollo debe continua
 
 - `AGENTS.md` y `CLAUDE.md` siguen modificados localmente por instrucciones del proyecto; no pertenecen al commit de migración.
 - Los logs `output-next-8083.*.log` son artefactos locales del servidor y no se deben versionar.
-- Vercel CLI no está instalado localmente y `npx vercel whoami` requiere login interactivo; se abrió el import web para `FincaLaHermosa/finca-la-hermosa`.
+- Vercel CLI quedó autenticado como `emacevedo17-1600`; el proyecto está importado desde GitHub y despliega desde `main`.
 - El CMS sigue pendiente; la migración actual prioriza fidelidad del sitio público.
 
 ## Siguiente paso recomendado
