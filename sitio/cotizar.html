@@ -58,7 +58,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 
 /* ── Hero compacto ──────────────────────────────────────── */
 .hero-cotizar{
-  min-height:44vh; background:var(--verde-dark);
+  min-height:50vh; background:var(--verde-dark);
   position:relative; overflow:hidden;
   display:flex; align-items:flex-end;
   padding:0 80px 60px;
@@ -96,6 +96,13 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 .step-label{font-family:'Jost',sans-serif;font-size:0.61rem;font-weight:300;letter-spacing:0.08em;color:var(--muted);text-transform:uppercase;margin-top:8px;text-align:center;}
 .progress-step.active .step-label,.progress-step.done .step-label{color:var(--verde);}
 .progress-labels{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.progress-labels .step-label{
+  justify-self:start;
+  width:max-content;
+  margin-left:16px;
+  transform:translateX(-50%);
+  text-align:center;
+}
 
 .step-heading{
   font-family:'Jost',sans-serif;font-size:0.62rem;font-weight:400;
@@ -247,7 +254,7 @@ textarea.field-input{resize:vertical;min-height:100px;line-height:1.65;}
 .btn-submit:hover{background:#a8664a;transform:scale(1.03);}
 
 /* ── Resumen lateral ────────────────────────────────────── */
-.summary-wrap{position:sticky;top:100px;}
+.summary-wrap{position:static;}
 .summary-card{
   background:var(--verde-dark);border-radius:16px;
   padding:28px;color:#fffdf8;
@@ -259,9 +266,9 @@ textarea.field-input{resize:vertical;min-height:100px;line-height:1.65;}
   margin-bottom:4px;
 }
 .summary-sub{
-  font-family:'Cormorant Garamond',serif;font-size:1rem;
+  font-family:'Cormorant Garamond',serif;font-size:1.42rem;
   font-style:italic;font-weight:300;color:var(--terracota);
-  margin-bottom:24px;
+  margin-bottom:28px;line-height:1;
 }
 .summary-sep{height:1px;background:rgba(255,255,255,0.08);margin:16px 0;}
 .summary-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px;}
@@ -374,10 +381,10 @@ textarea.field-input{resize:vertical;min-height:100px;line-height:1.65;}
           </div>
         </div>
         <div class="progress-labels">
-          <div class="step-label" id="sl-1" style="text-align:left;">Tu evento</div>
-          <div class="step-label" id="sl-2" style="text-align:center;">Fecha</div>
-          <div class="step-label" id="sl-3" style="text-align:center;">Extras</div>
-          <div class="step-label" id="sl-4" style="text-align:right;">Tus datos</div>
+          <div class="step-label" id="sl-1">Tu evento</div>
+          <div class="step-label" id="sl-2">Fecha</div>
+          <div class="step-label" id="sl-3">Extras</div>
+          <div class="step-label" id="sl-4">Tus datos</div>
         </div>
       </div>
 
@@ -464,7 +471,7 @@ textarea.field-input{resize:vertical;min-height:100px;line-height:1.65;}
       <!-- ─ STEP 2: Fecha e invitados ──────────────────── -->
       <div class="step-panel" id="step-2">
         <div class="step-heading">Paso 2 de 4</div>
-        <div class="step-title">Fecha e</div>
+        <div class="step-title">Fecha</div>
         <div class="step-sub">invitados.</div>
 
         <div class="field-group">
@@ -635,13 +642,13 @@ textarea.field-input{resize:vertical;min-height:100px;line-height:1.65;}
         </div>
         <div class="form-row full" style="margin-top:16px;">
           <div class="field-group" style="margin-bottom:0;">
-            <label class="field-label" for="inp-email">Correo electrónico</label>
+            <label class="field-label" for="inp-email">Correo electrónico <span class="optional-label">(opcional)</span></label>
             <input class="field-input" type="email" id="inp-email" placeholder="tuemail@ejemplo.com">
           </div>
         </div>
         <div class="form-row full" style="margin-top:16px;">
           <div class="field-group" style="margin-bottom:0;">
-            <label class="field-label" for="inp-notas">Cuéntanos más <span style="font-weight:200;text-transform:none;letter-spacing:0;color:var(--muted);">(opcional)</span></label>
+            <label class="field-label" for="inp-notas">Cuéntanos más <span class="optional-label">(opcional)</span></label>
             <textarea class="field-input" id="inp-notas" placeholder="Alguna petición especial, duda o contexto que quieras que sepamos…"></textarea>
           </div>
         </div>
@@ -727,13 +734,6 @@ textarea.field-input{resize:vertical;min-height:100px;line-height:1.65;}
           <div style="text-align:right;">
             <div class="summary-total-val" id="s-total">$13,000</div>
           </div>
-        </div>
-
-        <!-- Paquete recomendado -->
-        <div class="paquete-rec" id="paquete-rec">
-          <div class="paquete-rec-label">Paquete sugerido</div>
-          <div class="paquete-rec-name" id="pr-name">Esencial</div>
-          <div class="paquete-rec-desc" id="pr-desc">Finca completa, un día, hasta 80 personas. Incluye todo el acceso base.</div>
         </div>
 
         <!-- Trust badges -->

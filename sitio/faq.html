@@ -332,8 +332,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
 
     <!-- Tabs -->
     <div class="faq-tabs txt-reveal">
-      <button class="faq-tab active" data-filter="all">Todas</button>
-      <button class="faq-tab" data-filter="reservaciones">Reservaciones</button>
+      <button class="faq-tab active" data-filter="reservaciones">Reservaciones</button>
       <button class="faq-tab" data-filter="espacios">Espacios</button>
       <button class="faq-tab" data-filter="precios">Precios y pagos</button>
       <button class="faq-tab" data-filter="logistica">Logística</button>
@@ -677,9 +676,17 @@ window.addEventListener('DOMContentLoaded', () => {
 document.querySelectorAll('.faq-question').forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-answer');
     const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      const openAnswer = i.querySelector('.faq-answer');
+      if (openAnswer) openAnswer.style.maxHeight = '';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      if (answer) answer.style.maxHeight = `${answer.scrollHeight}px`;
+    }
   });
 });
 
@@ -690,10 +697,18 @@ document.querySelectorAll('.faq-tab').forEach(tab => {
     document.querySelectorAll('.faq-tab').forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
     document.querySelectorAll('.faq-group').forEach(group => {
-      group.style.display = (filter === 'all' || group.dataset.category === filter) ? '' : 'none';
+      group.style.display = group.dataset.category === filter ? '' : 'none';
     });
-    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      const answer = i.querySelector('.faq-answer');
+      if (answer) answer.style.maxHeight = '';
+    });
   });
+});
+
+document.querySelectorAll('.faq-group').forEach(group => {
+  group.style.display = group.dataset.category === 'reservaciones' ? '' : 'none';
 });
 </script>
 

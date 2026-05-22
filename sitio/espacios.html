@@ -66,6 +66,11 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 .img-reveal.in .reveal-cover{transform:translateY(-100%);}
 .img-reveal .img-bg{transform:scale(1.08);transition:transform 1.6s var(--ease-snap);}
 .img-reveal.in .img-bg{transform:scale(1);}
+@keyframes arrow-pulse {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(7px); opacity: 1; }
+}
+.scroll-arrow { animation: arrow-pulse 1.8s ease-in-out infinite; }
 
 /* ── CTA CARDS ─────────────────────────────────── */
 .cta-card{padding:28px 24px;background:rgba(255,255,255,0.07);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.11);border-radius:12px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;transition:background 0.26s,border-color 0.26s;}
@@ -73,6 +78,34 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 .cta-card-icon{width:26px;height:26px;color:rgba(255,253,248,0.7);}
 .cta-card-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;color:#fff;}
 .cta-card-sub{font-family:'Jost',sans-serif;font-size:0.75rem;font-weight:300;color:rgba(255,253,248,0.52);line-height:1.65;flex:1;}
+
+@media (max-width:760px){
+  #cta-section .cta-small-grid.exp-cta-card-grid{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:14px!important;
+  }
+  #cta-section .cta-small-grid.exp-cta-card-grid .cta-card{
+    min-width:0;
+    padding:18px 14px!important;
+  }
+  #cta-section .cta-small-grid.exp-cta-card-grid .cta-card-title{
+    font-size:1rem!important;
+    line-height:1.15!important;
+  }
+  #cta-section .cta-small-grid.exp-cta-card-grid .cta-card-sub{
+    display:none!important;
+  }
+  #cta-section .cta-small-grid.exp-cta-card-grid .btn-accent,
+  #cta-section .cta-small-grid.exp-cta-card-grid button{
+    width:100%;
+    min-height:42px;
+    box-sizing:border-box;
+    padding-left:12px!important;
+    padding-right:12px!important;
+    text-align:center;
+  }
+}
 
 
 
@@ -151,9 +184,9 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 }
 .hero-folio-display {
   font-family: 'Against', serif;
-  font-size: clamp(4rem, 7.5vw, 8.5rem);
-  line-height: 0.9;
-  letter-spacing: -0.03em;
+  font-size: clamp(3.8rem, 6.5vw, 7rem);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
   color: var(--carbon);
   display: block;
 }
@@ -161,7 +194,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(2.8rem, 5.5vw, 6.2rem);
+  font-size: clamp(3.2rem, 5.5vw, 5.8rem);
   line-height: 1;
   color: var(--terracota);
   display: block;
@@ -761,7 +794,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 }
 .inv-left-tally {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 10px;
   margin-top: 38px;
   padding-top: 26px;
@@ -781,7 +814,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(255,253,248,0.35);
-  line-height: 1.5;
+  line-height: 1.25;
 }
 .inv-right {
   background: var(--crema);
@@ -790,10 +823,21 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
   flex-direction: column;
   justify-content: center;
 }
+.inv-scroll-cue {
+  display: none;
+  justify-content: center;
+  margin-bottom: 24px;
+  color: var(--verde-mid);
+}
+.inv-scroll-cue svg {
+  width: 28px;
+  height: 28px;
+  opacity: 0.7;
+}
 .inv-section-label {
   font-family: 'Jost', sans-serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.26em;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--terracota);
   display: flex;
@@ -916,14 +960,6 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 
   <div class="hero-folio-container">
 
-    <div class="hero-folio-bar txt-reveal">
-      <span>Folio 03</span>
-      <span>Estudio del venue</span>
-      <span>9 rincones</span>
-      <span class="hero-folio-bar-spacer"></span>
-      <span>Edición 2026</span>
-    </div>
-
     <div class="hero-folio-grid">
 
       <div class="hero-folio-text">
@@ -944,7 +980,6 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
           <div class="reveal-cover" style="background:var(--terracota);"></div>
           <div class="img-bg hero-photo-inner">
             <img src="assets/photo-jardines.jpg" alt="Jardines de la finca">
-            <div class="hero-photo-corner">01 / 09</div>
           </div>
           <div class="hero-photo-meta">
             <span>Pl. 01</span>
@@ -1048,11 +1083,14 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
     <p class="inv-left-body">Cuando reservas Finca La Hermosa, todos los espacios son tuyos. Sin restricciones, sin exclusiones.</p>
     <div class="inv-left-tally">
       <span class="inv-tally-num">12</span>
-      <span class="inv-tally-label">activos<br>del venue</span>
+      <span class="inv-tally-label">áreas /<br>amenidades</span>
     </div>
   </div>
 
   <div class="inv-right">
+    <div class="inv-scroll-cue txt-reveal" aria-hidden="true">
+      <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </div>
     <div class="inv-section-label txt-reveal">Activos del venue</div>
     <div class="inv-cols txt-reveal" data-d="1">
       <div>
@@ -1072,27 +1110,28 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
         <div class="inv-item"><span class="inv-item-num">12</span><div class="inv-item-body"><span class="inv-item-name">Circuito ciclopista</span><span class="inv-item-detail">sendero natural · bosque</span></div></div>
       </div>
     </div>
-    <p class="inv-footer-line txt-reveal" data-d="2">"Cuando reservas, todos los espacios son tuyos. <em>Sin restricciones.</em>"</p>
+    <p class="inv-footer-line txt-reveal" data-d="2">"Cuando reservas, el espacio es exclusivo para tu evento. <em>Sin distracciones.</em>"</p>
   </div>
 
 </section>
 
 
 <!-- ══ S5 · CTA FINAL DARK ════════════════════════════════════ -->
-<section id="cta-section" style="background:var(--verde-dark);padding:100px 0;position:relative;overflow:hidden;">
+<section id="cta-section" class="exp-cta" style="background:#0d1918;padding:100px 0;position:relative;overflow:hidden;">
   <div style="position:absolute;inset:0;z-index:0;">
-    <img src="assets/photo-cta-dark.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.12;">
-    <div style="position:absolute;inset:0;background:linear-gradient(160deg,var(--verde-dark) 0%,var(--verde) 30%,rgba(26,42,26,1) 65%,rgba(14,30,30,1) 100%);opacity:0.9;"></div>
+    <img src="assets/photo-cta-dark.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.22;">
+    <div style="position:absolute;inset:0;background:linear-gradient(160deg,#1e3232 0%,#2d4949 28%,#1a2a1a 60%,#0e1e1e 100%);opacity:0.85;"></div>
   </div>
+  <div style="position:absolute;bottom:20%;left:50%;transform:translateX(-50%);width:400px;height:250px;background:radial-gradient(ellipse,rgba(240,160,60,0.1) 0%,transparent 70%);border-radius:50%;z-index:0;pointer-events:none;"></div>
 
-  <div style="position:relative;z-index:1;max-width:1500px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+  <div class="cta-outer exp-cta-inner" style="position:relative;z-index:1;max-width:1500px;width:100%;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
     <div style="display:flex;flex-direction:column;gap:20px;">
       <div class="overline overline-light txt-reveal">Reserva tu fecha</div>
       <div class="txt-reveal" data-d="1">
-        <div style="font-family:'Against',serif;font-size:clamp(3.2rem,5.5vw,6rem);line-height:0.92;letter-spacing:-0.025em;color:#fffdf8;">La finca te espera,</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,4.5vw,5rem);font-style:italic;font-weight:300;line-height:1;color:var(--terracota);margin-top:6px;">¿cuándo celebramos?</div>
+        <div style="font-family:'Against',serif;font-size:clamp(3.5rem,6vw,6.5rem);line-height:0.92;letter-spacing:-0.025em;color:#fffdf8;">La finca te espera,</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,5rem);font-style:italic;font-weight:300;line-height:1;color:var(--terracota);margin-top:6px;">¿cuándo celebramos?</div>
       </div>
-      <p class="txt-reveal" data-d="2" style="font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;line-height:1.85;color:rgba(255,253,248,0.62);max-width:360px;">Cotiza tu evento, agenda una visita o escríbenos directo por WhatsApp. Respuesta en menos de 24 horas.</p>
+      <p class="txt-reveal" data-d="2" style="font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;line-height:1.8;color:rgba(255,253,248,0.62);max-width:380px;">Cotiza tu evento, agenda una visita o escríbenos directo por WhatsApp. Respuesta en menos de 24 horas.</p>
     </div>
 
     <div class="txt-reveal" data-d="2" style="display:flex;flex-direction:column;gap:14px;">
@@ -1102,7 +1141,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
         <p class="cta-card-sub">Cuéntanos sobre tu evento y recibe una propuesta personalizada.</p>
         <a href="cotizar.html" class="btn-accent" style="font-size:0.65rem;padding:10px 20px;">Cotizar ahora</a>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div class="cta-small-grid exp-cta-card-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
         <div class="cta-card">
           <svg class="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           <div class="cta-card-title">Agendar visita</div>
@@ -1154,6 +1193,9 @@ const captionNum   = document.getElementById('sg-caption-num');
 const captionName  = document.getElementById('sg-caption-name');
 const captionSub   = document.getElementById('sg-caption-sub');
 const scrollHint   = document.getElementById('sg-scroll-hint');
+const sgSticky      = document.querySelector('.sg-sticky');
+const sgRight       = document.querySelector('.sg-right');
+const sgDescArea    = document.querySelector('.sg-desc-area');
 
 ESPACIOS.forEach((esp, i) => {
   const item = document.createElement('div');
@@ -1164,7 +1206,10 @@ ESPACIOS.forEach((esp, i) => {
     <div class="sg-item-bar"></div>
     <span class="sg-item-name">${esp.nombre}</span>
   `;
-  item.addEventListener('click', () => goTo(i));
+  item.addEventListener('click', () => {
+    stopAutoAdvance();
+    goTo(i);
+  });
   sgList.appendChild(item);
 });
 
@@ -1178,7 +1223,10 @@ ESPACIOS.forEach((esp, i) => {
 ESPACIOS.forEach((_, i) => {
   const dot = document.createElement('div');
   dot.className = 'sg-dot';
-  dot.addEventListener('click', () => goTo(i));
+  dot.addEventListener('click', () => {
+    stopAutoAdvance();
+    goTo(i);
+  });
   progressWrap.appendChild(dot);
 });
 
@@ -1193,6 +1241,46 @@ let wheelAccum = 0;
 let wheelTimer = null;
 let touchStartX = 0;
 let touchStartY = 0;
+let autoTimer = null;
+let autoStoppedByClick = false;
+
+function positionList(activeIdx, instant = false) {
+  const activeItem = listItems[activeIdx];
+  const viewportMid = sgListVP.offsetHeight / 2;
+  const activeMid = activeItem
+    ? activeItem.offsetTop + activeItem.offsetHeight / 2
+    : activeIdx * ITEM_H + ITEM_H / 2;
+
+  if (instant) sgList.style.transition = 'none';
+  sgList.style.transform = `translateY(${viewportMid - activeMid}px)`;
+  if (instant) requestAnimationFrame(() => { sgList.style.transition = ''; });
+}
+
+function stopAutoAdvance() {
+  autoStoppedByClick = true;
+  clearInterval(autoTimer);
+  autoTimer = null;
+}
+
+function startAutoAdvance() {
+  if (!mobileMQ.matches || autoStoppedByClick || autoTimer) return;
+  autoTimer = setInterval(() => {
+    goTo((currentIdx + 1) % N);
+  }, 1800);
+}
+
+function placeDescArea() {
+  if (mobileMQ.matches) {
+    if (sgDescArea.parentElement !== sgSticky) {
+      sgRight.after(sgDescArea);
+    }
+    return;
+  }
+
+  if (sgDescArea.parentElement !== sgLeft) {
+    sgLeft.appendChild(sgDescArea);
+  }
+}
 
 function setActive(activeIdx) {
   if (activeIdx === lastActive) return;
@@ -1220,18 +1308,20 @@ function setActive(activeIdx) {
   captionSub.textContent  = ESPACIOS[activeIdx].caption;
 }
 
-function goTo(idx) {
+function goTo(idx, force = false) {
   const target = Math.max(0, Math.min(N - 1, idx));
-  if (target === currentIdx) return;
+  if (target === currentIdx && !force) return;
   currentIdx = target;
 
   imgTrack.style.transform = `translateX(-${currentIdx * getSlideWidth()}%)`;
 
-  const viewportMid = sgListVP.offsetHeight / 2;
-  const activeMid   = currentIdx * ITEM_H + ITEM_H / 2;
-  sgList.style.transform = `translateY(${viewportMid - activeMid}px)`;
+  positionList(currentIdx);
 
   slides.forEach((img, i) => {
+    if (mobileMQ.matches) {
+      img.style.transform = 'scale(1.34)';
+      return;
+    }
     const dist = currentIdx - i;
     const py   = Math.max(-7, Math.min(7, dist * 5));
     img.style.transform = `translateY(calc(-6% + ${py}%))`;
@@ -1243,6 +1333,7 @@ function goTo(idx) {
 
 /* Wheel sobre panel izquierdo → navega lista; no afecta scroll de página */
 sgLeft.addEventListener('wheel', (e) => {
+  if (mobileMQ.matches && !sgListVP.contains(e.target)) return;
   e.preventDefault();
 
   wheelAccum += e.deltaY;
@@ -1274,14 +1365,32 @@ function handleTouchEnd(e) {
   goTo(currentIdx + (dx < 0 ? 1 : -1));
 }
 
-mobileMQ.addEventListener('change', () => goTo(currentIdx));
+function handleListTouchEnd(e) {
+  const touch = e.changedTouches[0];
+  const dx = touch.clientX - touchStartX;
+  const dy = touch.clientY - touchStartY;
+  const absX = Math.abs(dx);
+  const absY = Math.abs(dy);
+
+  if (absY < 30 || absY < absX) return;
+  goTo(currentIdx + (dy < 0 ? 1 : -1));
+}
+
+mobileMQ.addEventListener('change', () => {
+  placeDescArea();
+  goTo(currentIdx, true);
+});
 
 [sgLeft, imgTrack].forEach((el) => {
   el.addEventListener('touchstart', handleTouchStart, { passive: true });
   el.addEventListener('touchend', handleTouchEnd, { passive: true });
 });
 
+sgListVP.addEventListener('touchstart', handleTouchStart, { passive: true });
+sgListVP.addEventListener('touchend', handleListTouchEnd, { passive: true });
+
 /* Init */
+placeDescArea();
 setActive(0);
 scrollHint.classList.remove('hidden');
 
@@ -1303,6 +1412,18 @@ const revealObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('section:not(.sg-section)').forEach(s => revealObs.observe(s));
 
+const sgAutoObs = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      startAutoAdvance();
+    } else if (!autoStoppedByClick) {
+      clearInterval(autoTimer);
+      autoTimer = null;
+    }
+  });
+}, { threshold: 0.45 });
+sgAutoObs.observe(document.getElementById('sg-section'));
+
 setTimeout(() => {
   const hero = document.querySelector('section');
   if (hero) {
@@ -1321,10 +1442,7 @@ listItems[0].classList.add('active');
 dots[0].classList.add('active');
 
 requestAnimationFrame(() => {
-  const viewportMid = sgListVP.offsetHeight / 2;
-  sgList.style.transition = 'none';
-  sgList.style.transform = `translateY(${viewportMid - ITEM_H / 2}px)`;
-  requestAnimationFrame(() => { sgList.style.transition = ''; });
+  positionList(0, true);
 });
 </script>
 <script src="mobile-nav.js"></script>

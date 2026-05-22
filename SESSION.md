@@ -1,62 +1,52 @@
-# SESSION — 2026-05-08
+# SESSION - 2026-05-22
 
-## Objetivo actual
+## Objetivo cerrado
 
-Cerrar sesión de adaptación responsive y microajustes visuales en prototipos HTML.
+Adaptacion responsive de los prototipos HTML de Finca La Hermosa.
 
 ## Estatus
 
 Rama activa: `codex/responsive-site-adapt`.
 
-Página `experiencias.html` revisada visualmente en mobile y aprobada por el usuario. Página `index.html` recibió ajuste puntual en CTA y paquetes destacados mobile. Página `espacios.html` adaptada con `$impeccable adapt` y verificada en mobile.
+Servidor local actual: `http://localhost:8082/`.
+URL LAN: `http://192.168.100.7:8082/`.
 
-Quedan pendientes por revisar/adaptar: `nosotros.html`, `faq.html`, `cotizar.html`.
+## Hecho
 
-## Qué se hizo
+- `espacios.html` aprobado por el usuario en celular.
+- `nosotros.html` ajustado en mobile: hero en columna, timeline alineado, equipo en dos columnas, textos descriptivos ocultos en cards de equipo, badge de promesa corregido.
+- `faq.html` ajustado: filtro `Todas` eliminado, `Reservaciones` queda activo inicial, acordeon abre con altura real.
+- `cotizar.html` ajustado: hero separado del header, opciones en dos columnas mobile, textos de pasos escalados, correo marcado como opcional, resumen sin sticky, paquete sugerido oculto para reservarlo al PDF/WhatsApp, labels del progreso alineados con sus numeros.
+- `responsive.css` consolidado como capa de adaptacion mobile/tablet.
 
-**Experiencias:**
-- Paquetes destacados en mobile convertidos a carrusel horizontal con scroll-snap.
-- Filtro `Todos` eliminado; `Eventos Sociales` queda como categoría inicial.
-- Botones de paquetes cambiados a intención de consulta por WhatsApp con mensaje prellenado.
-- Add-ons adaptados a 2 columnas compactas en mobile.
-- Título de add-ons cambiado a `Cada detalle, solamente tuyo.`
-- CTA final ajustado en mobile para conservar layout compacto tipo inicio.
+## Verificacion realizada
 
-**Inicio:**
-- Título del CTA final `Tu momento perfecto, comienza aquí.` quedó estático, sin animación de escritura ni `txt-reveal`.
-- Sección `Experiencias para cada ocasión` debajo del cotizador embebido convertida a carrusel horizontal en mobile.
+- Browser integrado en mobile y desktop, incluyendo 390x844, 445x844, 1038x1113 y 1920x1080.
+- Checks principales:
+  - Sin overflow horizontal efectivo.
+  - Menu mobile abre correctamente.
+  - FAQ filtra por categoria y acordeon despliega respuesta visible.
+  - Cotizador permite seleccionar tipo de evento y avanzar de paso.
+  - Progreso del cotizador alineado con numeros.
+  - Hero de cotizar no se encima con header en desktop.
 
-**Espacios:**
-- Hero folio ajustado para mobile: menor espacio vertical, CTAs full-width, barra folio y tabla de contenidos con scroll horizontal limpio.
-- Galería scroll-driven adaptada a mobile: imagen superior full-width, lista legible en una columna, caption compacto, progreso reposicionado y swipe/click funcional.
-- Cálculo JS de la galería usa `100%` de slide en mobile y conserva `88%` en desktop.
-- Inventario mantiene layout de una columna y sin overflow horizontal.
+## Archivos tocados para commit
 
-## Verificación
-
-- Servidor local/LAN usado: `python -m http.server 3333 --bind 0.0.0.0` desde `sitio/`.
-- URLs de revisión:
-  - `http://127.0.0.1:3333/index.html`
-  - `http://127.0.0.1:3333/experiencias.html`
-  - `http://192.168.100.7:3333/index.html`
-  - `http://192.168.100.7:3333/experiencias.html`
-- El usuario revisó visualmente en preview/celular. No seguir usando screenshots salvo que se pidan.
-- `espacios.html` verificado con Playwright local en 390×844: sin errores de consola, sin overflow horizontal, interacción de galería `Casa principal` OK.
-- Browser integrado cargó la página, pero falló al capturar screenshots tras el parche; se usó Playwright local como fallback de verificación visual.
-
-## Archivos modificados
-
-- `sitio/experiencias.html`
-- `sitio/index.html`
-- `sitio/espacios.html`
-- `sitio/responsive.css`
 - `SESSION.md`
+- `sitio/espacios.html`
+- `sitio/nosotros.html`
+- `sitio/faq.html`
+- `sitio/cotizar.html`
+- `sitio/responsive.css`
 
-## Notas
+## No incluir
 
-- `output/` contiene capturas temporales generadas antes; no commitear.
-- Para evitar caché en celular, usar query strings temporales tipo `?v=...` durante revisión.
+- `AGENTS.md`
+- `CLAUDE.md`
+- `output/`
 
-## Próximo paso recomendado
+Esos cambios/archivos son ajenos o temporales.
 
-Continuar con revisión mobile de `nosotros.html`, después `faq.html` y `cotizar.html`.
+## Siguiente paso recomendado
+
+Migrar los prototipos aprobados a Next.js 15 o, antes de eso, hacer una ultima pasada de contenido/precios definitivos si ya se van a publicar.
