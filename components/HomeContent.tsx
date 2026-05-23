@@ -276,18 +276,23 @@ function QuickQuoteSection({ selected, onSelect }: { selected: string | null; on
   const quoteHref = selectedType ? `/cotizar?tipo=${selectedType}` : "/cotizar";
 
   return (
-    <section className="snap-section quote-gateway" data-sec="cotizador" style={{ background: "var(--verde)", minHeight: "92vh" }}>
-      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-        <img src="/assets/photo-cta-dark.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.18 }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(115deg,rgba(30,50,50,0.98) 0%,rgba(30,50,50,0.9) 44%,rgba(30,50,50,0.54) 100%)" }} />
+    <section className="snap-section quote-gateway quote-video-section" data-sec="cotizador" style={{ background: "var(--verde-dark)", minHeight: "100vh" }}>
+      <div className="quote-video-bg" aria-hidden="true">
+        <video className="quote-video-media" autoPlay muted loop playsInline preload="metadata" poster="/assets/photo-cta-dark.jpg">
+          <source src="/assets/home-quote-loop.mp4" type="video/mp4" />
+          <source src="/assets/home-quote-loop.webm" type="video/webm" />
+        </video>
+        <img className="quote-video-poster" src="/assets/photo-cta-dark.jpg" alt="" />
+        <div className="quote-video-wash" />
       </div>
       <div className="arch-label" style={{ right: -30, bottom: 46, color: "rgba(255,253,248,0.035)" }}>COTIZA</div>
-      <div style={{ position: "relative", zIndex: 1, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "grid", gridTemplateColumns: "0.95fr 1.05fr", gap: 72, alignItems: "center" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+      <div className="quote-video-inner" style={{ position: "relative", zIndex: 1, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "grid", gridTemplateColumns: "minmax(0,0.92fr) minmax(420px,0.58fr)", gap: 72, alignItems: "end" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 22, paddingBottom: 18 }}>
+          <div className="txt-reveal overline overline-light" data-d="1">Cotización guiada</div>
           <div className="txt-reveal" data-d="1" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.3rem,5.8vw,6.2rem)", fontWeight: 400, lineHeight: 0.9, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tu experiencia,</div>
           <div className="txt-reveal" data-d="2" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.6rem,4.4vw,4.8rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 0.95, color: "var(--terracota)" }}>en 3 minutos.</div>
           <p className="txt-reveal" data-d="3" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.68)", maxWidth: 440 }}>
-            Elige el punto de partida y continúa al cotizador completo. La propuesta final llega por WhatsApp con precio, paquete recomendado y próximos pasos.
+            Mira el ambiente, elige el punto de partida y continúa al cotizador completo. La propuesta final llega por WhatsApp con precio, paquete recomendado y próximos pasos.
           </p>
           <div className="txt-reveal quote-proof-row" data-d="4" style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
             {["PDF personalizado", "Respuesta en 24 h", "Sin compromiso"].map((item) => (
@@ -296,7 +301,7 @@ function QuickQuoteSection({ selected, onSelect }: { selected: string | null; on
           </div>
         </div>
 
-        <div className="txt-reveal quote-gateway-panel" data-d="2" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 22, padding: 34, border: "1px solid rgba(255,253,248,0.14)", borderRadius: 14, background: "rgba(15,28,27,0.38)", boxShadow: "0 24px 70px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.06)" }}>
+        <div className="txt-reveal quote-gateway-panel" data-d="2" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 22, padding: 30, border: "1px solid rgba(255,253,248,0.14)", borderRadius: 14, background: "rgba(15,28,27,0.56)", boxShadow: "0 24px 70px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06)" }}>
           <div style={{ display: "flex", justifyContent: "space-between", gap: 24, alignItems: "flex-start" }}>
             <div>
               <div style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.64rem", fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--terra-light)", marginBottom: 9 }}>Inicio rápido</div>

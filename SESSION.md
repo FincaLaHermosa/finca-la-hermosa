@@ -95,7 +95,9 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
   - Se mantiene la capa CSS del prototipo para conservar fidelidad visual.
 - Se rediseñó la sección home `Tu experiencia, en 3 minutos` usando criterio Impeccable:
   - Se retiró el patrón de mini-cotizador falso con dots.
-  - Ahora funciona como entrada premium al cotizador completo, con elección rápida de tipo de evento y CTA real.
+  - Se rediseñó como sección cinematográfica con video autoplay/muted/loop/playsInline y poster fallback.
+  - El video esperado debe colocarse en `public/assets/home-quote-loop.mp4` o `public/assets/home-quote-loop.webm`.
+  - Funciona como entrada premium al cotizador completo, con elección rápida de tipo de evento y CTA real.
   - `/cotizar` acepta `?tipo=` desde server props y abre con el tipo preseleccionado.
 - Se corrigió el adaptador de prototipos para que no redispare listeners antiguos de `DOMContentLoaded` al navegar entre páginas; esto evita errores como `filterPkgs` intentando operar sobre DOM de otra ruta.
 - Se desactivó `devIndicators` de Next en `next.config.ts` para evitar el bug de devtools/webpack `SegmentViewNode` / `__webpack_modules__[moduleId] is not a function` en desarrollo.
@@ -121,6 +123,7 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 - `npm run build` pasa después de migrar home; la ruta `/` queda en 9.38 kB y First Load JS 115 kB.
 - En `/`, validación headless mobile 390×844 tras rediseño de cotizador rápido: 6 opciones, CTA genera `/cotizar?tipo=corporativo`, `/cotizar` abre con `Corporativo` seleccionado y sin overflow horizontal.
 - `npm run build` pasa tras el rediseño; `/cotizar` queda dinámica por lectura de search params server-side.
+- En `/`, validación headless mobile 390×844 tras rediseño con video: existe `<video>` con autoplay, muted, loop, playsInline, poster fallback; CTA genera `/cotizar?tipo=familiar`, `/cotizar` abre con `Reunión familiar` seleccionado y sin overflow horizontal.
 - `http://localhost:8084/` y `http://localhost:8084/experiencias` responden HTTP 200 tras el fix de listeners.
 - `http://localhost:8084/`, `/experiencias` y `/faq` vuelven a responder HTTP 200 tras limpiar `.next` y reiniciar el servidor con `devIndicators: false`.
 - Servidor local de referencia activo en `http://localhost:8083/`.

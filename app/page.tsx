@@ -57,6 +57,46 @@ const homeOverrides = `
     text-decoration: none;
   }
 
+  .home-page-react .quote-video-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: var(--verde-dark);
+  }
+
+  .home-page-react .quote-video-media,
+  .home-page-react .quote-video-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .home-page-react .quote-video-media {
+    z-index: 1;
+  }
+
+  .home-page-react .quote-video-poster {
+    z-index: 0;
+    opacity: 0.9;
+    transform: scale(1.04);
+  }
+
+  .home-page-react .quote-video-wash {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+      linear-gradient(90deg, rgba(16,27,26,0.96) 0%, rgba(30,50,50,0.84) 42%, rgba(30,50,50,0.28) 100%),
+      linear-gradient(0deg, rgba(16,27,26,0.72) 0%, rgba(16,27,26,0.12) 58%, rgba(16,27,26,0.5) 100%);
+  }
+
+  .home-page-react .quote-video-section .overline::before {
+    background: rgba(232,196,173,0.58);
+  }
+
   .home-page-react .proc-dot.active:nth-child(1) .proc-dot-inner { transition-delay: 100ms; }
   .home-page-react .proc-dot.active:nth-child(2) .proc-dot-inner { transition-delay: 1100ms; }
   .home-page-react .proc-dot.active:nth-child(3) .proc-dot-inner { transition-delay: 2100ms; }
@@ -71,6 +111,16 @@ const homeOverrides = `
     .home-page-react .quote-gateway {
       min-height: auto !important;
       padding: 96px 0 76px;
+    }
+
+    .home-page-react .quote-video-inner {
+      align-items: start !important;
+    }
+
+    .home-page-react .quote-video-wash {
+      background:
+        linear-gradient(180deg, rgba(16,27,26,0.66) 0%, rgba(30,50,50,0.94) 42%, rgba(30,50,50,0.98) 100%),
+        linear-gradient(90deg, rgba(16,27,26,0.74), rgba(16,27,26,0.18));
     }
 
     .home-page-react .quote-gateway-panel {
