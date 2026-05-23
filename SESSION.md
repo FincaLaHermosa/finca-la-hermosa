@@ -66,6 +66,12 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
   - `lib/faq-data.ts` centraliza categorías y preguntas para futuro CMS.
   - Se conserva el CSS del prototipo como capa visual temporal para mantener fidelidad.
   - Se corrigió el reset visual de los botones del acordeón para mantener alineación y estilo idénticos al prototipo.
+- Se migró `/espacios` a React real:
+  - `app/espacios/page.tsx` ya no usa `PrototypePage`.
+  - `components/EspaciosContent.tsx` renderiza hero, stats, galería interactiva, inventario y CTA final.
+  - `lib/espacios-data.ts` centraliza espacios, fotos, bullets, capacidades y amenidades para futuro CMS.
+  - La galería se porta a estado React con clicks, dots, wheel, touch/swipe y autoavance móvil solo cuando la sección entra en vista.
+  - Se mantiene la capa CSS del prototipo para conservar fidelidad visual.
 - Se corrigió el adaptador de prototipos para que no redispare listeners antiguos de `DOMContentLoaded` al navegar entre páginas; esto evita errores como `filterPkgs` intentando operar sobre DOM de otra ruta.
 - Se desactivó `devIndicators` de Next en `next.config.ts` para evitar el bug de devtools/webpack `SegmentViewNode` / `__webpack_modules__[moduleId] is not a function` en desarrollo.
 
@@ -78,6 +84,8 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 - En `/experiencias`, filtro React validado en Chrome: Social muestra `Esencial | Completo con Salón | Premium All-In`; al cambiar a Corporativos muestra `Corporativo Creativo | Completo con Salón | Premium All-In`.
 - En `/faq`, tabs y acordeón React validados en Chrome: inicia en `Reservaciones`, cambia a `Espacios y capacidad` y abre `¿Cuántas personas puede recibir la finca?`.
 - En `/faq`, se verificó por DOM que `.faq-question` no conserva borde/fondo nativo de botón y ocupa el mismo ancho que `.faq-item`.
+- En `/espacios`, validación headless mobile 390×844: 9 items, 9 slides, 9 dots, inicia en `Jardines y áreas verdes`, cambia a `Salón de eventos`, sin overflow horizontal y nav oscuro.
+- En `/espacios`, validación headless desktop 1440×1000: inicia en `Jardines y áreas verdes`, 9 items/slides, sin overflow horizontal, nav oscuro y galería con altura correcta.
 - `http://localhost:8084/` y `http://localhost:8084/experiencias` responden HTTP 200 tras el fix de listeners.
 - `http://localhost:8084/`, `/experiencias` y `/faq` vuelven a responder HTTP 200 tras limpiar `.next` y reiniciar el servidor con `devIndicators: false`.
 - Servidor local de referencia activo en `http://localhost:8083/`.
@@ -99,4 +107,4 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 
 ## Siguiente paso recomendado
 
-Continuar migración por partes usando side-by-side. Siguiente candidata: `/espacios` a React real, extrayendo data de galería/amenidades y conservando la capa visual temporal hasta aprobar fidelidad.
+Revisar `/espacios` manualmente side-by-side. Si queda aprobado, continuar con `/nosotros` a React real.

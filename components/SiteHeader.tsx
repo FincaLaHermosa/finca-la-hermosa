@@ -33,6 +33,7 @@ export function SiteHeader() {
   if (pathname === "/cotizar/listo") return null;
 
   const activePath = pathname === "/" ? "/" : `/${pathname.split("/")[1]}`;
+  const forceScrolled = activePath === "/espacios";
 
   const handleQuote = () => {
     setIsOpen(false);
@@ -46,7 +47,7 @@ export function SiteHeader() {
 
   return (
     <nav id="site-nav">
-      <div className={`nav-pill${isScrolled ? " scrolled" : ""}${isOpen ? " nav-open" : ""}`} id="nav-pill">
+      <div className={`nav-pill${isScrolled || forceScrolled ? " scrolled" : ""}${isOpen ? " nav-open" : ""}`} id="nav-pill">
         <Link className="nav-logo" href="/" aria-label="Finca La Hermosa">
           <Image src="/assets/logo-blanco.svg" alt="Finca La Hermosa" width={128} height={42} priority />
         </Link>
