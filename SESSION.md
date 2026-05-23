@@ -65,6 +65,7 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
   - `components/FaqContent.tsx` renderiza hero, tabs de categorías, acordeón, bloque de contacto y CTA final.
   - `lib/faq-data.ts` centraliza categorías y preguntas para futuro CMS.
   - Se conserva el CSS del prototipo como capa visual temporal para mantener fidelidad.
+  - Se corrigió el reset visual de los botones del acordeón para mantener alineación y estilo idénticos al prototipo.
 - Se corrigió el adaptador de prototipos para que no redispare listeners antiguos de `DOMContentLoaded` al navegar entre páginas; esto evita errores como `filterPkgs` intentando operar sobre DOM de otra ruta.
 - Se desactivó `devIndicators` de Next en `next.config.ts` para evitar el bug de devtools/webpack `SegmentViewNode` / `__webpack_modules__[moduleId] is not a function` en desarrollo.
 
@@ -76,6 +77,7 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 - Comparación headless Chrome contra `http://localhost:8083/experiencias` en mobile 390×844 y desktop 1440×1000 se mantiene visualmente alineada.
 - En `/experiencias`, filtro React validado en Chrome: Social muestra `Esencial | Completo con Salón | Premium All-In`; al cambiar a Corporativos muestra `Corporativo Creativo | Completo con Salón | Premium All-In`.
 - En `/faq`, tabs y acordeón React validados en Chrome: inicia en `Reservaciones`, cambia a `Espacios y capacidad` y abre `¿Cuántas personas puede recibir la finca?`.
+- En `/faq`, se verificó por DOM que `.faq-question` no conserva borde/fondo nativo de botón y ocupa el mismo ancho que `.faq-item`.
 - `http://localhost:8084/` y `http://localhost:8084/experiencias` responden HTTP 200 tras el fix de listeners.
 - `http://localhost:8084/`, `/experiencias` y `/faq` vuelven a responder HTTP 200 tras limpiar `.next` y reiniciar el servidor con `devIndicators: false`.
 - Servidor local de referencia activo en `http://localhost:8083/`.
