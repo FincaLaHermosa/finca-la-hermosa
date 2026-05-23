@@ -37,11 +37,6 @@ export function SiteHeader() {
 
   const handleQuote = () => {
     setIsOpen(false);
-    const quoteTarget = document.querySelector("[data-sec=cotizador], #cta-section");
-    if (quoteTarget) {
-      quoteTarget.scrollIntoView({ behavior: "smooth" });
-      return;
-    }
     router.push("/cotizar");
   };
 

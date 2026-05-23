@@ -86,6 +86,7 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
   - El resumen lateral se recalcula desde estado React: tipo, fecha, invitados, duración, add-ons y total.
   - El correo se mantiene opcional; nombre y WhatsApp/teléfono son obligatorios.
   - Se mantiene la capa CSS del prototipo para conservar fidelidad visual.
+- Se corrigió el CTA global del navbar: `Cotizar ahora` siempre navega a `/cotizar` en lugar de hacer scroll al CTA de la página actual.
 - Se corrigió el adaptador de prototipos para que no redispare listeners antiguos de `DOMContentLoaded` al navegar entre páginas; esto evita errores como `filterPkgs` intentando operar sobre DOM de otra ruta.
 - Se desactivó `devIndicators` de Next en `next.config.ts` para evitar el bug de devtools/webpack `SegmentViewNode` / `__webpack_modules__[moduleId] is not a function` en desarrollo.
 
@@ -104,6 +105,7 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 - En `/nosotros`, validación headless desktop 1440×1000: 7 secciones, 6 timeline items, 4 team cards, grid 1.4fr/1fr/1fr/1fr, descripciones visibles, nav activo en `Nosotros`, sin overflow horizontal.
 - En `/nosotros`, validación headless desktop confirma que los 6 dots del timeline comparten el mismo centro X y coinciden con el centro de `.timeline`.
 - En `/cotizar`, validación headless mobile 390×844: selecciona Boda, fecha 20 jun 2026, 60 invitados, add-on Salón, total `$21,000`, submit exitoso con correo vacío y sin overflow horizontal.
+- En navbar, validación headless desde `/nosotros`: click en `Cotizar ahora` navega a `/cotizar`.
 - `npm run build` pasa después de migrar `/cotizar`; la ruta `/cotizar` queda en 6.51 kB y First Load JS 112 kB.
 - `http://localhost:8084/` y `http://localhost:8084/experiencias` responden HTTP 200 tras el fix de listeners.
 - `http://localhost:8084/`, `/experiencias` y `/faq` vuelven a responder HTTP 200 tras limpiar `.next` y reiniciar el servidor con `devIndicators: false`.
