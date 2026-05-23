@@ -61,6 +61,7 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
   - `lib/experiencias-data.ts` centraliza paquetes, filtros y add-ons para futuro CMS.
   - Se conserva el CSS del prototipo como capa visual temporal para mantener fidelidad.
 - Se corrigió el adaptador de prototipos para que no redispare listeners antiguos de `DOMContentLoaded` al navegar entre páginas; esto evita errores como `filterPkgs` intentando operar sobre DOM de otra ruta.
+- Se desactivó `devIndicators` de Next en `next.config.ts` para evitar el bug de devtools/webpack `SegmentViewNode` / `__webpack_modules__[moduleId] is not a function` en desarrollo.
 
 ## Verificación realizada
 
@@ -70,6 +71,7 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 - Comparación headless Chrome contra `http://localhost:8083/experiencias` en mobile 390×844 y desktop 1440×1000 se mantiene visualmente alineada.
 - En `/experiencias`, filtro React validado en Chrome: Social muestra `Esencial | Completo con Salón | Premium All-In`; al cambiar a Corporativos muestra `Corporativo Creativo | Completo con Salón | Premium All-In`.
 - `http://localhost:8084/` y `http://localhost:8084/experiencias` responden HTTP 200 tras el fix de listeners.
+- `http://localhost:8084/` y `/experiencias` vuelven a responder HTTP 200 tras limpiar `.next` y reiniciar el servidor con `devIndicators: false`.
 - Servidor local de referencia activo en `http://localhost:8083/`.
 - Servidor local de migración activo en `http://localhost:8084/`.
 - Browser integrado validó:
