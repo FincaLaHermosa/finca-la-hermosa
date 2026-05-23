@@ -96,7 +96,8 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 - Se rediseñó la sección home `Tu experiencia, en 3 minutos` usando criterio Impeccable:
   - Se retiró el patrón de mini-cotizador falso con dots.
   - Se rediseñó como sección cinematográfica con video autoplay/muted/loop/playsInline y poster fallback.
-  - El video esperado debe colocarse en `public/assets/home-quote-loop.mp4` o `public/assets/home-quote-loop.webm`.
+  - Se movió el video provisto por el usuario a `public/assets/home-quote-loop.mp4`.
+  - La sección usa una card glassmorphism grande, flotante y alineada a la izquierda sobre video full-bleed.
   - Funciona como entrada premium al cotizador completo, con elección rápida de tipo de evento y CTA real.
   - `/cotizar` acepta `?tipo=` desde server props y abre con el tipo preseleccionado.
 - Se corrigió el adaptador de prototipos para que no redispare listeners antiguos de `DOMContentLoaded` al navegar entre páginas; esto evita errores como `filterPkgs` intentando operar sobre DOM de otra ruta.
@@ -124,6 +125,7 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 - En `/`, validación headless mobile 390×844 tras rediseño de cotizador rápido: 6 opciones, CTA genera `/cotizar?tipo=corporativo`, `/cotizar` abre con `Corporativo` seleccionado y sin overflow horizontal.
 - `npm run build` pasa tras el rediseño; `/cotizar` queda dinámica por lectura de search params server-side.
 - En `/`, validación headless mobile 390×844 tras rediseño con video: existe `<video>` con autoplay, muted, loop, playsInline, poster fallback; CTA genera `/cotizar?tipo=familiar`, `/cotizar` abre con `Reunión familiar` seleccionado y sin overflow horizontal.
+- En `/`, validación headless confirma que `home-quote-loop.mp4` carga desde `http://localhost:8084/assets/home-quote-loop.mp4` con `readyState 4`, card glass con `backdrop-filter: blur(22px) saturate(1.35)`, alineada a la izquierda en mobile sin overflow, y selección `Retiro` navega a `/cotizar?tipo=retiro`.
 - `http://localhost:8084/` y `http://localhost:8084/experiencias` responden HTTP 200 tras el fix de listeners.
 - `http://localhost:8084/`, `/experiencias` y `/faq` vuelven a responder HTTP 200 tras limpiar `.next` y reiniciar el servidor con `devIndicators: false`.
 - Servidor local de referencia activo en `http://localhost:8083/`.

@@ -286,32 +286,30 @@ function QuickQuoteSection({ selected, onSelect }: { selected: string | null; on
         <div className="quote-video-wash" />
       </div>
       <div className="arch-label" style={{ right: -30, bottom: 46, color: "rgba(255,253,248,0.035)" }}>COTIZA</div>
-      <div className="quote-video-inner" style={{ position: "relative", zIndex: 1, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "grid", gridTemplateColumns: "minmax(0,0.92fr) minmax(420px,0.58fr)", gap: 72, alignItems: "end" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: 22, paddingBottom: 18 }}>
-          <div className="txt-reveal overline overline-light" data-d="1">Cotización guiada</div>
-          <div className="txt-reveal" data-d="1" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.3rem,5.8vw,6.2rem)", fontWeight: 400, lineHeight: 0.9, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tu experiencia,</div>
-          <div className="txt-reveal" data-d="2" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.6rem,4.4vw,4.8rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 0.95, color: "var(--terracota)" }}>en 3 minutos.</div>
-          <p className="txt-reveal" data-d="3" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.68)", maxWidth: 440 }}>
+      <div className="quote-video-inner" style={{ position: "relative", zIndex: 1, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
+        <div className="txt-reveal quote-gateway-panel" data-d="2" style={{ width: "min(620px, 100%)", display: "grid", gridTemplateColumns: "1fr", gap: 24, padding: "42px 40px 38px", border: "1px solid rgba(255,253,248,0.18)", borderRadius: 16, background: "rgba(24,42,40,0.58)", backdropFilter: "blur(22px) saturate(1.35)", WebkitBackdropFilter: "blur(22px) saturate(1.35)", boxShadow: "0 30px 90px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.1)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 24, alignItems: "flex-start" }}>
+            <div>
+              <div className="overline overline-light" style={{ marginBottom: 15 }}>Cotización guiada</div>
+              <div style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.2rem,5.2vw,5.8rem)", fontWeight: 400, lineHeight: 0.9, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tu experiencia,</div>
+              <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.5rem,4vw,4.4rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 0.98, color: "var(--terracota)", marginTop: 4 }}>en 3 minutos.</div>
+            </div>
+            <div aria-hidden="true" style={{ width: 76, height: 76, borderRadius: "50%", border: "1px solid rgba(232,196,173,0.3)", display: "grid", placeItems: "center", color: "var(--terra-light)", flex: "0 0 auto" }}>
+              <Icon name="file" className="quote-gateway-icon" />
+            </div>
+          </div>
+
+          <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.72)", maxWidth: 470 }}>
             Mira el ambiente, elige el punto de partida y continúa al cotizador completo. La propuesta final llega por WhatsApp con precio, paquete recomendado y próximos pasos.
           </p>
+
           <div className="txt-reveal quote-proof-row" data-d="4" style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
             {["PDF personalizado", "Respuesta en 24 h", "Sin compromiso"].map((item) => (
               <span key={item} style={{ padding: "8px 13px", border: "1px solid rgba(232,196,173,0.22)", borderRadius: 999, fontFamily: "'Jost',sans-serif", fontSize: "0.66rem", fontWeight: 400, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,253,248,0.58)" }}>{item}</span>
             ))}
           </div>
-        </div>
 
-        <div className="txt-reveal quote-gateway-panel" data-d="2" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 22, padding: 30, border: "1px solid rgba(255,253,248,0.14)", borderRadius: 14, background: "rgba(15,28,27,0.56)", boxShadow: "0 24px 70px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06)" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", gap: 24, alignItems: "flex-start" }}>
-            <div>
-              <div style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.64rem", fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--terra-light)", marginBottom: 9 }}>Inicio rápido</div>
-              <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.65rem", fontWeight: 300, color: "rgba(255,253,248,0.92)", lineHeight: 1.18 }}>¿Qué estás imaginando?</p>
-            </div>
-            <div aria-hidden="true" style={{ width: 74, height: 74, borderRadius: "50%", border: "1px solid rgba(232,196,173,0.28)", display: "grid", placeItems: "center", color: "var(--terra-light)", flex: "0 0 auto" }}>
-              <Icon name="file" className="quote-gateway-icon" />
-            </div>
-          </div>
-
+          <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.55rem", fontWeight: 300, color: "rgba(255,253,248,0.92)", lineHeight: 1.2, marginTop: 2 }}>¿Qué estás imaginando?</p>
           <div id="q-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 10 }}>
             {quickQuoteOptions.map((option, index) => (
               <button key={option} className={`quote-choice ${selected === option ? "selected" : ""}`} onClick={() => onSelect(option)} type="button" aria-pressed={selected === option}>

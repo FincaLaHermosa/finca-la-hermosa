@@ -89,8 +89,8 @@ const homeOverrides = `
     inset: 0;
     z-index: 2;
     background:
-      linear-gradient(90deg, rgba(16,27,26,0.96) 0%, rgba(30,50,50,0.84) 42%, rgba(30,50,50,0.28) 100%),
-      linear-gradient(0deg, rgba(16,27,26,0.72) 0%, rgba(16,27,26,0.12) 58%, rgba(16,27,26,0.5) 100%);
+      linear-gradient(90deg, rgba(16,27,26,0.88) 0%, rgba(30,50,50,0.5) 42%, rgba(30,50,50,0.12) 100%),
+      linear-gradient(0deg, rgba(16,27,26,0.64) 0%, rgba(16,27,26,0.08) 58%, rgba(16,27,26,0.42) 100%);
   }
 
   .home-page-react .quote-video-section .overline::before {
@@ -124,7 +124,7 @@ const homeOverrides = `
     }
 
     .home-page-react .quote-gateway-panel {
-      padding: 24px 20px !important;
+      padding: 28px 22px !important;
     }
 
     .home-page-react .quote-gateway #q-grid {
