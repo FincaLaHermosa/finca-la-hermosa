@@ -87,6 +87,12 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
   - El correo se mantiene opcional; nombre y WhatsApp/teléfono son obligatorios.
   - Se mantiene la capa CSS del prototipo para conservar fidelidad visual.
 - Se corrigió el CTA global del navbar: `Cotizar ahora` siempre navega a `/cotizar` en lugar de hacer scroll al CTA de la página actual.
+- Se migró home `/` a React real:
+  - `app/page.tsx` ya no usa `PrototypePage`.
+  - `components/HomeContent.tsx` renderiza hero, tabs de experiencias, carrusel de espacios, timeline de proceso, mini-cotizador, paquetes, testimonios y CTA final.
+  - `lib/home-data.ts` centraliza experiencias, espacios, opciones del mini-cotizador, paquetes y testimonios para futuro CMS.
+  - Tabs, carrusel, timeline, auto-scroll mobile de testimonios y mini-cotizador quedaron portados a estado/efectos React.
+  - Se mantiene la capa CSS del prototipo para conservar fidelidad visual.
 - Se corrigió el adaptador de prototipos para que no redispare listeners antiguos de `DOMContentLoaded` al navegar entre páginas; esto evita errores como `filterPkgs` intentando operar sobre DOM de otra ruta.
 - Se desactivó `devIndicators` de Next en `next.config.ts` para evitar el bug de devtools/webpack `SegmentViewNode` / `__webpack_modules__[moduleId] is not a function` en desarrollo.
 
@@ -107,6 +113,8 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 - En `/cotizar`, validación headless mobile 390×844: selecciona Boda, fecha 20 jun 2026, 60 invitados, add-on Salón, total `$21,000`, submit exitoso con correo vacío y sin overflow horizontal.
 - En navbar, validación headless desde `/nosotros`: click en `Cotizar ahora` navega a `/cotizar`.
 - `npm run build` pasa después de migrar `/cotizar`; la ruta `/cotizar` queda en 6.51 kB y First Load JS 112 kB.
+- En `/`, validación headless mobile 390×844 y desktop 1440×1000: 8 secciones, hero presente, 5 tabs, 6 cards del carrusel, tabs cambian a Corporativos, carrusel desplaza, mini-cotizador avanza al paso 2 con interacción normal y sin overflow horizontal.
+- `npm run build` pasa después de migrar home; la ruta `/` queda en 9.38 kB y First Load JS 115 kB.
 - `http://localhost:8084/` y `http://localhost:8084/experiencias` responden HTTP 200 tras el fix de listeners.
 - `http://localhost:8084/`, `/experiencias` y `/faq` vuelven a responder HTTP 200 tras limpiar `.next` y reiniciar el servidor con `devIndicators: false`.
 - Servidor local de referencia activo en `http://localhost:8083/`.
@@ -128,4 +136,4 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 
 ## Siguiente paso recomendado
 
-Revisar `/cotizar` manualmente side-by-side. Si queda aprobado, continuar con home `/` a React real o preparar integración backend/Supabase según prioridad.
+Revisar home `/` manualmente side-by-side. Si queda aprobada, la migración pública principal queda lista para una ronda de limpieza: reducir dependencia del CSS de prototipo por componentes compartidos y preparar integración backend/Supabase.
