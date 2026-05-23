@@ -90,9 +90,36 @@ function normalizeCss(input: string) {
 function wrapPrototypeScripts(script: string) {
   return `
 (() => {
+  const prototypeReadyCallbacks = [];
+  const originalDocumentAddEventListener = document.addEventListener.bind(document);
+  const originalWindowAddEventListener = window.addEventListener.bind(window);
+  const captureReadyListener = (target, listener) => {
+    if (typeof listener === 'function') {
+      prototypeReadyCallbacks.push(() => listener.call(target, new Event('DOMContentLoaded')));
+      return true;
+    }
+    if (listener && typeof listener.handleEvent === 'function') {
+      prototypeReadyCallbacks.push(() => listener.handleEvent(new Event('DOMContentLoaded')));
+      return true;
+    }
+    return false;
+  };
+
+  document.addEventListener = (type, listener, options) => {
+    if (type === 'DOMContentLoaded' && captureReadyListener(document, listener)) return;
+    originalDocumentAddEventListener(type, listener, options);
+  };
+  window.addEventListener = (type, listener, options) => {
+    if (type === 'DOMContentLoaded' && captureReadyListener(window, listener)) return;
+    originalWindowAddEventListener(type, listener, options);
+  };
+
   installPrototypeHandlers();
 
 ${script}
+
+  document.addEventListener = originalDocumentAddEventListener;
+  window.addEventListener = originalWindowAddEventListener;
 
   installPrototypeHandlers();
 
@@ -113,8 +140,7 @@ ${script}
     if (typeof value === 'function') window[key] = value;
   });
 
-  document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
-  window.dispatchEvent(new Event('DOMContentLoaded'));
+  prototypeReadyCallbacks.forEach((callback) => callback());
 
   function installPrototypeHandlers() {
     window.switchTab = (idx, btn) => {
