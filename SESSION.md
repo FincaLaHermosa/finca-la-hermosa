@@ -72,6 +72,12 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
   - `lib/espacios-data.ts` centraliza espacios, fotos, bullets, capacidades y amenidades para futuro CMS.
   - La galería se porta a estado React con clicks, dots, wheel, touch/swipe y autoavance móvil solo cuando la sección entra en vista.
   - Se mantiene la capa CSS del prototipo para conservar fidelidad visual.
+- Se migró `/nosotros` a React real:
+  - `app/nosotros/page.tsx` ya no usa `PrototypePage`.
+  - `components/NosotrosContent.tsx` renderiza hero, historia, valores, timeline, equipo, promesa y CTA final.
+  - `lib/nosotros-data.ts` centraliza timeline, valores, equipo y promesas para futuro CMS.
+  - Los reveals de texto e imagen se portaron a React con `IntersectionObserver`.
+  - Se mantiene la capa CSS del prototipo para conservar fidelidad visual.
 - Se corrigió el adaptador de prototipos para que no redispare listeners antiguos de `DOMContentLoaded` al navegar entre páginas; esto evita errores como `filterPkgs` intentando operar sobre DOM de otra ruta.
 - Se desactivó `devIndicators` de Next en `next.config.ts` para evitar el bug de devtools/webpack `SegmentViewNode` / `__webpack_modules__[moduleId] is not a function` en desarrollo.
 
@@ -86,6 +92,8 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 - En `/faq`, se verificó por DOM que `.faq-question` no conserva borde/fondo nativo de botón y ocupa el mismo ancho que `.faq-item`.
 - En `/espacios`, validación headless mobile 390×844: 9 items, 9 slides, 9 dots, inicia en `Jardines y áreas verdes`, cambia a `Salón de eventos`, sin overflow horizontal y nav oscuro.
 - En `/espacios`, validación headless desktop 1440×1000: inicia en `Jardines y áreas verdes`, 9 items/slides, sin overflow horizontal, nav oscuro y galería con altura correcta.
+- En `/nosotros`, validación headless mobile 390×844: 7 secciones, 6 timeline items, 4 team cards, grid de equipo en 2 columnas, descripciones ocultas en mobile, sin overflow horizontal.
+- En `/nosotros`, validación headless desktop 1440×1000: 7 secciones, 6 timeline items, 4 team cards, grid 1.4fr/1fr/1fr/1fr, descripciones visibles, nav activo en `Nosotros`, sin overflow horizontal.
 - `http://localhost:8084/` y `http://localhost:8084/experiencias` responden HTTP 200 tras el fix de listeners.
 - `http://localhost:8084/`, `/experiencias` y `/faq` vuelven a responder HTTP 200 tras limpiar `.next` y reiniciar el servidor con `devIndicators: false`.
 - Servidor local de referencia activo en `http://localhost:8083/`.
@@ -107,4 +115,4 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 
 ## Siguiente paso recomendado
 
-Revisar `/espacios` manualmente side-by-side. Si queda aprobado, continuar con `/nosotros` a React real.
+Revisar `/nosotros` manualmente side-by-side. Si queda aprobado, continuar con `/cotizar` a React real.
