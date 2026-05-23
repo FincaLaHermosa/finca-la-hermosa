@@ -78,6 +78,7 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
   - `lib/nosotros-data.ts` centraliza timeline, valores, equipo y promesas para futuro CMS.
   - Los reveals de texto e imagen se portaron a React con `IntersectionObserver`.
   - Se mantiene la capa CSS del prototipo para conservar fidelidad visual.
+  - Se corrigió el orden DOM del timeline para que los dots queden alineados con la línea central.
 - Se corrigió el adaptador de prototipos para que no redispare listeners antiguos de `DOMContentLoaded` al navegar entre páginas; esto evita errores como `filterPkgs` intentando operar sobre DOM de otra ruta.
 - Se desactivó `devIndicators` de Next en `next.config.ts` para evitar el bug de devtools/webpack `SegmentViewNode` / `__webpack_modules__[moduleId] is not a function` en desarrollo.
 
@@ -94,6 +95,7 @@ La carpeta en OneDrive queda como referencia/backup. La copia intermedia en `C:\
 - En `/espacios`, validación headless desktop 1440×1000: inicia en `Jardines y áreas verdes`, 9 items/slides, sin overflow horizontal, nav oscuro y galería con altura correcta.
 - En `/nosotros`, validación headless mobile 390×844: 7 secciones, 6 timeline items, 4 team cards, grid de equipo en 2 columnas, descripciones ocultas en mobile, sin overflow horizontal.
 - En `/nosotros`, validación headless desktop 1440×1000: 7 secciones, 6 timeline items, 4 team cards, grid 1.4fr/1fr/1fr/1fr, descripciones visibles, nav activo en `Nosotros`, sin overflow horizontal.
+- En `/nosotros`, validación headless desktop confirma que los 6 dots del timeline comparten el mismo centro X y coinciden con el centro de `.timeline`.
 - `http://localhost:8084/` y `http://localhost:8084/experiencias` responden HTTP 200 tras el fix de listeners.
 - `http://localhost:8084/`, `/experiencias` y `/faq` vuelven a responder HTTP 200 tras limpiar `.next` y reiniciar el servidor con `devIndicators: false`.
 - Servidor local de referencia activo en `http://localhost:8083/`.

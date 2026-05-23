@@ -187,20 +187,39 @@ function TimelineSection() {
         <div className="timeline">
           {timelineItems.map((item, index) => (
             <div key={`${item.year}-${item.title}`} className="tl-item txt-reveal">
-              {index % 2 === 1 ? <div className="tl-empty" /> : null}
-              <div className="tl-content">
-                <div className="tl-year" style={item.current ? { color: "var(--verde)" } : undefined}>{item.year}</div>
-                <div className="tl-title">{item.title}</div>
-                <div className="tl-desc">{item.desc}</div>
-              </div>
-              <div className="tl-dot"><div className="tl-dot-inner" style={item.current ? { background: "var(--verde)", boxShadow: "0 0 0 1px var(--verde)" } : undefined} /></div>
-              {index % 2 === 0 ? <div className="tl-empty" /> : null}
+              {index % 2 === 0 ? (
+                <>
+                  <TimelineContent item={item} />
+                  <TimelineDot current={item.current} />
+                  <div className="tl-empty" />
+                </>
+              ) : (
+                <>
+                  <div className="tl-empty" />
+                  <TimelineDot current={item.current} />
+                  <TimelineContent item={item} />
+                </>
+              )}
             </div>
           ))}
         </div>
       </div>
     </section>
   );
+}
+
+function TimelineContent({ item }: { item: (typeof timelineItems)[number] }) {
+  return (
+    <div className="tl-content">
+      <div className="tl-year" style={item.current ? { color: "var(--verde)" } : undefined}>{item.year}</div>
+      <div className="tl-title">{item.title}</div>
+      <div className="tl-desc">{item.desc}</div>
+    </div>
+  );
+}
+
+function TimelineDot({ current }: { current?: boolean }) {
+  return <div className="tl-dot"><div className="tl-dot-inner" style={current ? { background: "var(--verde)", boxShadow: "0 0 0 1px var(--verde)" } : undefined} /></div>;
 }
 
 function TeamSection() {
@@ -355,4 +374,3 @@ function CalendarIcon() {
 function MessageIcon() {
   return <svg className="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>;
 }
-
