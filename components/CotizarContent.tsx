@@ -30,9 +30,12 @@ const initialState: FormState = {
 
 const steps = ["Tu evento", "Fecha", "Extras", "Tus datos"];
 
-export function CotizarContent() {
+export function CotizarContent({ initialType = "" }: { initialType?: string }) {
   const [step, setStep] = useState(1);
-  const [state, setState] = useState<FormState>(initialState);
+  const [state, setState] = useState<FormState>(() => {
+    const normalizedType = eventTypes.find((type) => type.id === initialType || type.value.toLowerCase() === initialType.toLowerCase());
+    return normalizedType ? { ...initialState, tipo: normalizedType.id } : initialState;
+  });
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const selectedType = eventTypes.find((item) => item.id === state.tipo);

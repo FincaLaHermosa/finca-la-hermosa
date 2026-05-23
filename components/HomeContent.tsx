@@ -9,9 +9,7 @@ type IconName = "users" | "briefcase" | "home" | "heart" | "clock" | "more" | "f
 
 export function HomeContent() {
   const [activeTab, setActiveTab] = useState(0);
-  const [quoteStep, setQuoteStep] = useState(1);
   const [quoteSelected, setQuoteSelected] = useState<string | null>(null);
-  const [quoteShake, setQuoteShake] = useState(false);
   const [processActive, setProcessActive] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
   const processRef = useRef<HTMLDivElement>(null);
@@ -104,27 +102,13 @@ export function HomeContent() {
     carouselRef.current?.scrollBy({ left: direction * 290, behavior: "smooth" });
   }, []);
 
-  const advanceQuote = useCallback(() => {
-    if (!quoteSelected) {
-      setQuoteShake(true);
-      window.setTimeout(() => setQuoteShake(false), 180);
-      return;
-    }
-    if (quoteStep < 3) {
-      setQuoteStep((current) => current + 1);
-      setQuoteSelected(null);
-      return;
-    }
-    window.location.href = `/cotizar?tipo=${encodeURIComponent(quoteSelected)}`;
-  }, [quoteSelected, quoteStep]);
-
   return (
     <main className="prototype-route home-page-react">
       <HeroSection />
       <ExperiencesSection activeTab={activeTab} onTabChange={setActiveTab} />
       <SpacesSection carouselRef={carouselRef} onScroll={scrollCarousel} />
       <ProcessSection active={processActive} processRef={processRef} />
-      <QuickQuoteSection quoteStep={quoteStep} selected={quoteSelected} shake={quoteShake} onSelect={setQuoteSelected} onNext={advanceQuote} />
+      <QuickQuoteSection selected={quoteSelected} onSelect={setQuoteSelected} />
       <PackagesSection />
       <TestimonialsSection testimonialsRef={testimonialsRef} />
       <FinalCtaSection />
@@ -287,32 +271,57 @@ function ProcessSection({ active, processRef }: { active: boolean; processRef: R
   );
 }
 
-function QuickQuoteSection({ quoteStep, selected, shake, onSelect, onNext }: { quoteStep: number; selected: string | null; shake: boolean; onSelect: (value: string) => void; onNext: () => void }) {
+function QuickQuoteSection({ selected, onSelect }: { selected: string | null; onSelect: (value: string) => void }) {
+  const selectedType = selected ? quickQuoteTypeMap[selected] : "";
+  const quoteHref = selectedType ? `/cotizar?tipo=${selectedType}` : "/cotizar";
+
   return (
-    <section className="snap-section" data-sec="cotizador" style={{ background: "var(--verde)" }}>
-      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 80% 20%,rgba(192,122,90,0.1) 0%,transparent 55%),radial-gradient(ellipse at 10% 80%,rgba(255,253,248,0.04) 0%,transparent 45%)", pointerEvents: "none", zIndex: 0 }} />
-      <div className="arch-label" style={{ right: -20, top: 60, color: "rgba(255,253,248,0.04)" }}>COTIZA</div>
-      <div style={{ position: "relative", zIndex: 1, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          <div className="txt-reveal" data-d="1" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3rem,5vw,5.5rem)", fontWeight: 400, lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fff" }}>Tu experiencia,</div>
-          <div className="txt-reveal" data-d="2" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.4rem,4vw,4.2rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 2 }}>en 3 minutos.</div>
-          <p className="txt-reveal" data-d="3" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.8, color: "rgba(255,253,248,0.65)", maxWidth: 380 }}>Recibe una cotización personalizada con el paquete que mejor se adapta a tu evento.</p>
-          <div className="txt-reveal" data-d="4" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.72rem", fontWeight: 300, color: "rgba(255,253,248,0.35)", letterSpacing: "0.04em" }}>Sin compromiso · Respuesta en menos de 24 horas</div>
+    <section className="snap-section quote-gateway" data-sec="cotizador" style={{ background: "var(--verde)", minHeight: "92vh" }}>
+      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+        <img src="/assets/photo-cta-dark.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.18 }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(115deg,rgba(30,50,50,0.98) 0%,rgba(30,50,50,0.9) 44%,rgba(30,50,50,0.54) 100%)" }} />
+      </div>
+      <div className="arch-label" style={{ right: -30, bottom: 46, color: "rgba(255,253,248,0.035)" }}>COTIZA</div>
+      <div style={{ position: "relative", zIndex: 1, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "grid", gridTemplateColumns: "0.95fr 1.05fr", gap: 72, alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+          <div className="txt-reveal" data-d="1" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.3rem,5.8vw,6.2rem)", fontWeight: 400, lineHeight: 0.9, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tu experiencia,</div>
+          <div className="txt-reveal" data-d="2" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.6rem,4.4vw,4.8rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 0.95, color: "var(--terracota)" }}>en 3 minutos.</div>
+          <p className="txt-reveal" data-d="3" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.68)", maxWidth: 440 }}>
+            Elige el punto de partida y continúa al cotizador completo. La propuesta final llega por WhatsApp con precio, paquete recomendado y próximos pasos.
+          </p>
+          <div className="txt-reveal quote-proof-row" data-d="4" style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+            {["PDF personalizado", "Respuesta en 24 h", "Sin compromiso"].map((item) => (
+              <span key={item} style={{ padding: "8px 13px", border: "1px solid rgba(232,196,173,0.22)", borderRadius: 999, fontFamily: "'Jost',sans-serif", fontSize: "0.66rem", fontWeight: 400, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,253,248,0.58)" }}>{item}</span>
+            ))}
+          </div>
         </div>
-        <div className="txt-reveal" data-d="2" style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-          <QuoteDots step={quoteStep} />
-          <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.35rem", fontWeight: 300, color: "rgba(255,253,248,0.92)", lineHeight: 1.4 }}>¿Qué tipo de evento quieres celebrar?</p>
-          <div id="q-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, transform: shake ? "translateX(-6px)" : undefined, transition: "transform 80ms ease" }}>
+
+        <div className="txt-reveal quote-gateway-panel" data-d="2" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 22, padding: 34, border: "1px solid rgba(255,253,248,0.14)", borderRadius: 14, background: "rgba(15,28,27,0.38)", boxShadow: "0 24px 70px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.06)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 24, alignItems: "flex-start" }}>
+            <div>
+              <div style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.64rem", fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--terra-light)", marginBottom: 9 }}>Inicio rápido</div>
+              <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.65rem", fontWeight: 300, color: "rgba(255,253,248,0.92)", lineHeight: 1.18 }}>¿Qué estás imaginando?</p>
+            </div>
+            <div aria-hidden="true" style={{ width: 74, height: 74, borderRadius: "50%", border: "1px solid rgba(232,196,173,0.28)", display: "grid", placeItems: "center", color: "var(--terra-light)", flex: "0 0 auto" }}>
+              <Icon name="file" className="quote-gateway-icon" />
+            </div>
+          </div>
+
+          <div id="q-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 10 }}>
             {quickQuoteOptions.map((option, index) => (
-              <button key={option} className={`s5-opt ${selected === option ? "selected" : ""}`} onClick={() => onSelect(option)} type="button">
+              <button key={option} className={`quote-choice ${selected === option ? "selected" : ""}`} onClick={() => onSelect(option)} type="button" aria-pressed={selected === option}>
                 <Icon name={quoteIconNames[index]} className="s5-opt-icon" />
                 <span className="s5-opt-label">{option}</span>
               </button>
             ))}
           </div>
-          <button type="button" onClick={onNext} style={{ display: "block", width: "100%", padding: 15, fontFamily: "'Jost',sans-serif", fontSize: "0.78rem", fontWeight: 400, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fffdf8", background: "var(--terracota)", border: "none", borderRadius: 999, cursor: "pointer", transition: "opacity 0.22s" }}>
-            {quoteStep < 3 ? "Siguiente →" : "Ir al cotizador →"}
-          </button>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 18, alignItems: "center", paddingTop: 8, borderTop: "1px solid rgba(255,253,248,0.1)" }}>
+            <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.76rem", fontWeight: 300, lineHeight: 1.6, color: "rgba(255,253,248,0.5)" }}>
+              {selected ? `Punto de partida: ${selected}.` : "Puedes empezar sin elegir categoría."}
+            </p>
+            <Link className="btn-accent quote-main-cta" href={quoteHref}>Empezar cotización</Link>
+          </div>
         </div>
       </div>
     </section>
@@ -451,19 +460,6 @@ function CarouselButton({ direction, onClick }: { direction: "left" | "right"; o
   );
 }
 
-function QuoteDots({ step }: { step: number }) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0 }}>
-      {[1, 2, 3].map((dot) => (
-        <div key={dot} style={{ display: "contents" }}>
-          <div id={`q-dot-${dot}`} style={quoteDotStyle(dot, step)}>{dot}</div>
-          {dot < 3 ? <div id={`q-line-${dot}`} style={{ width: 70, height: 1, background: dot < step ? "rgba(192,122,90,0.5)" : "rgba(255,255,255,0.15)", margin: "0 4px" }} /> : null}
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function CheckItem({ children }: { children: ReactNode }) {
   return (
     <li style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.82rem", fontWeight: 300, color: "var(--body-clr)", display: "flex", gap: 8, alignItems: "flex-start" }}>
@@ -497,6 +493,14 @@ function ArrowIcon() {
 }
 
 const quoteIconNames: IconName[] = ["users", "briefcase", "home", "heart", "clock", "more"];
+const quickQuoteTypeMap: Record<string, string> = {
+  "Evento Social": "familiar",
+  Corporativo: "corporativo",
+  Retiro: "retiro",
+  "Estancia Privada": "retiro",
+  "One Day Exp.": "otro",
+  "No sé aún": "otro",
+};
 
 const sectionTitleStyle: CSSProperties = { fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(3.4rem,6vw,5.2rem)", fontWeight: 300, letterSpacing: "-0.02em", color: "var(--carbon)", lineHeight: 1.05 };
 const sectionItalicStyle: CSSProperties = { fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.4rem,4vw,3.8rem)", fontStyle: "italic", fontWeight: 300, color: "var(--terracota)" };
@@ -507,22 +511,3 @@ const cardTitleStyle: CSSProperties = { fontFamily: "'Cormorant Garamond',serif"
 const bodyCopyStyle: CSSProperties = { fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.8, color: "var(--body-clr)" };
 const smallLinkStyle: CSSProperties = { fontFamily: "'Jost',sans-serif", fontSize: "0.78rem", fontWeight: 300, letterSpacing: "0.06em", color: "var(--terracota)", display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" };
 const spaceCardStyle: CSSProperties = { flex: "0 0 340px", scrollSnapAlign: "start", borderRadius: 8, overflow: "hidden", background: "var(--crema)", boxShadow: "0 2px 8px rgba(45,73,73,0.07),0 8px 24px rgba(45,73,73,0.05)", cursor: "pointer", transition: "transform 0.26s var(--ease-out),box-shadow 0.26s", textDecoration: "none", color: "inherit" };
-
-function quoteDotStyle(dot: number, step: number): CSSProperties {
-  const base: CSSProperties = {
-    width: 30,
-    height: 30,
-    borderRadius: "50%",
-    border: "1.5px solid rgba(255,255,255,0.2)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontFamily: "'Jost',sans-serif",
-    fontSize: "0.72rem",
-    fontWeight: 300,
-    color: "rgba(255,253,248,0.4)",
-  };
-  if (dot < step) return { ...base, background: "rgba(192,122,90,0.3)", borderColor: "var(--terracota)", fontWeight: 500, color: "var(--terracota)" };
-  if (dot === step) return { ...base, background: "var(--terracota)", borderColor: "var(--terracota)", fontWeight: 500, color: "#fff" };
-  return { ...base, background: "transparent" };
-}

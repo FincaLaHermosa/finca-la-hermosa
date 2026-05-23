@@ -11,13 +11,18 @@ const cotizarReactStyleFixes = `
 }
 `;
 
-export default function CotizarPage() {
+type CotizarPageProps = {
+  searchParams?: Promise<{ tipo?: string }>;
+};
+
+export default async function CotizarPage({ searchParams }: CotizarPageProps) {
   const payload = loadPrototype("cotizar");
+  const params = await searchParams;
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: `${payload.styles}\n${cotizarReactStyleFixes}` }} />
-      <CotizarContent />
+      <CotizarContent initialType={params?.tipo} />
     </>
   );
 }

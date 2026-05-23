@@ -19,15 +19,74 @@ const homeOverrides = `
     width: 100%;
   }
 
+  .home-page-react .quote-choice {
+    appearance: none;
+    min-height: 104px;
+    padding: 18px 16px;
+    background: rgba(255,253,248,0.045);
+    border: 1px solid rgba(255,253,248,0.12);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    cursor: pointer;
+    text-align: left;
+    transition: transform 260ms cubic-bezier(0.22,1,0.36,1), border-color 260ms ease, background 260ms ease;
+  }
+
+  .home-page-react .quote-choice:hover {
+    transform: translateY(-3px);
+    border-color: rgba(232,196,173,0.38);
+    background: rgba(192,122,90,0.1);
+  }
+
+  .home-page-react .quote-choice.selected {
+    border-color: var(--terracota);
+    background: rgba(192,122,90,0.16);
+  }
+
+  .home-page-react .quote-gateway-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .home-page-react .quote-main-cta {
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
   .home-page-react .proc-dot.active:nth-child(1) .proc-dot-inner { transition-delay: 100ms; }
   .home-page-react .proc-dot.active:nth-child(2) .proc-dot-inner { transition-delay: 1100ms; }
   .home-page-react .proc-dot.active:nth-child(3) .proc-dot-inner { transition-delay: 2100ms; }
 
   @media (max-width: 760px) {
-    .home-page-react [data-sec="cotizador"] > div[style*="grid-template-columns: 1fr 1fr"],
+    .home-page-react [data-sec="cotizador"] > div[style*="grid-template-columns"],
     .home-page-react [data-sec="cta"] .cta-outer {
       grid-template-columns: 1fr !important;
       gap: 36px !important;
+    }
+
+    .home-page-react .quote-gateway {
+      min-height: auto !important;
+      padding: 96px 0 76px;
+    }
+
+    .home-page-react .quote-gateway-panel {
+      padding: 24px 20px !important;
+    }
+
+    .home-page-react .quote-gateway #q-grid {
+      grid-template-columns: 1fr 1fr !important;
+    }
+
+    .home-page-react .quote-gateway-panel > div:last-child {
+      grid-template-columns: 1fr !important;
+    }
+
+    .home-page-react .quote-main-cta {
+      width: 100%;
     }
   }
 `;
