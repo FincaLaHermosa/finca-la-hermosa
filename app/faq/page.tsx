@@ -1,5 +1,13 @@
-import { PrototypePage } from "@/components/PrototypePage";
+import { FaqContent } from "@/components/FaqContent";
+import { loadPrototype } from "@/lib/prototype";
 
 export default function FaqPage() {
-  return <PrototypePage route="faq" />;
+  const payload = loadPrototype("faq");
+
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: payload.styles }} />
+      <FaqContent />
+    </>
+  );
 }
