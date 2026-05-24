@@ -65,8 +65,8 @@ function HeroFaq() {
           <div className="overline overline-light" style={{ justifyContent: "center" }}>Todo lo que necesitas saber</div>
         </div>
         <div className="txt-reveal" data-d="1">
-          <div style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.4rem,6vw,7rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Preguntas</div>
-          <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.8rem,5vw,5.8rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>frecuentes.</div>
+          <div className="hero-title-display" style={{ color: "#fffdf8" }}>Preguntas</div>
+          <div className="hero-title-italic" style={{ color: "var(--terracota)", marginTop: 6 }}>frecuentes.</div>
         </div>
         <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(255,253,248,0.52)", maxWidth: 420 }}>
           Resolvemos las dudas más comunes sobre reservaciones, espacios, precios y logística. Si no encuentras lo que buscas, escríbenos.

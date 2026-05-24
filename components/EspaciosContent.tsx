@@ -27,8 +27,8 @@ function HeroFolio() {
           <div className="hero-folio-text">
             <div className="hero-folio-id txt-reveal">El venue</div>
             <h1 style={{ margin: 0, fontWeight: 400 }}>
-              <span className="hero-folio-display txt-reveal" data-d="1">Espacios</span>
-              <span className="hero-folio-italic txt-reveal" data-d="2">que cuentan historias.</span>
+              <span className="hero-folio-display hero-title-display txt-reveal" data-d="1">Espacios</span>
+              <span className="hero-folio-italic hero-title-italic txt-reveal" data-d="2">que cuentan historias.</span>
             </h1>
             <p className="hero-folio-body txt-reveal" data-d="3">
               Cada rincón de la finca está pensado para vivirse plenamente. Desplázate por los nueve espacios y encuentra el escenario perfecto para tu celebración.

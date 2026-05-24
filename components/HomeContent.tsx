@@ -9,7 +9,6 @@ type IconName = "users" | "briefcase" | "home" | "heart" | "clock" | "more" | "f
 
 export function HomeContent() {
   const [activeTab, setActiveTab] = useState(0);
-  const [quoteSelected, setQuoteSelected] = useState<string | null>(null);
   const [processActive, setProcessActive] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
   const processRef = useRef<HTMLDivElement>(null);
@@ -108,7 +107,7 @@ export function HomeContent() {
       <ExperiencesSection activeTab={activeTab} onTabChange={setActiveTab} />
       <SpacesSection carouselRef={carouselRef} onScroll={scrollCarousel} />
       <ProcessSection active={processActive} processRef={processRef} />
-      <QuickQuoteSection selected={quoteSelected} onSelect={setQuoteSelected} />
+      <QuickQuoteSection />
       <PackagesSection />
       <TestimonialsSection testimonialsRef={testimonialsRef} />
       <FinalCtaSection />
@@ -133,8 +132,8 @@ function HeroSection() {
           <div className="overline overline-light">VENUE Y EXPERIENCIAS - MÉXICO</div>
         </div>
         <div style={{ maxWidth: 820 }}>
-          <div className="txt-reveal" data-d="1" style={{ fontFamily: "'Against',serif", fontSize: "clamp(56px,8vw,104px)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Cada experiencia,</div>
-          <div className="txt-reveal" data-d="2" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(52px,7.5vw,96px)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 4 }}>diseñada para ti.</div>
+          <div className="txt-reveal hero-title-display" data-d="1" style={{ color: "#fffdf8" }}>Cada experiencia,</div>
+          <div className="txt-reveal hero-title-italic" data-d="2" style={{ color: "var(--terracota)", marginTop: 4 }}>diseñada para ti.</div>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, marginTop: 48, alignItems: "flex-end" }}>
           <p className="txt-reveal" data-d="3" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.8, color: "rgba(255,253,248,0.72)", maxWidth: 400 }}>
@@ -159,11 +158,11 @@ function ExperiencesSection({ activeTab, onTabChange }: { activeTab: number; onT
   return (
     <section className="snap-section" data-sec="experiencias" style={{ background: "var(--crema-warm)", overflow: "hidden", paddingTop: 86 }}>
       <div style={{ maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "flex", flexDirection: "column", gap: 0 }}>
-        <div className="txt-reveal" data-d="1" style={{ textAlign: "center", marginBottom: 16 }}>
+        <div className="txt-reveal home-experiences-heading" data-d="1" style={{ textAlign: "center", marginBottom: 16 }}>
           <div className="overline overline-dark" style={{ justifyContent: "center", marginBottom: 10 }}>Experiencias</div>
           <div style={sectionTitleStyle}>¿Qué quieres celebrar?</div>
         </div>
-        <div className="tabs-bar txt-reveal" data-d="2">
+        <div className="tabs-bar txt-reveal home-experiences-tabs" data-d="2">
           {homeExperiences.map((experience, index) => (
             <button key={experience.label} className={`tab-btn ${experience.special ? "tab-btn--special" : ""} ${activeTab === index ? "active" : ""}`} onClick={() => onTabChange(index)}>
               {experience.label}
@@ -228,9 +227,9 @@ function ProcessSection({ active, processRef }: { active: boolean; processRef: R
   ];
 
   return (
-    <section className="snap-section" data-sec="proceso" style={{ background: "var(--crema-warm)" }}>
+    <section className="snap-section process-compact-section" data-sec="proceso" style={{ background: "var(--crema-warm)", minHeight: "72vh" }}>
       <div style={{ maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 56 }}>
+        <div className="process-compact-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 38 }}>
           <div className="txt-reveal" data-d="1" style={{ lineHeight: 1 }}>
             <div style={sectionTitleStyle}>De la idea</div>
             <div style={sectionItalicStyle}>a la celebración.</div>
@@ -262,7 +261,7 @@ function ProcessSection({ active, processRef }: { active: boolean; processRef: R
           </div>
         </div>
 
-        <div className="txt-reveal" data-d="4" style={{ marginTop: 52, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+        <div className="txt-reveal process-compact-cta" data-d="4" style={{ marginTop: 34, display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
           <Link className="btn-primary" href="/cotizar">Cotizar ahora</Link>
           <svg className="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ width: 28, height: 28, color: "var(--verde-mid)", opacity: 0.7 }}><polyline points="6 9 12 15 18 9" /></svg>
         </div>
@@ -271,12 +270,9 @@ function ProcessSection({ active, processRef }: { active: boolean; processRef: R
   );
 }
 
-function QuickQuoteSection({ selected, onSelect }: { selected: string | null; onSelect: (value: string) => void }) {
-  const selectedType = selected ? quickQuoteTypeMap[selected] : "";
-  const quoteHref = selectedType ? `/cotizar?tipo=${selectedType}` : "/cotizar";
-
+function QuickQuoteSection() {
   return (
-    <section className="snap-section quote-gateway quote-video-section" data-sec="cotizador" style={{ background: "var(--verde-dark)", minHeight: "100vh" }}>
+    <section className="snap-section quote-gateway quote-video-section" data-sec="cotizador" style={{ background: "var(--verde-dark)", minHeight: "76vh" }}>
       <div className="quote-video-bg" aria-hidden="true">
         <video className="quote-video-media" autoPlay muted loop playsInline preload="metadata" poster="/assets/photo-cta-dark.jpg">
           <source src="/assets/home-quote-loop.mp4" type="video/mp4" />
@@ -286,45 +282,17 @@ function QuickQuoteSection({ selected, onSelect }: { selected: string | null; on
         <div className="quote-video-wash" />
       </div>
       <div className="arch-label" style={{ right: -30, bottom: 46, color: "rgba(255,253,248,0.035)" }}>COTIZA</div>
-      <div className="quote-video-inner" style={{ position: "relative", zIndex: 1, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
-        <div className="txt-reveal quote-gateway-panel" data-d="2" style={{ width: "min(620px, 100%)", display: "grid", gridTemplateColumns: "1fr", gap: 24, padding: "42px 40px 38px", border: "1px solid rgba(255,253,248,0.18)", borderRadius: 16, background: "rgba(24,42,40,0.58)", backdropFilter: "blur(22px) saturate(1.35)", WebkitBackdropFilter: "blur(22px) saturate(1.35)", boxShadow: "0 30px 90px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.1)" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", gap: 24, alignItems: "flex-start" }}>
-            <div>
-              <div className="overline overline-light" style={{ marginBottom: 15 }}>Cotización guiada</div>
-              <div style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.2rem,5.2vw,5.8rem)", fontWeight: 400, lineHeight: 0.9, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tu experiencia,</div>
-              <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.5rem,4vw,4.4rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 0.98, color: "var(--terracota)", marginTop: 4 }}>en 3 minutos.</div>
-            </div>
-            <div aria-hidden="true" style={{ width: 76, height: 76, borderRadius: "50%", border: "1px solid rgba(232,196,173,0.3)", display: "grid", placeItems: "center", color: "var(--terra-light)", flex: "0 0 auto" }}>
-              <Icon name="file" className="quote-gateway-icon" />
-            </div>
+      <div className="quote-video-inner" style={{ position: "relative", zIndex: 4, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
+        <div className="txt-reveal quote-glass-card" data-d="2">
+          <div className="overline overline-light">Cotización guiada</div>
+          <div>
+            <div className="quote-card-title">Tu experiencia,</div>
+            <div className="quote-card-subtitle">en 3 minutos.</div>
           </div>
-
-          <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.72)", maxWidth: 470 }}>
+          <p className="quote-card-copy">
             Mira el ambiente, elige el punto de partida y continúa al cotizador completo. La propuesta final llega por WhatsApp con precio, paquete recomendado y próximos pasos.
           </p>
-
-          <div className="txt-reveal quote-proof-row" data-d="4" style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-            {["PDF personalizado", "Respuesta en 24 h", "Sin compromiso"].map((item) => (
-              <span key={item} style={{ padding: "8px 13px", border: "1px solid rgba(232,196,173,0.22)", borderRadius: 999, fontFamily: "'Jost',sans-serif", fontSize: "0.66rem", fontWeight: 400, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,253,248,0.58)" }}>{item}</span>
-            ))}
-          </div>
-
-          <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.55rem", fontWeight: 300, color: "rgba(255,253,248,0.92)", lineHeight: 1.2, marginTop: 2 }}>¿Qué estás imaginando?</p>
-          <div id="q-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 10 }}>
-            {quickQuoteOptions.map((option, index) => (
-              <button key={option} className={`quote-choice ${selected === option ? "selected" : ""}`} onClick={() => onSelect(option)} type="button" aria-pressed={selected === option}>
-                <Icon name={quoteIconNames[index]} className="s5-opt-icon" />
-                <span className="s5-opt-label">{option}</span>
-              </button>
-            ))}
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 18, alignItems: "center", paddingTop: 8, borderTop: "1px solid rgba(255,253,248,0.1)" }}>
-            <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.76rem", fontWeight: 300, lineHeight: 1.6, color: "rgba(255,253,248,0.5)" }}>
-              {selected ? `Punto de partida: ${selected}.` : "Puedes empezar sin elegir categoría."}
-            </p>
-            <Link className="btn-accent quote-main-cta" href={quoteHref}>Empezar cotización</Link>
-          </div>
+          <Link className="btn-accent quote-main-cta" href="/cotizar">Cotizar ahora</Link>
         </div>
       </div>
     </section>
@@ -494,16 +462,6 @@ function Icon({ name, className }: { name: IconName; className?: string }) {
 function ArrowIcon() {
   return <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><polyline points="9 18 15 12 9 6" /></svg>;
 }
-
-const quoteIconNames: IconName[] = ["users", "briefcase", "home", "heart", "clock", "more"];
-const quickQuoteTypeMap: Record<string, string> = {
-  "Evento Social": "familiar",
-  Corporativo: "corporativo",
-  Retiro: "retiro",
-  "Estancia Privada": "retiro",
-  "One Day Exp.": "otro",
-  "No sé aún": "otro",
-};
 
 const sectionTitleStyle: CSSProperties = { fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(3.4rem,6vw,5.2rem)", fontWeight: 300, letterSpacing: "-0.02em", color: "var(--carbon)", lineHeight: 1.05 };
 const sectionItalicStyle: CSSProperties = { fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.4rem,4vw,3.8rem)", fontStyle: "italic", fontWeight: 300, color: "var(--terracota)" };

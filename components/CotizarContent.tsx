@@ -143,8 +143,8 @@ function HeroCotizar() {
       <div className="hero-cotizar-content">
         <div className="txt-reveal" style={{ marginBottom: 14 }}><div className="overline overline-light">Tu propuesta personalizada</div></div>
         <div className="txt-reveal" data-d="1">
-          <div style={{ fontFamily: "'Against',serif", fontSize: "clamp(2.8rem,5vw,5.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Cuéntanos sobre</div>
-          <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.2rem,4vw,4.4rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 4 }}>tu celebración.</div>
+          <div className="hero-title-display" style={{ color: "#fffdf8" }}>Cuéntanos sobre</div>
+          <div className="hero-title-italic" style={{ color: "var(--terracota)", marginTop: 4 }}>tu celebración.</div>
         </div>
         <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.85rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.5)", maxWidth: 440, marginTop: 16 }}>
           Responde 4 preguntas y en menos de 24 horas recibirás una propuesta con PDF personalizado — precio exacto, paquete recomendado y próximos pasos.

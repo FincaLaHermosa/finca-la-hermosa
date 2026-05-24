@@ -88,8 +88,8 @@ function HeroSection({ onQuote }: { onQuote: () => void }) {
       <div className="exp-hero-inner" style={{ position: "relative", zIndex: 2, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "60px 52px 72px" }}>
         <div className="exp-hero-copy" style={{ maxWidth: 560 }}>
           <div className="overline overline-light txt-reveal" style={{ marginBottom: 24 }}>Catálogo de paquetes</div>
-          <div className="txt-reveal" data-d="1" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.8rem,6.5vw,7rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Experiencias,</div>
-          <div className="txt-reveal" data-d="2" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(3.2rem,5.5vw,5.8rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 4 }}>diseñadas para celebrar.</div>
+          <div className="txt-reveal hero-title-display" data-d="1" style={{ color: "#fffdf8" }}>Experiencias,</div>
+          <div className="txt-reveal hero-title-italic" data-d="2" style={{ color: "var(--terracota)", marginTop: 4 }}>diseñadas para celebrar.</div>
           <p className="txt-reveal" data-d="3" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.92rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.68)", marginTop: 28, maxWidth: 420 }}>
             Elige el paquete que mejor se adapta a tu evento. Cada experiencia incluye atención personalizada, espacios únicos y todo el entorno natural de la finca.
           </p>

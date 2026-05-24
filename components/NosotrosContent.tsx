@@ -65,8 +65,8 @@ function HeroSection() {
           <div className="overline overline-light">Nuestra historia</div>
         </div>
         <div className="txt-reveal" data-d="1" style={{ marginBottom: 24 }}>
-          <div style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.4rem,6vw,7rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>La historia</div>
-          <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.8rem,5vw,5.8rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>que hace el lugar.</div>
+          <div className="hero-title-display" style={{ color: "#fffdf8" }}>La historia</div>
+          <div className="hero-title-italic" style={{ color: "var(--terracota)", marginTop: 6 }}>que hace el lugar.</div>
         </div>
         <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.9rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(255,253,248,0.6)", maxWidth: 440, marginBottom: 36 }}>
           Finca La Hermosa nació de una familia con raíces en Isidro Fabela y el deseo de compartir lo que durante décadas fue solo suyo. Hoy, cada evento que vivimos aquí es una extensión de ese mismo espíritu.
