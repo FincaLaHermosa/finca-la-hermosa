@@ -9,7 +9,6 @@ type IconName = "users" | "briefcase" | "home" | "heart" | "clock" | "more" | "f
 
 export function HomeContent() {
   const [activeTab, setActiveTab] = useState(0);
-  const [processActive, setProcessActive] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
   const processRef = useRef<HTMLDivElement>(null);
   const testimonialsRef = useRef<HTMLDivElement>(null);
@@ -36,21 +35,9 @@ export function HomeContent() {
       hero?.querySelectorAll(".img-reveal").forEach((el) => el.classList.add("in"));
     }, 180);
 
-    const processObs = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          window.setTimeout(() => setProcessActive(true), 600);
-          processObs.disconnect();
-        }
-      },
-      { threshold: 0.5 },
-    );
-    if (processRef.current) processObs.observe(processRef.current);
-
     return () => {
       window.clearTimeout(heroTimer);
       revealObs.disconnect();
-      processObs.disconnect();
     };
   }, []);
 
@@ -106,7 +93,7 @@ export function HomeContent() {
       <HeroSection />
       <ExperiencesSection activeTab={activeTab} onTabChange={setActiveTab} />
       <SpacesSection carouselRef={carouselRef} onScroll={scrollCarousel} />
-      <ProcessSection active={processActive} processRef={processRef} />
+      <ProcessSection processRef={processRef} />
       <QuickQuoteSection />
       <PackagesSection />
       <TestimonialsSection testimonialsRef={testimonialsRef} />
@@ -219,7 +206,7 @@ function SpacesSection({ carouselRef, onScroll }: { carouselRef: RefObject<HTMLD
   );
 }
 
-function ProcessSection({ active, processRef }: { active: boolean; processRef: RefObject<HTMLDivElement | null> }) {
+function ProcessSection({ processRef }: { processRef: RefObject<HTMLDivElement | null> }) {
   const steps = [
     { title: "Cotiza en línea", body: "Llena nuestro formulario en 3 minutos y cuéntanos cómo imaginas tu evento.", icon: "file" as IconName },
     { title: "Recibe tu propuesta", body: "Te enviamos un PDF personalizado con el paquete que mejor se adapta a tu evento y presupuesto.", icon: "mail" as IconName },
@@ -238,21 +225,10 @@ function ProcessSection({ active, processRef }: { active: boolean; processRef: R
         </div>
 
         <div ref={processRef} className="proc-timeline txt-reveal" data-d="3">
-          <div className="proc-track-wrap">
-            <div className="proc-track">
-              <div className="proc-track-fill" id="proc-fill" style={{ transition: active ? "width 2s linear" : undefined, width: active ? "100%" : 0 }} />
-            </div>
-            <div className="proc-dots-row">
-              {[1, 2, 3].map((step, index) => (
-                <div key={step} className={`proc-dot ${active ? "active" : ""}`} id={`proc-dot-${step}`} style={{ transitionDelay: `${index}s` }}>
-                  <div className="proc-dot-inner">0{step}</div>
-                </div>
-              ))}
-            </div>
-          </div>
           <div className="proc-cols">
-            {steps.map((step) => (
+            {steps.map((step, index) => (
               <div className="proc-col" key={step.title}>
+                <div className="proc-num">0{index + 1}</div>
                 <Icon name={step.icon} className="proc-icon" />
                 <div className="proc-title">{step.title}</div>
                 <p className="proc-body">{step.body}</p>
@@ -262,7 +238,6 @@ function ProcessSection({ active, processRef }: { active: boolean; processRef: R
         </div>
 
         <div className="txt-reveal process-compact-cta" data-d="4" style={{ marginTop: 34, display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
-          <Link className="btn-primary" href="/cotizar">Cotizar ahora</Link>
           <svg className="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ width: 28, height: 28, color: "var(--verde-mid)", opacity: 0.7 }}><polyline points="6 9 12 15 18 9" /></svg>
         </div>
       </div>
@@ -434,7 +409,7 @@ function CarouselButton({ direction, onClick }: { direction: "left" | "right"; o
 function CheckItem({ children }: { children: ReactNode }) {
   return (
     <li style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.82rem", fontWeight: 300, color: "var(--body-clr)", display: "flex", gap: 8, alignItems: "flex-start" }}>
-      <span style={{ color: "var(--terracota)", fontSize: "0.75rem" }}>✓</span>{children}
+      <span style={{ width: 3, height: 3, borderRadius: "50%", background: "var(--terracota)", flexShrink: 0, marginTop: "0.68em" }} />{children}
     </li>
   );
 }

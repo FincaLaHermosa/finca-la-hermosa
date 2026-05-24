@@ -42,6 +42,11 @@ La carpeta en OneDrive queda como referencia/backup. El desarrollo debe seguir e
 
 ## Hecho en este bloque
 
+- Se inició la retirada gradual de la capa de prototipo por la página home:
+  - `/` ya no llama `loadPrototype("index")`.
+  - Los estilos visuales de home se movieron a `lib/home-styles.ts`.
+  - `app/page.tsx` renderiza solo `HomeContent` + `homeStyles`.
+  - `lib/home-styles.ts` fue depurado de 2581 a 1230 líneas, eliminando reglas ajenas a home (`faq`, `nosotros`, `cotizar`, `experiencias`, `espacios/folio`, `sg`).
 - Home `/` quedó migrado a React real con hero, experiencias, espacios, proceso, paquetes, testimonios y CTA final.
 - Se rediseñó la sección `Tu experiencia, en 3 minutos` usando criterio Impeccable:
   - video autoplay/muted/loop/playsInline;
@@ -63,6 +68,8 @@ La carpeta en OneDrive queda como referencia/backup. El desarrollo debe seguir e
 
 ## Verificación reciente
 
+- `npm run build` pasa tras retirar `loadPrototype` de `/`.
+- `npm run build` pasa tras depurar `lib/home-styles.ts`.
 - `npx tsc --noEmit` pasa.
 - Servidor local `http://localhost:8084` responde HTTP 200.
 - El usuario verificó mobile y confirmó que el ajuste visual quedó bien.

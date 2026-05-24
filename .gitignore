@@ -9,6 +9,7 @@ node_modules/
 .next/
 *.tsbuildinfo
 output*.log
+.next-dev-*.log
 .env
 .env.local
 .env.production
