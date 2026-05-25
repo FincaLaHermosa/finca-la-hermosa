@@ -1,12 +1,10 @@
 import { NosotrosContent } from "@/components/NosotrosContent";
-import { loadPrototype } from "@/lib/prototype";
+import { nosotrosStyles } from "@/lib/nosotros-styles";
 
 export default function NosotrosPage() {
-  const payload = loadPrototype("nosotros");
-
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: payload.styles }} />
+      <style dangerouslySetInnerHTML={{ __html: nosotrosStyles }} />
       <NosotrosContent />
     </>
   );

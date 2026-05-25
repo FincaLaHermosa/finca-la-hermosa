@@ -349,8 +349,8 @@ function FinalCtaSection() {
       <div className="cta-outer" style={{ position: "relative", zIndex: 1, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div>
-            <div id="illum-text" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.5rem,6vw,6.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tu momento perfecto,</div>
-            <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.8rem,5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>comienza aquí.</div>
+            <div id="illum-text" className="final-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.5rem,6vw,6.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tu momento perfecto,</div>
+            <div className="final-cta-title-sub" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.8rem,5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>comienza aquí.</div>
           </div>
           <p className="txt-reveal" data-d="3" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.8, color: "rgba(255,253,248,0.62)", maxWidth: 380 }}>Agenda una visita, resuelve tus dudas o recibe tu cotización ahora mismo.</p>
         </div>

@@ -12,11 +12,11 @@ Venue multifuncional en Isidro Fabela, EDOMEX. Objetivo: sistema de adquisición
 |---|------|--------|
 | 1–3 | Estrategia + Identidad + Arquitectura | ✅ Completadas |
 | 4 | Diseño visual (prototipos HTML) | ✅ Completada |
-| 5 | GitHub repo + Next.js base | ⏳ |
+| 5 | GitHub repo + Next.js base | ✅ Completada |
 | 5.5 | Inventario de contenido editable | ⏳ |
-| 6 | Construcción en código (Next.js) | ⏳ |
-| 7 | Responsive + retoques | ⏳ |
-| 8 | Vercel + deploy | ⏳ |
+| 6 | Construcción en código (Next.js) | 🔄 En validación visual |
+| 7 | Responsive + retoques | 🔄 En curso |
+| 8 | Vercel + deploy | ✅ Completada |
 | 9 | Analytics (GTM + GA4 + Meta Pixel) | ⏳ |
 | 10 | Paquetes y pricing definitivos | 🔄 En curso |
 
@@ -24,7 +24,8 @@ Venue multifuncional en Isidro Fabela, EDOMEX. Objetivo: sistema de adquisición
 
 ## ★ Base / referencias estables
 
-**Prototipos HTML:** `sitio/` contiene los prototipos visuales completos para migración futura a Next.js.
+**Prototipos HTML:** `sitio/` conserva los prototipos visuales aprobados como referencia de fidelidad.
+**Next.js público:** las rutas públicas están implementadas en `app/` + `components/` y ya no dependen del runtime de prototipos.
 **Estrategia de marca/producto:** `PRODUCT.md` es la fuente para register, usuarios, propósito, personalidad, anti-referencias y accesibilidad.
 **Sistema visual detallado:** `DESIGN.md` es la fuente para tokens, componentes, color, tipografía, elevación, motion y reglas UI.
 

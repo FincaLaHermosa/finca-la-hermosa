@@ -195,8 +195,8 @@ function FinalCtaSection() {
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div className="overline overline-light txt-reveal">Empieza a planear</div>
           <div className="txt-reveal" data-d="1">
-            <div style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.2rem,5.5vw,6rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tu evento,</div>
-            <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.6rem,4.5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>hecho a tu medida.</div>
+            <div className="final-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.2rem,5.5vw,6rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tu evento,</div>
+            <div className="final-cta-title-sub" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.6rem,4.5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>hecho a tu medida.</div>
           </div>
           <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.62)", maxWidth: 360 }}>
             ¿Ya tienes todo más claro? Cuéntanos sobre tu evento y te preparamos una propuesta personalizada con PDF en menos de 24 horas.

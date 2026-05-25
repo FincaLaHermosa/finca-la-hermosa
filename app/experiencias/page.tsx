@@ -1,12 +1,10 @@
 import { ExperienciasContent } from "@/components/ExperienciasContent";
-import { loadPrototype } from "@/lib/prototype";
+import { experienciasStyles } from "@/lib/experiencias-styles";
 
 export default function ExperienciasPage() {
-  const payload = loadPrototype("experiencias");
-
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: payload.styles }} />
+      <style dangerouslySetInnerHTML={{ __html: experienciasStyles }} />
       <ExperienciasContent />
     </>
   );

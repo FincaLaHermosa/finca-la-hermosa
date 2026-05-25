@@ -306,8 +306,8 @@ function CtaSection() {
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div className="overline overline-light txt-reveal">Empieza a planear</div>
           <div className="txt-reveal" data-d="1">
-            <div style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.2rem,5.5vw,6rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Celebra con</div>
-            <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.6rem,4.5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>nosotros.</div>
+            <div className="final-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.2rem,5.5vw,6rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Celebra con</div>
+            <div className="final-cta-title-sub" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.6rem,4.5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>nosotros.</div>
           </div>
           <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.62)", maxWidth: 360 }}>Lleva a tu familia o a tu equipo a vivir algo diferente. Cuéntanos sobre tu evento y te preparamos una propuesta en menos de 24 horas.</p>
           <div className="txt-reveal" data-d="3" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 8 }}>

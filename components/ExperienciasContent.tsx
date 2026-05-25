@@ -258,8 +258,8 @@ function FinalCtaSection({ onWhatsapp }: { onWhatsapp: () => void }) {
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div className="overline overline-light txt-reveal">Empieza a planear</div>
           <div>
-            <div style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.5rem,6vw,6.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tu experiencia,</div>
-            <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.8rem,5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>empieza aquí.</div>
+            <div className="final-cta-title-main exp-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.5rem,6vw,6.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tu experiencia,</div>
+            <div className="final-cta-title-sub exp-cta-title-sub" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.8rem,5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>empieza aquí.</div>
           </div>
           <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.8, color: "rgba(255,253,248,0.62)", maxWidth: 380 }}>
             Cuéntanos sobre tu evento, elige tu paquete y recibe una propuesta personalizada en menos de 24 horas.

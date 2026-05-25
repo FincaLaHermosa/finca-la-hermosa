@@ -192,7 +192,17 @@ function ScrollGallery() {
   }, [activeIndex, isMobile]);
 
   const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    const direction = event.deltaY > 0 ? 1 : -1;
+    const nextIndex = activeIndex + direction;
+    const canMoveCarousel = nextIndex >= 0 && nextIndex < espacios.length;
+
+    if (!canMoveCarousel) {
+      wheelAccumRef.current = 0;
+      return;
+    }
+
     event.preventDefault();
+    event.stopPropagation();
     wheelAccumRef.current += event.deltaY;
 
     if (wheelTimerRef.current) window.clearTimeout(wheelTimerRef.current);
@@ -201,10 +211,9 @@ function ScrollGallery() {
     }, 250);
 
     if (Math.abs(wheelAccumRef.current) < 50) return;
-    const direction = wheelAccumRef.current > 0 ? 1 : -1;
     wheelAccumRef.current = 0;
     if (wheelTimerRef.current) window.clearTimeout(wheelTimerRef.current);
-    goToByUser(activeIndex + direction);
+    goToByUser(nextIndex);
   };
 
   const handleTouchStart = (event: React.TouchEvent) => {
@@ -232,12 +241,12 @@ function ScrollGallery() {
     <section className="sg-section" id="sg-section" ref={sectionRef}>
       <div id="sg-track">
         <div className="sg-sticky">
-          <div className="sg-left" onWheel={handleWheel} onTouchStart={handleTouchStart} onTouchEnd={handleHorizontalTouchEnd}>
+          <div className="sg-left" onTouchStart={handleTouchStart} onTouchEnd={handleHorizontalTouchEnd}>
             <div className="sg-header">
               <div className="sg-header-overline">Espacios del venue</div>
               <div className="sg-header-title">Cada rincón,<br /><em>diseñado para vivirse.</em></div>
             </div>
-            <div className="sg-list-viewport" ref={listViewportRef} onTouchStart={handleTouchStart} onTouchEnd={handleListTouchEnd}>
+            <div className="sg-list-viewport" ref={listViewportRef}>
               <div id="sg-list" style={{ transform: `translateY(${listOffset}px)` }}>
                 {espacios.map((espacio, index) => {
                   const distance = Math.abs(index - activeIndex);
@@ -260,7 +269,7 @@ function ScrollGallery() {
             {!isMobile ? <GalleryDescription espacio={activeEspacio} /> : null}
           </div>
 
-          <div className="sg-right" onTouchStart={handleTouchStart} onTouchEnd={handleHorizontalTouchEnd}>
+          <div className="sg-right" onWheel={handleWheel} onTouchStart={handleTouchStart} onTouchEnd={handleHorizontalTouchEnd}>
             <div id="sg-img-track" style={{ transform: `translateX(-${activeIndex * slideWidth}%)` }}>
               {espacios.map((espacio, index) => (
                 <div key={espacio.nombre} className="sg-img-slide">
@@ -368,8 +377,8 @@ function CtaSection() {
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div className="overline overline-light txt-reveal">Reserva tu fecha</div>
           <div className="txt-reveal" data-d="1">
-            <div style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.5rem,6vw,6.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>La finca te espera,</div>
-            <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.8rem,5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>¿cuándo celebramos?</div>
+            <div className="final-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.5rem,6vw,6.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>La finca te espera,</div>
+            <div className="final-cta-title-sub" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.8rem,5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>¿cuándo celebramos?</div>
           </div>
           <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.8, color: "rgba(255,253,248,0.62)", maxWidth: 380 }}>
             Cotiza tu evento, agenda una visita o escríbenos directo por WhatsApp. Respuesta en menos de 24 horas.
