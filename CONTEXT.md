@@ -24,21 +24,21 @@ Venue multifuncional en Isidro Fabela, EDOMEX. Objetivo: sistema de adquisición
 
 ## ★ Base / referencias estables
 
-**Prototipos HTML:** `sitio/` conserva los prototipos visuales aprobados como referencia de fidelidad.
+**Prototipos HTML:** `references/prototype-html/` conserva los prototipos visuales aprobados como referencia de fidelidad.
 **Next.js público:** las rutas públicas están implementadas en `app/` + `components/` y ya no dependen del runtime de prototipos.
 **Estrategia de marca/producto:** `PRODUCT.md` es la fuente para register, usuarios, propósito, personalidad, anti-referencias y accesibilidad.
 **Sistema visual detallado:** `DESIGN.md` es la fuente para tokens, componentes, color, tipografía, elevación, motion y reglas UI.
 
 | Página | Archivo | Estado |
 |--------|---------|--------|
-| `/` Inicio | `sitio/index.html` | Completo |
-| `/experiencias` | `sitio/experiencias.html` | Completo |
-| `/espacios` | `sitio/espacios.html` | Completo |
-| `/nosotros` | `sitio/nosotros.html` | Completo |
-| `/faq` | `sitio/faq.html` | Completo |
-| `/cotizar` | `sitio/cotizar.html` | Completo |
+| `/` Inicio | `references/prototype-html/index.html` | Completo |
+| `/experiencias` | `references/prototype-html/experiencias.html` | Completo |
+| `/espacios` | `references/prototype-html/espacios.html` | Completo |
+| `/nosotros` | `references/prototype-html/nosotros.html` | Completo |
+| `/faq` | `references/prototype-html/faq.html` | Completo |
+| `/cotizar` | `references/prototype-html/cotizar.html` | Completo |
 
-**Patrones base en `sitio/index.html` (reusar en migración):**
+**Patrones base en `references/prototype-html/index.html` (reusar en migración):**
 - CSS tokens en `:root` (cremas, verdes, terracota, ease curves)
 - Nav pill glassmorphism + `.scrolled` state
 - `.txt-reveal` + IntersectionObserver para fade-in por sección
@@ -49,7 +49,7 @@ Venue multifuncional en Isidro Fabela, EDOMEX. Objetivo: sistema de adquisición
 - `.cta-card` para sección final dark
 - Footer HTML idéntico en todas las páginas
 
-**Servidor preview:** `npx serve sitio -p 3333` — URLs sin `/sitio/` prefix (e.g. `localhost:3333/experiencias.html`)
+**Servidor preview de referencia:** `npx serve references/prototype-html -p 3333` — URLs sin `/references/prototype-html/` prefix (e.g. `localhost:3333/experiencias.html`)
 
 ---
 
@@ -61,12 +61,12 @@ Next.js 15 (App Router) · Tailwind CSS · Framer Motion · Embla Carousel · Su
 
 ## ★ Sistema de diseño
 
-**Referencia completa:** `Finca La Hermosa Design System/colors_and_type.css`
-**Assets:** `Finca La Hermosa Design System/assets/` — logos y isotipos × 3 colores (blanco, verde, terracota)
+**Referencia completa:** `references/design-system/colors_and_type.css`
+**Assets:** `references/design-system/assets/` — logos y isotipos × 3 colores (blanco, verde, terracota)
 **Contexto Impeccable:** usar `PRODUCT.md` para estrategia/marca y `DESIGN.md` para sistema visual detallado. No duplicar esos archivos completos en `CONTEXT.md`.
 
 **Tipografías:**
-- `Against Regular` — display/hero (local: `sitio/fonts/against-regular.otf`)
+- `Against Regular` — display/hero (local: `public/fonts/against-regular.otf`; referencia: `references/prototype-html/fonts/against-regular.otf`)
 - `Cormorant Garamond` — editorial serif, H2, cursivas emocionales
 - `Jost` — body, UI, nav, botones (Google Fonts)
 
@@ -141,7 +141,7 @@ Casa principal (6 hab) · 2 jardines · Salón 22×14 m · Terraza 3.5 m · Albe
 ## ★ Pendientes estables
 
 - Definir paquetes y pricing definitivos antes de publicar.
-- Migrar prototipos HTML a Next.js 15 con el sistema visual aprobado.
+- Validar visualmente rutas Next.js y depurar estilos por página hacia estilos compartidos.
 
 ---
 
@@ -149,5 +149,5 @@ Casa principal (6 hab) · 2 jardines · Salón 22×14 m · Terraza 3.5 m · Albe
 
 `2026-05-07` — Critique completo aplicado: scroll-snap eliminado de index, capacidades unificadas (220 eventos / 30 hospedaje), validación inline en cotizar, JS init bug en espacios, nav links corregidos en experiencias. Footer canónico unificado en las 6 páginas. sg-section reescrita sin hijack.
 `2026-05-06` — Se crearon `PRODUCT.md` y `DESIGN.md`; se aplicó critique de `/nosotros` y se unificaron botones, WA float y tipografía Jost en los prototipos HTML.
-`2026-05-05` — Fase 4 completada: prototipos HTML de inicio, experiencias, espacios, nosotros, FAQ y cotizar terminados en `sitio/`.
+`2026-05-05` — Fase 4 completada: prototipos HTML de inicio, experiencias, espacios, nosotros, FAQ y cotizar terminados; ahora viven en `references/prototype-html/`.
 `2026-05-05` — `espacios.html` consolidado a v2 FOLIO editorial con galería scroll-driven, 9 espacios, stats e inventario.

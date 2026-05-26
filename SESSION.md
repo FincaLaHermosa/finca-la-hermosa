@@ -20,6 +20,11 @@ El desarrollo debe seguir en `C:\Users\limin\dev\FINCA LA HERMOSA\WEBSITE` para 
   - `WEBSITE` para el repo del sitio.
   - `BRANDING` para referencias visuales y marca.
   - `MARKETING`, `CONTABILIDAD`, `LEGAL`, `OPERACION`, `VENTAS`, `FOTOGRAFIA_VIDEO`, `DOCUMENTOS` para organizar archivos futuros del negocio.
+- Orden interno de `WEBSITE`:
+  - `docs/architecture/` para planes y documentación de arquitectura.
+  - `references/prototype-html/` para prototipos HTML aprobados.
+  - `references/design-system/` para el design system de referencia.
+  - La raíz conserva archivos funcionales de Next/Git/Vercel y contexto de agentes.
 - Dominio productivo configurado: `https://fincalahermosa.com`.
 - `www.fincalahermosa.com` redirige al dominio raíz.
 - Vercel y Cloudflare quedaron conectados/configurados.
