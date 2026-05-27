@@ -57,7 +57,7 @@ export function SiteFooter() {
       <div className="footer-bottom">
         <p className="footer-copy">© 2026 Finca La Hermosa</p>
         <p className="footer-copy">
-          <a href="#">Privacidad</a> · <a href="#">Términos</a>
+          <span>Privacidad</span> · <span>Términos</span>
         </p>
       </div>
     </footer>
