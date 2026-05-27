@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { faqCategories, type FaqCategoryId, type FaqItem } from "@/lib/faq-data";
 
@@ -65,7 +64,7 @@ function HeroFaq() {
           <div className="overline overline-light" style={{ justifyContent: "center" }}>Todo lo que necesitas saber</div>
         </div>
         <div className="txt-reveal" data-d="1">
-          <div className="hero-title-display" style={{ color: "#fffdf8" }}>Preguntas</div>
+          <div className="hero-title-display" style={{ color: "var(--crema)" }}>Preguntas</div>
           <div className="hero-title-italic" style={{ color: "var(--terracota)", marginTop: 6 }}>frecuentes.</div>
         </div>
         <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(255,253,248,0.52)", maxWidth: 420 }}>
@@ -81,7 +80,7 @@ function HeroFaq() {
           <HeroStat value="19" label="preguntas respondidas" />
           <HeroStat value="5" label="categorías" />
           <div style={{ textAlign: "center" }}>
-            <div style={{ fontFamily: "'Against',serif", fontSize: "1.9rem", color: "#fffdf8", lineHeight: 1 }}>24<span style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "1.05rem", color: "var(--terracota)" }}>h</span></div>
+            <div style={{ fontFamily: "'Against',serif", fontSize: "1.9rem", color: "var(--crema)", lineHeight: 1 }}>24<span style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "1.05rem", color: "var(--terracota)" }}>h</span></div>
             <div style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.61rem", fontWeight: 300, letterSpacing: "0.08em", color: "rgba(255,253,248,0.32)", marginTop: 4 }}>tiempo de respuesta</div>
           </div>
         </div>
@@ -93,7 +92,7 @@ function HeroFaq() {
 function HeroStat({ value, label }: { value: string; label: string }) {
   return (
     <div style={{ textAlign: "center" }}>
-      <div style={{ fontFamily: "'Against',serif", fontSize: "1.9rem", color: "#fffdf8", lineHeight: 1 }}>{value}</div>
+      <div style={{ fontFamily: "'Against',serif", fontSize: "1.9rem", color: "var(--crema)", lineHeight: 1 }}>{value}</div>
       <div style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.61rem", fontWeight: 300, letterSpacing: "0.08em", color: "rgba(255,253,248,0.32)", marginTop: 4 }}>{label}</div>
     </div>
   );
@@ -175,7 +174,7 @@ function ContactSection() {
             <WhatsAppSmallIcon />
             Escribir por WhatsApp
           </a>
-          <Link href="/cotizar" className="btn-outline-dark">Solicitar cotización</Link>
+          <a href="/cotizar" className="btn-outline-dark">Solicitar cotización</a>
         </div>
       </div>
     </section>
@@ -187,7 +186,7 @@ function FinalCtaSection() {
     <section className="cta-section">
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <img src="/assets/photo-cta-dark.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.18 }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg,#1e3232 0%,#2d4949 30%,#1a2a1a 65%,#0e1e1e 100%)", opacity: 0.88 }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg,var(--verde-dark) 0%,var(--verde) 30%,#1a2a1a 65%,#0e1e1e 100%)", opacity: 0.88 }} />
       </div>
       <div style={{ position: "absolute", bottom: "15%", left: "45%", width: 500, height: 280, background: "radial-gradient(ellipse,rgba(240,160,60,0.08) 0%,transparent 70%)", borderRadius: "50%", zIndex: 0, pointerEvents: "none" }} />
 
@@ -195,7 +194,7 @@ function FinalCtaSection() {
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div className="overline overline-light txt-reveal">Empieza a planear</div>
           <div className="txt-reveal" data-d="1">
-            <div className="final-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.2rem,5.5vw,6rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tu evento,</div>
+            <div className="final-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.2rem,5.5vw,6rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "var(--crema)" }}>Tu evento,</div>
             <div className="final-cta-title-sub" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.6rem,4.5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>hecho a tu medida.</div>
           </div>
           <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.62)", maxWidth: 360 }}>
@@ -209,25 +208,25 @@ function FinalCtaSection() {
               </div>
             ))}
           </div>
-          <div className="txt-reveal" data-d="4" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 4 }}>
-            <Link href="/cotizar" className="btn-accent">Cotizar mi evento</Link>
+          <div className="faq-cta-actions txt-reveal" data-d="4">
+            <a href="/cotizar" className="btn-accent">Cotizar mi evento</a>
             <a href="https://wa.me/5215500000000" target="_blank" rel="noopener" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.69rem", fontWeight: 300, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,253,248,0.65)", background: "transparent", border: "1px solid rgba(255,255,255,0.22)", padding: "13px 28px", borderRadius: 999, textDecoration: "none", transition: "all 0.22s ease" }}>WhatsApp</a>
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <Link href="/experiencias" className="cta-card" style={{ textDecoration: "none" }}>
+        <div className="faq-cta-card-grid">
+          <a href="/experiencias" className="cta-card" style={{ textDecoration: "none" }}>
             <div className="cta-card-icon"><ShieldIcon /></div>
             <div className="cta-card-title">Ver experiencias y paquetes</div>
             <div className="cta-card-sub">Explora los paquetes y add-ons disponibles. Cada uno diseñado para un tipo de celebración.</div>
             <div style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.65rem", fontWeight: 300, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(192,122,90,0.8)", marginTop: 4 }}>Explorar →</div>
-          </Link>
-          <Link href="/espacios" className="cta-card" style={{ textDecoration: "none" }}>
+          </a>
+          <a href="/espacios" className="cta-card" style={{ textDecoration: "none" }}>
             <div className="cta-card-icon"><GridIcon /></div>
             <div className="cta-card-title">Conocer los espacios</div>
             <div className="cta-card-sub">Jardines, salón, alberca, terraza y más. Galería completa de cada rincón de la finca.</div>
             <div style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.65rem", fontWeight: 300, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(192,122,90,0.8)", marginTop: 4 }}>Ver galería →</div>
-          </Link>
+          </a>
         </div>
       </div>
     </section>

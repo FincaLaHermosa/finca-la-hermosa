@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   experienceAddons,
@@ -88,7 +87,7 @@ function HeroSection({ onQuote }: { onQuote: () => void }) {
       <div className="exp-hero-inner" style={{ position: "relative", zIndex: 2, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "60px 52px 72px" }}>
         <div className="exp-hero-copy" style={{ maxWidth: 560 }}>
           <div className="overline overline-light txt-reveal" style={{ marginBottom: 24 }}>Catálogo de paquetes</div>
-          <div className="txt-reveal hero-title-display" data-d="1" style={{ color: "#fffdf8" }}>Experiencias,</div>
+          <div className="txt-reveal hero-title-display" data-d="1" style={{ color: "var(--crema)" }}>Experiencias,</div>
           <div className="txt-reveal hero-title-italic" data-d="2" style={{ color: "var(--terracota)", marginTop: 4 }}>diseñadas para celebrar.</div>
           <p className="txt-reveal" data-d="3" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.92rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.68)", marginTop: 28, maxWidth: 420 }}>
             Elige el paquete que mejor se adapta a tu evento. Cada experiencia incluye atención personalizada, espacios únicos y todo el entorno natural de la finca.
@@ -249,7 +248,7 @@ function FinalCtaSection({ onWhatsapp }: { onWhatsapp: () => void }) {
     <section id="cta-section" className="exp-cta" style={{ background: "#0d1918", padding: "100px 0", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <img src="/assets/photo-cta-dark.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.22 }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg,#1e3232 0%,#2d4949 28%,#1a2a1a 60%,#0e1e1e 100%)", opacity: 0.85 }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg,var(--verde-dark) 0%,var(--verde) 28%,#1a2a1a 60%,#0e1e1e 100%)", opacity: 0.85 }} />
       </div>
       <div style={{ position: "absolute", bottom: "20%", left: "50%", transform: "translateX(-50%)", width: 400, height: 250, background: "radial-gradient(ellipse,rgba(240,160,60,0.1) 0%,transparent 70%)", borderRadius: "50%", zIndex: 0, pointerEvents: "none" }} />
       <div className="arch-label" style={{ left: -40, bottom: 60, color: "rgba(255,253,248,0.03)" }}>CELEBRA</div>
@@ -258,7 +257,7 @@ function FinalCtaSection({ onWhatsapp }: { onWhatsapp: () => void }) {
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div className="overline overline-light txt-reveal">Empieza a planear</div>
           <div>
-            <div className="final-cta-title-main exp-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.5rem,6vw,6.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tu experiencia,</div>
+            <div className="final-cta-title-main exp-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.5rem,6vw,6.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "var(--crema)" }}>Tu experiencia,</div>
             <div className="final-cta-title-sub exp-cta-title-sub" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.8rem,5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>empieza aquí.</div>
           </div>
           <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.8, color: "rgba(255,253,248,0.62)", maxWidth: 380 }}>
@@ -279,14 +278,14 @@ function FinalCtaSection({ onWhatsapp }: { onWhatsapp: () => void }) {
             <DocumentIcon />
             <div className="cta-card-title">Cotizar en línea</div>
             <p className="cta-card-sub">Cuéntanos sobre tu evento y recibe una propuesta con PDF personalizado.</p>
-            <Link className="btn-accent" style={{ fontSize: "0.65rem", padding: "10px 20px" }} href="/cotizar">Cotizar ahora</Link>
+            <a className="btn-accent" style={{ fontSize: "0.65rem", padding: "10px 20px" }} href="/cotizar">Cotizar ahora</a>
           </div>
           <div className="cta-small-grid exp-cta-card-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
             <div className="cta-card">
               <CalendarIcon />
               <div className="cta-card-title">Agendar visita</div>
               <p className="cta-card-sub">Ven a conocer la finca antes de decidir.</p>
-              <Link className="btn-accent" style={{ fontSize: "0.65rem", padding: "10px 20px" }} href="/cotizar">Agendar</Link>
+              <a className="btn-accent" style={{ fontSize: "0.65rem", padding: "10px 20px" }} href="/cotizar">Agendar</a>
             </div>
             <div className="cta-card">
               <MessageIcon />

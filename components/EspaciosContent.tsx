@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { espacios, venueAssets } from "@/lib/espacios-data";
 
@@ -369,15 +368,15 @@ function CtaSection() {
     <section id="cta-section" className="exp-cta" style={{ background: "#0d1918", padding: "100px 0", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <img src="/assets/photo-cta-dark.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.22 }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg,#1e3232 0%,#2d4949 28%,#1a2a1a 60%,#0e1e1e 100%)", opacity: 0.85 }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg,var(--verde-dark) 0%,var(--verde) 28%,#1a2a1a 60%,#0e1e1e 100%)", opacity: 0.85 }} />
       </div>
       <div style={{ position: "absolute", bottom: "20%", left: "50%", transform: "translateX(-50%)", width: 400, height: 250, background: "radial-gradient(ellipse,rgba(240,160,60,0.1) 0%,transparent 70%)", borderRadius: "50%", zIndex: 0, pointerEvents: "none" }} />
 
-      <div className="cta-outer exp-cta-inner" style={{ position: "relative", zIndex: 1, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+      <div className="cta-outer exp-cta-inner espacios-cta-inner" style={{ position: "relative", zIndex: 1, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div className="overline overline-light txt-reveal">Reserva tu fecha</div>
           <div className="txt-reveal" data-d="1">
-            <div className="final-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.5rem,6vw,6.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>La finca te espera,</div>
+            <div className="final-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.5rem,6vw,6.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "var(--crema)" }}>La finca te espera,</div>
             <div className="final-cta-title-sub" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.8rem,5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>¿cuándo celebramos?</div>
           </div>
           <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.8, color: "rgba(255,253,248,0.62)", maxWidth: 380 }}>
@@ -390,7 +389,7 @@ function CtaSection() {
             <DocumentIcon />
             <div className="cta-card-title">Cotizar en línea</div>
             <p className="cta-card-sub">Cuéntanos sobre tu evento y recibe una propuesta personalizada.</p>
-            <Link href="/cotizar" className="btn-accent" style={{ fontSize: "0.65rem", padding: "10px 20px" }}>Cotizar ahora</Link>
+            <a href="/cotizar" className="btn-accent" style={{ fontSize: "0.65rem", padding: "10px 20px" }}>Cotizar ahora</a>
           </div>
           <div className="cta-small-grid exp-cta-card-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
             <div className="cta-card">

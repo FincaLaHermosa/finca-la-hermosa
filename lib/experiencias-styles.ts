@@ -76,14 +76,14 @@ body {
   padding-bottom: 2px;
   transition: color 0.22s, border-color 0.22s;
 }
-.nav-links a:hover { color: #fffdf8; border-color: rgba(255,253,248,0.4); }
-.nav-links a.active { color: #fffdf8; border-color: rgba(192,122,90,0.6); }
+.nav-links a:hover { color: var(--crema); border-color: rgba(255,253,248,0.4); }
+.nav-links a.active { color: var(--crema); border-color: rgba(192,122,90,0.6); }
 .nav-right { display: flex; align-items: center; }
 .nav-cta {
   font-family: 'Jost', sans-serif;
   font-size: 0.67rem; font-weight: 300;
   letter-spacing: 0.13em; text-transform: uppercase;
-  color: #fffdf8;
+  color: var(--crema);
   background: rgba(255,253,248,0.09);
   border: 1px solid rgba(255,255,255,0.2);
   padding: 8px 20px; border-radius: 999px;
@@ -111,7 +111,7 @@ body {
 .btn-primary {
   font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
-  color: #fffdf8; background: var(--verde); border: none;
+  color: var(--crema); background: var(--verde); border: none;
   padding: 13px 28px; border-radius: 999px; cursor: pointer;
   text-decoration: none; display: inline-block;
   transition: all 0.22s ease;
@@ -121,7 +121,7 @@ body {
 .btn-accent {
   font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
-  color: #fffdf8; background: var(--terracota); border: none;
+  color: var(--crema); background: var(--terracota); border: none;
   padding: 13px 28px; border-radius: 999px; cursor: pointer;
   text-decoration: none; display: inline-block;
   transition: all 0.22s ease;
@@ -136,7 +136,7 @@ body {
   text-decoration: none; display: inline-block;
   transition: all 0.22s ease;
 }
-.btn-outline-dark:hover { background: var(--verde); color: #fffdf8; border-color: var(--verde); transform: scale(1.04); }
+.btn-outline-dark:hover { background: var(--verde); color: var(--crema); border-color: var(--verde); transform: scale(1.04); }
 
 .btn-ghost {
   font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500;
@@ -146,7 +146,7 @@ body {
   text-decoration: none; display: inline-block;
   transition: all 0.22s ease;
 }
-.btn-ghost:hover { color: #fffdf8; border-color: rgba(255,255,255,0.5); }
+.btn-ghost:hover { color: var(--crema); border-color: rgba(255,255,255,0.5); }
 
 /* ── OVERLINE ─────────────────────────────────────────────── */
 .overline {
@@ -214,7 +214,7 @@ body {
 .pkg-card:hover .pkg-img-wrap img { transform: scale(1.06); }
 .pkg-badge {
   position: absolute; top: 14px; left: 14px;
-  background: var(--terracota); color: #fffdf8;
+  background: var(--terracota); color: var(--crema);
   font-family: 'Jost', sans-serif; font-size: 0.6rem; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
   padding: 5px 12px; border-radius: 999px;
@@ -236,7 +236,7 @@ body {
   width:100%; padding:13px;
   font-family:'Jost',sans-serif; font-size:0.67rem; font-weight:300;
   letter-spacing:0.1em; text-transform:uppercase;
-  color:#fffdf8; background:var(--verde); border:none; border-radius:999px;
+  color:var(--crema); background:var(--verde); border:none; border-radius:999px;
   cursor:pointer; transition:background 0.22s, transform 0.22s;
 }
 .pkg-btn:hover { background:var(--verde-mid); transform:scale(1.02); }
@@ -316,7 +316,7 @@ body {
 .social-row{display:flex;gap:14px;}
 .social-circle{width:50px;height:50px;border-radius:50%;border:1px solid rgba(255,253,248,0.18);display:flex;align-items:center;justify-content:center;color:rgba(255,253,248,0.7);transition:background 0.32s var(--ease-out),border-color 0.32s var(--ease-out),color 0.32s var(--ease-out),transform 0.32s var(--ease-out);text-decoration:none;}
 .social-circle svg{width:19px;height:19px;transition:transform 0.32s var(--ease-out);}
-.social-circle:hover{background:var(--terracota);border-color:var(--terracota);color:#fffdf8;transform:translateY(-3px);}
+.social-circle:hover{background:var(--terracota);border-color:var(--terracota);color:var(--crema);transform:translateY(-3px);}
 .social-circle:hover svg{transform:scale(1.08);}
 .footer-contact-group{display:flex;flex-direction:column;}
 .footer-contact-line{font-family:'Jost',sans-serif;font-size:0.84rem;font-weight:300;color:rgba(255,253,248,0.62);line-height:1.85;display:block;}
@@ -338,7 +338,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 999px;
   background: rgba(255, 253, 248, 0.08);
-  color: #fffdf8;
+  color: var(--crema);
   align-items: center;
   justify-content: center;
   cursor: pointer;

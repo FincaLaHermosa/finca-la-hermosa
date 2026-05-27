@@ -20,9 +20,9 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 .nav-logo img{height:32px;}
 .nav-links{display:flex;gap:28px;align-items:center;}
 .nav-links a{font-family:'Jost',sans-serif;font-size:0.69rem;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,253,248,0.72);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:color 0.22s,border-color 0.22s;}
-.nav-links a:hover{color:#fffdf8;border-color:rgba(255,253,248,0.4);}
-.nav-links a.active{color:#fffdf8;border-color:rgba(192,122,90,0.6);}
-.nav-cta{font-family:'Jost',sans-serif;font-size:0.67rem;font-weight:300;letter-spacing:0.13em;text-transform:uppercase;color:#fffdf8;background:rgba(255,253,248,0.09);border:1px solid rgba(255,255,255,0.2);padding:8px 20px;border-radius:999px;cursor:pointer;transition:all 0.22s;}
+.nav-links a:hover{color:var(--crema);border-color:rgba(255,253,248,0.4);}
+.nav-links a.active{color:var(--crema);border-color:rgba(192,122,90,0.6);}
+.nav-cta{font-family:'Jost',sans-serif;font-size:0.67rem;font-weight:300;letter-spacing:0.13em;text-transform:uppercase;color:var(--crema);background:rgba(255,253,248,0.09);border:1px solid rgba(255,255,255,0.2);padding:8px 20px;border-radius:999px;cursor:pointer;transition:all 0.22s;}
 .nav-cta:hover{background:rgba(192,122,90,0.9);border-color:rgba(192,122,90,0.6);}
 
 /* ── WA ────────────────────────────────────────── */
@@ -30,12 +30,12 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 .wa-float:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.28);}
 
 /* ── BUTTONS ───────────────────────────────────── */
-.btn-accent{font-family:'Jost',sans-serif;font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#fffdf8;background:var(--terracota);border:none;padding:13px 28px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.22s;}
+.btn-accent{font-family:'Jost',sans-serif;font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--crema);background:var(--terracota);border:none;padding:13px 28px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.22s;}
 .btn-accent:hover{background:#a8664a;transform:scale(1.04);}
 .btn-ghost{font-family:'Jost',sans-serif;font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,253,248,0.75);background:transparent;border:1px solid rgba(255,255,255,0.2);padding:13px 28px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.22s;}
-.btn-ghost:hover{color:#fffdf8;border-color:rgba(255,255,255,0.5);}
+.btn-ghost:hover{color:var(--crema);border-color:rgba(255,255,255,0.5);}
 .btn-outline-dark{font-family:'Jost',sans-serif;font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--verde);background:transparent;border:1px solid rgba(45,73,73,0.35);padding:12px 26px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.22s;}
-.btn-outline-dark:hover{border-color:var(--verde);background:var(--verde);color:#fffdf8;}
+.btn-outline-dark:hover{border-color:var(--verde);background:var(--verde);color:var(--crema);}
 
 /* ── OVERLINE ──────────────────────────────────── */
 .overline{font-family:'Jost',sans-serif;font-size:0.67rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;display:flex;align-items:center;gap:10px;}
@@ -366,7 +366,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
   font-size: clamp(1.6rem, 2.4vw, 2.2rem);
   line-height: 1;
   letter-spacing: -0.02em;
-  color: #fffdf8;
+  color: var(--crema);
 }
 .stat-terra-num em {
   font-family: 'Cormorant Garamond', serif;
@@ -627,7 +627,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.7rem;
   font-weight: 300;
-  color: #fffdf8;
+  color: var(--crema);
   line-height: 1.1;
   display: block;
   transition: opacity 0.3s;
@@ -763,7 +763,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
   font-size: clamp(2.6rem, 4vw, 4.6rem);
   line-height: 0.92;
   letter-spacing: -0.025em;
-  color: #fffdf8;
+  color: var(--crema);
 }
 .inv-left-italic {
   font-family: 'Cormorant Garamond', serif;
@@ -928,7 +928,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 .social-row{display:flex;gap:14px;}
 .social-circle{width:50px;height:50px;border-radius:50%;border:1px solid rgba(255,253,248,0.18);display:flex;align-items:center;justify-content:center;color:rgba(255,253,248,0.7);transition:background 0.32s var(--ease-out),border-color 0.32s var(--ease-out),color 0.32s var(--ease-out),transform 0.32s var(--ease-out);text-decoration:none;}
 .social-circle svg{width:19px;height:19px;transition:transform 0.32s var(--ease-out);}
-.social-circle:hover{background:var(--terracota);border-color:var(--terracota);color:#fffdf8;transform:translateY(-3px);}
+.social-circle:hover{background:var(--terracota);border-color:var(--terracota);color:var(--crema);transform:translateY(-3px);}
 .social-circle:hover svg{transform:scale(1.08);}
 .footer-contact-group{display:flex;flex-direction:column;}
 .footer-contact-line{font-family:'Jost',sans-serif;font-size:0.84rem;font-weight:300;color:rgba(255,253,248,0.62);line-height:1.85;display:block;}
@@ -950,7 +950,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 999px;
   background: rgba(255, 253, 248, 0.08);
-  color: #fffdf8;
+  color: var(--crema);
   align-items: center;
   justify-content: center;
   cursor: pointer;

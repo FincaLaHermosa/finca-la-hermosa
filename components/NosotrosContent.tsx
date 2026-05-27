@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect } from "react";
 import { commitments, teamMembers, timelineItems, values } from "@/lib/nosotros-data";
 
@@ -65,14 +64,14 @@ function HeroSection() {
           <div className="overline overline-light">Nuestra historia</div>
         </div>
         <div className="txt-reveal" data-d="1" style={{ marginBottom: 24 }}>
-          <div className="hero-title-display" style={{ color: "#fffdf8" }}>La historia</div>
+          <div className="hero-title-display" style={{ color: "var(--crema)" }}>La historia</div>
           <div className="hero-title-italic" style={{ color: "var(--terracota)", marginTop: 6 }}>que hace el lugar.</div>
         </div>
         <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.9rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(255,253,248,0.6)", maxWidth: 440, marginBottom: 36 }}>
           Finca La Hermosa nació de una familia con raíces en Isidro Fabela y el deseo de compartir lo que durante décadas fue solo suyo. Hoy, cada evento que vivimos aquí es una extensión de ese mismo espíritu.
         </p>
         <div className="txt-reveal" data-d="3" style={{ display: "flex", gap: 14, alignItems: "center" }}>
-          <Link href="/experiencias" className="btn-accent" style={{ textDecoration: "none" }}>Ver experiencias</Link>
+          <a href="/experiencias" className="btn-accent" style={{ textDecoration: "none" }}>Ver experiencias</a>
           <a href="#story" className="btn-outline" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.72rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,253,248,0.65)", background: "transparent", border: "1px solid rgba(255,255,255,0.22)", padding: "13px 28px", borderRadius: 999, textDecoration: "none", transition: "all 0.22s ease" }}>Conocer más ↓</a>
         </div>
         <div className="txt-reveal" data-d="4" style={{ display: "flex", gap: 36, marginTop: 56, paddingTop: 36, borderTop: "1px solid rgba(255,255,255,0.08)" }}>
@@ -95,7 +94,7 @@ function HeroSection() {
 function HeroMiniStat({ value, suffix, label }: { value: string; suffix: string; label: string }) {
   return (
     <div>
-      <div style={{ fontFamily: "'Against',serif", fontSize: "2.2rem", color: "#fffdf8", lineHeight: 1 }}>{value}<span style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "1.3rem", color: "var(--terracota)" }}>{suffix}</span></div>
+      <div style={{ fontFamily: "'Against',serif", fontSize: "2.2rem", color: "var(--crema)", lineHeight: 1 }}>{value}<span style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "1.3rem", color: "var(--terracota)" }}>{suffix}</span></div>
       <div style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.65rem", fontWeight: 300, letterSpacing: "0.08em", color: "rgba(255,253,248,0.4)", marginTop: 4 }}>{label}</div>
     </div>
   );
@@ -132,7 +131,7 @@ function StorySection() {
           <div className="pull-quote txt-reveal" data-d="2">"Nos dimos cuenta de que este lugar tenía algo especial que merecía compartirse. No como un salón de eventos, sino como una experiencia que la gente pudiera hacer propia."</div>
           <p className="story-body txt-reveal" data-d="3">En 2013, abrimos las puertas formalmente. La filosofía siempre fue la misma: hospitalidad auténtica, naturaleza sin alterar, y el cuidado que solo una familia puede ofrecer. Hoy, más de 200 familias han celebrado aquí sus momentos más importantes — y cada uno de ellos lleva un pedazo de La Hermosa consigo.</p>
           <div className="txt-reveal" data-d="3" style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-            <Link href="/espacios" className="btn-outline-dark" style={{ textDecoration: "none" }}>Conocer los espacios</Link>
+            <a href="/espacios" className="btn-outline-dark" style={{ textDecoration: "none" }}>Conocer los espacios</a>
           </div>
         </div>
       </div>
@@ -150,7 +149,7 @@ function ValuesSection() {
           <div>
             <div className="txt-reveal"><div className="overline overline-light">Lo que nos define</div></div>
             <div className="txt-reveal" data-d="1" style={{ marginTop: 16 }}>
-              <div style={{ fontFamily: "'Against',serif", fontSize: "clamp(2.8rem,4.5vw,5.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tres principios,</div>
+              <div style={{ fontFamily: "'Against',serif", fontSize: "clamp(2.8rem,4.5vw,5.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "var(--crema)" }}>Tres principios,</div>
               <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.2rem,3.5vw,4.5rem)", fontStyle: "italic", fontWeight: 300, color: "var(--terracota)", marginTop: 4 }}>una sola promesa.</div>
             </div>
           </div>
@@ -231,7 +230,7 @@ function TeamSection() {
         <div className="txt-reveal" style={{ marginBottom: 48, display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <div className="overline overline-light">Las personas detrás de la finca</div>
-            <div style={{ fontFamily: "'Against',serif", fontSize: "clamp(2rem,3vw,3.2rem)", lineHeight: 0.95, letterSpacing: "-0.02em", color: "#fffdf8" }}>El equipo</div>
+            <div style={{ fontFamily: "'Against',serif", fontSize: "clamp(2rem,3vw,3.2rem)", lineHeight: 0.95, letterSpacing: "-0.02em", color: "var(--crema)" }}>El equipo</div>
           </div>
           <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.8rem", fontWeight: 300, color: "rgba(255,253,248,0.45)", maxWidth: 300, lineHeight: 1.8, alignSelf: "flex-end" }}>Cada persona conoce la finca de memoria. Eso se nota en cada evento.</p>
         </div>
@@ -299,14 +298,14 @@ function CtaSection() {
     <section id="cta-section" className="cta-section">
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <img src="/assets/photo-cta-dark.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.18 }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg,#1e3232 0%,#2d4949 30%,#1a2a1a 65%,#0e1e1e 100%)", opacity: 0.88 }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg,var(--verde-dark) 0%,var(--verde) 30%,#1a2a1a 65%,#0e1e1e 100%)", opacity: 0.88 }} />
       </div>
       <div style={{ position: "absolute", bottom: "15%", left: "45%", width: 500, height: 280, background: "radial-gradient(ellipse,rgba(240,160,60,0.08) 0%,transparent 70%)", borderRadius: "50%", zIndex: 0, pointerEvents: "none" }} />
       <div style={{ position: "relative", zIndex: 1, maxWidth: 1500, margin: "0 auto", padding: "0 80px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div className="overline overline-light txt-reveal">Empieza a planear</div>
           <div className="txt-reveal" data-d="1">
-            <div className="final-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.2rem,5.5vw,6rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Celebra con</div>
+            <div className="final-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.2rem,5.5vw,6rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "var(--crema)" }}>Celebra con</div>
             <div className="final-cta-title-sub" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.6rem,4.5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>nosotros.</div>
           </div>
           <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.62)", maxWidth: 360 }}>Lleva a tu familia o a tu equipo a vivir algo diferente. Cuéntanos sobre tu evento y te preparamos una propuesta en menos de 24 horas.</p>
@@ -324,7 +323,7 @@ function CtaSection() {
             <DocumentIcon />
             <div className="cta-card-title">Cotizar en línea</div>
             <p className="cta-card-sub">Cuéntanos sobre tu evento y recibe una propuesta con PDF personalizado.</p>
-            <Link href="/cotizar" className="btn-accent" style={{ fontSize: "0.65rem", padding: "10px 20px", textDecoration: "none" }}>Cotizar ahora</Link>
+            <a href="/cotizar" className="btn-accent" style={{ fontSize: "0.65rem", padding: "10px 20px", textDecoration: "none" }}>Cotizar ahora</a>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
             <div className="cta-card">

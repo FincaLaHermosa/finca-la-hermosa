@@ -4,7 +4,7 @@ import { experienciasStyles } from "@/lib/experiencias-styles";
 export default function ExperienciasPage() {
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: experienciasStyles }} />
+      <style data-route-page-style dangerouslySetInnerHTML={{ __html: experienciasStyles }} />
       <ExperienciasContent />
     </>
   );

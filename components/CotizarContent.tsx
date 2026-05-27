@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { addons, basePrice, busyDates, eventTypes, type Addon, type DurationId, type EventTypeId } from "@/lib/cotizar-data";
 
 type FormState = {
@@ -32,6 +31,7 @@ const steps = ["Tu evento", "Fecha", "Extras", "Tus datos"];
 
 export function CotizarContent({ initialType = "" }: { initialType?: string }) {
   const [step, setStep] = useState(1);
+  const shouldScrollToStep = useRef(false);
   const [state, setState] = useState<FormState>(() => {
     const normalizedType = eventTypes.find((type) => type.id === initialType || type.value.toLowerCase() === initialType.toLowerCase());
     return normalizedType ? { ...initialState, tipo: normalizedType.id } : initialState;
@@ -51,14 +51,23 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
     return () => window.clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (!shouldScrollToStep.current) return;
+    shouldScrollToStep.current = false;
+    window.requestAnimationFrame(() => {
+      const activeStepTitle = document.querySelector(`#step-${step} .step-heading`);
+      activeStepTitle?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, [step]);
+
   const setField = <K extends keyof FormState>(field: K, value: FormState[K]) => {
     setState((current) => ({ ...current, [field]: value }));
     setError("");
   };
 
   const goToStep = (nextStep: number) => {
+    shouldScrollToStep.current = true;
     setStep(nextStep);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const nextStep = () => {
@@ -82,6 +91,7 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
 
   const submitForm = (event: FormEvent) => {
     event.preventDefault();
+    if (step !== 4) return;
     if (!state.nombre.trim()) {
       setError("Por favor ingresa tu nombre.");
       return;
@@ -120,7 +130,7 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
                 <StepTwo active={step === 2} state={state} setField={setField} />
                 <StepThree active={step === 3} selectedAddons={state.addons} onToggle={toggleAddon} />
                 <StepFour active={step === 4} state={state} setField={setField} />
-                {error ? <div className="field-error show">{error}</div> : null}
+                {error ? <div className="field-error show" role="alert" aria-live="polite">{error}</div> : null}
                 <StepNavigation step={step} onPrev={() => goToStep(step - 1)} onNext={nextStep} />
               </>
             ) : (
@@ -143,7 +153,7 @@ function HeroCotizar() {
       <div className="hero-cotizar-content">
         <div className="txt-reveal" style={{ marginBottom: 14 }}><div className="overline overline-light">Tu propuesta personalizada</div></div>
         <div className="txt-reveal" data-d="1">
-          <div className="hero-title-display" style={{ color: "#fffdf8" }}>Cuéntanos sobre</div>
+          <div className="hero-title-display" style={{ color: "var(--crema)" }}>Cuéntanos sobre</div>
           <div className="hero-title-italic" style={{ color: "var(--terracota)", marginTop: 4 }}>tu celebración.</div>
         </div>
         <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.85rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.5)", maxWidth: 440, marginTop: 16 }}>
@@ -368,8 +378,8 @@ function SuccessPanel() {
       <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.3rem", fontStyle: "italic", fontWeight: 300, color: "var(--terracota)", marginBottom: 20 }}>En menos de 24 horas tendrás tu propuesta.</div>
       <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.86rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8, maxWidth: 420, margin: "0 auto 32px" }}>Prepararemos un PDF personalizado con el paquete que mejor se adapta a tu evento, con precio exacto y todos los detalles. Te lo enviamos por WhatsApp y, si lo compartiste, también por correo.</p>
       <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-        <a href="https://wa.me/5215500000000" target="_blank" rel="noopener" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.75rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fffdf8", background: "var(--verde)", border: "none", padding: "13px 24px", borderRadius: 999, cursor: "pointer", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8 }}>Escribir por WhatsApp</a>
-        <Link href="/" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.75rem", fontWeight: 400, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--terracota)", background: "transparent", border: "1px solid var(--terra-light)", padding: "13px 24px", borderRadius: 999, textDecoration: "none" }}>Volver al inicio</Link>
+        <a href="https://wa.me/5215500000000" target="_blank" rel="noopener" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.75rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--crema)", background: "var(--verde)", border: "none", padding: "13px 24px", borderRadius: 999, cursor: "pointer", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8 }}>Escribir por WhatsApp</a>
+        <a href="/" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.75rem", fontWeight: 400, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--terracota)", background: "transparent", border: "1px solid var(--terra-light)", padding: "13px 24px", borderRadius: 999, textDecoration: "none" }}>Volver al inicio</a>
       </div>
     </div>
   );

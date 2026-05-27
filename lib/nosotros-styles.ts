@@ -77,13 +77,13 @@ body {
   transition: color 0.22s, border-color 0.22s;
 }
 .nav-links a:hover,
-.nav-links a.active { color: #fffdf8; border-color: rgba(255,253,248,0.4); }
+.nav-links a.active { color: var(--crema); border-color: rgba(255,253,248,0.4); }
 .nav-right { display: flex; align-items: center; gap: 14px; }
 .nav-cta {
   font-family: 'Jost', sans-serif;
   font-size: 0.67rem; font-weight: 300;
   letter-spacing: 0.13em; text-transform: uppercase;
-  color: #fffdf8;
+  color: var(--crema);
   background: rgba(255,253,248,0.09);
   border: 1px solid rgba(255,255,255,0.2);
   padding: 8px 20px; border-radius: 999px;
@@ -112,7 +112,7 @@ body {
 .btn-primary {
   font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
-  color: #fffdf8; background: var(--verde); border: none;
+  color: var(--crema); background: var(--verde); border: none;
   padding: 13px 28px; border-radius: 999px; cursor: pointer;
   text-decoration: none; display: inline-block;
   transition: all 0.22s ease;
@@ -122,7 +122,7 @@ body {
 .btn-accent {
   font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
-  color: #fffdf8; background: var(--terracota); border: none;
+  color: var(--crema); background: var(--terracota); border: none;
   padding: 13px 28px; border-radius: 999px; cursor: pointer;
   text-decoration: none; display: inline-block;
   transition: all 0.22s ease;
@@ -137,7 +137,7 @@ body {
   text-decoration: none; display: inline-block;
   transition: all 0.22s ease;
 }
-.btn-outline-dark:hover { background: var(--terracota); color: #fffdf8; transform: scale(1.04); }
+.btn-outline-dark:hover { background: var(--terracota); color: var(--crema); transform: scale(1.04); }
 
 /* ── OVERLINE ─────────────────────────────────────────────── */
 .overline {
@@ -430,7 +430,7 @@ body {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.5rem;
   font-weight: 400;
-  color: #fffdf8;
+  color: var(--crema);
   line-height: 1.2;
 }
 .value-body {
@@ -470,7 +470,7 @@ body {
   font-size: clamp(2.8rem, 4vw, 4rem);
   line-height: 0.95;
   letter-spacing: -0.03em;
-  color: #fffdf8;
+  color: var(--crema);
 }
 .stat-unit {
   display: inline;
@@ -556,7 +556,7 @@ body {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.1rem;
   font-weight: 400;
-  color: #fffdf8;
+  color: var(--crema);
   line-height: 1.2;
 }
 .team-glass-desc {
@@ -675,7 +675,7 @@ body {
 .social-row{display:flex;gap:14px;}
 .social-circle{width:50px;height:50px;border-radius:50%;border:1px solid rgba(255,253,248,0.18);display:flex;align-items:center;justify-content:center;color:rgba(255,253,248,0.7);transition:background 0.32s var(--ease-out),border-color 0.32s var(--ease-out),color 0.32s var(--ease-out),transform 0.32s var(--ease-out);text-decoration:none;}
 .social-circle svg{width:19px;height:19px;transition:transform 0.32s var(--ease-out);}
-.social-circle:hover{background:var(--terracota);border-color:var(--terracota);color:#fffdf8;transform:translateY(-3px);}
+.social-circle:hover{background:var(--terracota);border-color:var(--terracota);color:var(--crema);transform:translateY(-3px);}
 .social-circle:hover svg{transform:scale(1.08);}
 .footer-contact-group{display:flex;flex-direction:column;}
 .footer-contact-line{font-family:'Jost',sans-serif;font-size:0.84rem;font-weight:300;color:rgba(255,253,248,0.62);line-height:1.85;display:block;}
@@ -697,7 +697,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 999px;
   background: rgba(255, 253, 248, 0.08);
-  color: #fffdf8;
+  color: var(--crema);
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -1698,6 +1698,29 @@ body {
   .value-card,
   .summary-card {
     max-width: 100%;
+  }
+
+  .value-card {
+    padding: 24px 20px !important;
+    gap: 12px !important;
+  }
+
+  .value-num {
+    font-size: 2.35rem !important;
+  }
+
+  .value-icon {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .value-title {
+    font-size: 1.22rem !important;
+  }
+
+  .value-body {
+    font-size: 0.74rem !important;
+    line-height: 1.62 !important;
   }
 
   .pkg-img-wrap,

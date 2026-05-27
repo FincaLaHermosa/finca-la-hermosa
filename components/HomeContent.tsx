@@ -1,7 +1,6 @@
 "use client";
 
 import type { CSSProperties, ReactNode, RefObject } from "react";
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { homeExperiences, homePackages, homeSpaces, homeTestimonials, quickQuoteOptions } from "@/lib/home-data";
 
@@ -24,7 +23,7 @@ export function HomeContent() {
           });
         });
       },
-      { threshold: 0.25 },
+      { threshold: 0.12, rootMargin: "0px 0px -10% 0px" },
     );
 
     document.querySelectorAll(".home-page-react [data-sec]").forEach((section) => revealObs.observe(section));
@@ -33,7 +32,7 @@ export function HomeContent() {
       const hero = document.querySelector('.home-page-react [data-sec="hero"]');
       hero?.querySelectorAll(".txt-reveal").forEach((el) => el.classList.add("in"));
       hero?.querySelectorAll(".img-reveal").forEach((el) => el.classList.add("in"));
-    }, 180);
+    }, 120);
 
     return () => {
       window.clearTimeout(heroTimer);
@@ -119,7 +118,7 @@ function HeroSection() {
           <div className="overline overline-light">VENUE Y EXPERIENCIAS - MÉXICO</div>
         </div>
         <div style={{ maxWidth: 820 }}>
-          <div className="txt-reveal hero-title-display" data-d="1" style={{ color: "#fffdf8" }}>Cada experiencia,</div>
+          <div className="txt-reveal hero-title-display" data-d="1" style={{ color: "var(--crema)" }}>Cada experiencia,</div>
           <div className="txt-reveal hero-title-italic" data-d="2" style={{ color: "var(--terracota)", marginTop: 4 }}>diseñada para ti.</div>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, marginTop: 48, alignItems: "flex-end" }}>
@@ -127,8 +126,8 @@ function HeroSection() {
             Un espacio rodeado de naturaleza para celebrar, descansar y compartir momentos que se quedan en la memoria.
           </p>
           <div className="txt-reveal" data-d="4" style={{ display: "flex", gap: 12, justifyContent: "flex-end" }}>
-            <Link className="btn-glass" href="/cotizar">Cotizar mi experiencia</Link>
-            <Link className="btn-outline" href="/espacios">Ver espacios</Link>
+            <a className="btn-glass" href="/cotizar">Cotizar mi experiencia</a>
+            <a className="btn-outline" href="/espacios">Ver espacios</a>
           </div>
         </div>
       </div>
@@ -171,7 +170,7 @@ function ExperiencesSection({ activeTab, onTabChange }: { activeTab: number; onT
                 <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
                   {experience.bullets.map((bullet) => <CheckItem key={bullet}>{bullet}</CheckItem>)}
                 </ul>
-                <Link className="btn-outline-dark" href="/experiencias" style={{ alignSelf: "flex-start", marginTop: 4 }}>{experience.cta}</Link>
+                <a className="btn-outline-dark" href="/experiencias" style={{ alignSelf: "flex-start", marginTop: 4 }}>{experience.cta}</a>
               </div>
             </div>
           ))}
@@ -191,7 +190,7 @@ function SpacesSection({ carouselRef, onScroll }: { carouselRef: RefObject<HTMLD
             <div style={sectionItalicStyle}>infinitas posibilidades</div>
           </div>
           <div className="txt-reveal" data-d="2">
-            <Link href="/espacios" style={smallLinkStyle}>Ver todos los espacios <ArrowIcon /></Link>
+            <a href="/espacios" style={smallLinkStyle}>Ver todos los espacios <ArrowIcon /></a>
           </div>
         </div>
       </div>
@@ -267,7 +266,7 @@ function QuickQuoteSection() {
           <p className="quote-card-copy">
             Mira el ambiente, elige el punto de partida y continúa al cotizador completo. La propuesta final llega por WhatsApp con precio, paquete recomendado y próximos pasos.
           </p>
-          <Link className="btn-accent quote-main-cta" href="/cotizar">Cotizar ahora</Link>
+          <a className="btn-accent quote-main-cta" href="/cotizar">Cotizar ahora</a>
         </div>
       </div>
     </section>
@@ -285,7 +284,7 @@ function PackagesSection() {
           </div>
           <div className="txt-reveal" data-d="2" style={{ textAlign: "right" }}>
             <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.82rem", fontWeight: 300, color: "var(--muted)" }}>Desde $13,000 MXN · 25–30 personas</p>
-            <Link href="/experiencias" style={{ ...smallLinkStyle, marginTop: 6 }}>Ver todos los paquetes <ArrowIcon /></Link>
+            <a href="/experiencias" style={{ ...smallLinkStyle, marginTop: 6 }}>Ver todos los paquetes <ArrowIcon /></a>
           </div>
         </div>
         <div className="txt-reveal pkg-featured-grid" data-d="2" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
@@ -302,7 +301,7 @@ function PackagesSection() {
                 <div className="pkg-capacity">{item.capacity}</div>
                 <div className="pkg-divider" />
                 <ul className="pkg-features">{item.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
-                <div className="pkg-btn-wrap"><Link className="pkg-btn" href="/experiencias">Ver más</Link></div>
+                <div className="pkg-btn-wrap"><a className="pkg-btn" href="/experiencias">Ver más</a></div>
               </div>
             </div>
           ))}
@@ -342,14 +341,14 @@ function FinalCtaSection() {
     <section className="snap-section" data-sec="cta" style={{ background: "#0d1918", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <img src="/assets/photo-cta-dark.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.22 }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg,#1e3232 0%,#2d4949 28%,#1a2a1a 60%,#0e1e1e 100%)", opacity: 0.85 }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg,var(--verde-dark) 0%,var(--verde) 28%,#1a2a1a 60%,#0e1e1e 100%)", opacity: 0.85 }} />
       </div>
       <div style={{ position: "absolute", bottom: "20%", left: "50%", transform: "translateX(-50%)", width: 400, height: 250, background: "radial-gradient(ellipse,rgba(240,160,60,0.1) 0%,transparent 70%)", borderRadius: "50%", zIndex: 0, pointerEvents: "none" }} />
       <div className="arch-label" style={{ left: -40, bottom: 60, color: "rgba(255,253,248,0.03)" }}>CELEBRA</div>
       <div className="cta-outer" style={{ position: "relative", zIndex: 1, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div>
-            <div id="illum-text" className="final-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.5rem,6vw,6.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "#fffdf8" }}>Tu momento perfecto,</div>
+            <div id="illum-text" className="final-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.5rem,6vw,6.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "var(--crema)" }}>Tu momento perfecto,</div>
             <div className="final-cta-title-sub" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.8rem,5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>comienza aquí.</div>
           </div>
           <p className="txt-reveal" data-d="3" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.8, color: "rgba(255,253,248,0.62)", maxWidth: 380 }}>Agenda una visita, resuelve tus dudas o recibe tu cotización ahora mismo.</p>
@@ -377,7 +376,7 @@ function CtaCard({ icon, title, body, href, label, whatsapp = false }: { icon: I
       {external ? (
         <a className={className} href={href} target="_blank" rel="noopener" style={{ fontSize: "0.65rem", padding: "10px 20px" }}>{label}</a>
       ) : (
-        <Link className={className} href={href} style={{ fontSize: "0.65rem", padding: "10px 20px" }}>{label}</Link>
+        <a className={className} href={href} style={{ fontSize: "0.65rem", padding: "10px 20px" }}>{label}</a>
       )}
     </div>
   );
@@ -385,14 +384,14 @@ function CtaCard({ icon, title, body, href, label, whatsapp = false }: { icon: I
 
 function SpaceCard({ space }: { space: (typeof homeSpaces)[number] }) {
   return (
-    <Link href="/espacios" style={spaceCardStyle}>
+    <a href="/espacios" style={spaceCardStyle}>
       <div style={{ height: 320, overflow: "hidden", position: "relative", background: space.gradient }}>
         {space.image ? <img src={space.image} alt={space.alt} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }} /> : null}
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,transparent 55%,rgba(10,18,10,0.5) 100%)" }} />
         <div style={imageCaptionStyle}>{space.caption}</div>
       </div>
       <div style={{ padding: "18px 20px 20px" }}><h3 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.3rem", fontWeight: 400, color: "var(--carbon)" }}>{space.name}</h3></div>
-    </Link>
+    </a>
   );
 }
 

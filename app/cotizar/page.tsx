@@ -10,7 +10,7 @@ export default async function CotizarPage({ searchParams }: CotizarPageProps) {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: cotizarStyles }} />
+      <style data-route-page-style dangerouslySetInnerHTML={{ __html: cotizarStyles }} />
       <CotizarContent initialType={params?.tipo} />
     </>
   );

@@ -4,7 +4,7 @@ import { espaciosStyles } from "@/lib/espacios-styles";
 export default function EspaciosPage() {
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: espaciosStyles }} />
+      <style data-route-page-style dangerouslySetInnerHTML={{ __html: espaciosStyles }} />
       <EspaciosContent />
     </>
   );

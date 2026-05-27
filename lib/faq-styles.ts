@@ -56,12 +56,12 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
   transition: color 0.22s, border-color 0.22s;
 }
 .nav-links a:hover,
-.nav-links a.active { color: #fffdf8; border-color: rgba(255,253,248,0.4); }
+.nav-links a.active { color: var(--crema); border-color: rgba(255,253,248,0.4); }
 .nav-right { display: flex; align-items: center; gap: 14px; }
 .nav-cta {
   font-family: 'Jost', sans-serif; font-size: 0.67rem; font-weight: 300;
   letter-spacing: 0.13em; text-transform: uppercase;
-  color: #fffdf8; background: rgba(255,253,248,0.09);
+  color: var(--crema); background: rgba(255,253,248,0.09);
   border: 1px solid rgba(255,255,255,0.2);
   padding: 8px 20px; border-radius: 999px;
   cursor: pointer; text-decoration: none; transition: all 0.22s ease;
@@ -82,7 +82,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
 .btn-primary {
   font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
-  color: #fffdf8; background: var(--verde); border: none;
+  color: var(--crema); background: var(--verde); border: none;
   padding: 13px 28px; border-radius: 999px; cursor: pointer;
   text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
   transition: all 0.22s ease;
@@ -91,7 +91,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
 .btn-accent {
   font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
-  color: #fffdf8; background: var(--terracota); border: none;
+  color: var(--crema); background: var(--terracota); border: none;
   padding: 13px 28px; border-radius: 999px; cursor: pointer;
   text-decoration: none; display: inline-block; transition: all 0.22s ease;
 }
@@ -103,7 +103,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
   padding: 13px 28px; border-radius: 999px; cursor: pointer;
   text-decoration: none; display: inline-block; transition: all 0.22s ease;
 }
-.btn-outline-dark:hover { background: var(--terracota); color: #fffdf8; transform: scale(1.04); }
+.btn-outline-dark:hover { background: var(--terracota); color: var(--crema); transform: scale(1.04); }
 
 /* ── OVERLINE ─────────────────────────────────────────────── */
 .overline {
@@ -174,7 +174,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
   transition: all 0.22s ease;
 }
 .faq-tab:hover { border-color: var(--terracota); color: var(--terracota); }
-.faq-tab.active { background: var(--verde); border-color: var(--verde); color: #fffdf8; }
+.faq-tab.active { background: var(--verde); border-color: var(--verde); color: var(--crema); }
 
 /* ── FAQ group ──────────────────────────────────────────── */
 .faq-group { margin-bottom: 48px; }
@@ -217,6 +217,33 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
 }
 .faq-item.open .faq-answer { max-height: 300px; }
 
+.faq-cta-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.faq-cta-card-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-cta-actions a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+.faq-cta-card-grid .cta-card {
+  min-width: 0;
+}
+
 /* ── Contact nudge ──────────────────────────────────────── */
 .faq-contact-section {
   background: var(--crema-warm); padding: 88px 40px; text-align: center;
@@ -226,7 +253,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
 .cta-section {
   position: relative; min-height: 480px;
   display: flex; align-items: center;
-  overflow: hidden; padding: 100px 0;
+  overflow: hidden; padding: 84px 0;
 }
 
 
@@ -240,7 +267,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
 .social-row{display:flex;gap:14px;}
 .social-circle{width:50px;height:50px;border-radius:50%;border:1px solid rgba(255,253,248,0.18);display:flex;align-items:center;justify-content:center;color:rgba(255,253,248,0.7);transition:background 0.32s var(--ease-out),border-color 0.32s var(--ease-out),color 0.32s var(--ease-out),transform 0.32s var(--ease-out);text-decoration:none;}
 .social-circle svg{width:19px;height:19px;transition:transform 0.32s var(--ease-out);}
-.social-circle:hover{background:var(--terracota);border-color:var(--terracota);color:#fffdf8;transform:translateY(-3px);}
+.social-circle:hover{background:var(--terracota);border-color:var(--terracota);color:var(--crema);transform:translateY(-3px);}
 .social-circle:hover svg{transform:scale(1.08);}
 .footer-contact-group{display:flex;flex-direction:column;}
 .footer-contact-line{font-family:'Jost',sans-serif;font-size:0.84rem;font-weight:300;color:rgba(255,253,248,0.62);line-height:1.85;display:block;}
@@ -262,7 +289,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 999px;
   background: rgba(255, 253, 248, 0.08);
-  color: #fffdf8;
+  color: var(--crema);
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -1481,8 +1508,8 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
   .team-section,
   .promesa-section,
   .cta-section {
-    padding-top: 72px !important;
-    padding-bottom: 76px !important;
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
   }
 
   .values-header,
@@ -1551,8 +1578,29 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
     gap: 32px !important;
   }
 
+  .faq-page-react .faq-cta-actions,
+  .faq-page-react .faq-cta-card-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .faq-page-react .faq-cta-actions a {
+    width: 100% !important;
+  }
+
   .cta-section .cta-card {
     padding: 22px 18px !important;
+  }
+
+  .faq-page-react .faq-cta-card-grid .cta-card {
+    padding: 18px 14px !important;
+    gap: 9px !important;
+  }
+
+  .faq-page-react .faq-cta-card-grid .cta-card-title {
+    font-size: 1rem !important;
+    line-height: 1.15 !important;
   }
 
   .cta-section .cta-card-sub {

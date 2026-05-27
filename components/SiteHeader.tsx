@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const navItems = [
@@ -15,7 +14,6 @@ const navItems = [
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -37,15 +35,15 @@ export function SiteHeader() {
 
   const handleQuote = () => {
     setIsOpen(false);
-    router.push("/cotizar");
+    window.location.assign("/cotizar");
   };
 
   return (
     <nav id="site-nav">
       <div className={`nav-pill${isScrolled || forceScrolled ? " scrolled" : ""}${isOpen ? " nav-open" : ""}`} id="nav-pill">
-        <Link className="nav-logo" href="/" aria-label="Finca La Hermosa">
+        <a className="nav-logo" href="/" aria-label="Finca La Hermosa">
           <Image src="/assets/logo-blanco.svg" alt="Finca La Hermosa" width={128} height={42} priority />
-        </Link>
+        </a>
 
         <button
           className="nav-toggle"
@@ -59,9 +57,9 @@ export function SiteHeader() {
 
         <div className="nav-links">
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className={activePath === item.href ? "active" : undefined}>
+            <a key={item.href} href={item.href} className={activePath === item.href ? "active" : undefined}>
               {item.label}
-            </Link>
+            </a>
           ))}
         </div>
 

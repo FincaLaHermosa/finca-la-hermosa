@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function CotizarListoPage() {
   return (
     <main className="standalone quote-done">
@@ -7,9 +5,9 @@ export default function CotizarListoPage() {
         <p className="quote-done-kicker">Propuesta solicitada</p>
         <h1>Solicitud recibida</h1>
         <p>Prepararemos tu propuesta personalizada y la enviaremos por WhatsApp.</p>
-        <Link className="quote-done-link" href="/">
+        <a className="quote-done-link" href="/">
           Volver al inicio
-        </Link>
+        </a>
       </section>
     </main>
   );

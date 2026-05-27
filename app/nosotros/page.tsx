@@ -4,7 +4,7 @@ import { nosotrosStyles } from "@/lib/nosotros-styles";
 export default function NosotrosPage() {
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: nosotrosStyles }} />
+      <style data-route-page-style dangerouslySetInnerHTML={{ __html: nosotrosStyles }} />
       <NosotrosContent />
     </>
   );

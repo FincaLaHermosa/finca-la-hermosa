@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export function SiteFooter() {
@@ -58,7 +57,7 @@ export function SiteFooter() {
       <div className="footer-bottom">
         <p className="footer-copy">© 2026 Finca La Hermosa</p>
         <p className="footer-copy">
-          <Link href="#">Privacidad</Link> · <Link href="#">Términos</Link>
+          <a href="#">Privacidad</a> · <a href="#">Términos</a>
         </p>
       </div>
     </footer>
