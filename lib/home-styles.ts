@@ -13,10 +13,10 @@
   --verde:        #2d4949;
   --verde-dark:   #1e3232;
   --verde-mid:    #4a6e6e;
-  --terracota:    #c07a5a;
+  --terracota:    #9d563d;
   --terra-light:  #e8c4ad;
   --body-clr:     #5a5040;
-  --muted:        #8c7d68;
+  --muted:        #6f634f;
   --carbon:       #1a1a1a;
   --ease-snap:    cubic-bezier(0.76,0,0.24,1);
   --ease-out:     cubic-bezier(0.22,1,0.36,1);
@@ -107,7 +107,7 @@ body {
   z-index: 150;
   width: 50px; height: 50px;
   border-radius: 50%;
-  background: #25D366;
+  background: #128c4a;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   transition: transform 0.26s, box-shadow 0.26s;
@@ -143,7 +143,7 @@ body {
   transition: all 0.22s ease;
 }
 .btn-accent:hover { background: #a8664a; transform: scale(1.04); }
-.btn-wa { background: #25D366 !important; }
+.btn-wa { background: #128c4a !important; }
 .btn-wa:hover { background: #1ebe5d !important; }
 
 .btn-outline {
@@ -372,13 +372,13 @@ body {
   border:1px solid var(--verde); background:var(--crema-warm);
   display:flex; align-items:center; justify-content:center;
   font-family:'Against',serif; font-size:0.85rem; color:var(--verde);
-  transition: width 0.8s cubic-bezier(0.34,1.4,0.64,1),
-              height 0.8s cubic-bezier(0.34,1.4,0.64,1),
+  transition: transform 0.72s var(--ease-out),
               background 0.5s ease, border-color 0.5s ease,
               color 0.4s ease, font-size 0.8s ease;
 }
 .proc-dot.active .proc-dot-inner {
-  width:112px; height:112px; font-size:2rem;
+  transform: scale(1.4);
+  font-size:2rem;
   background:var(--terracota); border-color:var(--terracota); color:#fff;
 }
 .proc-cols { display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:8px; }
@@ -628,7 +628,7 @@ body {
     font-size: clamp(2.5rem, 9vw, 3.2rem) !important;
   }
 
-  /* CTA: colapsa outer grid, preserva inner 2-col (Agendar+WhatsApp), oculta copys */
+  /* CTA: colapsa outer grid, preserva tarjetas internas y oculta copys secundarios */
   .snap-section[data-sec="cta"] .cta-outer {
     grid-template-columns: 1fr !important;
     gap: 24px !important;
@@ -1162,26 +1162,24 @@ body {
     }
 
     .home-page-react .home-experiences-tabs {
+      flex-direction: column !important;
+      align-items: stretch !important;
       justify-content: flex-start !important;
-      overflow-x: auto !important;
-      overflow-y: hidden !important;
-      max-width: calc(100vw - (var(--home-mobile-gutter) * 2)) !important;
-      width: calc(100vw - (var(--home-mobile-gutter) * 2)) !important;
+      gap: 10px !important;
+      overflow: visible !important;
+      max-width: 100% !important;
+      width: 100% !important;
       margin-left: 0 !important;
       margin-right: 0 !important;
+      margin-bottom: 26px !important;
       padding-left: 0 !important;
       padding-right: 0 !important;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .home-page-react .home-experiences-tabs::-webkit-scrollbar {
-      display: none;
     }
 
     .home-page-react .home-experiences-tabs .tab-btn {
-      flex: 0 0 auto;
-      white-space: nowrap;
+      width: 100% !important;
+      justify-content: center !important;
+      white-space: normal !important;
     }
 
     .home-page-react [data-sec="cotizador"] > div[style*="grid-template-columns"],

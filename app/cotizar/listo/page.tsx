@@ -4,7 +4,7 @@ export default function CotizarListoPage() {
       <section className="success-panel quote-done-panel">
         <p className="quote-done-kicker">Propuesta solicitada</p>
         <h1>Solicitud recibida</h1>
-        <p>Prepararemos tu propuesta personalizada y la enviaremos por WhatsApp.</p>
+        <p>Revisaremos tu solicitud y te contactaremos por WhatsApp en menos de 24 horas.</p>
         <a className="quote-done-link" href="/">
           Volver al inicio
         </a>

@@ -13,10 +13,10 @@ export const experienciasStyles = String.raw`
   --verde:        #2d4949;
   --verde-dark:   #1e3232;
   --verde-mid:    #4a6e6e;
-  --terracota:    #c07a5a;
+  --terracota:    #9d563d;
   --terra-light:  #e8c4ad;
   --body-clr:     #5a5040;
-  --muted:        #8c7d68;
+  --muted:        #6f634f;
   --carbon:       #1a1a1a;
   --ease-out:     cubic-bezier(0.22,1,0.36,1);
   --ease-snap:    cubic-bezier(0.76,0,0.24,1);
@@ -99,7 +99,7 @@ body {
   z-index: 150;
   width: 50px; height: 50px;
   border-radius: 50%;
-  background: #25D366;
+  background: #128c4a;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   transition: transform 0.26s, box-shadow 0.26s;

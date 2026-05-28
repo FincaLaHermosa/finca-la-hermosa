@@ -1,4 +1,4 @@
-export type PackageFilter = "social" | "corporativo" | "retiro" | "privado" | "dia";
+export type PackageFilter = "social" | "corporativo" | "retiro" | "privado";
 
 export type ExperiencePackage = {
   id: string;
@@ -30,16 +30,15 @@ export const packageFilters: Array<{ id: PackageFilter; label: string }> = [
   { id: "corporativo", label: "Corporativos" },
   { id: "retiro", label: "Retiros" },
   { id: "privado", label: "Estancia Privada" },
-  { id: "dia", label: "Day Use" },
 ];
 
 export const experiencePackages: ExperiencePackage[] = [
   {
     id: "esencial",
-    filters: ["social", "dia"],
+    filters: ["social"],
     image: "/assets/photo-alberca.jpg",
     imageAlt: "Paquete Esencial",
-    overline: "Eventos Sociales · Day Use",
+    overline: "Eventos Sociales",
     title: "Esencial",
     price: "Desde $13,000",
     unit: "MXN / día",
@@ -53,7 +52,7 @@ export const experiencePackages: ExperiencePackage[] = [
       "Estacionamiento privado",
       "Anfitrión + coordinadora de atención",
     ],
-    cta: "Preguntar evento",
+    cta: "Solicitar propuesta",
   },
   {
     id: "retiro-bosque",
@@ -74,7 +73,7 @@ export const experiencePackages: ExperiencePackage[] = [
       "Alberca y jardines",
       "Staff respetuoso de tu espacio",
     ],
-    cta: "Preguntar retiro",
+    cta: "Solicitar propuesta",
   },
   {
     id: "corporativo-creativo",
@@ -117,7 +116,7 @@ export const experiencePackages: ExperiencePackage[] = [
       "Acceso a café pequeño del venue",
       "Staff ampliado: anfitrión + 2 asistentes",
     ],
-    cta: "Preguntar evento",
+    cta: "Solicitar propuesta",
   },
   {
     id: "estancia-privada",
@@ -135,10 +134,10 @@ export const experiencePackages: ExperiencePackage[] = [
       "Alberca, jardines y rooftop",
       "Cocina equipada para uso propio",
       "Asador, fogata y columpio",
-      "Privacidad total - sin eventos paralelos",
+      "Privacidad total, sin eventos paralelos",
       "Staff disponible sin interrumpir",
     ],
-    cta: "Preguntar estancia",
+    cta: "Consultar estancia",
   },
   {
     id: "premium-all-in",

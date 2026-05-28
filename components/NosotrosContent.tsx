@@ -308,9 +308,9 @@ function CtaSection() {
             <div className="final-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.2rem,5.5vw,6rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "var(--crema)" }}>Celebra con</div>
             <div className="final-cta-title-sub" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.6rem,4.5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>nosotros.</div>
           </div>
-          <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.62)", maxWidth: 360 }}>Lleva a tu familia o a tu equipo a vivir algo diferente. Cuéntanos sobre tu evento y te preparamos una propuesta en menos de 24 horas.</p>
+          <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.62)", maxWidth: 360 }}>Si este lugar se parece a lo que estás buscando, cuéntanos tu idea. La aterrizamos contigo.</p>
           <div className="txt-reveal" data-d="3" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 8 }}>
-            {["Respuesta en 24 h", "PDF personalizado gratis", "Sin compromiso"].map((item) => (
+            {["Respuesta en 24 h", "Propuesta sin costo", "Sin compromiso"].map((item) => (
               <div key={item} style={{ display: "flex", alignItems: "center", gap: 8, fontFamily: "'Jost',sans-serif", fontSize: "0.72rem", fontWeight: 300, color: "rgba(255,253,248,0.5)" }}>
                 <CheckIcon />
                 {item}
@@ -319,26 +319,7 @@ function CtaSection() {
           </div>
         </div>
         <div className="txt-reveal" data-d="2" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-          <div className="cta-card">
-            <DocumentIcon />
-            <div className="cta-card-title">Cotizar en línea</div>
-            <p className="cta-card-sub">Cuéntanos sobre tu evento y recibe una propuesta con PDF personalizado.</p>
-            <a href="/cotizar" className="btn-accent" style={{ fontSize: "0.65rem", padding: "10px 20px", textDecoration: "none" }}>Cotizar ahora</a>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
-            <div className="cta-card">
-              <CalendarIcon />
-              <div className="cta-card-title">Agendar visita</div>
-              <p className="cta-card-sub">Ven a conocer la finca antes de decidir.</p>
-              <a href="https://wa.me/5215500000000" className="btn-accent" target="_blank" rel="noopener" style={{ fontSize: "0.65rem", padding: "10px 20px" }}>Agendar</a>
-            </div>
-            <div className="cta-card">
-              <MessageIcon />
-              <div className="cta-card-title">WhatsApp</div>
-              <p className="cta-card-sub">Respuesta rápida y directa.</p>
-              <a href="https://wa.me/5215500000000" target="_blank" rel="noopener" style={{ padding: "10px 20px", background: "#25D366", color: "#fff", border: "none", borderRadius: 999, fontFamily: "'Jost',sans-serif", fontSize: "0.65rem", fontWeight: 300, letterSpacing: "0.09em", textTransform: "uppercase", cursor: "pointer", textDecoration: "none", display: "inline-block", transition: "opacity 0.22s" }}>Escribir</a>
-            </div>
-          </div>
+          <a href="/cotizar" className="btn-accent proposal-card-link" style={{ fontSize: "0.65rem", padding: "10px 20px", textDecoration: "none" }}>Empezar</a>
         </div>
       </div>
     </section>
@@ -360,10 +341,6 @@ function CommitmentIcon({ name }: { name: string }) {
 
 function CheckIcon({ color = "currentColor" }: { color?: string }) {
   return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>;
-}
-
-function DocumentIcon() {
-  return <svg className="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" /></svg>;
 }
 
 function CalendarIcon() {

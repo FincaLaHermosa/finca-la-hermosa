@@ -4,8 +4,8 @@ export const espaciosStyles = String.raw`
 :root {
   --crema:#fffdf8; --crema-warm:#f5f0e8; --crema-border:#ede6d6;
   --verde:#2d4949; --verde-dark:#1e3232; --verde-mid:#4a6e6e;
-  --terracota:#c07a5a; --terra-light:#e8c4ad;
-  --body-clr:#5a5040; --muted:#8c7d68; --carbon:#1a1a1a;
+  --terracota:#9d563d; --terra-light:#e8c4ad;
+  --body-clr:#5a5040; --muted:#6f634f; --carbon:#1a1a1a;
   --ease-out:cubic-bezier(0.22,1,0.36,1);
   --ease-snap:cubic-bezier(0.76,0,0.24,1);
 }
@@ -26,7 +26,7 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 .nav-cta:hover{background:rgba(192,122,90,0.9);border-color:rgba(192,122,90,0.6);}
 
 /* ── WA ────────────────────────────────────────── */
-.wa-float{position:fixed;bottom:32px;right:32px;z-index:150;width:50px;height:50px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:transform 0.26s,box-shadow 0.26s;text-decoration:none;}
+.wa-float{position:fixed;bottom:32px;right:32px;z-index:150;width:50px;height:50px;border-radius:50%;background:#128c4a;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:transform 0.26s,box-shadow 0.26s;text-decoration:none;}
 .wa-float:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.28);}
 
 /* ── BUTTONS ───────────────────────────────────── */
@@ -522,13 +522,15 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
 
 .sg-item-bar {
   width: 2px;
-  height: 0;
+  height: 28px;
   background: var(--terracota);
   border-radius: 2px;
   flex-shrink: 0;
-  transition: height 0.22s var(--ease-snap);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.22s var(--ease-snap);
 }
-.sg-list-item.active .sg-item-bar { height: 28px; }
+.sg-list-item.active .sg-item-bar { transform: scaleY(1); }
 
 .sg-desc-area {
   flex-shrink: 0;
@@ -853,10 +855,10 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
   gap: 12px;
   padding: 12px 0;
   border-bottom: 1px solid rgba(45,73,73,0.06);
-  transition: padding-left 0.22s var(--ease-out);
+  transition: transform 0.22s var(--ease-out);
   cursor: default;
 }
-.inv-item:hover { padding-left: 5px; }
+.inv-item:hover { transform: translateX(5px); }
 .inv-item-num {
   font-family: 'Against', serif;
   font-size: 1rem;
@@ -1115,8 +1117,8 @@ body{font-family:'Jost',sans-serif;background:var(--crema);color:var(--body-clr)
     min-width: 0;
     padding-left: 12px !important;
     padding-right: 12px !important;
-    font-size: 0.62rem !important;
-    letter-spacing: 0.08em !important;
+    font-size: var(--type-button, 0.75rem) !important;
+    letter-spacing: var(--tracking-button, 0.1em) !important;
     white-space: normal;
   }
 

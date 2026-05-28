@@ -12,11 +12,33 @@
   --verde: #2d4949;
   --verde-dark: #1e3232;
   --verde-mid: #4a6e6e;
-  --terracota: #c07a5a;
+  --terracota: #9d563d;
+  --terracota-action: #9d563d;
   --terra-light: #e8c4ad;
   --body-clr: #5a5040;
-  --muted: #8c7d68;
+  --muted: #6f634f;
   --carbon: #1a1a1a;
+  --font-display: "Against", Georgia, serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Jost", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --type-label: 0.75rem;
+  --type-nav: 0.69rem;
+  --type-button: 0.75rem;
+  --type-caption: 0.75rem;
+  --type-small: 0.875rem;
+  --type-body: 1rem;
+  --type-lead: 1.05rem;
+  --type-card-title: 1.15rem;
+  --type-card-heading: 1.5rem;
+  --type-section: clamp(2.8rem, 4vw, 4rem);
+  --type-step-title: clamp(1.8rem, 2.5vw, 2.6rem);
+  --type-step-sub: clamp(1.1rem, 1.6vw, 1.4rem);
+  --type-hero-display: clamp(3.5rem, 8vw, 6.5rem);
+  --type-hero-italic: clamp(3.25rem, 7.5vw, 6rem);
+  --type-final-main: clamp(3.5rem, 6vw, 6.5rem);
+  --type-final-sub: clamp(2.8rem, 5vw, 5rem);
+  --tracking-label: 0.12em;
+  --tracking-button: 0.1em;
 }
 
 html,
@@ -31,6 +53,36 @@ body {
 
 .prototype-route {
   min-height: 100vh;
+  font-family: var(--font-sans);
+  font-kerning: normal;
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+}
+
+.prototype-route a,
+.prototype-route button,
+.prototype-route label {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.prototype-route a[class*="btn"],
+.prototype-route button[class*="btn"],
+.prototype-route .tipo-card,
+.prototype-route .addon-item,
+.prototype-route .faq-tab,
+.prototype-route .tab-btn,
+.prototype-route .sg-dot {
+  transform-origin: center;
+}
+
+.prototype-route a[class*="btn"]:active,
+.prototype-route button[class*="btn"]:active,
+.prototype-route .tipo-card:active,
+.prototype-route .addon-item:active,
+.prototype-route .faq-tab:active,
+.prototype-route .tab-btn:active,
+.prototype-route .sg-dot:active {
+  transform: scale(0.985);
 }
 
 .prototype-route a:focus-visible,
@@ -40,7 +92,7 @@ body {
 .prototype-route textarea:focus-visible,
 .prototype-route .tipo-card:focus-within,
 .prototype-route .addon-item:focus-within {
-  outline: 2px solid var(--terracota, #c07a5a);
+  outline: 2px solid var(--terracota, #9d563d);
   outline-offset: 4px;
 }
 
@@ -60,37 +112,309 @@ body {
 }
 
 .hero-title-display {
-  font-family: "Against", Georgia, serif !important;
-  font-size: clamp(56px, 8vw, 104px) !important;
+  font-family: var(--font-display) !important;
+  font-size: var(--type-hero-display) !important;
   font-weight: 400 !important;
   line-height: 0.92 !important;
   letter-spacing: -0.025em !important;
+  text-wrap: balance;
 }
 
 .hero-title-italic {
-  font-family: "Cormorant Garamond", Georgia, serif !important;
-  font-size: clamp(52px, 7.5vw, 96px) !important;
+  font-family: var(--font-serif) !important;
+  font-size: var(--type-hero-italic) !important;
   font-style: italic !important;
   font-weight: 300 !important;
   line-height: 1 !important;
+  text-wrap: balance;
 }
 
 .final-cta-title-main {
-  font-family: "Against", Georgia, serif !important;
-  font-size: clamp(3.5rem, 6vw, 6.5rem) !important;
+  font-family: var(--font-display) !important;
+  font-size: var(--type-final-main) !important;
   font-weight: 400 !important;
   line-height: 0.92 !important;
   letter-spacing: -0.025em !important;
   color: var(--crema) !important;
+  text-wrap: balance;
 }
 
 .final-cta-title-sub {
-  font-family: "Cormorant Garamond", Georgia, serif !important;
-  font-size: clamp(2.8rem, 5vw, 5rem) !important;
+  font-family: var(--font-serif) !important;
+  font-size: var(--type-final-sub) !important;
   font-style: italic !important;
   font-weight: 300 !important;
   line-height: 1 !important;
   color: var(--terracota) !important;
+  text-wrap: balance;
+}
+
+.prototype-route .overline,
+.prototype-route .hero-folio-id,
+.prototype-route .step-heading,
+.prototype-route .field-label,
+.prototype-route .footer-head,
+.prototype-route .inv-left-eyebrow,
+.prototype-route .inv-section-label,
+.prototype-route .pkg-over,
+.prototype-route .paquete-rec-label,
+.prototype-route .summary-total-key {
+  font-family: var(--font-sans) !important;
+  font-size: var(--type-label) !important;
+  font-weight: 500 !important;
+  letter-spacing: var(--tracking-label) !important;
+  line-height: 1.12 !important;
+  text-transform: uppercase;
+}
+
+.prototype-route .nav-links a,
+.prototype-route .nav-cta {
+  font-family: var(--font-sans) !important;
+  font-size: var(--type-nav) !important;
+  font-weight: 400 !important;
+  letter-spacing: var(--tracking-label) !important;
+  line-height: 1.1 !important;
+  text-transform: uppercase;
+}
+
+.prototype-route .btn-primary,
+.prototype-route .btn-accent,
+.prototype-route .btn-outline,
+.prototype-route .btn-outline-dark,
+.prototype-route .btn-ghost,
+.prototype-route .btn-glass,
+.prototype-route .btn-next,
+.prototype-route .btn-prev,
+.prototype-route .btn-submit,
+.prototype-route .pkg-btn,
+.prototype-route .tab-btn,
+.prototype-route .faq-tab,
+.prototype-route .quote-main-cta {
+  font-family: var(--font-sans) !important;
+  font-size: var(--type-button) !important;
+  font-weight: 500 !important;
+  letter-spacing: var(--tracking-button) !important;
+  line-height: 1.1 !important;
+  text-transform: uppercase;
+}
+
+.prototype-route .btn-accent,
+.prototype-route .btn-primary,
+.prototype-route .pkg-btn,
+.prototype-route .quote-main-cta {
+  background-color: var(--terracota-action) !important;
+  color: var(--crema) !important;
+}
+
+.prototype-route .overline-dark,
+.prototype-route .pkg-over,
+.prototype-route .field-label,
+.prototype-route .paquete-rec-label {
+  color: var(--terracota-action) !important;
+}
+
+.prototype-route .proposal-card-link {
+  position: relative;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 54px;
+  min-width: min(100%, 230px);
+  width: min(100%, 280px);
+  margin-top: 8px;
+  padding: 15px 18px 15px 24px !important;
+  border: 1px solid rgba(232, 196, 173, 0.34) !important;
+  border-radius: 999px;
+  background:
+    linear-gradient(100deg, var(--terracota-action) 0%, #b96d4b 52%, var(--terracota-action) 100%) !important;
+  box-shadow:
+    0 16px 38px rgba(93, 42, 27, 0.34),
+    inset 0 1px 0 rgba(255, 253, 248, 0.26);
+  overflow: hidden;
+  text-decoration: none !important;
+  transform: translateZ(0);
+  transition:
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prototype-route .proposal-card-link::before {
+  content: "";
+  position: absolute;
+  inset: -40% auto -40% -32%;
+  width: 32%;
+  background: linear-gradient(90deg, transparent, rgba(255, 253, 248, 0.38), transparent);
+  transform: skewX(-18deg) translateX(-120%);
+  transition:
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.prototype-route .proposal-card-link::after {
+  content: ">";
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 253, 248, 0.18);
+  color: var(--crema);
+  font-size: 1rem;
+  line-height: 1;
+  letter-spacing: 0;
+  transform: translateX(0);
+  transition:
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prototype-route .proposal-card-link:hover,
+.prototype-route .proposal-card-link:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(255, 253, 248, 0.46) !important;
+  box-shadow:
+    0 22px 54px rgba(93, 42, 27, 0.42),
+    inset 0 1px 0 rgba(255, 253, 248, 0.32);
+}
+
+.prototype-route .proposal-card-link:hover::before,
+.prototype-route .proposal-card-link:focus-visible::before {
+  transform: skewX(-18deg) translateX(470%);
+}
+
+.prototype-route .proposal-card-link:hover::after,
+.prototype-route .proposal-card-link:focus-visible::after {
+  transform: translateX(3px);
+  background: rgba(255, 253, 248, 0.26);
+}
+
+.prototype-route .proposal-card-link:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.prototype-route [style*="font-size: 0.48rem"],
+.prototype-route [style*="font-size:0.48rem"],
+.prototype-route [style*="font-size: 0.52rem"],
+.prototype-route [style*="font-size:0.52rem"],
+.prototype-route [style*="font-size: 0.55rem"],
+.prototype-route [style*="font-size:0.55rem"],
+.prototype-route [style*="font-size: 0.6rem"],
+.prototype-route [style*="font-size:0.6rem"],
+.prototype-route [style*="font-size: 0.61rem"],
+.prototype-route [style*="font-size:0.61rem"],
+.prototype-route [style*="font-size: 0.62rem"],
+.prototype-route [style*="font-size:0.62rem"],
+.prototype-route [style*="font-size: 0.63rem"],
+.prototype-route [style*="font-size:0.63rem"],
+.prototype-route [style*="font-size: 0.65rem"],
+.prototype-route [style*="font-size:0.65rem"],
+.prototype-route [style*="font-size: 0.67rem"],
+.prototype-route [style*="font-size:0.67rem"],
+.prototype-route [style*="font-size: 0.68rem"],
+.prototype-route [style*="font-size:0.68rem"],
+.prototype-route .footer-head,
+.prototype-route .footer-copy,
+.prototype-route .stat-terra-label,
+.prototype-route .hero-photo-meta,
+.prototype-route .sg-item-num,
+.prototype-route .pkg-badge,
+.prototype-route .step-dot,
+.prototype-route .summary-total-sub {
+  font-size: 0.75rem !important;
+}
+
+.prototype-route .footer-head,
+.prototype-route .footer-copy {
+  color: rgba(255, 253, 248, 0.68) !important;
+}
+
+.prototype-route .section-title {
+  font-family: var(--font-display) !important;
+  font-size: var(--type-section) !important;
+  font-weight: 400 !important;
+  line-height: 0.96 !important;
+  letter-spacing: -0.025em !important;
+  text-wrap: balance;
+}
+
+.prototype-route .step-title,
+.prototype-route .summary-title {
+  font-family: var(--font-display) !important;
+  font-size: var(--type-step-title) !important;
+  font-weight: 400 !important;
+  line-height: 0.96 !important;
+  letter-spacing: -0.02em !important;
+  text-wrap: balance;
+}
+
+.prototype-route .step-sub,
+.prototype-route .summary-sub {
+  font-family: var(--font-serif) !important;
+  font-size: var(--type-step-sub) !important;
+  font-weight: 300 !important;
+  line-height: 1.1 !important;
+  text-wrap: balance;
+}
+
+.cotizar-page-react .step-title {
+  font-family: var(--font-serif) !important;
+  font-size: clamp(2rem, 2.7vw, 2.75rem) !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+}
+
+.prototype-route .cta-card-title,
+.prototype-route .faq-q-text,
+.prototype-route .tipo-name,
+.prototype-route .addon-name,
+.prototype-route .paquete-rec-name {
+  font-family: var(--font-serif) !important;
+  font-size: var(--type-card-title) !important;
+  font-weight: 400 !important;
+  line-height: 1.22 !important;
+}
+
+.prototype-route .pkg-title {
+  font-family: var(--font-serif) !important;
+  font-size: var(--type-card-heading) !important;
+  font-weight: 400 !important;
+  line-height: 1.16 !important;
+  text-wrap: balance;
+}
+
+.prototype-route p {
+  font-family: var(--font-sans) !important;
+  font-size: var(--type-body) !important;
+  line-height: 1.65 !important;
+  text-wrap: pretty;
+}
+
+.prototype-route .cta-card-sub,
+.prototype-route .tipo-desc,
+.prototype-route .addon-sub,
+.prototype-route .paquete-rec-desc,
+.prototype-route .privacy-note,
+.prototype-route .footer-brand p,
+.prototype-route .footer-contact-line {
+  font-family: var(--font-sans) !important;
+  font-size: var(--type-caption) !important;
+  line-height: 1.65 !important;
+}
+
+.prototype-route .field-input,
+.prototype-route .field-error,
+.prototype-route .optional-label,
+.prototype-route .summary-key,
+.prototype-route .summary-val,
+.prototype-route .trust-item,
+.prototype-route .availability-badge,
+.prototype-route .suggestion-chip {
+  font-family: var(--font-sans) !important;
+  font-size: var(--type-small) !important;
+  line-height: 1.45 !important;
 }
 
 .cotizar-page-react .step-heading {
@@ -115,22 +439,21 @@ body {
 }
 
 @media (max-width: 760px) {
-  .hero-title-display {
-    font-size: clamp(34px, 10.8vw, 44px) !important;
-    letter-spacing: 0 !important;
+  :root {
+    --type-hero-display: clamp(2.125rem, 10.8vw, 2.75rem);
+    --type-hero-italic: clamp(2.375rem, 12vw, 3.375rem);
+    --type-final-main: clamp(2.5rem, 9vw, 3.2rem);
+    --type-final-sub: clamp(2.15rem, 9.5vw, 3rem);
+    --type-section: clamp(2rem, 10vw, 2.8rem);
+    --type-card-heading: 1.35rem;
   }
 
-  .hero-title-italic {
-    font-size: clamp(38px, 12vw, 54px) !important;
+  .hero-title-display {
+    letter-spacing: 0 !important;
   }
 
   .final-cta-title-main {
-    font-size: clamp(2.5rem, 9vw, 3.2rem) !important;
     letter-spacing: 0 !important;
-  }
-
-  .final-cta-title-sub {
-    font-size: clamp(2.8rem, 5vw, 5rem) !important;
   }
 
   .home-page-react {
@@ -180,26 +503,24 @@ body {
   }
 
   .home-page-react .home-experiences-tabs {
+    flex-direction: column !important;
+    align-items: stretch !important;
     justify-content: flex-start !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    max-width: calc(100vw - (var(--home-mobile-gutter) * 2)) !important;
-    width: calc(100vw - (var(--home-mobile-gutter) * 2)) !important;
+    gap: 10px !important;
+    overflow: visible !important;
+    max-width: 100% !important;
+    width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+    margin-bottom: 26px !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .home-page-react .home-experiences-tabs::-webkit-scrollbar {
-    display: none;
   }
 
   .home-page-react .home-experiences-tabs .tab-btn {
-    flex: 0 0 auto;
-    white-space: nowrap;
+    width: 100% !important;
+    justify-content: center !important;
+    white-space: normal !important;
   }
 
   .home-page-react .quote-gateway {
@@ -311,7 +632,7 @@ body {
 
   .cotizar-page-react .step-title {
     font-size: clamp(2rem, 10vw, 2.65rem) !important;
-    line-height: 0.92 !important;
+    line-height: 1 !important;
   }
 
   .cotizar-page-react .step-sub {

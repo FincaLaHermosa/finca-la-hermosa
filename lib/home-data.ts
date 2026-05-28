@@ -84,18 +84,6 @@ export const homeExperiences: HomeExperience[] = [
     bullets: ["Casa principal con 6 habitaciones", "Acceso completo a todos los espacios del venue", "Staff disponible sin interrumpir tu privacidad"],
     cta: "Ver estancias disponibles",
   },
-  {
-    label: "One Day Experience",
-    eyebrow: "Sin quedarse a dormir · Grupo pequeño",
-    title: "Un día completo de naturaleza, sin necesidad de reservar todo",
-    body: "Perfecta para quienes quieren disfrutar la finca por un día: jardines, alberca, asador y una tarde memorable en un entorno increíble.",
-    image: "/assets/photo-alberca.jpg",
-    imageAlt: "One Day Experience",
-    caption: "Experiencia de día",
-    bullets: ["Acceso completo de 9am a 8pm", "Jardines, alberca, asador y columpio", "Ideal para grupos de hasta 30 personas"],
-    cta: "Ver One Day Experience",
-    special: true,
-  },
 ];
 
 export const homeSpaces: HomeSpace[] = [
@@ -107,7 +95,7 @@ export const homeSpaces: HomeSpace[] = [
   { name: "Puente Colgante", caption: "Exterior · Aventura", alt: "Puente colgante", gradient: "linear-gradient(160deg,#2d4020 0%,#4a6a30 25%,#3a5525 50%,#6a8a40 70%,#2d4020 100%)" },
 ];
 
-export const quickQuoteOptions = ["Evento Social", "Corporativo", "Retiro", "Estancia Privada", "One Day Exp.", "No sé aún"];
+export const quickQuoteOptions = ["Evento Social", "Corporativo", "Retiro", "Estancia Privada", "No sé aún"];
 
 export const homePackages: HomePackage[] = [
   {
@@ -141,12 +129,12 @@ export const homePackages: HomePackage[] = [
 ];
 
 export const homeTestimonials: HomeTestimonial[] = [
-  { quote: "Un espacio que supera cualquier expectativa.", author: "Valeria y Diego", event: "Boda · Abril 2025", background: "#fffdf5", rotation: "rotate(-1.8deg)", pin: "#c07a5a" },
+  { quote: "Un espacio que supera cualquier expectativa.", author: "Valeria y Diego", event: "Boda · Abril 2025", background: "#fffdf5", rotation: "rotate(-1.8deg)", pin: "#9d563d" },
   { quote: "La atención fue impecable. Mi fiesta fue perfecta en todo.", author: "Fernanda Salazar", event: "XV Años · Diciembre 2024", background: "#f7f3eb", rotation: "rotate(1.2deg)", pin: "#2d4949" },
-  { quote: "El retiro fue transformador. La naturaleza hizo todo el trabajo.", author: "Roberto Ángeles", event: "Retiro Corporativo · Feb 2025", background: "#fffdf5", rotation: "rotate(-0.8deg)", pin: "#c07a5a" },
+  { quote: "El retiro fue transformador. La naturaleza hizo todo el trabajo.", author: "Roberto Ángeles", event: "Retiro Corporativo · Feb 2025", background: "#fffdf5", rotation: "rotate(-0.8deg)", pin: "#9d563d" },
   { quote: "El jardín al atardecer es simplemente mágico.", author: "María José Reyes", event: "Cumpleaños · Octubre 2024", background: "#f2ede3", rotation: "rotate(2.1deg)", pin: "#2d4949" },
   { quote: "Nos cuidaron cada detalle. Solo disfrutamos.", author: "Alejandro Fuentes", event: "Evento Corporativo · Ene 2025", background: "#f2ede3", rotation: "rotate(1.6deg)", pin: "#2d4949" },
-  { quote: "Naturaleza y elegancia en perfecta armonía.", author: "Sofía y Emilio", event: "Boda · Marzo 2025", background: "#fffdf5", rotation: "rotate(-2.3deg)", pin: "#c07a5a" },
-  { quote: "El silencio, la naturaleza, la hospitalidad. Todo.", author: "Grupo La Paloma", event: "Retiro Espiritual · Nov 2024", background: "#f7f3eb", rotation: "rotate(0.9deg)", pin: "#c07a5a" },
-  { quote: "Vinimos un día y ya reservamos nuestra próxima visita.", author: "Claudia Hernández", event: "One Day · Enero 2025", background: "#fffdf5", rotation: "rotate(-1.4deg)", pin: "#2d4949" },
+  { quote: "Naturaleza y elegancia en perfecta armonía.", author: "Sofía y Emilio", event: "Boda · Marzo 2025", background: "#fffdf5", rotation: "rotate(-2.3deg)", pin: "#9d563d" },
+  { quote: "El silencio, la naturaleza, la hospitalidad. Todo.", author: "Grupo La Paloma", event: "Retiro Espiritual · Nov 2024", background: "#f7f3eb", rotation: "rotate(0.9deg)", pin: "#9d563d" },
+  { quote: "Vinimos un día y ya reservamos nuestra próxima visita.", author: "Claudia Hernández", event: "Visita familiar · Enero 2025", background: "#fffdf5", rotation: "rotate(-1.4deg)", pin: "#2d4949" },
 ];

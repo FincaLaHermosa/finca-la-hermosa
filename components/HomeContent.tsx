@@ -2,7 +2,7 @@
 
 import type { CSSProperties, ReactNode, RefObject } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { homeExperiences, homePackages, homeSpaces, homeTestimonials, quickQuoteOptions } from "@/lib/home-data";
+import { homeExperiences, homeSpaces, homeTestimonials } from "@/lib/home-data";
 
 type IconName = "users" | "briefcase" | "home" | "heart" | "clock" | "more" | "file" | "mail" | "calendar" | "whatsapp";
 
@@ -94,7 +94,6 @@ export function HomeContent() {
       <SpacesSection carouselRef={carouselRef} onScroll={scrollCarousel} />
       <ProcessSection processRef={processRef} />
       <QuickQuoteSection />
-      <PackagesSection />
       <TestimonialsSection testimonialsRef={testimonialsRef} />
       <FinalCtaSection />
     </main>
@@ -126,7 +125,7 @@ function HeroSection() {
             Un espacio rodeado de naturaleza para celebrar, descansar y compartir momentos que se quedan en la memoria.
           </p>
           <div className="txt-reveal" data-d="4" style={{ display: "flex", gap: 12, justifyContent: "flex-end" }}>
-            <a className="btn-glass" href="/cotizar">Cotizar mi experiencia</a>
+            <a className="btn-glass" href="/cotizar">Solicitar propuesta</a>
             <a className="btn-outline" href="/espacios">Ver espacios</a>
           </div>
         </div>
@@ -207,9 +206,9 @@ function SpacesSection({ carouselRef, onScroll }: { carouselRef: RefObject<HTMLD
 
 function ProcessSection({ processRef }: { processRef: RefObject<HTMLDivElement | null> }) {
   const steps = [
-    { title: "Cotiza en línea", body: "Llena nuestro formulario en 3 minutos y cuéntanos cómo imaginas tu evento.", icon: "file" as IconName },
-    { title: "Recibe tu propuesta", body: "Te enviamos un PDF personalizado con el paquete que mejor se adapta a tu evento y presupuesto.", icon: "mail" as IconName },
-    { title: "Confirma y celebra", body: "Agenda una visita, confirma los detalles y prepárate para vivir algo memorable.", icon: "calendar" as IconName },
+    { title: "Cuéntanos tu idea", body: "Tipo de evento, fecha tentativa, invitados y lo que quieres cuidar.", icon: "file" as IconName },
+    { title: "Armamos la propuesta", body: "Te recomendamos espacios, extras y una ruta clara para decidir.", icon: "mail" as IconName },
+    { title: "Afinamos contigo", body: "Si algo falta, lo ajustamos. La finca se adapta al evento, no al revés.", icon: "calendar" as IconName },
   ];
 
   return (
@@ -258,53 +257,15 @@ function QuickQuoteSection() {
       <div className="arch-label" style={{ right: -30, bottom: 46, color: "rgba(255,253,248,0.035)" }}>COTIZA</div>
       <div className="quote-video-inner" style={{ position: "relative", zIndex: 4, maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
         <div className="txt-reveal quote-glass-card" data-d="2">
-          <div className="overline overline-light">Cotización guiada</div>
+          <div className="overline overline-light">Propuesta flexible</div>
           <div>
-            <div className="quote-card-title">Tu experiencia,</div>
-            <div className="quote-card-subtitle">en 3 minutos.</div>
+            <div className="quote-card-title">Nos adaptamos</div>
+            <div className="quote-card-subtitle">a tu evento.</div>
           </div>
           <p className="quote-card-copy">
-            Mira el ambiente, elige el punto de partida y continúa al cotizador completo. La propuesta final llega por WhatsApp con precio, paquete recomendado y próximos pasos.
+            Cada celebración pide algo distinto. Cuéntanos qué tienes en mente y armamos una propuesta con espacios, extras y precios justos, sin empujarte a pagar cosas que no necesitas.
           </p>
-          <a className="btn-accent quote-main-cta" href="/cotizar">Cotizar ahora</a>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function PackagesSection() {
-  return (
-    <section className="snap-section" data-sec="paquetes" style={{ background: "var(--crema)", flexDirection: "column", justifyContent: "center", overflow: "hidden" }}>
-      <div style={{ maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 44 }}>
-          <div className="txt-reveal" data-d="1" style={{ lineHeight: 1 }}>
-            <div style={sectionTitleStyle}>Experiencias</div>
-            <div style={sectionItalicStyle}>para cada ocasión</div>
-          </div>
-          <div className="txt-reveal" data-d="2" style={{ textAlign: "right" }}>
-            <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.82rem", fontWeight: 300, color: "var(--muted)" }}>Desde $13,000 MXN · 25–30 personas</p>
-            <a href="/experiencias" style={{ ...smallLinkStyle, marginTop: 6 }}>Ver todos los paquetes <ArrowIcon /></a>
-          </div>
-        </div>
-        <div className="txt-reveal pkg-featured-grid" data-d="2" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
-          {homePackages.map((item) => (
-            <div className="pkg-card" key={item.name}>
-              <div className="pkg-img-wrap">
-                <img src={item.image} alt={item.alt} className="pkg-img-inner" style={{ height: 190 }} />
-                <div style={{ position: "absolute", inset: 0, background: item.overlay }} />
-                {item.badge ? <div style={{ position: "absolute", top: 14, left: 14, padding: "4px 12px", background: "var(--terra-light)", color: "var(--terracota)", fontFamily: "'Jost',sans-serif", fontSize: "0.62rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", borderRadius: 999 }}>{item.badge}</div> : null}
-              </div>
-              <div className="pkg-body">
-                <div className="pkg-over">{item.name}</div>
-                <div className="pkg-price">{item.price}</div>
-                <div className="pkg-capacity">{item.capacity}</div>
-                <div className="pkg-divider" />
-                <ul className="pkg-features">{item.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
-                <div className="pkg-btn-wrap"><a className="pkg-btn" href="/experiencias">Ver más</a></div>
-              </div>
-            </div>
-          ))}
+          <a className="btn-accent quote-main-cta" href="/cotizar">Solicitar propuesta</a>
         </div>
       </div>
     </section>
@@ -351,34 +312,25 @@ function FinalCtaSection() {
             <div id="illum-text" className="final-cta-title-main" style={{ fontFamily: "'Against',serif", fontSize: "clamp(3.5rem,6vw,6.5rem)", lineHeight: 0.92, letterSpacing: "-0.025em", color: "var(--crema)" }}>Tu momento perfecto,</div>
             <div className="final-cta-title-sub" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.8rem,5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>comienza aquí.</div>
           </div>
-          <p className="txt-reveal" data-d="3" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.8, color: "rgba(255,253,248,0.62)", maxWidth: 380 }}>Agenda una visita, resuelve tus dudas o recibe tu cotización ahora mismo.</p>
+          <p className="txt-reveal" data-d="3" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.8, color: "rgba(255,253,248,0.62)", maxWidth: 380 }}>Cuéntanos fecha, invitados y tipo de evento. Nosotros te proponemos el mejor uso de la finca.</p>
         </div>
         <div className="txt-reveal" data-d="2" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-          <CtaCard icon="file" title="Cotizar en línea" body="Cuéntanos sobre tu evento y recibe una propuesta personalizada en menos de 24 horas." href="/cotizar" label="Cotizar ahora" />
-          <div className="cta-small-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
-            <CtaCard icon="calendar" title="Agendar visita" body="Ven a conocer la finca en persona antes de decidir." href="https://wa.me/5215500000000" label="Agendar" />
-            <CtaCard icon="whatsapp" title="WhatsApp" body="Respuesta rápida y sin complicaciones." href="https://wa.me/5215500000000" label="Escribir" whatsapp />
-          </div>
+          <CtaCard icon="file" title="Solicitar propuesta" body="Dinos qué quieres celebrar y te respondemos con una ruta clara, sin paquetes forzados." href="/cotizar" label="Empezar" />
         </div>
       </div>
     </section>
   );
 }
 
-function CtaCard({ icon, title, body, href, label, whatsapp = false }: { icon: IconName; title: string; body: string; href: string; label: string; whatsapp?: boolean }) {
+function CtaCard({ href, label, whatsapp = false }: { icon: IconName; title: string; body: string; href: string; label: string; whatsapp?: boolean }) {
   const external = href.startsWith("http");
   const className = `btn-accent ${whatsapp ? "btn-wa" : ""}`;
   return (
-    <div className="cta-card">
-      <Icon name={icon} className="cta-card-icon" />
-      <div className="cta-card-title">{title}</div>
-      <p className="cta-card-sub">{body}</p>
-      {external ? (
-        <a className={className} href={href} target="_blank" rel="noopener" style={{ fontSize: "0.65rem", padding: "10px 20px" }}>{label}</a>
-      ) : (
-        <a className={className} href={href} style={{ fontSize: "0.65rem", padding: "10px 20px" }}>{label}</a>
-      )}
-    </div>
+    external ? (
+      <a className={`${className} proposal-card-link`} href={href} target="_blank" rel="noopener" style={{ fontSize: "0.65rem", padding: "10px 20px" }}>{label}</a>
+    ) : (
+      <a className={`${className} proposal-card-link`} href={href} style={{ fontSize: "0.65rem", padding: "10px 20px" }}>{label}</a>
+    )
   );
 }
 

@@ -13,10 +13,10 @@ export const nosotrosStyles = String.raw`
   --verde:        #2d4949;
   --verde-dark:   #1e3232;
   --verde-mid:    #4a6e6e;
-  --terracota:    #c07a5a;
+  --terracota:    #9d563d;
   --terra-light:  #e8c4ad;
   --body-clr:     #5a5040;
-  --muted:        #8c7d68;
+  --muted:        #6f634f;
   --carbon:       #1a1a1a;
   --ease-snap:    cubic-bezier(0.76,0,0.24,1);
   --ease-out:     cubic-bezier(0.22,1,0.36,1);
@@ -100,7 +100,7 @@ body {
   z-index: 150;
   width: 50px; height: 50px;
   border-radius: 50%;
-  background: #25D366;
+  background: #128c4a;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   transition: transform 0.26s, box-shadow 0.26s;
@@ -814,7 +814,7 @@ body {
     font-size: clamp(2.5rem, 9vw, 3.2rem) !important;
   }
 
-  /* CTA: colapsa outer grid, preserva inner 2-col (Agendar+WhatsApp), oculta copys */
+  /* CTA: colapsa outer grid, preserva tarjetas internas y oculta copys secundarios */
   .snap-section[data-sec="cta"] .cta-outer {
     grid-template-columns: 1fr !important;
     gap: 24px !important;
@@ -1583,20 +1583,7 @@ body {
   }
 
   .hero-nosotros .hero-right {
-    width: 100% !important;
-    flex: none !important;
-    aspect-ratio: 4 / 3 !important;
-    min-height: 0 !important;
-  }
-
-  .hero-nosotros .hero-right .img-reveal {
-    position: relative !important;
-    inset: auto !important;
-    height: 100% !important;
-  }
-
-  .hero-nosotros .hero-right::after {
-    background: linear-gradient(180deg, var(--verde-dark) 0%, rgba(30, 50, 50, 0.08) 38%, transparent 100%) !important;
+    display: none !important;
   }
 
   .hero-nosotros .hero-left > [style*="display:flex"][style*="gap:14px"],
@@ -2024,7 +2011,7 @@ body {
   }
 
   .cta-section .cta-card .btn-accent,
-  .cta-section .cta-card a[style*="background:#25D366"],
+  .cta-section .cta-card a[style*="background:#128c4a"],
   .cta-section .cta-card button {
     width: 100% !important;
     min-height: 42px;

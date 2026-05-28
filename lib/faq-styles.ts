@@ -13,10 +13,10 @@ export const faqStyles = String.raw`
   --verde:        #2d4949;
   --verde-dark:   #1e3232;
   --verde-mid:    #4a6e6e;
-  --terracota:    #c07a5a;
+  --terracota:    #9d563d;
   --terra-light:  #e8c4ad;
   --body-clr:     #5a5040;
-  --muted:        #8c7d68;
+  --muted:        #6f634f;
   --carbon:       #1a1a1a;
   --ease-snap:    cubic-bezier(0.76,0,0.24,1);
   --ease-out:     cubic-bezier(0.22,1,0.36,1);
@@ -71,7 +71,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
 /* ── WA FLOAT ────────────────────────────────────────────── */
 .wa-float {
   position: fixed; bottom: 32px; right: 32px; z-index: 150;
-  width: 50px; height: 50px; border-radius: 50%; background: #25D366;
+  width: 50px; height: 50px; border-radius: 50%; background: #128c4a;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   transition: transform 0.26s, box-shadow 0.26s; text-decoration: none;
@@ -209,13 +209,13 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
   border-color: var(--terracota); background: var(--terracota);
   color: #fff; transform: rotate(45deg);
 }
-.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.45s var(--ease-snap); }
-.faq-answer-inner { padding-bottom: 24px; }
+.faq-answer { display: grid; grid-template-rows: 0fr; overflow: hidden; transition: grid-template-rows 0.45s var(--ease-snap); }
+.faq-answer-inner { min-height: 0; overflow: hidden; padding-bottom: 24px; }
 .faq-a-text {
   font-family: 'Jost', sans-serif; font-size: 0.88rem;
   font-weight: 300; line-height: 1.85; color: var(--muted);
 }
-.faq-item.open .faq-answer { max-height: 300px; }
+.faq-item.open .faq-answer { grid-template-rows: 1fr; }
 
 .faq-cta-actions {
   display: flex;
@@ -406,7 +406,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
     font-size: clamp(2.5rem, 9vw, 3.2rem) !important;
   }
 
-  /* CTA: colapsa outer grid, preserva inner 2-col (Agendar+WhatsApp), oculta copys */
+  /* CTA: colapsa outer grid, preserva tarjetas internas y oculta copys secundarios */
   .snap-section[data-sec="cta"] .cta-outer {
     grid-template-columns: 1fr !important;
     gap: 24px !important;
@@ -1614,7 +1614,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
   }
 
   .cta-section .cta-card .btn-accent,
-  .cta-section .cta-card a[style*="background:#25D366"],
+  .cta-section .cta-card a[style*="background:#128c4a"],
   .cta-section .cta-card button {
     width: 100% !important;
     min-height: 42px;

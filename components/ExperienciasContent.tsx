@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   experienceAddons,
   experiencePackages,
@@ -10,7 +10,7 @@ import {
   type PackageFilter,
 } from "@/lib/experiencias-data";
 
-const proofItems = ["Respuesta en 24 h", "PDF personalizado gratis", "Sin compromiso"];
+const proofItems = ["Respuesta en 24 h", "Propuesta sin costo", "Sin compromiso"];
 
 export function ExperienciasContent() {
   const [activeFilter, setActiveFilter] = useState<PackageFilter>("social");
@@ -47,30 +47,17 @@ export function ExperienciasContent() {
     };
   }, []);
 
-  const scrollToCta = useCallback(() => {
-    document.getElementById("cta-section")?.scrollIntoView({ behavior: "smooth" });
-  }, []);
-
-  const askPackage = useCallback((packageName: string) => {
-    const message = `Hola, quiero más información sobre el paquete ${packageName} de Finca La Hermosa.`;
-    window.open(`https://wa.me/5215500000000?text=${encodeURIComponent(message)}`, "_blank", "noopener");
-  }, []);
-
-  const openWhatsapp = useCallback(() => {
-    window.open("https://wa.me/5215500000000", "_blank", "noopener");
-  }, []);
-
   return (
     <main className="prototype-route experiencias-page-react">
-      <HeroSection onQuote={scrollToCta} />
-      <CatalogSection activeFilter={activeFilter} packages={visiblePackages} onFilter={setActiveFilter} onAskPackage={askPackage} />
-      <AddonsSection onQuote={scrollToCta} />
-      <FinalCtaSection onWhatsapp={openWhatsapp} />
+      <HeroSection />
+      <CatalogSection activeFilter={activeFilter} packages={visiblePackages} onFilter={setActiveFilter} />
+      <AddonsSection />
+      <FinalCtaSection />
     </main>
   );
 }
 
-function HeroSection({ onQuote }: { onQuote: () => void }) {
+function HeroSection() {
   return (
     <section className="exp-hero" style={{ minHeight: "65vh", background: "var(--verde-dark)", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", paddingTop: 86 }}>
       <div className="img-reveal exp-hero-media" style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "52%", zIndex: 0 }}>
@@ -94,7 +81,7 @@ function HeroSection({ onQuote }: { onQuote: () => void }) {
           </p>
           <div className="txt-reveal exp-hero-actions" data-d="4" style={{ display: "flex", gap: 12, marginTop: 36, flexWrap: "wrap" }}>
             <a href="#catalogo" className="btn-accent">Ver todos los paquetes</a>
-            <button className="btn-ghost" type="button" onClick={onQuote}>Cotizar ahora</button>
+            <a href="/cotizar" className="btn-ghost">Solicitar propuesta</a>
           </div>
           <div className="txt-reveal exp-social-proof" data-d="5" style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 40, paddingTop: 32, borderTop: "1px solid rgba(255,255,255,0.1)" }}>
             <div style={{ display: "flex" }}>
@@ -117,12 +104,10 @@ function CatalogSection({
   activeFilter,
   packages,
   onFilter,
-  onAskPackage,
 }: {
   activeFilter: PackageFilter;
   packages: ExperiencePackage[];
   onFilter: (filter: PackageFilter) => void;
-  onAskPackage: (packageName: string) => void;
 }) {
   return (
     <section id="catalogo" className="exp-catalog" style={{ background: "var(--crema)", padding: "100px 0 80px", position: "relative", overflow: "hidden" }}>
@@ -137,7 +122,7 @@ function CatalogSection({
           </div>
           <div className="txt-reveal" data-d="2" style={{ flexShrink: 0 }}>
             <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.84rem", fontWeight: 300, lineHeight: 1.75, color: "var(--muted)", maxWidth: 300, textAlign: "right" }}>
-              Tarifa base: día completo para hasta 220 personas. Incluye staff dedicado.
+              Tarifa base por día completo para hasta 220 personas. Incluye staff dedicado del venue.
             </p>
           </div>
         </div>
@@ -152,7 +137,7 @@ function CatalogSection({
 
         <div id="pkg-grid" className="txt-reveal" data-d="3">
           {packages.map((item) => (
-            <PackageCard key={item.id} item={item} onAskPackage={onAskPackage} />
+            <PackageCard key={item.id} item={item} />
           ))}
         </div>
 
@@ -166,7 +151,7 @@ function CatalogSection({
         <div className="txt-reveal exp-pricing-note" style={{ marginTop: 44, padding: "22px 28px", background: "var(--crema-warm)", borderRadius: 10, border: "1px solid var(--crema-border)", display: "flex", gap: 16, alignItems: "flex-start" }}>
           <InfoIcon />
           <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.8rem", fontWeight: 300, lineHeight: 1.75, color: "var(--muted)" }}>
-            Todos los precios son por día completo e incluyen el staff dedicado del venue. Los add-ons se contratan por separado. Precios sujetos a disponibilidad - cotiza tu fecha para confirmar.
+            Los precios son por día completo e incluyen staff dedicado del venue. Los add-ons se contratan por separado. Cotiza tu fecha para confirmar disponibilidad y total.
           </p>
         </div>
       </div>
@@ -174,7 +159,7 @@ function CatalogSection({
   );
 }
 
-function PackageCard({ item, onAskPackage }: { item: ExperiencePackage; onAskPackage: (packageName: string) => void }) {
+function PackageCard({ item }: { item: ExperiencePackage }) {
   return (
     <article className="pkg-card" data-type={item.filters.join(" ")}>
       <div className="pkg-img-wrap">
@@ -193,14 +178,14 @@ function PackageCard({ item, onAskPackage }: { item: ExperiencePackage; onAskPac
           {item.features.map((feature) => <li key={feature}>{feature}</li>)}
         </ul>
         <div className="pkg-btn-wrap">
-          <button className="pkg-btn" type="button" onClick={() => onAskPackage(item.title)}>{item.cta}</button>
+          <a className="pkg-btn" href="/cotizar">{item.cta}</a>
         </div>
       </div>
     </article>
   );
 }
 
-function AddonsSection({ onQuote }: { onQuote: () => void }) {
+function AddonsSection() {
   return (
     <section className="exp-addons" style={{ background: "var(--crema-warm)", padding: "100px 0", position: "relative", overflow: "hidden" }}>
       <div className="arch-label" style={{ left: -20, bottom: 0, color: "rgba(45,73,73,0.035)" }}>ADD·ONS</div>
@@ -224,8 +209,8 @@ function AddonsSection({ onQuote }: { onQuote: () => void }) {
         </div>
 
         <div className="txt-reveal exp-addon-note" style={{ marginTop: 44, textAlign: "center" }}>
-          <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.82rem", fontWeight: 300, color: "var(--muted)", marginBottom: 18 }}>Los add-ons se agregan en el proceso de cotización. Precio por evento, no por persona.</p>
-          <button className="btn-primary" type="button" onClick={onQuote}>Cotizar con add-ons</button>
+          <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.82rem", fontWeight: 300, color: "var(--muted)", marginBottom: 18 }}>Puedes agregar add-ons al solicitar tu propuesta. Se cotizan por evento, no por persona.</p>
+          <a className="btn-primary" href="/cotizar">Armar mi propuesta</a>
         </div>
       </div>
     </section>
@@ -243,7 +228,7 @@ function AddonCard({ item }: { item: ExperienceAddon }) {
   );
 }
 
-function FinalCtaSection({ onWhatsapp }: { onWhatsapp: () => void }) {
+function FinalCtaSection() {
   return (
     <section id="cta-section" className="exp-cta" style={{ background: "#0d1918", padding: "100px 0", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
@@ -261,7 +246,7 @@ function FinalCtaSection({ onWhatsapp }: { onWhatsapp: () => void }) {
             <div className="final-cta-title-sub exp-cta-title-sub" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.8rem,5vw,5rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 6 }}>empieza aquí.</div>
           </div>
           <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.8, color: "rgba(255,253,248,0.62)", maxWidth: 380 }}>
-            Cuéntanos sobre tu evento, elige tu paquete y recibe una propuesta personalizada en menos de 24 horas.
+            Elige un paquete como punto de partida. Si no encaja perfecto, lo ajustamos contigo.
           </p>
           <div className="txt-reveal exp-cta-proof" data-d="3" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 8 }}>
             {proofItems.map((item) => (
@@ -274,26 +259,7 @@ function FinalCtaSection({ onWhatsapp }: { onWhatsapp: () => void }) {
         </div>
 
         <div className="txt-reveal" data-d="2" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-          <div className="cta-card">
-            <DocumentIcon />
-            <div className="cta-card-title">Cotizar en línea</div>
-            <p className="cta-card-sub">Cuéntanos sobre tu evento y recibe una propuesta con PDF personalizado.</p>
-            <a className="btn-accent" style={{ fontSize: "0.65rem", padding: "10px 20px" }} href="/cotizar">Cotizar ahora</a>
-          </div>
-          <div className="cta-small-grid exp-cta-card-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
-            <div className="cta-card">
-              <CalendarIcon />
-              <div className="cta-card-title">Agendar visita</div>
-              <p className="cta-card-sub">Ven a conocer la finca antes de decidir.</p>
-              <a className="btn-accent" style={{ fontSize: "0.65rem", padding: "10px 20px" }} href="/cotizar">Agendar</a>
-            </div>
-            <div className="cta-card">
-              <MessageIcon />
-              <div className="cta-card-title">WhatsApp</div>
-              <p className="cta-card-sub">Respuesta rápida y directa.</p>
-              <button type="button" style={{ padding: "10px 20px", background: "#25D366", color: "#fff", border: "none", borderRadius: 999, fontFamily: "'Jost',sans-serif", fontSize: "0.65rem", fontWeight: 300, letterSpacing: "0.09em", textTransform: "uppercase", cursor: "pointer", transition: "opacity 0.22s" }} onClick={onWhatsapp}>Escribir</button>
-            </div>
-          </div>
+          <a className="btn-accent proposal-card-link" style={{ fontSize: "0.65rem", padding: "10px 20px" }} href="/cotizar">Empezar</a>
         </div>
       </div>
     </section>
@@ -316,16 +282,4 @@ function InfoIcon() {
 
 function CheckIcon() {
   return <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><polyline points="20 6 9 17 4 12" /></svg>;
-}
-
-function DocumentIcon() {
-  return <svg className="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" /></svg>;
-}
-
-function CalendarIcon() {
-  return <svg className="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>;
-}
-
-function MessageIcon() {
-  return <svg className="cta-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>;
 }

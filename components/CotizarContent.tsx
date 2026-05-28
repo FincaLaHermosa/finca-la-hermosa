@@ -15,6 +15,11 @@ type FormState = {
   notas: string;
 };
 
+type FormError = {
+  message: string;
+  fieldId?: string;
+};
+
 const initialState: FormState = {
   tipo: "",
   fecha: "",
@@ -27,7 +32,7 @@ const initialState: FormState = {
   notas: "",
 };
 
-const steps = ["Tu evento", "Fecha", "Extras", "Tus datos"];
+const steps = ["Tipo", "Fecha", "Extras", "Contacto"];
 
 export function CotizarContent({ initialType = "" }: { initialType?: string }) {
   const [step, setStep] = useState(1);
@@ -36,7 +41,7 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
     const normalizedType = eventTypes.find((type) => type.id === initialType || type.value.toLowerCase() === initialType.toLowerCase());
     return normalizedType ? { ...initialState, tipo: normalizedType.id } : initialState;
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState<FormError | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const selectedType = eventTypes.find((item) => item.id === state.tipo);
   const selectedAddons = addons.filter((addon) => state.addons.includes(addon.id));
@@ -62,7 +67,7 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
 
   const setField = <K extends keyof FormState>(field: K, value: FormState[K]) => {
     setState((current) => ({ ...current, [field]: value }));
-    setError("");
+    setError(null);
   };
 
   const goToStep = (nextStep: number) => {
@@ -72,20 +77,20 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
 
   const nextStep = () => {
     if (step === 1 && !state.tipo) {
-      setError("Selecciona el tipo de evento para continuar.");
+      setError({ message: "Elige el tipo de evento para preparar una propuesta adecuada.", fieldId: "tipo-evento-group" });
       return;
     }
     if (step === 2) {
       if (!state.fecha) {
-        setError("Selecciona una fecha tentativa.");
+        setError({ message: "Elige una fecha tentativa para revisar disponibilidad.", fieldId: "fecha-input" });
         return;
       }
       if (busyDates.includes(state.fecha)) {
-        setError("Esa fecha no está disponible. Elige una fecha alternativa.");
+        setError({ message: "Esa fecha ya está reservada. Elige una de las fechas cercanas disponibles.", fieldId: "fecha-input" });
         return;
       }
     }
-    setError("");
+    setError(null);
     goToStep(step + 1);
   };
 
@@ -93,18 +98,18 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
     event.preventDefault();
     if (step !== 4) return;
     if (!state.nombre.trim()) {
-      setError("Por favor ingresa tu nombre.");
+      setError({ message: "Escribe tu nombre para saber a quién dirigir la propuesta.", fieldId: "inp-nombre" });
       return;
     }
     if (!state.tel.trim()) {
-      setError("Por favor ingresa tu número de WhatsApp o teléfono.");
+      setError({ message: "Comparte un WhatsApp o teléfono para enviarte la propuesta.", fieldId: "inp-telefono" });
       return;
     }
     if (state.email.trim() && !state.email.includes("@")) {
-      setError("El correo no parece válido. Puedes corregirlo o dejarlo vacío.");
+      setError({ message: "Revisa el correo. Debe incluir @, o puedes dejarlo vacío.", fieldId: "inp-email" });
       return;
     }
-    setError("");
+    setError(null);
     setSubmitted(true);
     setStep(4);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -126,11 +131,11 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
             <Progress currentStep={submitted ? 5 : step} />
             {!submitted ? (
               <>
-                <StepOne active={step === 1} selected={state.tipo} onSelect={(value) => setField("tipo", value)} />
-                <StepTwo active={step === 2} state={state} setField={setField} />
+                <StepOne active={step === 1} selected={state.tipo} onSelect={(value) => setField("tipo", value)} error={error} />
+                <StepTwo active={step === 2} state={state} setField={setField} error={error} />
                 <StepThree active={step === 3} selectedAddons={state.addons} onToggle={toggleAddon} />
-                <StepFour active={step === 4} state={state} setField={setField} />
-                {error ? <div className="field-error show" role="alert" aria-live="polite">{error}</div> : null}
+                <StepFour active={step === 4} state={state} setField={setField} error={error} />
+                {error ? <div id="cotizar-form-error" className="field-error show" role="alert" aria-live="polite">{error.message}</div> : null}
                 <StepNavigation step={step} onPrev={() => goToStep(step - 1)} onNext={nextStep} />
               </>
             ) : (
@@ -157,7 +162,7 @@ function HeroCotizar() {
           <div className="hero-title-italic" style={{ color: "var(--terracota)", marginTop: 4 }}>tu celebración.</div>
         </div>
         <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.85rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.5)", maxWidth: 440, marginTop: 16 }}>
-          Responde 4 preguntas y en menos de 24 horas recibirás una propuesta con PDF personalizado — precio exacto, paquete recomendado y próximos pasos.
+          Responde 4 preguntas y te enviaremos una propuesta en menos de 24 horas, con precio estimado, paquete recomendado y próximos pasos.
         </p>
       </div>
     </section>
@@ -171,7 +176,7 @@ function Progress({ currentStep }: { currentStep: number }) {
         {steps.map((_, index) => {
           const number = index + 1;
           return (
-            <div key={number} className={`progress-step${currentStep === number ? " active" : ""}${currentStep > number ? " done" : ""}`}>
+            <div key={number} className={`progress-step${currentStep === number ? " active" : ""}${currentStep > number ? " done" : ""}`} aria-current={currentStep === number ? "step" : undefined}>
               <div className="step-dot">{number}</div>
               {number < 4 ? <div className="step-line" /> : null}
             </div>
@@ -188,11 +193,14 @@ function Progress({ currentStep }: { currentStep: number }) {
   );
 }
 
-function StepOne({ active, selected, onSelect }: { active: boolean; selected: EventTypeId | ""; onSelect: (value: EventTypeId) => void }) {
+function StepOne({ active, selected, onSelect, error }: { active: boolean; selected: EventTypeId | ""; onSelect: (value: EventTypeId) => void; error: FormError | null }) {
+  const hasError = error?.fieldId === "tipo-evento-group";
+
   return (
-    <div className={`step-panel${active ? " active" : ""}`} id="step-1">
-      <StepTitle step={1} title="¿Qué vas" sub="a celebrar?" />
-      <div className="tipo-grid">
+    <div className={`step-panel${active ? " active" : ""}`} id="step-1" aria-hidden={!active}>
+      <StepTitle step={1} title="¿Qué tipo de" sub="evento tienes?" />
+      <fieldset className="tipo-grid" id="tipo-evento-group" aria-invalid={hasError || undefined} aria-describedby={hasError ? "cotizar-form-error" : undefined}>
+        <legend className="sr-only">Tipo de evento</legend>
         {eventTypes.map((type) => (
           <label key={type.id} className={`tipo-card${selected === type.id ? " selected" : ""}`}>
             <input type="radio" name="tipo" value={type.value} checked={selected === type.id} onChange={() => onSelect(type.id)} />
@@ -202,23 +210,24 @@ function StepOne({ active, selected, onSelect }: { active: boolean; selected: Ev
             <div className="tipo-desc">{type.desc}</div>
           </label>
         ))}
-      </div>
+      </fieldset>
     </div>
   );
 }
 
-function StepTwo({ active, state, setField }: { active: boolean; state: FormState; setField: <K extends keyof FormState>(field: K, value: FormState[K]) => void }) {
+function StepTwo({ active, state, setField, error }: { active: boolean; state: FormState; setField: <K extends keyof FormState>(field: K, value: FormState[K]) => void; error: FormError | null }) {
   const isBusy = Boolean(state.fecha && busyDates.includes(state.fecha));
   const suggestions = isBusy ? [-7, -14, 7, 14].map((offset) => addDays(state.fecha, offset)).filter((date) => !busyDates.includes(date) && date >= todayIso()) : [];
+  const hasDateError = error?.fieldId === "fecha-input";
 
   return (
-    <div className={`step-panel${active ? " active" : ""}`} id="step-2">
-      <StepTitle step={2} title="Fecha" sub="invitados." />
+    <div className={`step-panel${active ? " active" : ""}`} id="step-2" aria-hidden={!active}>
+      <StepTitle step={2} title="Fecha e" sub="invitados." />
       <div className="field-group">
-        <label className="field-label" htmlFor="fecha-input">Fecha tentativa del evento</label>
-        <input className="field-input" type="date" id="fecha-input" min={todayIso()} value={state.fecha} onChange={(event) => setField("fecha", event.target.value)} />
-        {state.fecha && !isBusy ? <div className="availability-badge ok"><CheckLineIcon />Fecha disponible — ¡perfecto!</div> : null}
-        {isBusy ? <div className="availability-badge busy"><InfoLineIcon />Esa fecha ya está reservada. Fechas cercanas disponibles:</div> : null}
+        <label className="field-label" htmlFor="fecha-input">Fecha tentativa</label>
+        <input className="field-input" type="date" id="fecha-input" min={todayIso()} value={state.fecha} onChange={(event) => setField("fecha", event.target.value)} aria-invalid={hasDateError || undefined} aria-describedby={hasDateError ? "cotizar-form-error" : undefined} />
+        {state.fecha && !isBusy ? <div className="availability-badge ok"><CheckLineIcon />Disponible para revisar contigo.</div> : null}
+        {isBusy ? <div className="availability-badge busy"><InfoLineIcon />Ya está reservada. Puedes elegir una fecha cercana:</div> : null}
         {suggestions.length ? (
           <div className="suggestions show">
             {suggestions.map((date) => <button key={date} className="suggestion-chip" type="button" onClick={() => setField("fecha", date)}>{formatDate(date)}</button>)}
@@ -226,16 +235,16 @@ function StepTwo({ active, state, setField }: { active: boolean; state: FormStat
         ) : null}
       </div>
       <div className="field-group">
-        <label className="field-label">Número de invitados estimado</label>
+        <label className="field-label" htmlFor="guests-input">Invitados estimados</label>
         <div className="counter-row">
-          <button className="counter-btn" type="button" onClick={() => setField("guests", clampGuests(state.guests - 10))}>−</button>
-          <input className="counter-val" type="number" value={state.guests} min="15" max="220" readOnly />
-          <button className="counter-btn" type="button" onClick={() => setField("guests", clampGuests(state.guests + 10))}>+</button>
+          <button className="counter-btn" type="button" aria-label="Reducir invitados" onClick={() => setField("guests", clampGuests(state.guests - 10))}>−</button>
+          <input className="counter-val" id="guests-input" type="number" value={state.guests} min="15" max="220" readOnly aria-describedby="guests-help" />
+          <button className="counter-btn" type="button" aria-label="Aumentar invitados" onClick={() => setField("guests", clampGuests(state.guests + 10))}>+</button>
         </div>
-        <div style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.72rem", fontWeight: 300, color: "var(--muted)", marginTop: 6 }}>Capacidad mínima 15 · máxima 220 personas</div>
+        <div id="guests-help" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.72rem", fontWeight: 300, color: "var(--muted)", marginTop: 6 }}>Capacidad de referencia: 15 a 220 personas</div>
       </div>
       <div className="field-group">
-        <label className="field-label" htmlFor="duracion-select">Duración del evento</label>
+        <label className="field-label" htmlFor="duracion-select">Tiempo de uso</label>
         <select className="field-input" id="duracion-select" value={state.duracion} onChange={(event) => setField("duracion", event.target.value as DurationId)}>
           <option value="dia">Un día (8:00 – 22:00 h)</option>
           <option value="finde">Fin de semana completo (vie–dom)</option>
@@ -247,9 +256,9 @@ function StepTwo({ active, state, setField }: { active: boolean; state: FormStat
 
 function StepThree({ active, selectedAddons, onToggle }: { active: boolean; selectedAddons: string[]; onToggle: (addonId: string) => void }) {
   return (
-    <div className={`step-panel${active ? " active" : ""}`} id="step-3">
+    <div className={`step-panel${active ? " active" : ""}`} id="step-3" aria-hidden={!active}>
       <StepTitle step={3} title="Personaliza" sub="tu experiencia." />
-      <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.82rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.75, marginBottom: 24 }}>Todo es opcional. Selecciona lo que necesitas y el precio se ajusta automáticamente.</p>
+      <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.82rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.75, marginBottom: 24 }}>Estos extras son opcionales. Marca solo lo que te interesa y lo incluimos en el estimado.</p>
       <div className="addon-list">
         {addons.map((addon) => (
           <label key={addon.id} className={`addon-item${selectedAddons.includes(addon.id) ? " selected" : ""}`}>
@@ -268,37 +277,36 @@ function StepThree({ active, selectedAddons, onToggle }: { active: boolean; sele
   );
 }
 
-function StepFour({ active, state, setField }: { active: boolean; state: FormState; setField: <K extends keyof FormState>(field: K, value: FormState[K]) => void }) {
+function StepFour({ active, state, setField, error }: { active: boolean; state: FormState; setField: <K extends keyof FormState>(field: K, value: FormState[K]) => void; error: FormError | null }) {
   return (
-    <div className={`step-panel${active ? " active" : ""}`} id="step-4">
-      <StepTitle step={4} title="Casi listo —" sub="¿a dónde enviamos tu propuesta?" />
+    <div className={`step-panel${active ? " active" : ""}`} id="step-4" aria-hidden={!active}>
+      <StepTitle step={4} title="Casi listo:" sub="¿a dónde te contactamos?" />
       <div className="form-row">
-        <Field label="Nombre completo" value={state.nombre} placeholder="Tu nombre" onChange={(value) => setField("nombre", value)} />
-        <Field label="WhatsApp / Teléfono" type="tel" value={state.tel} placeholder="55 1234 5678" onChange={(value) => setField("tel", value)} />
+        <Field id="inp-nombre" label="Nombre completo" value={state.nombre} placeholder="Tu nombre" onChange={(value) => setField("nombre", value)} invalid={error?.fieldId === "inp-nombre"} />
+        <Field id="inp-telefono" label="WhatsApp o teléfono" type="tel" value={state.tel} placeholder="55 1234 5678" onChange={(value) => setField("tel", value)} invalid={error?.fieldId === "inp-telefono"} />
       </div>
       <div className="form-row full" style={{ marginTop: 16 }}>
         <div className="field-group" style={{ marginBottom: 0 }}>
-          <label className="field-label" htmlFor="inp-email">Correo electrónico <span className="optional-label">(opcional)</span></label>
-          <input className="field-input" id="inp-email" type="email" value={state.email} placeholder="tuemail@ejemplo.com" onChange={(event) => setField("email", event.target.value)} />
+          <label className="field-label" htmlFor="inp-email">Correo para copia <span className="optional-label">(opcional)</span></label>
+          <input className="field-input" id="inp-email" type="email" value={state.email} placeholder="tuemail@ejemplo.com" onChange={(event) => setField("email", event.target.value)} aria-invalid={error?.fieldId === "inp-email" || undefined} aria-describedby={error?.fieldId === "inp-email" ? "cotizar-form-error" : undefined} />
         </div>
       </div>
       <div className="form-row full" style={{ marginTop: 16 }}>
         <div className="field-group" style={{ marginBottom: 0 }}>
-          <label className="field-label" htmlFor="inp-notas">Cuéntanos más <span className="optional-label">(opcional)</span></label>
-          <textarea className="field-input" id="inp-notas" value={state.notas} placeholder="Alguna petición especial, duda o contexto que quieras que sepamos…" onChange={(event) => setField("notas", event.target.value)} />
+          <label className="field-label" htmlFor="inp-notas">Detalles importantes <span className="optional-label">(opcional)</span></label>
+          <textarea className="field-input" id="inp-notas" value={state.notas} placeholder="Horario ideal, tipo de montaje, dudas o algo que debamos saber." onChange={(event) => setField("notas", event.target.value)} />
         </div>
       </div>
-      <div className="privacy-note">Tu información es confidencial y solo se usará para preparar tu propuesta. No hacemos spam.</div>
+      <div className="privacy-note">Usaremos tus datos solo para preparar y enviarte esta propuesta.</div>
     </div>
   );
 }
 
-function Field({ label, value, placeholder, type = "text", onChange }: { label: string; value: string; placeholder: string; type?: string; onChange: (value: string) => void }) {
-  const id = `inp-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+function Field({ id, label, value, placeholder, type = "text", onChange, invalid = false }: { id: string; label: string; value: string; placeholder: string; type?: string; onChange: (value: string) => void; invalid?: boolean }) {
   return (
     <div className="field-group" style={{ marginBottom: 0 }}>
       <label className="field-label" htmlFor={id}>{label}</label>
-      <input className="field-input" id={id} type={type} value={value} placeholder={placeholder} onChange={(event) => onChange(event.target.value)} />
+      <input className="field-input" id={id} type={type} value={value} placeholder={placeholder} onChange={(event) => onChange(event.target.value)} aria-invalid={invalid || undefined} aria-describedby={invalid ? "cotizar-form-error" : undefined} />
     </div>
   );
 }
@@ -317,7 +325,7 @@ function StepNavigation({ step, onPrev, onNext }: { step: number; onPrev: () => 
   return (
     <div className="step-nav">
       {step > 1 ? <button className="btn-prev" type="button" onClick={onPrev}><ArrowLeftIcon />Atrás</button> : <div />}
-      {step < 4 ? <button className="btn-next" type="button" onClick={onNext}>Continuar<ArrowRightIcon /></button> : <button className="btn-submit" type="submit">Solicitar mi propuesta<SendIcon /></button>}
+      {step < 4 ? <button className="btn-next" type="button" onClick={onNext}>Siguiente<ArrowRightIcon /></button> : <button className="btn-submit" type="submit">Enviar solicitud<SendIcon /></button>}
     </div>
   );
 }
@@ -330,7 +338,7 @@ function SummaryCard({ typeLabel, state, selectedAddons, total }: { typeLabel: s
         <div className="summary-sub">cotización.</div>
         <div className="summary-sep" />
         <SummaryRow label="Tipo de evento" value={typeLabel} />
-        <SummaryRow label="Fecha tentativa" value={state.fecha ? formatDate(state.fecha) : ""} />
+        <SummaryRow label="Fecha" value={state.fecha ? formatDate(state.fecha) : ""} />
         <SummaryRow label="Invitados" value={`${state.guests} personas`} />
         <SummaryRow label="Duración" value={state.duracion === "finde" ? "Fin de semana" : "Un día"} />
         <div className="summary-sep" />
@@ -345,13 +353,13 @@ function SummaryCard({ typeLabel, state, selectedAddons, total }: { typeLabel: s
         </div>
         <div className="summary-total-row">
           <div>
-            <div className="summary-total-key">Estimado total</div>
-            <div className="summary-total-sub">MXN · sujeto a confirmación</div>
+            <div className="summary-total-key">Total estimado</div>
+            <div className="summary-total-sub">MXN, por confirmar contigo</div>
           </div>
           <div style={{ textAlign: "right" }}><div className="summary-total-val">${total.toLocaleString()}</div></div>
         </div>
         <div className="trust-badges">
-          {["PDF personalizado en 24 horas", "Sin compromiso de compra", "Precio exacto, sin cargos ocultos"].map((item) => (
+          {["Propuesta en menos de 24 horas", "Sin compromiso de compra", "Desglose claro de espacios y extras"].map((item) => (
             <div key={item} className="trust-item"><CheckTinyIcon />{item}</div>
           ))}
         </div>
@@ -365,7 +373,7 @@ function SummaryRow({ label, value, alwaysFilled = false }: { label: string; val
   return (
     <div className="summary-row">
       <span className="summary-key">{label}</span>
-      <span className={`summary-val${filled ? "" : " empty"}`}>{filled ? value : "—"}</span>
+      <span className={`summary-val${filled ? "" : " empty"}`}>{filled ? value : "Pendiente"}</span>
     </div>
   );
 }
@@ -375,8 +383,8 @@ function SuccessPanel() {
     <div className="success-panel show">
       <div className="success-icon"><CheckLineIcon /></div>
       <div style={{ fontFamily: "'Against',serif", fontSize: "2.2rem", lineHeight: 0.95, letterSpacing: "-0.02em", color: "var(--verde-dark)", marginBottom: 8 }}>¡Recibimos tu solicitud!</div>
-      <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.3rem", fontStyle: "italic", fontWeight: 300, color: "var(--terracota)", marginBottom: 20 }}>En menos de 24 horas tendrás tu propuesta.</div>
-      <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.86rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8, maxWidth: 420, margin: "0 auto 32px" }}>Prepararemos un PDF personalizado con el paquete que mejor se adapta a tu evento, con precio exacto y todos los detalles. Te lo enviamos por WhatsApp y, si lo compartiste, también por correo.</p>
+      <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.3rem", fontStyle: "italic", fontWeight: 300, color: "var(--terracota)", marginBottom: 20 }}>Te contactaremos en menos de 24 horas.</div>
+      <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.86rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8, maxWidth: 420, margin: "0 auto 32px" }}>Revisaremos tu fecha, invitados y extras para enviarte una propuesta clara por WhatsApp y, si lo compartiste, también por correo.</p>
       <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
         <a href="https://wa.me/5215500000000" target="_blank" rel="noopener" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.75rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--crema)", background: "var(--verde)", border: "none", padding: "13px 24px", borderRadius: 999, cursor: "pointer", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8 }}>Escribir por WhatsApp</a>
         <a href="/" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.75rem", fontWeight: 400, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--terracota)", background: "transparent", border: "1px solid var(--terra-light)", padding: "13px 24px", borderRadius: 999, textDecoration: "none" }}>Volver al inicio</a>
