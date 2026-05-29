@@ -2,20 +2,22 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const navItems = [
-  { href: "/", label: "Inicio" },
-  { href: "/experiencias", label: "Experiencias" },
-  { href: "/espacios", label: "Espacios" },
-  { href: "/nosotros", label: "Nosotros" },
-  { href: "/faq", label: "FAQ" },
+  { href: "/", label: "Inicio", note: "Primera impresión" },
+  { href: "/experiencias", label: "Experiencias", note: "Formas de celebrar" },
+  { href: "/espacios", label: "Espacios", note: "Recorrido por la finca" },
+  { href: "/nosotros", label: "Nosotros", note: "Historia y carácter" },
+  { href: "/faq", label: "FAQ", note: "Dudas frecuentes" },
 ];
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const closeTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 80);
@@ -26,7 +28,42 @@ export function SiteHeader() {
 
   useEffect(() => {
     setIsOpen(false);
+    setIsClosing(false);
   }, [pathname]);
+
+  useEffect(() => {
+    document.body.classList.toggle("site-menu-open", isOpen || isClosing);
+    document.body.classList.toggle("site-menu-closing", isClosing);
+    return () => {
+      document.body.classList.remove("site-menu-open");
+      document.body.classList.remove("site-menu-closing");
+    };
+  }, [isOpen, isClosing]);
+
+  const closeMenu = () => {
+    if (!isOpen || isClosing) return;
+    setIsClosing(true);
+    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = window.setTimeout(() => {
+      setIsOpen(false);
+      setIsClosing(false);
+      closeTimerRef.current = null;
+    }, 460);
+  };
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeMenu();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  });
+
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
+    };
+  }, []);
 
   if (pathname === "/cotizar/listo") return null;
 
@@ -40,7 +77,7 @@ export function SiteHeader() {
 
   return (
     <nav id="site-nav">
-      <div className={`nav-pill${isScrolled || forceScrolled ? " scrolled" : ""}${isOpen ? " nav-open" : ""}`} id="nav-pill">
+      <div className={`nav-pill${isScrolled || forceScrolled ? " scrolled" : ""}${isOpen ? " nav-open" : ""}${isClosing ? " nav-closing" : ""}`} id="nav-pill">
         <a className="nav-logo" href="/" aria-label="Finca La Hermosa">
           <Image src="/assets/logo-blanco.svg" alt="Finca La Hermosa" width={128} height={42} priority />
         </a>
@@ -50,15 +87,24 @@ export function SiteHeader() {
           type="button"
           aria-label={isOpen ? "Cerrar menu" : "Abrir menu"}
           aria-expanded={isOpen}
-          onClick={() => setIsOpen((value) => !value)}
+          onClick={() => {
+            if (isOpen) {
+              closeMenu();
+              return;
+            }
+            setIsClosing(false);
+            setIsOpen(true);
+          }}
         >
           <span />
         </button>
 
         <div className="nav-links">
-          {navItems.map((item) => (
+          {navItems.map((item, index) => (
             <a key={item.href} href={item.href} className={activePath === item.href ? "active" : undefined}>
-              {item.label}
+              <span className="nav-link-index">{String(index + 1).padStart(2, "0")}</span>
+              <span className="nav-link-label">{item.label}</span>
+              <span className="nav-link-note">{item.note}</span>
             </a>
           ))}
         </div>
@@ -67,6 +113,10 @@ export function SiteHeader() {
           <button className="nav-cta" type="button" onClick={handleQuote}>
             Cotizar ahora
           </button>
+          <div className="nav-open-note" aria-hidden="true">
+            <span>Venue privado</span>
+            <span>Isidro Fabela, EDOMEX</span>
+          </div>
         </div>
       </div>
     </nav>
