@@ -1,5 +1,5 @@
 export type EventTypeId = "boda" | "xv" | "corporativo" | "familiar" | "retiro" | "otro";
-export type DurationId = "dia" | "finde";
+export type DurationId = "dia" | "finde" | "personalizado";
 
 export type EventType = {
   id: EventTypeId;

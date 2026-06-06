@@ -35,17 +35,17 @@ export const timelineItems = [
 export const values = [
   {
     title: "Hospitalidad sin distancia",
-    body: "Somos una familia que recibe a otra familia. No hay un “gerente de eventos”: hay personas reales que cuidan cada detalle porque les importa genuinamente.",
+    body: "Recibimos como familia: con atención cercana, trato directo y cuidado real.",
     icon: "people",
   },
   {
     title: "Naturaleza como anfitriona",
-    body: "El bosque de Isidro Fabela no es solo el fondo de las fotos. Es parte activa de la experiencia. Protegemos el entorno porque es la razón por la que la gente viene.",
+    body: "El bosque no es fondo; es parte de la experiencia y lo cuidamos como tal.",
     icon: "home",
   },
   {
     title: "Celebración con intención",
-    body: "Cada momento que ocurre aquí merece ser recordado. Diseñamos nuestros espacios y servicios para que las personas puedan estar presentes, no preocupadas.",
+    body: "Diseñamos cada espacio para que puedas estar presente, no pendiente.",
     icon: "heart",
   },
 ];

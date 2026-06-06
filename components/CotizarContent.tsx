@@ -34,6 +34,12 @@ const initialState: FormState = {
 
 const steps = ["Tipo", "Fecha", "Extras", "Contacto"];
 
+const durationLabels: Record<DurationId, string> = {
+  dia: "Un día",
+  finde: "Fin de semana",
+  personalizado: "Personalizado",
+};
+
 export function CotizarContent({ initialType = "" }: { initialType?: string }) {
   const [step, setStep] = useState(1);
   const shouldScrollToStep = useRef(false);
@@ -133,7 +139,7 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
               <>
                 <StepOne active={step === 1} selected={state.tipo} onSelect={(value) => setField("tipo", value)} error={error} />
                 <StepTwo active={step === 2} state={state} setField={setField} error={error} />
-                <StepThree active={step === 3} selectedAddons={state.addons} onToggle={toggleAddon} />
+                <StepThree active={step === 3} selectedAddons={state.addons} notes={state.notas} setField={setField} onToggle={toggleAddon} />
                 <StepFour active={step === 4} state={state} setField={setField} error={error} />
                 {error ? <div id="cotizar-form-error" className="field-error show" role="alert" aria-live="polite">{error.message}</div> : null}
                 <StepNavigation step={step} onPrev={() => goToStep(step - 1)} onNext={nextStep} />
@@ -162,7 +168,7 @@ function HeroCotizar() {
           <div className="hero-title-italic" style={{ color: "var(--terracota)", marginTop: 4 }}>tu celebración.</div>
         </div>
         <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.85rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.5)", maxWidth: 440, marginTop: 16 }}>
-          Responde 4 preguntas y te enviaremos una propuesta en menos de 24 horas, con precio estimado, paquete recomendado y próximos pasos.
+          Responde 4 preguntas y recibe una propuesta personalizada en menos de 24 horas.
         </p>
       </div>
     </section>
@@ -246,15 +252,28 @@ function StepTwo({ active, state, setField, error }: { active: boolean; state: F
       <div className="field-group">
         <label className="field-label" htmlFor="duracion-select">Tiempo de uso</label>
         <select className="field-input" id="duracion-select" value={state.duracion} onChange={(event) => setField("duracion", event.target.value as DurationId)}>
-          <option value="dia">Un día (8:00 – 22:00 h)</option>
+          <option value="dia">Un día (10:00 – 20:00 h)</option>
           <option value="finde">Fin de semana completo (vie–dom)</option>
+          <option value="personalizado">Personalizado</option>
         </select>
       </div>
     </div>
   );
 }
 
-function StepThree({ active, selectedAddons, onToggle }: { active: boolean; selectedAddons: string[]; onToggle: (addonId: string) => void }) {
+function StepThree({
+  active,
+  selectedAddons,
+  notes,
+  setField,
+  onToggle,
+}: {
+  active: boolean;
+  selectedAddons: string[];
+  notes: string;
+  setField: <K extends keyof FormState>(field: K, value: FormState[K]) => void;
+  onToggle: (addonId: string) => void;
+}) {
   return (
     <div className={`step-panel${active ? " active" : ""}`} id="step-3" aria-hidden={!active}>
       <StepTitle step={3} title="Personaliza" sub="tu experiencia." />
@@ -273,6 +292,10 @@ function StepThree({ active, selectedAddons, onToggle }: { active: boolean; sele
           </label>
         ))}
       </div>
+      <div className="field-group addon-notes-field">
+        <label className="field-label" htmlFor="inp-addon-notas">¿Necesitas algo más? <span className="optional-label">(opcional)</span></label>
+        <textarea className="field-input" id="inp-addon-notas" value={notes} placeholder="Cuéntanos si necesitas algo que no aparece en los add-ons." onChange={(event) => setField("notas", event.target.value)} />
+      </div>
     </div>
   );
 }
@@ -289,12 +312,6 @@ function StepFour({ active, state, setField, error }: { active: boolean; state: 
         <div className="field-group" style={{ marginBottom: 0 }}>
           <label className="field-label" htmlFor="inp-email">Correo para copia <span className="optional-label">(opcional)</span></label>
           <input className="field-input" id="inp-email" type="email" value={state.email} placeholder="tuemail@ejemplo.com" onChange={(event) => setField("email", event.target.value)} aria-invalid={error?.fieldId === "inp-email" || undefined} aria-describedby={error?.fieldId === "inp-email" ? "cotizar-form-error" : undefined} />
-        </div>
-      </div>
-      <div className="form-row full" style={{ marginTop: 16 }}>
-        <div className="field-group" style={{ marginBottom: 0 }}>
-          <label className="field-label" htmlFor="inp-notas">Detalles importantes <span className="optional-label">(opcional)</span></label>
-          <textarea className="field-input" id="inp-notas" value={state.notas} placeholder="Horario ideal, tipo de montaje, dudas o algo que debamos saber." onChange={(event) => setField("notas", event.target.value)} />
         </div>
       </div>
       <div className="privacy-note">Usaremos tus datos solo para preparar y enviarte esta propuesta.</div>
@@ -340,7 +357,7 @@ function SummaryCard({ typeLabel, state, selectedAddons, total }: { typeLabel: s
         <SummaryRow label="Tipo de evento" value={typeLabel} />
         <SummaryRow label="Fecha" value={state.fecha ? formatDate(state.fecha) : ""} />
         <SummaryRow label="Invitados" value={`${state.guests} personas`} />
-        <SummaryRow label="Duración" value={state.duracion === "finde" ? "Fin de semana" : "Un día"} />
+        <SummaryRow label="Duración" value={durationLabels[state.duracion]} />
         <div className="summary-sep" />
         <div style={{ marginBottom: 4 }}>
           <SummaryRow label="Finca (base)" value="$13,000" alwaysFilled />
@@ -359,7 +376,7 @@ function SummaryCard({ typeLabel, state, selectedAddons, total }: { typeLabel: s
           <div style={{ textAlign: "right" }}><div className="summary-total-val">${total.toLocaleString()}</div></div>
         </div>
         <div className="trust-badges">
-          {["Propuesta en menos de 24 horas", "Sin compromiso de compra", "Desglose claro de espacios y extras"].map((item) => (
+          {["Propuesta hoy mismo", "Promociones especiales", "Confianza y claridad total"].map((item) => (
             <div key={item} className="trust-item"><CheckTinyIcon />{item}</div>
           ))}
         </div>

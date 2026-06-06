@@ -65,7 +65,7 @@ function HeroFaq() {
           <div className="hero-title-italic" style={{ color: "var(--terracota)", marginTop: 6 }}>frecuentes.</div>
         </div>
         <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(255,253,248,0.52)", maxWidth: 420 }}>
-          Resolvemos las dudas más comunes sobre reservaciones, espacios, precios y logística. Si no encuentras lo que buscas, escríbenos.
+          Resolvemos tus dudas. Si no encuentras lo que buscas, escríbenos.
         </p>
         <div className="txt-reveal" data-d="3">
           <a href="#faq-content" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.67rem", fontWeight: 300, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,253,248,0.4)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, transition: "color 0.22s" }}>
@@ -164,7 +164,7 @@ function ContactSection() {
           <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(1.6rem,2.8vw,2.6rem)", fontStyle: "italic", fontWeight: 300, lineHeight: 1, color: "var(--terracota)", marginTop: 4 }}>para responderte.</div>
         </div>
         <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.86rem", fontWeight: 300, lineHeight: 1.85, color: "var(--muted)", marginBottom: 32 }}>
-          Escríbenos por WhatsApp o solicita una propuesta. Te ayudamos a resolver disponibilidad, espacios y siguientes pasos antes de decidir.
+          Escríbenos por WhatsApp o solicita una propuesta. Te resolvemos rápido.
         </p>
         <div className="txt-reveal" data-d="3" style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="https://wa.me/5215500000000" className="btn-primary" target="_blank" rel="noopener">

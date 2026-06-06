@@ -30,7 +30,7 @@ function HeroFolio() {
               <span className="hero-folio-italic hero-title-italic txt-reveal" data-d="2">que cuentan historias.</span>
             </h1>
             <p className="hero-folio-body txt-reveal" data-d="3">
-              Cada rincón de la finca está pensado para vivirse plenamente. Desplázate por los nueve espacios y encuentra el escenario perfecto para tu celebración.
+              Recorre los nueve espacios de la finca y encuentra el escenario ideal para tu celebración.
             </p>
             <div className="hero-folio-actions txt-reveal" data-d="4">
               <a href="#sg-section" className="btn-accent">Explorar espacios</a>
@@ -94,6 +94,8 @@ function StatsTerra() {
 
 function ScrollGallery() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [lightboxImageIndex, setLightboxImageIndex] = useState(0);
+  const [lightboxEspacioIndex, setLightboxEspacioIndex] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [listOffset, setListOffset] = useState(0);
   const [autoStopped, setAutoStopped] = useState(false);
@@ -107,6 +109,19 @@ function ScrollGallery() {
   const touchStartRef = useRef({ x: 0, y: 0 });
   const activeEspacio = espacios[activeIndex];
   const slideWidth = isMobile ? 100 : slideWidthDesktop;
+  const lightboxEspacio = lightboxEspacioIndex === null ? null : espacios[lightboxEspacioIndex];
+  const lightboxGallery = lightboxEspacio?.gallery?.length ? lightboxEspacio.gallery : lightboxEspacio ? [lightboxEspacio.img] : [];
+
+  const openLightbox = (index: number) => {
+    stopAutoAdvance();
+    setLightboxEspacioIndex(index);
+    setLightboxImageIndex(0);
+  };
+
+  const closeLightbox = useCallback(() => {
+    setLightboxEspacioIndex(null);
+    setLightboxImageIndex(0);
+  }, []);
 
   const goTo = useCallback((nextIndex: number) => {
     setActiveIndex(Math.max(0, Math.min(espacios.length - 1, nextIndex)));
@@ -122,6 +137,19 @@ function ScrollGallery() {
     stopAutoAdvance();
     goTo(nextIndex);
   }, [goTo, stopAutoAdvance]);
+
+  useEffect(() => {
+    if (lightboxEspacioIndex === null) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeLightbox();
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [closeLightbox, lightboxEspacioIndex]);
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 760px)");
@@ -236,6 +264,12 @@ function ScrollGallery() {
     goToByUser(activeIndex + (dy < 0 ? 1 : -1));
   };
 
+  const handleGalleryClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLElement;
+    if (target.closest(".sg-progress")) return;
+    openLightbox(activeIndex);
+  };
+
   return (
     <section className="sg-section" id="sg-section" ref={sectionRef}>
       <div id="sg-track">
@@ -268,16 +302,18 @@ function ScrollGallery() {
             {!isMobile ? <GalleryDescription espacio={activeEspacio} /> : null}
           </div>
 
-          <div className="sg-right" onWheel={handleWheel} onTouchStart={handleTouchStart} onTouchEnd={handleHorizontalTouchEnd}>
+          <div className="sg-right" onClick={handleGalleryClick} onWheel={handleWheel} onTouchStart={handleTouchStart} onTouchEnd={handleHorizontalTouchEnd}>
             <div id="sg-img-track" style={{ transform: `translateX(-${activeIndex * slideWidth}%)` }}>
               {espacios.map((espacio, index) => (
                 <div key={espacio.nombre} className="sg-img-slide">
-                  <img
-                    src={espacio.img}
-                    alt={espacio.nombre}
-                    loading={index === 0 ? "eager" : "lazy"}
-                    style={{ transform: isMobile ? "scale(1.34)" : `translateY(calc(-6% + ${Math.max(-7, Math.min(7, (activeIndex - index) * 5))}%))` }}
-                  />
+                  <button className="sg-image-open" type="button" aria-label={`Abrir galería de ${espacio.nombre}`} onClick={(event) => { event.stopPropagation(); openLightbox(index); }}>
+                    <img
+                      src={espacio.img}
+                      alt={espacio.nombre}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      style={{ transform: isMobile ? "scale(1.34)" : `translateY(calc(-6% + ${Math.max(-7, Math.min(7, (activeIndex - index) * 5))}%))` }}
+                    />
+                  </button>
                 </div>
               ))}
             </div>
@@ -306,6 +342,39 @@ function ScrollGallery() {
           {isMobile ? <GalleryDescription espacio={activeEspacio} /> : null}
         </div>
       </div>
+      {lightboxEspacio ? (
+        <div className="space-lightbox" role="dialog" aria-modal="true" aria-label={`Galería de ${lightboxEspacio.nombre}`}>
+          <button className="space-lightbox-backdrop" type="button" aria-label="Cerrar galería" onClick={closeLightbox} />
+          <div className="space-lightbox-panel">
+            <div className="space-lightbox-head">
+              <div>
+                <span>{formatIndex(lightboxEspacioIndex ?? 0)}</span>
+                <h2>{lightboxEspacio.nombre}</h2>
+              </div>
+              <button className="space-lightbox-close" type="button" aria-label="Cerrar galería" onClick={closeLightbox}>
+                <CloseIcon />
+              </button>
+            </div>
+            <div className="space-lightbox-image">
+              <img src={lightboxGallery[lightboxImageIndex]} alt={lightboxEspacio.nombre} />
+            </div>
+            <div className="space-lightbox-thumbs" aria-label="Imágenes del espacio">
+              {lightboxGallery.map((image, index) => (
+                <button
+                  key={`${image}-${index}`}
+                  className={`space-lightbox-thumb${index === lightboxImageIndex ? " active" : ""}`}
+                  type="button"
+                  aria-label={`Ver imagen ${index + 1}`}
+                  aria-pressed={index === lightboxImageIndex}
+                  onClick={() => setLightboxImageIndex(index)}
+                >
+                  <img src={image} alt="" />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }
@@ -411,6 +480,10 @@ function ChevronLeftIcon() {
 
 function ChevronRightIcon() {
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 6 15 12 9 18" /></svg>;
+}
+
+function CloseIcon() {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>;
 }
 
 function WhatsAppSmallIcon() {

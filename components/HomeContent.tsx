@@ -140,19 +140,36 @@ function HeroSection() {
 }
 
 function ExperiencesSection({ activeTab, onTabChange }: { activeTab: number; onTabChange: (index: number) => void }) {
+  const experienceCards = [
+    { title: "Eventos Sociales", note: "Bodas, XV años y cumpleaños.", rail: "Celebraciones" },
+    { title: "Corporativos", note: "Team building, juntas y lanzamientos.", rail: "Empresas" },
+    { title: "Retiros", note: "Campamentos, escuelas, iglesias.", rail: "Grupos" },
+    { title: "Estancia Privada", note: "Hospedaje, escape y familia.", rail: "Familia" },
+  ];
+
   return (
     <section className="snap-section" data-sec="experiencias" style={{ background: "var(--crema-warm)", overflow: "hidden", paddingTop: 86 }}>
       <div style={{ maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px", display: "flex", flexDirection: "column", gap: 0 }}>
-        <div className="txt-reveal home-experiences-heading" data-d="1" style={{ textAlign: "center", marginBottom: 16 }}>
+        <div className="txt-reveal home-experiences-heading" data-d="1" style={{ textAlign: "center", marginBottom: 68 }}>
           <div className="overline overline-dark" style={{ justifyContent: "center", marginBottom: 10 }}>Experiencias</div>
           <div style={sectionTitleStyle}>¿Qué quieres celebrar?</div>
         </div>
         <div className="tabs-bar txt-reveal home-experiences-tabs" data-d="2">
-          {homeExperiences.map((experience, index) => (
-            <button key={experience.label} className={`tab-btn ${experience.special ? "tab-btn--special" : ""} ${activeTab === index ? "active" : ""}`} onClick={() => onTabChange(index)}>
-              {experience.label}
-            </button>
-          ))}
+          {homeExperiences.map((experience, index) => {
+            const cardCopy = experienceCards[index] ?? { title: experience.label, note: experience.eyebrow };
+
+            return (
+              <button key={experience.label} type="button" aria-pressed={activeTab === index} className={`tab-btn ${experience.special ? "tab-btn--special" : ""} ${activeTab === index ? "active" : ""}`} onClick={() => onTabChange(index)}>
+                <span className="tab-card-rail" aria-hidden="true">{cardCopy.rail}</span>
+                <span className="tab-card-index">{String(index + 1).padStart(2, "0")}</span>
+                <span className="tab-card-copy">
+                  <span className="tab-card-title">{cardCopy.title}</span>
+                  <span className="tab-card-note">{cardCopy.note}</span>
+                </span>
+                <span className="tab-card-arrow" aria-hidden="true">→</span>
+              </button>
+            );
+          })}
         </div>
         <div className="txt-reveal" data-d="3" style={{ flex: 1, overflow: "hidden" }}>
           {homeExperiences.map((experience, index) => (

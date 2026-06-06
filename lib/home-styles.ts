@@ -298,8 +298,232 @@ body {
 .tab-btn--special:hover { background: transparent; border-color: var(--terracota); color: var(--terracota); opacity: 0.75; }
 .tab-btn--special.active { background: var(--verde); border-color: var(--verde); color: var(--crema); opacity: 1; }
 
+.home-page-react .home-experiences-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  width: min(100%, 760px);
+  margin: 0 auto 14px;
+  padding: 0;
+}
+
+.home-page-react .home-experiences-tabs .tab-btn {
+  position: relative;
+  min-height: 168px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  grid-template-areas:
+    "rail index arrow"
+    "rail copy copy";
+  align-content: space-between;
+  gap: 18px 16px;
+  padding: 18px 18px 20px 16px;
+  border-radius: 12px;
+  border: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(245, 240, 232, 0.92));
+  box-shadow:
+    0 1px 0 rgba(255, 253, 248, 0.92),
+    0 16px 34px rgba(45, 73, 73, 0.13),
+    0 4px 10px rgba(45, 73, 73, 0.07);
+  color: var(--verde-dark);
+  isolation: isolate;
+  overflow: hidden;
+  text-align: left;
+  white-space: normal;
+  transition:
+    transform 0.28s var(--ease-out),
+    border-color 0.28s var(--ease-out),
+    box-shadow 0.28s var(--ease-out),
+    color 0.28s var(--ease-out);
+}
+
+.home-page-react .home-experiences-tabs .tab-btn::before {
+  display: none;
+}
+
+.home-page-react .home-experiences-tabs .tab-btn::after {
+  content: "";
+  position: absolute;
+  left: 42px;
+  top: 18px;
+  bottom: 18px;
+  width: 1px;
+  border: 0;
+  border-radius: 0;
+  background: rgba(157, 86, 61, 0.22);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-page-react .home-experiences-tabs .tab-card-rail {
+  grid-area: rail;
+  position: relative;
+  z-index: 1;
+  align-self: stretch;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  justify-self: start;
+  color: rgba(90, 80, 64, 0.46);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.home-page-react .home-experiences-tabs .tab-card-index {
+  grid-area: index;
+  position: relative;
+  z-index: 1;
+  justify-self: end;
+  align-self: start;
+  color: rgba(157, 86, 61, 0.48);
+  font-family: 'Against', Georgia, serif;
+  font-size: clamp(2.6rem, 4vw, 3.7rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 0.8;
+  opacity: 0.72;
+}
+
+.home-page-react .home-experiences-tabs .tab-card-copy {
+  grid-area: copy;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  align-self: end;
+  padding-left: 2px;
+}
+
+.home-page-react .home-experiences-tabs .tab-card-title {
+  color: currentColor;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.82rem, 2.45vw, 2.28rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0.92;
+  text-transform: none;
+}
+
+.home-page-react .home-experiences-tabs .tab-card-note {
+  color: rgba(90, 80, 64, 0.64);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 300;
+  letter-spacing: 0.035em;
+  line-height: 1.42;
+  text-transform: none;
+}
+
+.home-page-react .home-experiences-tabs .tab-card-arrow {
+  grid-area: arrow;
+  position: relative;
+  z-index: 1;
+  justify-self: end;
+  align-self: start;
+  width: 28px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  color: rgba(45, 73, 73, 0.52);
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  transition:
+    transform 0.28s var(--ease-out),
+    color 0.28s var(--ease-out),
+    background 0.28s var(--ease-out);
+}
+
+.home-page-react .home-experiences-tabs .tab-btn:hover,
+.home-page-react .home-experiences-tabs .tab-btn:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(157, 86, 61, 0.38);
+  color: var(--terracota);
+  box-shadow:
+    0 3px 10px rgba(45, 73, 73, 0.06),
+    0 22px 48px rgba(45, 73, 73, 0.14);
+}
+
+.home-page-react .home-experiences-tabs .tab-btn:hover .tab-card-arrow,
+.home-page-react .home-experiences-tabs .tab-btn:focus-visible .tab-card-arrow {
+  color: var(--terracota);
+  background: rgba(157, 86, 61, 0.08);
+  transform: translateX(2px);
+}
+
+.home-page-react .home-experiences-tabs .tab-btn:focus-visible {
+  outline: 2px solid var(--terracota-action);
+  outline-offset: 3px;
+}
+
+.home-page-react .home-experiences-tabs .tab-btn:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.home-page-react .home-experiences-tabs .tab-btn.active,
+.home-page-react .home-experiences-tabs .tab-btn--special.active {
+  background:
+    radial-gradient(ellipse at 84% 0%, rgba(232, 196, 173, 0.2), transparent 42%),
+    linear-gradient(155deg, rgba(45, 73, 73, 0.98), rgba(30, 50, 50, 1));
+  background-size: 100% 100%, 100% 100%;
+  border-color: var(--verde);
+  color: var(--crema);
+  box-shadow:
+    0 6px 16px rgba(30, 50, 50, 0.18),
+    0 18px 42px rgba(30, 50, 50, 0.18);
+}
+
+.home-page-react .home-experiences-tabs .tab-btn.active::after,
+.home-page-react .home-experiences-tabs .tab-btn--special.active::after {
+  background: rgba(232, 196, 173, 0.3);
+}
+
+.home-page-react .home-experiences-tabs .tab-btn.active .tab-card-index,
+.home-page-react .home-experiences-tabs .tab-btn--special.active .tab-card-index {
+  color: rgba(232, 196, 173, 0.74);
+}
+
+.home-page-react .home-experiences-tabs .tab-btn.active .tab-card-rail,
+.home-page-react .home-experiences-tabs .tab-btn--special.active .tab-card-rail {
+  color: rgba(255, 253, 248, 0.48);
+}
+
+.home-page-react .home-experiences-tabs .tab-btn.active .tab-card-note,
+.home-page-react .home-experiences-tabs .tab-btn--special.active .tab-card-note {
+  color: rgba(255, 253, 248, 0.58);
+}
+
+.home-page-react .home-experiences-tabs .tab-btn.active .tab-card-arrow,
+.home-page-react .home-experiences-tabs .tab-btn--special.active .tab-card-arrow {
+  color: var(--terra-light);
+  background: rgba(255, 253, 248, 0.08);
+}
+
+.home-page-react .home-experiences-tabs .tab-btn--special {
+  border-color: rgba(157, 86, 61, 0.32);
+  color: var(--terracota);
+}
+
 .tab2-panel { display: none; }
 .tab2-panel.active { display: grid; grid-template-columns: 56fr 44fr; gap: 64px; align-items: center; }
+
+.home-page-react .snap-section[data-sec="espacios"] {
+  min-height: auto !important;
+  justify-content: flex-start !important;
+  padding-top: 96px !important;
+  padding-bottom: 0 !important;
+}
+
+.home-page-react .snap-section[data-sec="espacios"] #s3-carousel {
+  padding-bottom: 0 !important;
+}
 
 /* â”€â”€ PKG CARD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .pkg-card {
@@ -906,6 +1130,11 @@ body {
   #s3-carousel {
     contain: layout paint;
     max-width: 100%;
+    padding-bottom: 0 !important;
+  }
+
+  .snap-section[data-sec="espacios"] {
+    padding-bottom: 0 !important;
   }
 
   [style*="width:400px"] {
@@ -1127,7 +1356,7 @@ body {
     }
 
     .home-page-react .home-experiences-tabs {
-      margin-bottom: 22px;
+      margin-bottom: 14px;
     }
   }
 
@@ -1162,24 +1391,73 @@ body {
     }
 
     .home-page-react .home-experiences-tabs {
-      flex-direction: column !important;
-      align-items: stretch !important;
-      justify-content: flex-start !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
       gap: 10px !important;
       overflow: visible !important;
       max-width: 100% !important;
       width: 100% !important;
       margin-left: 0 !important;
       margin-right: 0 !important;
-      margin-bottom: 26px !important;
+      margin-bottom: 10px !important;
       padding-left: 0 !important;
       padding-right: 0 !important;
     }
 
     .home-page-react .home-experiences-tabs .tab-btn {
       width: 100% !important;
+      min-height: 154px !important;
+      grid-template-columns: 18px minmax(0, 1fr) 20px !important;
+      gap: 14px 10px !important;
+      padding: 13px 12px 14px 10px !important;
       justify-content: center !important;
       white-space: normal !important;
+    }
+
+    .home-page-react .home-experiences-tabs .tab-btn::after {
+      left: 30px !important;
+      top: 13px !important;
+      bottom: 13px !important;
+    }
+
+    .home-page-react .home-experiences-tabs .tab-card-rail {
+      font-size: 0.5rem !important;
+      letter-spacing: 0.14em !important;
+    }
+
+    .home-page-react .home-experiences-tabs .tab-card-index {
+      font-size: clamp(2.05rem, 10vw, 2.55rem) !important;
+    }
+
+    .home-page-react .home-experiences-tabs .tab-card-title {
+      font-size: clamp(1.18rem, 5vw, 1.38rem) !important;
+      line-height: 0.98 !important;
+    }
+
+    .home-page-react .home-experiences-tabs .tab-card-note {
+      font-size: 0.7rem !important;
+      letter-spacing: 0.025em !important;
+      line-height: 1.28 !important;
+    }
+
+    .home-page-react .home-experiences-tabs .tab-card-arrow {
+      width: 22px !important;
+      height: 22px !important;
+      font-size: 0.86rem !important;
+    }
+
+    @media (max-width: 390px) {
+      .home-page-react .home-experiences-tabs .tab-btn {
+        min-height: 148px !important;
+        padding: 12px 9px 13px 8px !important;
+      }
+
+      .home-page-react .home-experiences-tabs .tab-card-title {
+        font-size: 1.16rem !important;
+      }
+
+      .home-page-react .home-experiences-tabs .tab-card-note {
+        font-size: 0.68rem !important;
+      }
     }
 
     .home-page-react [data-sec="cotizador"] > div[style*="grid-template-columns"],

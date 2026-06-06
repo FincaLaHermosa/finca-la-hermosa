@@ -68,7 +68,7 @@ function HeroSection() {
           <div className="hero-title-italic" style={{ color: "var(--terracota)", marginTop: 6 }}>que hace el lugar.</div>
         </div>
         <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.9rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(255,253,248,0.6)", maxWidth: 440, marginBottom: 36 }}>
-          Finca La Hermosa nació de una familia con raíces en Isidro Fabela y el deseo de compartir lo que durante décadas fue solo suyo. Hoy, cada evento que vivimos aquí es una extensión de ese mismo espíritu.
+          Un lugar que se vive como casa y se recuerda como destino.
         </p>
         <div className="txt-reveal" data-d="3" style={{ display: "flex", gap: 14, alignItems: "center" }}>
           <a href="/experiencias" className="btn-accent" style={{ textDecoration: "none" }}>Ver experiencias</a>
@@ -153,7 +153,7 @@ function ValuesSection() {
               <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.2rem,3.5vw,4.5rem)", fontStyle: "italic", fontWeight: 300, color: "var(--terracota)", marginTop: 4 }}>una sola promesa.</div>
             </div>
           </div>
-          <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(255,253,248,0.5)", alignSelf: "end", paddingBottom: 4 }}>Todo lo que hacemos en La Hermosa nace de tres convicciones simples. No son claims de marketing — son la forma en que llevamos más de una década operando este lugar.</p>
+          <p className="txt-reveal" data-d="2" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.9, color: "rgba(255,253,248,0.5)", alignSelf: "end", paddingBottom: 4 }}>Tres convicciones guían cada evento: recibir bien, cuidar el lugar y celebrar con intención.</p>
         </div>
         <div className="values-grid txt-reveal" data-d="1">
           {values.map((value, index) => (

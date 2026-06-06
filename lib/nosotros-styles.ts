@@ -49,7 +49,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 28px;
+  padding: 0 28px 0 18px;
   border-radius: 999px;
   background: rgba(18,28,24,0.12);
   border: 1px solid rgba(255,255,255,0.1);
@@ -873,7 +873,7 @@ body {
 
   .nav-pill {
     height: 54px !important;
-    padding: 0 10px 0 16px !important;
+    padding: 0 10px 0 0 !important;
     align-items: center;
   }
 
@@ -881,6 +881,7 @@ body {
     display: flex;
     align-items: center;
     min-width: 0;
+    transform: translateX(-10px);
   }
 
   .nav-logo img {

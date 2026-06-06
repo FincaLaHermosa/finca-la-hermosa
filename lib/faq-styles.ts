@@ -35,7 +35,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
 .nav-pill {
   width: 100%; max-width: 1500px; height: 58px;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 28px; border-radius: 999px;
+  padding: 0 28px 0 18px; border-radius: 999px;
   background: rgba(18,28,24,0.12); border: 1px solid rgba(255,255,255,0.1);
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.07);
@@ -160,11 +160,11 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
 }
 
 /* ── FAQ section ────────────────────────────────────────── */
-.faq-section { background: var(--crema); padding: 88px 0 100px; }
+.faq-section { background: var(--crema); padding: 68px 0 62px; }
 .faq-inner { max-width: 860px; margin: 0 auto; padding: 0 40px; }
 
 /* ── Category tabs ──────────────────────────────────────── */
-.faq-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 56px; }
+.faq-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 34px; }
 .faq-tab {
   font-family: 'Jost', sans-serif; font-size: 0.67rem; font-weight: 300;
   letter-spacing: 0.12em; text-transform: uppercase;
@@ -177,7 +177,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
 .faq-tab.active { background: var(--verde); border-color: var(--verde); color: var(--crema); }
 
 /* ── FAQ group ──────────────────────────────────────────── */
-.faq-group { margin-bottom: 48px; }
+.faq-group { margin-bottom: 0; }
 .faq-group-label {
   font-family: 'Jost', sans-serif; font-size: 0.63rem; font-weight: 500;
   letter-spacing: 0.16em; text-transform: uppercase; color: var(--terracota);
@@ -465,7 +465,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
 
   .nav-pill {
     height: 54px !important;
-    padding: 0 10px 0 16px !important;
+    padding: 0 10px 0 0 !important;
     align-items: center;
   }
 
@@ -473,6 +473,7 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
     display: flex;
     align-items: center;
     min-width: 0;
+    transform: translateX(-10px);
   }
 
   .nav-logo img {
@@ -1302,7 +1303,8 @@ body { font-family: 'Jost', sans-serif; background: var(--crema); color: var(--b
     display: flex !important;
     gap: 10px !important;
     overflow-x: auto;
-    padding-bottom: 12px;
+    padding-bottom: 6px;
+    margin-bottom: 24px !important;
     margin-left: -22px;
     margin-right: -22px;
     padding-left: 22px;

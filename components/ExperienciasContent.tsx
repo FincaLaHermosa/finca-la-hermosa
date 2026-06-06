@@ -77,11 +77,11 @@ function HeroSection() {
           <div className="txt-reveal hero-title-display" data-d="1" style={{ color: "var(--crema)" }}>Experiencias,</div>
           <div className="txt-reveal hero-title-italic" data-d="2" style={{ color: "var(--terracota)", marginTop: 4 }}>diseñadas para celebrar.</div>
           <p className="txt-reveal" data-d="3" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.92rem", fontWeight: 300, lineHeight: 1.85, color: "rgba(255,253,248,0.68)", marginTop: 28, maxWidth: 420 }}>
-            Elige el paquete que mejor se adapta a tu evento. Cada experiencia incluye atención personalizada, espacios únicos y todo el entorno natural de la finca.
+            Paquetes flexibles para celebrar, reunir o descansar en la finca. Elige una base y la ajustamos contigo.
           </p>
-          <div className="txt-reveal exp-hero-actions" data-d="4" style={{ display: "flex", gap: 12, marginTop: 36, flexWrap: "wrap" }}>
-            <a href="#catalogo" className="btn-accent">Ver todos los paquetes</a>
-            <a href="/cotizar" className="btn-ghost">Solicitar propuesta</a>
+          <div className="txt-reveal exp-hero-actions" data-d="4" style={{ display: "flex", gap: 12, marginTop: 48, flexWrap: "wrap" }}>
+            <a href="#catalogo" className="btn-accent">Ver paquetes <DownArrowIcon /></a>
+            <a href="/cotizar" className="btn-ghost">Cotizar</a>
           </div>
           <div className="txt-reveal exp-social-proof" data-d="5" style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 40, paddingTop: 32, borderTop: "1px solid rgba(255,255,255,0.1)" }}>
             <div style={{ display: "flex" }}>
@@ -109,27 +109,35 @@ function CatalogSection({
   packages: ExperiencePackage[];
   onFilter: (filter: PackageFilter) => void;
 }) {
+  const handleFilterClick = (filter: PackageFilter) => {
+    if (filter === activeFilter) return;
+
+    onFilter(filter);
+    window.setTimeout(() => {
+      const packageGrid = document.getElementById("pkg-grid");
+      packageGrid?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start",
+      });
+    }, 80);
+  };
+
   return (
     <section id="catalogo" className="exp-catalog" style={{ background: "var(--crema)", padding: "100px 0 80px", position: "relative", overflow: "hidden" }}>
       <div className="arch-label" style={{ right: -20, top: 40 }}>PAQUETES</div>
       <div className="exp-container" style={{ maxWidth: 1500, margin: "0 auto", padding: "0 52px" }}>
-        <div className="exp-section-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48, gap: 40 }}>
+        <div className="exp-section-header" style={{ display: "flex", justifyContent: "flex-start", alignItems: "flex-end", marginBottom: 48, gap: 40 }}>
           <div>
             <div className="overline overline-dark txt-reveal" style={{ marginBottom: 14 }}>Nuestros paquetes</div>
             <div className="txt-reveal" data-d="1" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(2.4rem,4vw,3.8rem)", fontWeight: 300, color: "var(--carbon)", lineHeight: 1.05, letterSpacing: "-0.02em" }}>
               Cada paquete, diseñado<br /><em style={{ color: "var(--terracota)", fontStyle: "italic" }}>para tu momento.</em>
             </div>
           </div>
-          <div className="txt-reveal" data-d="2" style={{ flexShrink: 0 }}>
-            <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.84rem", fontWeight: 300, lineHeight: 1.75, color: "var(--muted)", maxWidth: 300, textAlign: "right" }}>
-              Tarifa base por día completo para hasta 220 personas. Incluye staff dedicado del venue.
-            </p>
-          </div>
         </div>
 
         <div className="tabs-bar txt-reveal" data-d="2" style={{ marginBottom: 40 }} role="tablist" aria-label="Filtrar paquetes">
           {packageFilters.map((filter) => (
-            <button key={filter.id} className={`tab-btn${activeFilter === filter.id ? " active" : ""}`} type="button" role="tab" aria-selected={activeFilter === filter.id} onClick={() => onFilter(filter.id)}>
+            <button key={filter.id} className={`tab-btn${activeFilter === filter.id ? " active" : ""}`} type="button" role="tab" aria-selected={activeFilter === filter.id} onClick={() => handleFilterClick(filter.id)}>
               {filter.label}
             </button>
           ))}
@@ -150,8 +158,8 @@ function CatalogSection({
 
         <div className="txt-reveal exp-pricing-note" style={{ marginTop: 44, padding: "22px 28px", background: "var(--crema-warm)", borderRadius: 10, border: "1px solid var(--crema-border)", display: "flex", gap: 16, alignItems: "flex-start" }}>
           <InfoIcon />
-          <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.8rem", fontWeight: 300, lineHeight: 1.75, color: "var(--muted)" }}>
-            Los precios son por día completo e incluyen staff dedicado del venue. Los add-ons se contratan por separado. Cotiza tu fecha para confirmar disponibilidad y total.
+          <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.79rem", fontWeight: 300, lineHeight: 1.75, color: "var(--muted)" }}>
+            Precios por día completo con staff del venue. Add-ons por separado; cotiza tu fecha para confirmar disponibilidad.
           </p>
         </div>
       </div>
@@ -175,10 +183,10 @@ function PackageCard({ item }: { item: ExperiencePackage }) {
         <div className="pkg-capacity">{item.capacity}</div>
         <div className="pkg-divider" />
         <ul className="pkg-features">
-          {item.features.map((feature) => <li key={feature}>{feature}</li>)}
+          {item.features.slice(0, 6).map((feature) => <li key={feature}>{feature}</li>)}
         </ul>
         <div className="pkg-btn-wrap">
-          <a className="pkg-btn" href="/cotizar">{item.cta}</a>
+          <a className="pkg-btn" href="/cotizar">Cotizar</a>
         </div>
       </div>
     </article>
@@ -199,18 +207,13 @@ function AddonsSection() {
           </div>
           <div className="txt-reveal" data-d="2">
             <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.88rem", fontWeight: 300, lineHeight: 1.8, color: "var(--body-clr)" }}>
-              Complementa cualquier paquete con los extras que hacen la diferencia. Cada add-on se suma automáticamente a tu cotización personalizada.
+              Puedes personalizar tu experiencia con estos extras. Los eliges al solicitar tu propuesta.
             </p>
           </div>
         </div>
 
         <div className="txt-reveal exp-addons-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }} data-d="3">
           {experienceAddons.map((addon) => <AddonCard key={addon.id} item={addon} />)}
-        </div>
-
-        <div className="txt-reveal exp-addon-note" style={{ marginTop: 44, textAlign: "center" }}>
-          <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.82rem", fontWeight: 300, color: "var(--muted)", marginBottom: 18 }}>Puedes agregar add-ons al solicitar tu propuesta. Se cotizan por evento, no por persona.</p>
-          <a className="btn-primary" href="/cotizar">Armar mi propuesta</a>
         </div>
       </div>
     </section>
@@ -282,4 +285,8 @@ function InfoIcon() {
 
 function CheckIcon() {
   return <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><polyline points="20 6 9 17 4 12" /></svg>;
+}
+
+function DownArrowIcon() {
+  return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ marginLeft: 8 }}><path d="m6 9 6 6 6-6" /></svg>;
 }

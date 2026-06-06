@@ -231,15 +231,26 @@ body {
   display:flex; gap:8px; align-items:flex-start; line-height:1.45;
 }
 .pkg-features li::before { content:'·'; color:var(--terracota); font-size:1.2rem; line-height:0.9; flex-shrink:0; }
+.exp-pricing-note p {
+  font-size: 0.79rem !important;
+  line-height: 1.45 !important;
+}
 .pkg-btn-wrap { margin-top:18px; }
 .pkg-btn {
-  width:100%; padding:13px;
+  width:100%; min-height:44px; padding:0 16px;
   font-family:'Jost',sans-serif; font-size:0.67rem; font-weight:300;
   letter-spacing:0.1em; text-transform:uppercase;
   color:var(--crema); background:var(--verde); border:none; border-radius:999px;
+  display:flex; align-items:center; justify-content:center; text-align:center; text-decoration:none;
   cursor:pointer; transition:background 0.22s, transform 0.22s;
 }
-.pkg-btn:hover { background:var(--verde-mid); transform:scale(1.02); }
+.pkg-btn:hover,
+.pkg-btn:focus,
+.pkg-btn:active {
+  background:var(--verde-mid);
+  transform:scale(1.02);
+  text-decoration:none;
+}
 
 /* ── TABS ────────────────────────────────────────────────── */
 .tabs-bar {
@@ -376,11 +387,16 @@ body {
   flex: 0 0 3px;
 }
 
+#pkg-grid {
+  scroll-margin-top: 104px;
+}
+
 @media (max-width: 760px) {
   html { font-size: 16px; }
   html, body { max-width: 100%; overflow-x: clip; }
   img, video, canvas, svg { max-width: 100%; }
   section { scroll-margin-top: 88px; }
+  #catalogo { scroll-margin-top: 0 !important; }
 
   #site-nav { padding: 10px 12px !important; }
   .nav-pill {
@@ -450,7 +466,7 @@ body {
   .arch-label { display: none !important; }
 
  .exp-hero {
-    min-height: auto !important;
+    min-height: 100svh !important;
     padding-top: 86px !important;
     align-items: flex-start !important;
   }
@@ -487,7 +503,7 @@ body {
   }
 
   .exp-hero-inner {
-    padding: 30px 22px 42px !important;
+    padding: 56px 22px 58px !important;
   }
 
   .exp-hero-copy {
@@ -516,7 +532,7 @@ body {
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 10px !important;
-    margin-top: 28px !important;
+    margin-top: 70px !important;
   }
 
   .exp-hero-actions .btn-accent,
@@ -590,6 +606,7 @@ body {
     display: flex !important;
     grid-template-columns: none !important;
     gap: 14px !important;
+    scroll-margin-top: 82px;
     overflow-x: auto !important;
     overflow-y: hidden !important;
     scroll-snap-type: x mandatory;
