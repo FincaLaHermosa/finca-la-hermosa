@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 import { faqCategories, type FaqCategoryId, type FaqItem } from "@/lib/faq-data";
 
 export function FaqContent() {
@@ -36,6 +37,10 @@ export function FaqContent() {
   }, []);
 
   const changeCategory = (nextCategory: FaqCategoryId) => {
+    trackEvent("faq_category_select", {
+      category: nextCategory,
+      category_label: faqCategories.find((item) => item.id === nextCategory)?.label,
+    });
     setActiveCategory(nextCategory);
     setOpenItem(null);
   };
@@ -124,7 +129,13 @@ function FaqSection({
         <div className="faq-group txt-reveal" data-category={activeCategory}>
           <div className="faq-group-label">{groupLabel}</div>
           {items.map((item) => (
-            <FaqAccordionItem key={item.id} item={item} isOpen={openItem === item.id} onToggle={() => onToggle(openItem === item.id ? null : item.id)} />
+            <FaqAccordionItem
+              key={item.id}
+              item={item}
+              category={activeCategory}
+              isOpen={openItem === item.id}
+              onToggle={() => onToggle(openItem === item.id ? null : item.id)}
+            />
           ))}
         </div>
       </div>
@@ -132,12 +143,22 @@ function FaqSection({
   );
 }
 
-function FaqAccordionItem({ item, isOpen, onToggle }: { item: FaqItem; isOpen: boolean; onToggle: () => void }) {
+function FaqAccordionItem({ item, category, isOpen, onToggle }: { item: FaqItem; category: FaqCategoryId; isOpen: boolean; onToggle: () => void }) {
   const answerId = `faq-answer-${item.id}`;
+  const handleToggle = () => {
+    if (!isOpen) {
+      trackEvent("faq_question_open", {
+        category,
+        question_id: item.id,
+        question: item.question,
+      });
+    }
+    onToggle();
+  };
 
   return (
     <div className={`faq-item${isOpen ? " open" : ""}`}>
-      <button className="faq-question" type="button" aria-expanded={isOpen} aria-controls={answerId} onClick={onToggle}>
+      <button className="faq-question" type="button" aria-expanded={isOpen} aria-controls={answerId} onClick={handleToggle}>
         <span className="faq-q-text">{item.question}</span>
         <div className="faq-icon">
           <PlusIcon />

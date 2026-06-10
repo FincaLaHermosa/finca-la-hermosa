@@ -2,6 +2,7 @@
 
 import type { CSSProperties, ReactNode, RefObject } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 import { homeExperiences, homeSpaces, homeTestimonials } from "@/lib/home-data";
 
 type IconName = "users" | "briefcase" | "home" | "heart" | "clock" | "more" | "file" | "mail" | "calendar" | "whatsapp";
@@ -159,7 +160,19 @@ function ExperiencesSection({ activeTab, onTabChange }: { activeTab: number; onT
             const cardCopy = experienceCards[index] ?? { title: experience.label, note: experience.eyebrow };
 
             return (
-              <button key={experience.label} type="button" aria-pressed={activeTab === index} className={`tab-btn ${experience.special ? "tab-btn--special" : ""} ${activeTab === index ? "active" : ""}`} onClick={() => onTabChange(index)}>
+              <button
+                key={experience.label}
+                type="button"
+                aria-pressed={activeTab === index}
+                className={`tab-btn ${experience.special ? "tab-btn--special" : ""} ${activeTab === index ? "active" : ""}`}
+                onClick={() => {
+                  trackEvent("home_experience_select", {
+                    experience_label: experience.label,
+                    experience_index: index + 1,
+                  });
+                  onTabChange(index);
+                }}
+              >
                 <span className="tab-card-rail" aria-hidden="true">{cardCopy.rail}</span>
                 <span className="tab-card-index">{String(index + 1).padStart(2, "0")}</span>
                 <span className="tab-card-copy">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 import { espacios, venueAssets } from "@/lib/espacios-data";
 
 const slideWidthDesktop = 88;
@@ -116,6 +117,10 @@ function ScrollGallery() {
     stopAutoAdvance();
     setLightboxEspacioIndex(index);
     setLightboxImageIndex(0);
+    trackEvent("space_gallery_open", {
+      space_name: espacios[index]?.nombre,
+      space_index: index + 1,
+    });
   };
 
   const closeLightbox = useCallback(() => {
@@ -136,6 +141,12 @@ function ScrollGallery() {
   const goToByUser = useCallback((nextIndex: number) => {
     stopAutoAdvance();
     goTo(nextIndex);
+    if (nextIndex >= 0 && nextIndex < espacios.length) {
+      trackEvent("space_gallery_select", {
+        space_name: espacios[nextIndex]?.nombre,
+        space_index: nextIndex + 1,
+      });
+    }
   }, [goTo, stopAutoAdvance]);
 
   useEffect(() => {
@@ -366,7 +377,13 @@ function ScrollGallery() {
                   type="button"
                   aria-label={`Ver imagen ${index + 1}`}
                   aria-pressed={index === lightboxImageIndex}
-                  onClick={() => setLightboxImageIndex(index)}
+                  onClick={() => {
+                    setLightboxImageIndex(index);
+                    trackEvent("space_lightbox_image_select", {
+                      space_name: lightboxEspacio.nombre,
+                      image_index: index + 1,
+                    });
+                  }}
                 >
                   <img src={image} alt="" />
                 </button>

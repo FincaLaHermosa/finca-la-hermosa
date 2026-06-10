@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 import {
   experienceAddons,
   experiencePackages,
@@ -112,6 +113,10 @@ function CatalogSection({
   const handleFilterClick = (filter: PackageFilter) => {
     if (filter === activeFilter) return;
 
+    trackEvent("package_filter_select", {
+      category: filter,
+      category_label: packageFilters.find((item) => item.id === filter)?.label,
+    });
     onFilter(filter);
     window.setTimeout(() => {
       const packageGrid = document.getElementById("pkg-grid");
@@ -169,7 +174,7 @@ function CatalogSection({
 
 function PackageCard({ item }: { item: ExperiencePackage }) {
   return (
-    <article className="pkg-card" data-type={item.filters.join(" ")}>
+    <article className="pkg-card" data-type={item.filters.join(" ")} data-package-name={item.title}>
       <div className="pkg-img-wrap">
         {item.badge && <div className="pkg-badge">{item.badge}</div>}
         <img src={item.image} alt={item.imageAlt} />
@@ -186,7 +191,17 @@ function PackageCard({ item }: { item: ExperiencePackage }) {
           {item.features.slice(0, 6).map((feature) => <li key={feature}>{feature}</li>)}
         </ul>
         <div className="pkg-btn-wrap">
-          <a className="pkg-btn" href="/cotizar">Cotizar</a>
+          <a
+            className="pkg-btn"
+            href="/cotizar"
+            onClick={() => trackEvent("package_quote_click", {
+              package_name: item.title,
+              package_category: item.overline,
+              package_price: item.price,
+            })}
+          >
+            Cotizar
+          </a>
         </div>
       </div>
     </article>

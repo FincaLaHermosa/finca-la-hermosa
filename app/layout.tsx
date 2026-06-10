@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
+import { AnalyticsTracker } from "@/components/AnalyticsTracker";
+import { GoogleTagManager } from "@/components/GoogleTagManager";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
@@ -20,12 +22,18 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: "Finca La Hermosa | Venue privado en entorno natural",
   description: "Finca para bodas, eventos privados, retiros y experiencias en Isidro Fabela, Estado de México.",
+  icons: {
+    icon: "/assets/isotipo-blanco.svg",
+    shortcut: "/assets/isotipo-blanco.svg",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" className={`${jost.variable} ${cormorant.variable}`}>
       <body>
+        <GoogleTagManager />
+        <AnalyticsTracker />
         <SiteHeader />
         <WhatsAppFloat />
         {children}

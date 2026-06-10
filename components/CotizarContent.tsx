@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 import { addons, basePrice, busyDates, eventTypes, type Addon, type DurationId, type EventTypeId } from "@/lib/cotizar-data";
 
 type FormState = {
@@ -49,6 +50,7 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
   });
   const [error, setError] = useState<FormError | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const lastTrackedStep = useRef(0);
   const selectedType = eventTypes.find((item) => item.id === state.tipo);
   const selectedAddons = addons.filter((addon) => state.addons.includes(addon.id));
   const total = useMemo(() => {
@@ -74,6 +76,19 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
   const setField = <K extends keyof FormState>(field: K, value: FormState[K]) => {
     setState((current) => ({ ...current, [field]: value }));
     setError(null);
+
+    if (field === "tipo") {
+      trackEvent("quote_event_type_select", { event_type: String(value) });
+    }
+    if (field === "fecha") {
+      trackEvent("quote_date_set", { event_date: String(value), is_busy: busyDates.includes(String(value)) });
+    }
+    if (field === "guests") {
+      trackEvent("quote_guests_change", { guest_count: Number(value) });
+    }
+    if (field === "duracion") {
+      trackEvent("quote_duration_select", { duration: String(value) });
+    }
   };
 
   const goToStep = (nextStep: number) => {
@@ -83,15 +98,18 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
 
   const nextStep = () => {
     if (step === 1 && !state.tipo) {
+      trackEvent("quote_validation_error", { step_number: step, field_id: "tipo-evento-group", error_message: "missing_event_type" });
       setError({ message: "Elige el tipo de evento para preparar una propuesta adecuada.", fieldId: "tipo-evento-group" });
       return;
     }
     if (step === 2) {
       if (!state.fecha) {
+        trackEvent("quote_validation_error", { step_number: step, field_id: "fecha-input", error_message: "missing_date" });
         setError({ message: "Elige una fecha tentativa para revisar disponibilidad.", fieldId: "fecha-input" });
         return;
       }
       if (busyDates.includes(state.fecha)) {
+        trackEvent("quote_validation_error", { step_number: step, field_id: "fecha-input", error_message: "busy_date" });
         setError({ message: "Esa fecha ya está reservada. Elige una de las fechas cercanas disponibles.", fieldId: "fecha-input" });
         return;
       }
@@ -104,17 +122,30 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
     event.preventDefault();
     if (step !== 4) return;
     if (!state.nombre.trim()) {
+      trackEvent("quote_validation_error", { step_number: step, field_id: "inp-nombre", error_message: "missing_name" });
       setError({ message: "Escribe tu nombre para saber a quién dirigir la propuesta.", fieldId: "inp-nombre" });
       return;
     }
     if (!state.tel.trim()) {
+      trackEvent("quote_validation_error", { step_number: step, field_id: "inp-telefono", error_message: "missing_phone" });
       setError({ message: "Comparte un WhatsApp o teléfono para enviarte la propuesta.", fieldId: "inp-telefono" });
       return;
     }
     if (state.email.trim() && !state.email.includes("@")) {
+      trackEvent("quote_validation_error", { step_number: step, field_id: "inp-email", error_message: "invalid_email" });
       setError({ message: "Revisa el correo. Debe incluir @, o puedes dejarlo vacío.", fieldId: "inp-email" });
       return;
     }
+    trackEvent("quote_submit_success", {
+      event_type: state.tipo,
+      event_date: state.fecha,
+      guest_count: state.guests,
+      duration: state.duracion,
+      addons: state.addons,
+      estimated_total: total,
+      has_email: Boolean(state.email.trim()),
+      has_notes: Boolean(state.notas.trim()),
+    });
     setError(null);
     setSubmitted(true);
     setStep(4);
@@ -122,11 +153,32 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
   };
 
   const toggleAddon = (addonId: string) => {
+    const addon = addons.find((item) => item.id === addonId);
+    const selected = !state.addons.includes(addonId);
+
     setState((current) => ({
       ...current,
       addons: current.addons.includes(addonId) ? current.addons.filter((id) => id !== addonId) : [...current.addons, addonId],
     }));
+    trackEvent("quote_addon_toggle", {
+      addon_id: addonId,
+      addon_name: addon?.value,
+      selected,
+    });
   };
+
+  useEffect(() => {
+    if (submitted || lastTrackedStep.current === step) return;
+    lastTrackedStep.current = step;
+    trackEvent("quote_step_view", {
+      step_number: step,
+      step_name: steps[step - 1],
+      event_type: state.tipo || undefined,
+      guest_count: state.guests,
+      duration: state.duracion,
+      estimated_total: total,
+    });
+  }, [step, submitted, state.tipo, state.guests, state.duracion, total]);
 
   return (
     <main className="prototype-route cotizar-page-react">
