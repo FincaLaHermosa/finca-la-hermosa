@@ -2,8 +2,10 @@
 
 import { useEffect } from "react";
 import { commitments, teamMembers, timelineItems, values } from "@/lib/nosotros-data";
+import type { CmsNosotrosData } from "@/lib/cms/types";
 
-export function NosotrosContent() {
+export function NosotrosContent({ data }: { data?: CmsNosotrosData }) {
+  const nosotros = data ?? { commitments, teamMembers, timelineItems, values };
   useEffect(() => {
     const revealObserver = new IntersectionObserver(
       (entries) => {
@@ -44,10 +46,10 @@ export function NosotrosContent() {
     <main className="prototype-route nosotros-page-react">
       <HeroSection />
       <StorySection />
-      <ValuesSection />
-      <TimelineSection />
-      <TeamSection />
-      <PromiseSection />
+      <ValuesSection values={nosotros.values} />
+      <TimelineSection timelineItems={nosotros.timelineItems} />
+      <TeamSection teamMembers={nosotros.teamMembers} />
+      <PromiseSection commitments={nosotros.commitments} />
       <CtaSection />
     </main>
   );
@@ -139,7 +141,7 @@ function StorySection() {
   );
 }
 
-function ValuesSection() {
+function ValuesSection({ values }: { values: CmsNosotrosData["values"] }) {
   return (
     <section className="values-section">
       <div style={{ position: "absolute", top: "-10%", right: "15%", width: 600, height: 400, background: "radial-gradient(ellipse,rgba(192,122,90,0.06) 0%,transparent 65%)", borderRadius: "50%", zIndex: 0, pointerEvents: "none" }} />
@@ -172,7 +174,7 @@ function ValuesSection() {
   );
 }
 
-function TimelineSection() {
+function TimelineSection({ timelineItems }: { timelineItems: CmsNosotrosData["timelineItems"] }) {
   return (
     <section className="timeline-section">
       <div className="timeline-inner">
@@ -221,7 +223,7 @@ function TimelineDot({ current }: { current?: boolean }) {
   return <div className="tl-dot"><div className="tl-dot-inner" style={current ? { background: "var(--verde)", boxShadow: "0 0 0 1px var(--verde)" } : undefined} /></div>;
 }
 
-function TeamSection() {
+function TeamSection({ teamMembers }: { teamMembers: CmsNosotrosData["teamMembers"] }) {
   return (
     <section className="team-section" style={{ padding: "80px 0", background: "var(--verde-dark)", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", top: "-20%", left: "20%", width: 700, height: 500, background: "radial-gradient(ellipse,rgba(192,122,90,0.07) 0%,transparent 65%)", borderRadius: "50%", pointerEvents: "none" }} />
@@ -254,7 +256,7 @@ function TeamSection() {
   );
 }
 
-function PromiseSection() {
+function PromiseSection({ commitments }: { commitments: CmsNosotrosData["commitments"] }) {
   return (
     <section className="promesa-section">
       <div className="promesa-inner">

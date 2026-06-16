@@ -2,14 +2,16 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
-import { faqCategories, type FaqCategoryId, type FaqItem } from "@/lib/faq-data";
+import { faqCategories, type FaqItem } from "@/lib/faq-data";
+import type { CmsFaqData } from "@/lib/cms/types";
 
-export function FaqContent() {
-  const [activeCategory, setActiveCategory] = useState<FaqCategoryId>("reservaciones");
+export function FaqContent({ data }: { data?: CmsFaqData }) {
+  const categories = data?.categories ?? faqCategories;
+  const [activeCategory, setActiveCategory] = useState<string>(categories[0]?.id ?? "reservaciones");
   const [openItem, setOpenItem] = useState<string | null>(null);
   const category = useMemo(
-    () => faqCategories.find((item) => item.id === activeCategory) ?? faqCategories[0],
-    [activeCategory],
+    () => categories.find((item) => item.id === activeCategory) ?? categories[0],
+    [activeCategory, categories],
   );
 
   useEffect(() => {
@@ -36,10 +38,10 @@ export function FaqContent() {
     };
   }, []);
 
-  const changeCategory = (nextCategory: FaqCategoryId) => {
+  const changeCategory = (nextCategory: string) => {
     trackEvent("faq_category_select", {
       category: nextCategory,
-      category_label: faqCategories.find((item) => item.id === nextCategory)?.label,
+      category_label: categories.find((item) => item.id === nextCategory)?.label,
     });
     setActiveCategory(nextCategory);
     setOpenItem(null);
@@ -48,7 +50,7 @@ export function FaqContent() {
   return (
     <main className="prototype-route faq-page-react">
       <HeroFaq />
-      <FaqSection activeCategory={activeCategory} openItem={openItem} items={category.items} groupLabel={category.groupLabel} onCategory={changeCategory} onToggle={setOpenItem} />
+      <FaqSection categories={categories} activeCategory={activeCategory} openItem={openItem} items={category.items} groupLabel={category.groupLabel} onCategory={changeCategory} onToggle={setOpenItem} />
       <ContactSection />
     </main>
   );
@@ -102,24 +104,26 @@ function HeroStat({ value, label }: { value: string; label: string }) {
 
 function FaqSection({
   activeCategory,
+  categories,
   openItem,
   items,
   groupLabel,
   onCategory,
   onToggle,
 }: {
-  activeCategory: FaqCategoryId;
+  activeCategory: string;
+  categories: CmsFaqData["categories"];
   openItem: string | null;
   items: FaqItem[];
   groupLabel: string;
-  onCategory: (category: FaqCategoryId) => void;
+  onCategory: (category: string) => void;
   onToggle: (id: string | null) => void;
 }) {
   return (
     <section className="faq-section" id="faq-content">
       <div className="faq-inner">
         <div className="faq-tabs txt-reveal" role="tablist" aria-label="Categorías de preguntas frecuentes">
-          {faqCategories.map((category) => (
+          {categories.map((category) => (
             <button key={category.id} className={`faq-tab${activeCategory === category.id ? " active" : ""}`} type="button" role="tab" aria-selected={activeCategory === category.id} onClick={() => onCategory(category.id)}>
               {category.label}
             </button>
@@ -143,7 +147,7 @@ function FaqSection({
   );
 }
 
-function FaqAccordionItem({ item, category, isOpen, onToggle }: { item: FaqItem; category: FaqCategoryId; isOpen: boolean; onToggle: () => void }) {
+function FaqAccordionItem({ item, category, isOpen, onToggle }: { item: FaqItem; category: string; isOpen: boolean; onToggle: () => void }) {
   const answerId = `faq-answer-${item.id}`;
   const handleToggle = () => {
     if (!isOpen) {

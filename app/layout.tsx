@@ -5,6 +5,7 @@ import { GoogleTagManager } from "@/components/GoogleTagManager";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { getSiteConfig } from "@/lib/cms/queries";
 import "./globals.css";
 
 const jost = Jost({
@@ -28,16 +29,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export const revalidate = 60;
+
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const config = await getSiteConfig();
+
   return (
     <html lang="es" className={`${jost.variable} ${cormorant.variable}`}>
       <body>
         <GoogleTagManager />
         <AnalyticsTracker />
         <SiteHeader />
-        <WhatsAppFloat />
+        <WhatsAppFloat config={config} />
         {children}
-        <SiteFooter />
+        <SiteFooter config={config} />
       </body>
     </html>
   );

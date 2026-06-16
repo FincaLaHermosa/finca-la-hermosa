@@ -3,16 +3,21 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { espacios, venueAssets } from "@/lib/espacios-data";
+import type { CmsEspaciosData } from "@/lib/cms/types";
+import type { Espacio } from "@/lib/espacios-data";
 
 const slideWidthDesktop = 88;
 
-export function EspaciosContent() {
+export function EspaciosContent({ data }: { data?: CmsEspaciosData }) {
+  const spaces = data?.spaces ?? espacios;
+  const amenities = data?.amenities ?? venueAssets;
+
   return (
     <main className="prototype-route espacios-page-react">
       <HeroFolio />
       <StatsTerra />
-      <ScrollGallery />
-      <InventorySection />
+      <ScrollGallery spaces={spaces} />
+      <InventorySection amenities={amenities} />
       <CtaSection />
     </main>
   );
@@ -93,7 +98,7 @@ function StatsTerra() {
   );
 }
 
-function ScrollGallery() {
+function ScrollGallery({ spaces }: { spaces: Espacio[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxImageIndex, setLightboxImageIndex] = useState(0);
   const [lightboxEspacioIndex, setLightboxEspacioIndex] = useState<number | null>(null);
@@ -108,9 +113,9 @@ function ScrollGallery() {
   const wheelTimerRef = useRef<number | null>(null);
   const autoTimerRef = useRef<number | null>(null);
   const touchStartRef = useRef({ x: 0, y: 0 });
-  const activeEspacio = espacios[activeIndex];
+  const activeEspacio = spaces[activeIndex] ?? spaces[0];
   const slideWidth = isMobile ? 100 : slideWidthDesktop;
-  const lightboxEspacio = lightboxEspacioIndex === null ? null : espacios[lightboxEspacioIndex];
+  const lightboxEspacio = lightboxEspacioIndex === null ? null : spaces[lightboxEspacioIndex];
   const lightboxGallery = lightboxEspacio?.gallery?.length ? lightboxEspacio.gallery : lightboxEspacio ? [lightboxEspacio.img] : [];
 
   const openLightbox = (index: number) => {
@@ -118,7 +123,7 @@ function ScrollGallery() {
     setLightboxEspacioIndex(index);
     setLightboxImageIndex(0);
     trackEvent("space_gallery_open", {
-      space_name: espacios[index]?.nombre,
+      space_name: spaces[index]?.nombre,
       space_index: index + 1,
     });
   };
@@ -129,8 +134,8 @@ function ScrollGallery() {
   }, []);
 
   const goTo = useCallback((nextIndex: number) => {
-    setActiveIndex(Math.max(0, Math.min(espacios.length - 1, nextIndex)));
-  }, []);
+    setActiveIndex(Math.max(0, Math.min(spaces.length - 1, nextIndex)));
+  }, [spaces.length]);
 
   const stopAutoAdvance = useCallback(() => {
     setAutoStopped(true);
@@ -141,13 +146,13 @@ function ScrollGallery() {
   const goToByUser = useCallback((nextIndex: number) => {
     stopAutoAdvance();
     goTo(nextIndex);
-    if (nextIndex >= 0 && nextIndex < espacios.length) {
+    if (nextIndex >= 0 && nextIndex < spaces.length) {
       trackEvent("space_gallery_select", {
-        space_name: espacios[nextIndex]?.nombre,
+        space_name: spaces[nextIndex]?.nombre,
         space_index: nextIndex + 1,
       });
     }
-  }, [goTo, stopAutoAdvance]);
+  }, [goTo, spaces, stopAutoAdvance]);
 
   useEffect(() => {
     if (lightboxEspacioIndex === null) return;
@@ -212,13 +217,13 @@ function ScrollGallery() {
   useEffect(() => {
     if (!isMobile || !isGalleryVisible || autoStopped || autoTimerRef.current) return;
     autoTimerRef.current = window.setInterval(() => {
-      setActiveIndex((value) => (value + 1) % espacios.length);
+      setActiveIndex((value) => (value + 1) % spaces.length);
     }, 1450);
     return () => {
       if (autoTimerRef.current) window.clearInterval(autoTimerRef.current);
       autoTimerRef.current = null;
     };
-  }, [autoStopped, isGalleryVisible, isMobile]);
+  }, [autoStopped, isGalleryVisible, isMobile, spaces.length]);
 
   useLayoutEffect(() => {
     const viewport = listViewportRef.current;
@@ -232,7 +237,7 @@ function ScrollGallery() {
   const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
     const direction = event.deltaY > 0 ? 1 : -1;
     const nextIndex = activeIndex + direction;
-    const canMoveCarousel = nextIndex >= 0 && nextIndex < espacios.length;
+    const canMoveCarousel = nextIndex >= 0 && nextIndex < spaces.length;
 
     if (!canMoveCarousel) {
       wheelAccumRef.current = 0;
@@ -292,7 +297,7 @@ function ScrollGallery() {
             </div>
             <div className="sg-list-viewport" ref={listViewportRef}>
               <div id="sg-list" style={{ transform: `translateY(${listOffset}px)` }}>
-                {espacios.map((espacio, index) => {
+                {spaces.map((espacio, index) => {
                   const distance = Math.abs(index - activeIndex);
                   return (
                     <button
@@ -315,7 +320,7 @@ function ScrollGallery() {
 
           <div className="sg-right" onClick={handleGalleryClick} onWheel={handleWheel} onTouchStart={handleTouchStart} onTouchEnd={handleHorizontalTouchEnd}>
             <div id="sg-img-track" style={{ transform: `translateX(-${activeIndex * slideWidth}%)` }}>
-              {espacios.map((espacio, index) => (
+              {spaces.map((espacio, index) => (
                 <div key={espacio.nombre} className="sg-img-slide">
                   <button className="sg-image-open" type="button" aria-label={`Abrir galería de ${espacio.nombre}`} onClick={(event) => { event.stopPropagation(); openLightbox(index); }}>
                     <img
@@ -340,7 +345,7 @@ function ScrollGallery() {
               <ChevronRightIcon />
             </div>
             <div className="sg-progress" id="sg-progress">
-              {espacios.map((espacio, index) => (
+              {spaces.map((espacio, index) => (
                 <button key={espacio.nombre} className={`sg-dot${activeIndex === index ? " active" : ""}`} type="button" aria-label={`Ver ${espacio.nombre}`} onClick={() => goToByUser(index)} />
               ))}
             </div>
@@ -396,7 +401,7 @@ function ScrollGallery() {
   );
 }
 
-function GalleryDescription({ espacio }: { espacio: (typeof espacios)[number] }) {
+function GalleryDescription({ espacio }: { espacio: Espacio }) {
   return (
     <div className="sg-desc-area">
       <ul id="sg-desc-text">
@@ -407,9 +412,9 @@ function GalleryDescription({ espacio }: { espacio: (typeof espacios)[number] })
   );
 }
 
-function InventorySection() {
-  const splitIndex = Math.ceil(venueAssets.length / 2);
-  const columns = [venueAssets.slice(0, splitIndex), venueAssets.slice(splitIndex)];
+function InventorySection({ amenities }: { amenities: CmsEspaciosData["amenities"] }) {
+  const splitIndex = Math.ceil(amenities.length / 2);
+  const columns = [amenities.slice(0, splitIndex), amenities.slice(splitIndex)];
 
   return (
     <section className="inventario-section">

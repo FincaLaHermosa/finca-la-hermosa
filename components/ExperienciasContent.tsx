@@ -10,14 +10,17 @@ import {
   type ExperiencePackage,
   type PackageFilter,
 } from "@/lib/experiencias-data";
+import type { CmsExperienciasData } from "@/lib/cms/types";
 
 const proofItems = ["Respuesta en 24 h", "Propuesta sin costo", "Sin compromiso"];
 
-export function ExperienciasContent() {
+export function ExperienciasContent({ data }: { data?: CmsExperienciasData }) {
+  const packagesSource = data?.packages ?? experiencePackages;
+  const addonsSource = data?.addons ?? experienceAddons;
   const [activeFilter, setActiveFilter] = useState<PackageFilter>("social");
   const visiblePackages = useMemo(
-    () => experiencePackages.filter((item) => item.filters.includes(activeFilter)),
-    [activeFilter],
+    () => packagesSource.filter((item) => item.filters.includes(activeFilter)),
+    [activeFilter, packagesSource],
   );
 
   useEffect(() => {
@@ -52,7 +55,7 @@ export function ExperienciasContent() {
     <main className="prototype-route experiencias-page-react">
       <HeroSection />
       <CatalogSection activeFilter={activeFilter} packages={visiblePackages} onFilter={setActiveFilter} />
-      <AddonsSection />
+      <AddonsSection addons={addonsSource} />
       <FinalCtaSection />
     </main>
   );
@@ -208,7 +211,7 @@ function PackageCard({ item }: { item: ExperiencePackage }) {
   );
 }
 
-function AddonsSection() {
+function AddonsSection({ addons }: { addons: ExperienceAddon[] }) {
   return (
     <section className="exp-addons" style={{ background: "var(--crema-warm)", padding: "100px 0", position: "relative", overflow: "hidden" }}>
       <div className="arch-label" style={{ left: -20, bottom: 0, color: "rgba(45,73,73,0.035)" }}>ADD·ONS</div>
@@ -228,7 +231,7 @@ function AddonsSection() {
         </div>
 
         <div className="txt-reveal exp-addons-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }} data-d="3">
-          {experienceAddons.map((addon) => <AddonCard key={addon.id} item={addon} />)}
+          {addons.map((addon) => <AddonCard key={addon.id} item={addon} />)}
         </div>
       </div>
     </section>

@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { addons, basePrice, busyDates, eventTypes, type Addon, type DurationId, type EventTypeId } from "@/lib/cotizar-data";
+import type { CmsQuoteData } from "@/lib/cms/types";
 
 type FormState = {
   tipo: EventTypeId | "";
@@ -35,27 +36,44 @@ const initialState: FormState = {
 
 const steps = ["Tipo", "Fecha", "Extras", "Contacto"];
 
-const durationLabels: Record<DurationId, string> = {
+const defaultDurationLabels: Record<DurationId, string> = {
   dia: "Un día",
   finde: "Fin de semana",
   personalizado: "Personalizado",
 };
 
-export function CotizarContent({ initialType = "" }: { initialType?: string }) {
+export function CotizarContent({ initialType = "", data }: { initialType?: string; data?: CmsQuoteData }) {
+  const quoteData = data ?? {
+    basePrice,
+    eventTypes,
+    addons,
+    busyDates,
+    durations: [
+      { id: "dia", label: "Un día (10:00 – 20:00 h)", summaryLabel: "Un día" },
+      { id: "finde", label: "Fin de semana completo (vie–dom)", summaryLabel: "Fin de semana" },
+      { id: "personalizado", label: "Personalizado", summaryLabel: "Personalizado" },
+    ],
+    successMessage: {
+      title: "¡Recibimos tu solicitud!",
+      subtitle: "Te contactaremos en menos de 24 horas.",
+      body: "Revisaremos tu fecha, invitados y extras para enviarte una propuesta clara por WhatsApp y, si lo compartiste, también por correo.",
+    },
+  };
+  const durationLabels = Object.fromEntries(quoteData.durations.map((duration) => [duration.id, duration.summaryLabel])) as Record<string, string>;
   const [step, setStep] = useState(1);
   const shouldScrollToStep = useRef(false);
   const [state, setState] = useState<FormState>(() => {
-    const normalizedType = eventTypes.find((type) => type.id === initialType || type.value.toLowerCase() === initialType.toLowerCase());
+    const normalizedType = quoteData.eventTypes.find((type) => type.id === initialType || type.value.toLowerCase() === initialType.toLowerCase());
     return normalizedType ? { ...initialState, tipo: normalizedType.id } : initialState;
   });
   const [error, setError] = useState<FormError | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const lastTrackedStep = useRef(0);
-  const selectedType = eventTypes.find((item) => item.id === state.tipo);
-  const selectedAddons = addons.filter((addon) => state.addons.includes(addon.id));
+  const selectedType = quoteData.eventTypes.find((item) => item.id === state.tipo);
+  const selectedAddons = quoteData.addons.filter((addon) => state.addons.includes(addon.id));
   const total = useMemo(() => {
-    return basePrice + (state.duracion === "finde" ? basePrice : 0) + selectedAddons.reduce((sum, addon) => sum + addon.price, 0);
-  }, [selectedAddons, state.duracion]);
+    return quoteData.basePrice + (state.duracion === "finde" ? quoteData.basePrice : 0) + selectedAddons.reduce((sum, addon) => sum + addon.price, 0);
+  }, [quoteData.basePrice, selectedAddons, state.duracion]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -81,7 +99,7 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
       trackEvent("quote_event_type_select", { event_type: String(value) });
     }
     if (field === "fecha") {
-      trackEvent("quote_date_set", { event_date: String(value), is_busy: busyDates.includes(String(value)) });
+      trackEvent("quote_date_set", { event_date: String(value), is_busy: quoteData.busyDates.includes(String(value)) });
     }
     if (field === "guests") {
       trackEvent("quote_guests_change", { guest_count: Number(value) });
@@ -108,7 +126,7 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
         setError({ message: "Elige una fecha tentativa para revisar disponibilidad.", fieldId: "fecha-input" });
         return;
       }
-      if (busyDates.includes(state.fecha)) {
+      if (quoteData.busyDates.includes(state.fecha)) {
         trackEvent("quote_validation_error", { step_number: step, field_id: "fecha-input", error_message: "busy_date" });
         setError({ message: "Esa fecha ya está reservada. Elige una de las fechas cercanas disponibles.", fieldId: "fecha-input" });
         return;
@@ -153,7 +171,7 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
   };
 
   const toggleAddon = (addonId: string) => {
-    const addon = addons.find((item) => item.id === addonId);
+    const addon = quoteData.addons.find((item) => item.id === addonId);
     const selected = !state.addons.includes(addonId);
 
     setState((current) => ({
@@ -189,18 +207,18 @@ export function CotizarContent({ initialType = "" }: { initialType?: string }) {
             <Progress currentStep={submitted ? 5 : step} />
             {!submitted ? (
               <>
-                <StepOne active={step === 1} selected={state.tipo} onSelect={(value) => setField("tipo", value)} error={error} />
-                <StepTwo active={step === 2} state={state} setField={setField} error={error} />
-                <StepThree active={step === 3} selectedAddons={state.addons} notes={state.notas} setField={setField} onToggle={toggleAddon} />
+                <StepOne eventTypes={quoteData.eventTypes} active={step === 1} selected={state.tipo} onSelect={(value) => setField("tipo", value)} error={error} />
+                <StepTwo durations={quoteData.durations} busyDates={quoteData.busyDates} active={step === 2} state={state} setField={setField} error={error} />
+                <StepThree addons={quoteData.addons} active={step === 3} selectedAddons={state.addons} notes={state.notas} setField={setField} onToggle={toggleAddon} />
                 <StepFour active={step === 4} state={state} setField={setField} error={error} />
                 {error ? <div id="cotizar-form-error" className="field-error show" role="alert" aria-live="polite">{error.message}</div> : null}
                 <StepNavigation step={step} onPrev={() => goToStep(step - 1)} onNext={nextStep} />
               </>
             ) : (
-              <SuccessPanel />
+              <SuccessPanel message={quoteData.successMessage} />
             )}
           </div>
-          <SummaryCard typeLabel={selectedType?.value ?? ""} state={state} selectedAddons={selectedAddons} total={total} />
+          <SummaryCard basePrice={quoteData.basePrice} durationLabels={durationLabels} typeLabel={selectedType?.value ?? ""} state={state} selectedAddons={selectedAddons} total={total} />
         </div>
       </form>
     </main>
@@ -251,7 +269,7 @@ function Progress({ currentStep }: { currentStep: number }) {
   );
 }
 
-function StepOne({ active, selected, onSelect, error }: { active: boolean; selected: EventTypeId | ""; onSelect: (value: EventTypeId) => void; error: FormError | null }) {
+function StepOne({ eventTypes, active, selected, onSelect, error }: { eventTypes: CmsQuoteData["eventTypes"]; active: boolean; selected: EventTypeId | ""; onSelect: (value: EventTypeId) => void; error: FormError | null }) {
   const hasError = error?.fieldId === "tipo-evento-group";
 
   return (
@@ -273,7 +291,7 @@ function StepOne({ active, selected, onSelect, error }: { active: boolean; selec
   );
 }
 
-function StepTwo({ active, state, setField, error }: { active: boolean; state: FormState; setField: <K extends keyof FormState>(field: K, value: FormState[K]) => void; error: FormError | null }) {
+function StepTwo({ durations, busyDates, active, state, setField, error }: { durations: CmsQuoteData["durations"]; busyDates: string[]; active: boolean; state: FormState; setField: <K extends keyof FormState>(field: K, value: FormState[K]) => void; error: FormError | null }) {
   const isBusy = Boolean(state.fecha && busyDates.includes(state.fecha));
   const suggestions = isBusy ? [-7, -14, 7, 14].map((offset) => addDays(state.fecha, offset)).filter((date) => !busyDates.includes(date) && date >= todayIso()) : [];
   const hasDateError = error?.fieldId === "fecha-input";
@@ -304,9 +322,7 @@ function StepTwo({ active, state, setField, error }: { active: boolean; state: F
       <div className="field-group">
         <label className="field-label" htmlFor="duracion-select">Tiempo de uso</label>
         <select className="field-input" id="duracion-select" value={state.duracion} onChange={(event) => setField("duracion", event.target.value as DurationId)}>
-          <option value="dia">Un día (10:00 – 20:00 h)</option>
-          <option value="finde">Fin de semana completo (vie–dom)</option>
-          <option value="personalizado">Personalizado</option>
+          {durations.map((duration) => <option key={duration.id} value={duration.id}>{duration.label}</option>)}
         </select>
       </div>
     </div>
@@ -314,12 +330,14 @@ function StepTwo({ active, state, setField, error }: { active: boolean; state: F
 }
 
 function StepThree({
+  addons,
   active,
   selectedAddons,
   notes,
   setField,
   onToggle,
 }: {
+  addons: Addon[];
   active: boolean;
   selectedAddons: string[];
   notes: string;
@@ -399,7 +417,7 @@ function StepNavigation({ step, onPrev, onNext }: { step: number; onPrev: () => 
   );
 }
 
-function SummaryCard({ typeLabel, state, selectedAddons, total }: { typeLabel: string; state: FormState; selectedAddons: Addon[]; total: number }) {
+function SummaryCard({ basePrice, durationLabels, typeLabel, state, selectedAddons, total }: { basePrice: number; durationLabels: Record<string, string>; typeLabel: string; state: FormState; selectedAddons: Addon[]; total: number }) {
   return (
     <div className="summary-wrap">
       <div className="summary-card">
@@ -409,10 +427,10 @@ function SummaryCard({ typeLabel, state, selectedAddons, total }: { typeLabel: s
         <SummaryRow label="Tipo de evento" value={typeLabel} />
         <SummaryRow label="Fecha" value={state.fecha ? formatDate(state.fecha) : ""} />
         <SummaryRow label="Invitados" value={`${state.guests} personas`} />
-        <SummaryRow label="Duración" value={durationLabels[state.duracion]} />
+        <SummaryRow label="Duración" value={durationLabels[state.duracion] || defaultDurationLabels[state.duracion]} />
         <div className="summary-sep" />
         <div style={{ marginBottom: 4 }}>
-          <SummaryRow label="Finca (base)" value="$13,000" alwaysFilled />
+          <SummaryRow label="Finca (base)" value={`$${basePrice.toLocaleString()}`} alwaysFilled />
           {selectedAddons.map((addon) => (
             <div key={addon.id} className="summary-row" style={{ marginBottom: 4 }}>
               <span className="summary-key" style={{ paddingLeft: 8 }}>+ {addon.value}</span>
@@ -447,13 +465,13 @@ function SummaryRow({ label, value, alwaysFilled = false }: { label: string; val
   );
 }
 
-function SuccessPanel() {
+function SuccessPanel({ message }: { message: CmsQuoteData["successMessage"] }) {
   return (
     <div className="success-panel show">
       <div className="success-icon"><CheckLineIcon /></div>
-      <div style={{ fontFamily: "'Against',serif", fontSize: "2.2rem", lineHeight: 0.95, letterSpacing: "-0.02em", color: "var(--verde-dark)", marginBottom: 8 }}>¡Recibimos tu solicitud!</div>
-      <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.3rem", fontStyle: "italic", fontWeight: 300, color: "var(--terracota)", marginBottom: 20 }}>Te contactaremos en menos de 24 horas.</div>
-      <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.86rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8, maxWidth: 420, margin: "0 auto 32px" }}>Revisaremos tu fecha, invitados y extras para enviarte una propuesta clara por WhatsApp y, si lo compartiste, también por correo.</p>
+      <div style={{ fontFamily: "'Against',serif", fontSize: "2.2rem", lineHeight: 0.95, letterSpacing: "-0.02em", color: "var(--verde-dark)", marginBottom: 8 }}>{message.title}</div>
+      <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.3rem", fontStyle: "italic", fontWeight: 300, color: "var(--terracota)", marginBottom: 20 }}>{message.subtitle}</div>
+      <p style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.86rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8, maxWidth: 420, margin: "0 auto 32px" }}>{message.body}</p>
       <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
         <a href="https://wa.me/5215500000000" target="_blank" rel="noopener" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.75rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--crema)", background: "var(--verde)", border: "none", padding: "13px 24px", borderRadius: 999, cursor: "pointer", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8 }}>Escribir por WhatsApp</a>
         <a href="/" style={{ fontFamily: "'Jost',sans-serif", fontSize: "0.75rem", fontWeight: 400, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--terracota)", background: "transparent", border: "1px solid var(--terra-light)", padding: "13px 24px", borderRadius: 999, textDecoration: "none" }}>Volver al inicio</a>

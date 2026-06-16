@@ -65,7 +65,7 @@ export function SiteHeader() {
     };
   }, []);
 
-  if (pathname === "/cotizar/listo") return null;
+  if (pathname === "/cotizar/listo" || pathname.startsWith("/admin")) return null;
 
   const activePath = pathname === "/" ? "/" : `/${pathname.split("/")[1]}`;
   const forceScrolled = activePath === "/espacios";

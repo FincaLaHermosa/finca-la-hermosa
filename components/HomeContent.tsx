@@ -4,10 +4,12 @@ import type { CSSProperties, ReactNode, RefObject } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { homeExperiences, homeSpaces, homeTestimonials } from "@/lib/home-data";
+import type { CmsHomeData } from "@/lib/cms/types";
 
 type IconName = "users" | "briefcase" | "home" | "heart" | "clock" | "more" | "file" | "mail" | "calendar" | "whatsapp";
 
-export function HomeContent() {
+export function HomeContent({ data }: { data?: CmsHomeData }) {
+  const testimonials = data?.testimonials ?? homeTestimonials;
   const [activeTab, setActiveTab] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const processRef = useRef<HTMLDivElement>(null);
@@ -95,7 +97,7 @@ export function HomeContent() {
       <SpacesSection carouselRef={carouselRef} onScroll={scrollCarousel} />
       <ProcessSection processRef={processRef} />
       <QuickQuoteSection />
-      <TestimonialsSection testimonialsRef={testimonialsRef} />
+      <TestimonialsSection testimonials={testimonials} testimonialsRef={testimonialsRef} />
       <FinalCtaSection />
     </main>
   );
@@ -302,7 +304,7 @@ function QuickQuoteSection() {
   );
 }
 
-function TestimonialsSection({ testimonialsRef }: { testimonialsRef: RefObject<HTMLDivElement | null> }) {
+function TestimonialsSection({ testimonials, testimonialsRef }: { testimonials: typeof homeTestimonials; testimonialsRef: RefObject<HTMLDivElement | null> }) {
   return (
     <section className="snap-section" data-sec="testimonios" style={{ background: "var(--crema-warm)", flexDirection: "column", justifyContent: "center" }}>
       <div style={{ maxWidth: 1500, width: "100%", margin: "0 auto", padding: "0 52px" }}>
@@ -314,7 +316,7 @@ function TestimonialsSection({ testimonialsRef }: { testimonialsRef: RefObject<H
           <div className="overline overline-dark txt-reveal" data-d="2">+50 eventos realizados</div>
         </div>
         <div ref={testimonialsRef} className="txt-reveal" data-d="2" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "20px 12px", padding: "8px 4px" }}>
-          {homeTestimonials.map((item) => (
+          {testimonials.map((item) => (
             <div key={`${item.author}-${item.event}`} className="postit" style={{ background: item.background, transform: item.rotation, "--pin": item.pin } as CSSProperties}>
               <div className="postit-pin" />
               <p className="postit-q">"{item.quote}"</p>
