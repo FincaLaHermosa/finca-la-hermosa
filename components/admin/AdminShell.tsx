@@ -1464,16 +1464,98 @@ const adminCss = `
   }
 
   .admin-file-input {
-    position: absolute;
-    inline-size: 1px;
-    block-size: 1px;
-    opacity: 0;
-    pointer-events: none;
+    display: none;
   }
 
   .admin-url-input {
     margin-top: 3px;
     font-size: .76rem;
+  }
+
+  .admin-upload-meta {
+    width: max-content;
+    max-width: 100%;
+    display: inline-flex;
+    padding: 5px 8px;
+    border-radius: 999px;
+    background: rgba(18, 140, 74, .09);
+    color: #2f6a4b;
+    font-size: .68rem;
+  }
+
+  .admin-gallery-uploader {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 1px dashed rgba(45, 73, 73, .52);
+    border-radius: 12px;
+    background: rgba(245, 240, 232, .76);
+  }
+
+  .admin-gallery-uploader > div {
+    min-width: 0;
+    display: grid;
+    gap: 4px;
+  }
+
+  .admin-gallery-uploader strong {
+    color: var(--admin-forest);
+    font-weight: 560;
+  }
+
+  .admin-gallery-uploader span {
+    color: var(--admin-muted);
+    font-size: .74rem;
+    line-height: 1.45;
+  }
+
+  .admin-gallery-list {
+    display: grid;
+    gap: 8px;
+  }
+
+  .admin-gallery-item {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 9px;
+    padding: 8px;
+    border: 1px solid rgba(111, 99, 79, .24);
+    border-radius: 12px;
+    background: rgba(255, 253, 248, .82);
+    box-shadow: inset 0 1px 0 rgba(255, 253, 248, .82);
+  }
+
+  .admin-gallery-thumb {
+    width: 64px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid var(--admin-border);
+    object-fit: cover;
+    background: var(--admin-cream);
+  }
+
+  .admin-gallery-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .admin-gallery-actions .admin-icon-button:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .admin-gallery-empty {
+    padding: 12px;
+    border: 1px solid rgba(111, 99, 79, .18);
+    border-radius: 12px;
+    color: var(--admin-muted);
+    background: rgba(255, 253, 248, .58);
+    font-size: .78rem;
   }
 
   .admin-savebar {
@@ -1622,7 +1704,9 @@ const adminCss = `
     }
 
     .admin-fieldset-grid,
-    .admin-image-uploader {
+    .admin-image-uploader,
+    .admin-gallery-uploader,
+    .admin-gallery-item {
       grid-template-columns: 1fr;
     }
 

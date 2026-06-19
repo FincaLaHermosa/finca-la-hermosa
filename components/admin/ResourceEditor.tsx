@@ -1,8 +1,10 @@
 "use client";
 
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
   AlertCircle,
+  ArrowDown,
+  ArrowUp,
   CheckCircle2,
   Eye,
   EyeOff,
@@ -20,6 +22,12 @@ import type { AdminField, AdminResource } from "@/lib/admin/resources";
 import { createClient } from "@/lib/supabase/client";
 
 type Row = Record<string, unknown>;
+type UploadResult = {
+  url: string;
+  originalBytes: number;
+  optimizedBytes: number;
+  quality: number;
+};
 
 export function ResourceEditor({ resource }: { resource: AdminResource }) {
   const supabase = useMemo(() => createClient(), []);
@@ -283,24 +291,25 @@ export function ResourceEditor({ resource }: { resource: AdminResource }) {
 
 function FieldEditor({ field, value, disabled = false, onChange }: { field: AdminField; value: unknown; disabled?: boolean; onChange: (value: unknown) => void }) {
   const [uploading, setUploading] = useState(false);
+  const [uploadInfo, setUploadInfo] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const inputId = `admin-field-${field.key}`;
 
   const upload = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
     setUploading(true);
-    const supabase = createClient();
-    const extension = file.name.split(".").pop() || "jpg";
-    const folder = field.folder || "misc";
-    const path = `${folder}/${Date.now()}-${slugify(file.name)}.${extension}`;
-    const { error } = await supabase.storage.from("site-images").upload(path, file, { upsert: false });
-    setUploading(false);
-    if (error) {
-      alert(`No pude subir la imagen. ${error.message}`);
-      return;
+    setUploadInfo(null);
+    try {
+      const result = await uploadOptimizedImage(file, field.folder || "misc", "cover");
+      onChange(result.url);
+      setUploadInfo(formatUploadInfo(result));
+    } catch (error) {
+      alert(error instanceof Error ? error.message : "No pude subir la imagen.");
+    } finally {
+      setUploading(false);
+      event.target.value = "";
     }
-    const { data } = supabase.storage.from("site-images").getPublicUrl(path);
-    onChange(data.publicUrl);
   };
 
   if (field.type === "boolean") {
@@ -333,6 +342,10 @@ function FieldEditor({ field, value, disabled = false, onChange }: { field: Admi
   }
 
   if (field.type === "text_array") {
+    if (field.key === "gallery") {
+      return <GalleryFieldEditor field={field} value={value} onChange={onChange} />;
+    }
+
     return (
       <div className="admin-field admin-field-wide">
         <label htmlFor={inputId}>{field.label}</label>
@@ -360,10 +373,10 @@ function FieldEditor({ field, value, disabled = false, onChange }: { field: Admi
             <strong>{imageUrl ? "Reemplazar imagen" : "Subir imagen"}</strong>
             <span>Usa una foto clara, bien encuadrada y coherente con el estilo del sitio.</span>
             <div className="admin-upload-actions">
-              <label className="admin-secondary" htmlFor={inputId}>
+              <button className="admin-secondary" type="button" onClick={() => fileInputRef.current?.click()}>
                 <UploadCloud size={15} strokeWidth={1.8} />
                 {uploading ? "Subiendo" : "Subir archivo"}
-              </label>
+              </button>
               {imageUrl ? (
                 <button className="admin-danger" type="button" onClick={() => onChange("")}>
                   Quitar imagen
@@ -371,8 +384,9 @@ function FieldEditor({ field, value, disabled = false, onChange }: { field: Admi
               ) : null}
             </div>
           </div>
-          <input id={inputId} className="admin-file-input" type="file" accept="image/*" onChange={upload} />
+          <input ref={fileInputRef} id={inputId} className="admin-file-input" type="file" accept="image/*" onChange={upload} />
         </div>
+        {uploadInfo ? <small className="admin-upload-meta">{uploadInfo}</small> : null}
         <input className="admin-url-input" type="text" value={imageUrl} onChange={(event) => onChange(event.target.value)} placeholder="Pega una URL si la imagen ya está publicada" />
       </div>
     );
@@ -390,6 +404,101 @@ function FieldEditor({ field, value, disabled = false, onChange }: { field: Admi
         disabled={disabled}
       />
       {disabled ? <small>El identificador se bloquea al editar para evitar duplicados.</small> : null}
+    </div>
+  );
+}
+
+function GalleryFieldEditor({ field, value, onChange }: { field: AdminField; value: unknown; onChange: (value: unknown) => void }) {
+  const [uploading, setUploading] = useState(false);
+  const [uploadInfo, setUploadInfo] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const inputId = `admin-field-${field.key}-upload`;
+  const items = arrayFromLines(value).map(String);
+
+  const setItems = (nextItems: string[]) => onChange(nextItems.join("\n"));
+
+  const uploadGallery = async (event: ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []);
+    if (!files.length) return;
+
+    setUploading(true);
+    setUploadInfo(null);
+    try {
+      const results = await Promise.all(files.map((file) => uploadOptimizedImage(file, field.folder || "spaces", "gallery")));
+      setItems([...items, ...results.map((result) => result.url)]);
+      const original = results.reduce((total, result) => total + result.originalBytes, 0);
+      const optimized = results.reduce((total, result) => total + result.optimizedBytes, 0);
+      const saved = Math.max(0, original - optimized);
+      setUploadInfo(`${results.length} imagen${results.length === 1 ? "" : "es"} en AVIF: ${formatBytes(original)} a ${formatBytes(optimized)}. Reducción: ${formatBytes(saved)}.`);
+    } catch (error) {
+      alert(error instanceof Error ? error.message : "No pude subir las imágenes de galería.");
+    } finally {
+      setUploading(false);
+      event.target.value = "";
+    }
+  };
+
+  const removeItem = (index: number) => setItems(items.filter((_, itemIndex) => itemIndex !== index));
+  const moveItem = (index: number, direction: -1 | 1) => {
+    const target = index + direction;
+    if (target < 0 || target >= items.length) return;
+    const nextItems = [...items];
+    [nextItems[index], nextItems[target]] = [nextItems[target], nextItems[index]];
+    setItems(nextItems);
+  };
+
+  return (
+    <div className="admin-field admin-field-wide">
+      <label>{field.label}</label>
+      <div className="admin-gallery-uploader">
+        <div>
+          <strong>Subir imágenes de galería</strong>
+          <span>Selecciona una o varias fotos. Se convierten a AVIF optimizado antes de guardarse en Supabase.</span>
+        </div>
+        <button className="admin-secondary" type="button" onClick={() => fileInputRef.current?.click()}>
+          <UploadCloud size={15} strokeWidth={1.8} />
+          {uploading ? "Subiendo" : "Elegir imágenes"}
+        </button>
+        <input ref={fileInputRef} id={inputId} className="admin-file-input" type="file" accept="image/*" multiple onChange={uploadGallery} />
+      </div>
+
+      {uploadInfo ? <small className="admin-upload-meta">{uploadInfo}</small> : null}
+
+      {items.length ? (
+        <div className="admin-gallery-list">
+          {items.map((item, index) => (
+            <article key={`${item}-${index}`} className="admin-gallery-item">
+              <img className="admin-gallery-thumb" src={item} alt="" />
+              <input
+                type="text"
+                value={item}
+                onChange={(event) => {
+                  const nextItems = [...items];
+                  nextItems[index] = event.target.value;
+                  setItems(nextItems);
+                }}
+                aria-label={`URL de imagen ${index + 1}`}
+              />
+              <div className="admin-gallery-actions">
+                <button className="admin-icon-button" type="button" title="Subir posición" onClick={() => moveItem(index, -1)} disabled={index === 0}>
+                  <ArrowUp size={14} strokeWidth={1.8} />
+                </button>
+                <button className="admin-icon-button" type="button" title="Bajar posición" onClick={() => moveItem(index, 1)} disabled={index === items.length - 1}>
+                  <ArrowDown size={14} strokeWidth={1.8} />
+                </button>
+                <button className="admin-icon-button danger" type="button" title="Quitar imagen" onClick={() => removeItem(index)}>
+                  <Trash2 size={14} strokeWidth={1.8} />
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div className="admin-gallery-empty">Todavía no hay imágenes en la galería.</div>
+      )}
+
+      <textarea value={arrayToLines(value)} onChange={(event) => onChange(event.target.value)} />
+      <small>También puedes pegar una URL por línea. El orden de esta lista será el orden publicado.</small>
     </div>
   );
 }
@@ -543,6 +652,60 @@ function arrayFromLines(value: unknown) {
   return String(value || "").split("\n").map((item) => item.trim()).filter(Boolean);
 }
 
-function slugify(value: string) {
-  return value.toLowerCase().replace(/[^a-z0-9.]+/g, "-").replace(/^-|-$/g, "");
+async function uploadOptimizedImage(file: File, folder: string, variant: "cover" | "gallery"): Promise<UploadResult> {
+  const preparedFile = await prepareImageForUpload(file);
+  const formData = new FormData();
+  formData.append("file", preparedFile);
+  formData.append("folder", folder);
+  formData.append("variant", variant);
+
+  const response = await fetch("/api/admin/upload-image", {
+    method: "POST",
+    body: formData,
+  });
+  const payload = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(payload.error || "No pude subir la imagen optimizada.");
+  }
+
+  return payload as UploadResult;
+}
+
+async function prepareImageForUpload(file: File) {
+  if (file.size <= 3_000_000 || file.type === "image/svg+xml") return file;
+
+  try {
+    const bitmap = await createImageBitmap(file);
+    const maxDimension = 2400;
+    const scale = Math.min(1, maxDimension / Math.max(bitmap.width, bitmap.height));
+    const width = Math.max(1, Math.round(bitmap.width * scale));
+    const height = Math.max(1, Math.round(bitmap.height * scale));
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const context = canvas.getContext("2d");
+    if (!context) return file;
+
+    context.drawImage(bitmap, 0, 0, width, height);
+    bitmap.close();
+
+    const quality = file.size > 8_000_000 ? 0.9 : 0.94;
+    const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/jpeg", quality));
+    if (!blob) return file;
+
+    return new File([blob], file.name.replace(/\.[^.]+$/, ".jpg"), { type: "image/jpeg" });
+  } catch {
+    return file;
+  }
+}
+
+function formatUploadInfo(result: UploadResult) {
+  return `AVIF optimizado: ${formatBytes(result.originalBytes)} a ${formatBytes(result.optimizedBytes)}. Reducción: ${formatBytes(Math.max(0, result.originalBytes - result.optimizedBytes))}. Calidad ${result.quality}.`;
+}
+
+function formatBytes(value: number) {
+  if (!Number.isFinite(value) || value <= 0) return "0 KB";
+  if (value >= 1024 * 1024) return `${(value / 1024 / 1024).toFixed(1)} MB`;
+  return `${Math.max(1, Math.round(value / 1024))} KB`;
 }

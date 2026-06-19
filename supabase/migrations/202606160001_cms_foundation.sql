@@ -222,7 +222,7 @@ insert into public.site_config (id) values ('main') on conflict (id) do nothing;
 insert into public.quote_settings (id) values ('main') on conflict (id) do nothing;
 
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
-values ('site-images', 'site-images', true, 5242880, array['image/jpeg','image/png','image/webp','image/gif','image/svg+xml'])
+values ('site-images', 'site-images', true, 5242880, array['image/jpeg','image/png','image/webp','image/gif','image/svg+xml','image/avif'])
 on conflict (id) do update set
   public = excluded.public,
   file_size_limit = excluded.file_size_limit,

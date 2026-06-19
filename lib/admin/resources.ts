@@ -139,7 +139,7 @@ export const adminResources: AdminResource[] = [
       { key: "capacity", label: "Capacidad", type: "text" },
       { key: "image", label: "Imagen principal", type: "image", folder: "spaces" },
       { key: "image_alt", label: "Descripción de la imagen", type: "text" },
-      { key: "gallery", label: "Galería", type: "text_array" },
+      { key: "gallery", label: "Galería", type: "text_array", folder: "spaces" },
       { key: "caption", label: "Texto bajo la imagen", type: "text" },
       { key: "sort_order", label: "Posición en la lista", type: "number" },
       { key: "visible", label: "Publicar en el sitio", type: "boolean" },
