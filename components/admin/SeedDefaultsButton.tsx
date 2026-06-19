@@ -9,7 +9,7 @@ export function SeedDefaultsButton() {
   const [loading, setLoading] = useState(false);
 
   const seed = async () => {
-    if (!confirm("Esto cargará el contenido actual como base editable del CMS. ¿Continuar?")) return;
+    if (!confirm("Cargar la base editable copiará el contenido actual del sitio a Supabase. Puedes editarlo después desde el CMS. ¿Continuar?")) return;
     setLoading(true);
     setMessage(null);
 
@@ -141,14 +141,17 @@ export function SeedDefaultsButton() {
     }
 
     setLoading(false);
-    setMessage(error ? error.message : "Contenido base cargado.");
+    setMessage(error ? `No pude cargar la base editable. ${error.message}` : "Base editable cargada. Ya puedes revisar y ajustar el contenido desde cada sección.");
   };
 
   return (
-    <div className="admin-card" style={{ padding: 22, display: "grid", gap: 12 }}>
-      <h2 style={{ margin: 0, fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 400 }}>Contenido inicial</h2>
-      <p style={{ margin: 0, color: "#6f634f" }}>Carga en Supabase los datos actuales del sitio como punto de partida editable.</p>
-      <button className="admin-primary" type="button" onClick={seed} disabled={loading}>{loading ? "Cargando..." : "Cargar contenido actual"}</button>
+    <div className="admin-seed-card">
+      <div>
+        <p className="admin-module-eyebrow">Primer paso</p>
+        <h2>Cargar contenido actual</h2>
+        <p>Copia el contenido que ya tiene el sitio a Supabase para usarlo como punto de partida editable.</p>
+      </div>
+      <button className="admin-primary" type="button" onClick={seed} disabled={loading}>{loading ? "Cargando base" : "Cargar base editable"}</button>
       {message ? <div className="admin-message">{message}</div> : null}
     </div>
   );
