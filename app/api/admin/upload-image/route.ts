@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import sharp from "sharp";
 import { createClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
@@ -10,6 +9,7 @@ const MAX_DIMENSIONS = {
   gallery: 1600,
   default: 1600,
 };
+const MAX_UPLOAD_BYTES = 4_000_000;
 
 export async function POST(request: Request) {
   const supabase = await createClient();
@@ -42,6 +42,17 @@ export async function POST(request: Request) {
 
   try {
     const input = Buffer.from(await file.arrayBuffer());
+    if (input.byteLength > MAX_UPLOAD_BYTES) {
+      return NextResponse.json(
+        {
+          error:
+            "La imagen llega demasiado pesada al servidor. Intenta subir una imagen JPG, PNG o WEBP menor a 4 MB.",
+        },
+        { status: 413 },
+      );
+    }
+
+    const sharp = (await import("sharp")).default;
     const image = sharp(input, { failOn: "none" }).rotate();
     const metadata = await image.metadata();
     const width = metadata.width || 0;

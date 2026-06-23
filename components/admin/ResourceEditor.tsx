@@ -654,6 +654,10 @@ function arrayFromLines(value: unknown) {
 
 async function uploadOptimizedImage(file: File, folder: string, variant: "cover" | "gallery"): Promise<UploadResult> {
   const preparedFile = await prepareImageForUpload(file);
+  if (preparedFile.size > 4_000_000) {
+    throw new Error("La imagen sigue pesando mas de 4 MB despues de prepararla. Convierte la foto a JPG/PNG/WEBP o reduce su tamano antes de subirla.");
+  }
+
   const formData = new FormData();
   formData.append("file", preparedFile);
   formData.append("folder", folder);
@@ -663,10 +667,14 @@ async function uploadOptimizedImage(file: File, folder: string, variant: "cover"
     method: "POST",
     body: formData,
   });
-  const payload = await response.json().catch(() => ({}));
+  const contentType = response.headers.get("content-type") || "";
+  const payload = contentType.includes("application/json") ? await response.json().catch(() => ({})) : {};
+  const fallbackMessage = response.status === 413
+    ? "La imagen es demasiado pesada para subirla desde el CMS. Reduce la foto a menos de 4 MB e intenta de nuevo."
+    : `No pude subir la imagen optimizada. El servidor respondio ${response.status}.`;
 
   if (!response.ok) {
-    throw new Error(payload.error || "No pude subir la imagen optimizada.");
+    throw new Error(payload.error || fallbackMessage);
   }
 
   return payload as UploadResult;
