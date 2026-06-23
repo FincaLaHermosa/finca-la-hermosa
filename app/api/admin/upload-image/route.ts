@@ -4,11 +4,6 @@ import { createClient } from "@/lib/supabase/server";
 export const runtime = "nodejs";
 export const maxDuration = 30;
 
-const MAX_DIMENSIONS = {
-  cover: 1800,
-  gallery: 1600,
-  default: 1600,
-};
 const MAX_UPLOAD_BYTES = 4_000_000;
 
 export async function POST(request: Request) {
@@ -26,7 +21,7 @@ export async function POST(request: Request) {
   const formData = await request.formData();
   const file = formData.get("file");
   const folder = sanitizeFolder(String(formData.get("folder") || "misc"));
-  const variant = normalizeVariant(String(formData.get("variant") || "default"));
+  const originalBytes = Number(formData.get("originalBytes")) || 0;
 
   if (!(file instanceof File)) {
     return NextResponse.json({ error: "No recibí ningún archivo de imagen." }, { status: 400 });
@@ -52,31 +47,11 @@ export async function POST(request: Request) {
       );
     }
 
-    const sharp = (await import("sharp")).default;
-    const image = sharp(input, { failOn: "none" }).rotate();
-    const metadata = await image.metadata();
-    const width = metadata.width || 0;
-    const height = metadata.height || 0;
-    const quality = getAdaptiveQuality(input.byteLength, width, height);
-    const maxSize = MAX_DIMENSIONS[variant];
-
-    const optimized = await image
-      .resize({
-        width: maxSize,
-        height: maxSize,
-        fit: "inside",
-        withoutEnlargement: true,
-      })
-      .avif({
-        quality,
-        effort: 6,
-      })
-      .toBuffer();
-
-    const path = `${folder}/${Date.now()}-${slugify(file.name)}.avif`;
-    const { error: uploadError } = await supabase.storage.from("site-images").upload(path, optimized, {
+    const extension = extensionFromMime(file.type);
+    const path = `${folder}/${Date.now()}-${slugify(file.name)}.${extension}`;
+    const { error: uploadError } = await supabase.storage.from("site-images").upload(path, input, {
       cacheControl: "31536000",
-      contentType: "image/avif",
+      contentType: file.type,
       upsert: false,
     });
 
@@ -89,31 +64,14 @@ export async function POST(request: Request) {
     return NextResponse.json({
       url: data.publicUrl,
       path,
-      originalBytes: input.byteLength,
-      optimizedBytes: optimized.byteLength,
-      width,
-      height,
-      quality,
-      format: "avif",
+      originalBytes: originalBytes || input.byteLength,
+      optimizedBytes: input.byteLength,
+      format: extension,
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "No pude optimizar la imagen.";
+    const message = error instanceof Error ? error.message : "No pude subir la imagen.";
     return NextResponse.json({ error: message }, { status: 500 });
   }
-}
-
-function getAdaptiveQuality(bytes: number, width: number, height: number) {
-  const megapixels = width && height ? (width * height) / 1_000_000 : 0;
-
-  if (bytes > 8_000_000 || megapixels > 18) return 58;
-  if (bytes > 4_000_000 || megapixels > 10) return 66;
-  if (bytes > 1_500_000 || megapixels > 4) return 74;
-  return 82;
-}
-
-function normalizeVariant(value: string): keyof typeof MAX_DIMENSIONS {
-  if (value === "cover" || value === "gallery") return value;
-  return "default";
 }
 
 function sanitizeFolder(value: string) {
@@ -124,4 +82,12 @@ function sanitizeFolder(value: string) {
 function slugify(value: string) {
   const base = value.replace(/\.[^.]+$/, "");
   return base.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "image";
+}
+
+function extensionFromMime(value: string) {
+  if (value === "image/png") return "png";
+  if (value === "image/webp") return "webp";
+  if (value === "image/gif") return "gif";
+  if (value === "image/avif") return "avif";
+  return "jpg";
 }

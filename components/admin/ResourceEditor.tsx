@@ -26,7 +26,8 @@ type UploadResult = {
   url: string;
   originalBytes: number;
   optimizedBytes: number;
-  quality: number;
+  quality?: number;
+  format?: string;
 };
 
 export function ResourceEditor({ resource }: { resource: AdminResource }) {
@@ -453,7 +454,7 @@ function GalleryFieldEditor({ field, value, onChange }: { field: AdminField; val
       <div className="admin-gallery-uploader">
         <div>
           <strong>Subir imágenes de galería</strong>
-          <span>Selecciona una o varias fotos. Se convierten a AVIF optimizado antes de guardarse en Supabase.</span>
+          <span>Selecciona una o varias fotos. Se preparan y comprimen antes de guardarse en Supabase.</span>
         </div>
         <button className="admin-secondary" type="button" onClick={() => fileInputRef.current?.click()}>
           <UploadCloud size={15} strokeWidth={1.8} />
@@ -653,7 +654,7 @@ function arrayFromLines(value: unknown) {
 }
 
 async function uploadOptimizedImage(file: File, folder: string, variant: "cover" | "gallery"): Promise<UploadResult> {
-  const preparedFile = await prepareImageForUpload(file);
+  const { file: preparedFile, quality } = await prepareImageForUpload(file, variant);
   if (preparedFile.size > 4_000_000) {
     throw new Error("La imagen sigue pesando mas de 4 MB despues de prepararla. Convierte la foto a JPG/PNG/WEBP o reduce su tamano antes de subirla.");
   }
@@ -662,6 +663,7 @@ async function uploadOptimizedImage(file: File, folder: string, variant: "cover"
   formData.append("file", preparedFile);
   formData.append("folder", folder);
   formData.append("variant", variant);
+  formData.append("originalBytes", String(file.size));
 
   const response = await fetch("/api/admin/upload-image", {
     method: "POST",
@@ -680,12 +682,12 @@ async function uploadOptimizedImage(file: File, folder: string, variant: "cover"
   return payload as UploadResult;
 }
 
-async function prepareImageForUpload(file: File) {
-  if (file.size <= 3_000_000 || file.type === "image/svg+xml") return file;
+async function prepareImageForUpload(file: File, variant: "cover" | "gallery") {
+  if (file.type === "image/svg+xml" || file.type === "image/gif") return { file };
 
   try {
     const bitmap = await createImageBitmap(file);
-    const maxDimension = 2400;
+    const maxDimension = variant === "cover" ? 1800 : 1600;
     const scale = Math.min(1, maxDimension / Math.max(bitmap.width, bitmap.height));
     const width = Math.max(1, Math.round(bitmap.width * scale));
     const height = Math.max(1, Math.round(bitmap.height * scale));
@@ -693,23 +695,28 @@ async function prepareImageForUpload(file: File) {
     canvas.width = width;
     canvas.height = height;
     const context = canvas.getContext("2d");
-    if (!context) return file;
+    if (!context) return { file };
 
     context.drawImage(bitmap, 0, 0, width, height);
     bitmap.close();
 
-    const quality = file.size > 8_000_000 ? 0.9 : 0.94;
+    const quality = file.size > 8_000_000 ? 0.86 : file.size > 4_000_000 ? 0.9 : 0.94;
     const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/jpeg", quality));
-    if (!blob) return file;
+    if (!blob) return { file };
 
-    return new File([blob], file.name.replace(/\.[^.]+$/, ".jpg"), { type: "image/jpeg" });
+    return {
+      file: new File([blob], file.name.replace(/\.[^.]+$/, ".jpg"), { type: "image/jpeg" }),
+      quality: Math.round(quality * 100),
+    };
   } catch {
-    return file;
+    return { file };
   }
 }
 
 function formatUploadInfo(result: UploadResult) {
-  return `AVIF optimizado: ${formatBytes(result.originalBytes)} a ${formatBytes(result.optimizedBytes)}. Reducción: ${formatBytes(Math.max(0, result.originalBytes - result.optimizedBytes))}. Calidad ${result.quality}.`;
+  const format = result.format ? result.format.toUpperCase() : "imagen";
+  const quality = result.quality ? ` Calidad ${result.quality}.` : "";
+  return `${format} preparado: ${formatBytes(result.originalBytes)} a ${formatBytes(result.optimizedBytes)}. Reducción: ${formatBytes(Math.max(0, result.originalBytes - result.optimizedBytes))}.${quality}`;
 }
 
 function formatBytes(value: number) {
