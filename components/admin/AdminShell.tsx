@@ -1295,6 +1295,7 @@ const adminCss = `
   }
 
   .admin-field input,
+  .admin-field select,
   .admin-field textarea,
   .admin-url-input {
     width: 100%;
@@ -1313,6 +1314,7 @@ const adminCss = `
   }
 
   .admin-field input:focus,
+  .admin-field select:focus,
   .admin-field textarea:focus,
   .admin-url-input:focus,
   .admin-search:focus-within {
@@ -1327,6 +1329,20 @@ const adminCss = `
     color: rgba(90, 80, 64, .66);
     background: rgba(245, 240, 232, .9);
     border-color: rgba(111, 99, 79, .24);
+  }
+
+  .admin-field select {
+    min-height: 39px;
+    appearance: none;
+    background-image:
+      linear-gradient(45deg, transparent 50%, rgba(45, 73, 73, .8) 50%),
+      linear-gradient(135deg, rgba(45, 73, 73, .8) 50%, transparent 50%);
+    background-position:
+      calc(100% - 16px) 16px,
+      calc(100% - 11px) 16px;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 34px;
   }
 
   .admin-field textarea {
@@ -1400,6 +1416,48 @@ const adminCss = `
     color: var(--admin-forest);
     font-size: .8rem;
     font-weight: 500;
+  }
+
+  .admin-choice-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .admin-choice-chip {
+    min-height: 34px;
+    border: 1px solid rgba(111, 99, 79, .28);
+    border-radius: 999px;
+    background: rgba(255, 253, 248, .9);
+    color: var(--admin-forest);
+    padding: 7px 11px;
+    font: inherit;
+    font-size: .76rem;
+    cursor: pointer;
+    transition: background .16s ease, border-color .16s ease, color .16s ease, transform .16s ease;
+  }
+
+  .admin-choice-chip:hover {
+    transform: translateY(-1px);
+    border-color: rgba(157, 86, 61, .38);
+  }
+
+  .admin-choice-chip.active {
+    background: var(--admin-forest);
+    border-color: var(--admin-forest);
+    color: var(--admin-ivory);
+  }
+
+  .admin-choice-chip.custom {
+    background: var(--admin-terracotta);
+    border-color: var(--admin-terracotta);
+  }
+
+  .admin-custom-option {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+    align-items: center;
   }
 
   .admin-image-uploader {

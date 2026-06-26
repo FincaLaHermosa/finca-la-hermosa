@@ -1,10 +1,83 @@
 export type AdminField = {
   key: string;
   label: string;
-  type: "text" | "textarea" | "number" | "boolean" | "json" | "text_array" | "image" | "date";
+  type: "text" | "textarea" | "number" | "boolean" | "json" | "text_array" | "image" | "date" | "select" | "multi_select";
   required?: boolean;
   folder?: string;
+  options?: AdminOption[];
+  allowCustom?: boolean;
+  help?: string;
 };
+
+export type AdminOption = {
+  value: string;
+  label: string;
+};
+
+export const packageCategoryOptions: AdminOption[] = [
+  { value: "social", label: "Eventos Sociales" },
+  { value: "corporativo", label: "Corporativos" },
+  { value: "retiro", label: "Retiros" },
+  { value: "privado", label: "Estancia Privada" },
+];
+
+export const adminSectionOptions: AdminOption[] = [
+  { value: "experiencias", label: "Experiencias" },
+  { value: "cotizar", label: "Cotizador" },
+];
+
+export const addonIconOptions: AdminOption[] = [
+  { value: "salon", label: "Salón" },
+  { value: "fogata", label: "Fogata" },
+  { value: "cine", label: "Cine" },
+  { value: "coffee", label: "Coffee break" },
+  { value: "av", label: "Audio / video" },
+  { value: "hospedaje", label: "Hospedaje" },
+];
+
+export const faqCategoryOptions: AdminOption[] = [
+  { value: "reservas", label: "Reservas" },
+  { value: "espacios", label: "Espacios" },
+  { value: "servicios", label: "Servicios" },
+  { value: "pagos", label: "Pagos" },
+  { value: "logistica", label: "Logística" },
+];
+
+export const faqGroupOptions: AdminOption[] = [
+  { value: "Reservas y disponibilidad", label: "Reservas y disponibilidad" },
+  { value: "Espacios y servicios", label: "Espacios y servicios" },
+  { value: "Pagos y condiciones", label: "Pagos y condiciones" },
+  { value: "Logística del evento", label: "Logística del evento" },
+];
+
+export const eventTypeOptions: AdminOption[] = [
+  { value: "social", label: "Evento social" },
+  { value: "corporativo", label: "Evento corporativo" },
+  { value: "retiro", label: "Retiro" },
+  { value: "privado", label: "Estancia privada" },
+  { value: "boda", label: "Boda" },
+  { value: "cumpleanos", label: "Cumpleaños" },
+  { value: "otro", label: "Otro" },
+];
+
+export const testimonialBackgroundOptions: AdminOption[] = [
+  { value: "#fffdf5", label: "Crema" },
+  { value: "#f5f0e8", label: "Crema cálido" },
+  { value: "#f1dfd4", label: "Terracota claro" },
+  { value: "#e6ece4", label: "Verde claro" },
+];
+
+export const testimonialPinOptions: AdminOption[] = [
+  { value: "#9d563d", label: "Terracota" },
+  { value: "#2d4949", label: "Verde" },
+  { value: "#6f634f", label: "Oliva" },
+];
+
+export const testimonialRotationOptions: AdminOption[] = [
+  { value: "rotate(-2deg)", label: "Inclinado izquierda" },
+  { value: "rotate(0deg)", label: "Recto" },
+  { value: "rotate(2deg)", label: "Inclinado derecha" },
+];
 
 export type AdminResource = {
   slug: string;
@@ -82,7 +155,7 @@ export const adminResources: AdminResource[] = [
     listFields: ["title", "price", "capacity", "visible"],
     fields: [
       { key: "id", label: "Identificador interno", type: "text", required: true },
-      { key: "filters", label: "Categorías donde aparece", type: "text_array" },
+      { key: "filters", label: "Categorías donde aparece", type: "multi_select", options: packageCategoryOptions, allowCustom: true, help: "Las categorías nuevas se guardan, pero para mostrarlas como filtro público hay que conectar después la navegación pública." },
       { key: "image", label: "Imagen", type: "image", folder: "packages" },
       { key: "image_alt", label: "Descripción de la imagen", type: "text" },
       { key: "badge", label: "Etiqueta destacada", type: "text" },
@@ -109,7 +182,7 @@ export const adminResources: AdminResource[] = [
     listFields: ["name", "price_label", "quote_only", "visible"],
     fields: [
       { key: "id", label: "Identificador interno", type: "text", required: true },
-      { key: "icon", label: "Icono", type: "text" },
+      { key: "icon", label: "Icono", type: "select", options: addonIconOptions, allowCustom: true },
       { key: "name", label: "Nombre", type: "text", required: true },
       { key: "description", label: "Descripción", type: "textarea" },
       { key: "price_label", label: "Precio visible", type: "text" },
@@ -117,7 +190,7 @@ export const adminResources: AdminResource[] = [
       { key: "quote_only", label: "Solo bajo cotización", type: "boolean" },
       { key: "dashed", label: "Borde punteado", type: "boolean" },
       { key: "accent_price", label: "Resaltar precio", type: "boolean" },
-      { key: "appears_in", label: "Secciones donde aparece", type: "text_array" },
+      { key: "appears_in", label: "Secciones donde aparece", type: "multi_select", options: adminSectionOptions, allowCustom: true },
       { key: "sort_order", label: "Posición en la lista", type: "number" },
       { key: "visible", label: "Publicar en el sitio", type: "boolean" },
     ],
@@ -176,7 +249,7 @@ export const adminResources: AdminResource[] = [
     listFields: ["category_id", "question", "visible"],
     fields: [
       { key: "id", label: "Identificador interno", type: "text", required: true },
-      { key: "category_id", label: "Categoría", type: "text", required: true },
+      { key: "category_id", label: "Categoría", type: "select", required: true, options: faqCategoryOptions, allowCustom: true, help: "Si escribes una categoría nueva, crea también su registro en Categorías FAQ para que aparezca publicada." },
       { key: "question", label: "Pregunta", type: "textarea", required: true },
       { key: "answer", label: "Respuesta", type: "textarea", required: true },
       { key: "sort_order", label: "Posición en la lista", type: "number" },
@@ -196,7 +269,7 @@ export const adminResources: AdminResource[] = [
     fields: [
       { key: "id", label: "Identificador interno", type: "text", required: true },
       { key: "label", label: "Nombre de la categoría", type: "text", required: true },
-      { key: "group_label", label: "Título de grupo", type: "text", required: true },
+      { key: "group_label", label: "Título de grupo", type: "select", required: true, options: faqGroupOptions, allowCustom: true },
       { key: "sort_order", label: "Posición en la lista", type: "number" },
       { key: "visible", label: "Publicar en el sitio", type: "boolean" },
     ],
@@ -217,9 +290,9 @@ export const adminResources: AdminResource[] = [
       { key: "author", label: "Nombre", type: "text", required: true },
       { key: "event_label", label: "Evento o fecha", type: "text" },
       { key: "image", label: "Imagen", type: "image", folder: "testimonials" },
-      { key: "background", label: "Color fondo", type: "text" },
-      { key: "rotation", label: "Rotación CSS", type: "text" },
-      { key: "pin", label: "Color del pin", type: "text" },
+      { key: "background", label: "Color fondo", type: "select", options: testimonialBackgroundOptions, allowCustom: true },
+      { key: "rotation", label: "Rotación CSS", type: "select", options: testimonialRotationOptions, allowCustom: true },
+      { key: "pin", label: "Color del pin", type: "select", options: testimonialPinOptions, allowCustom: true },
       { key: "featured", label: "Marcar como destacado", type: "boolean" },
       { key: "sort_order", label: "Posición en la lista", type: "number" },
       { key: "visible", label: "Publicar en el sitio", type: "boolean" },
@@ -276,7 +349,7 @@ export const adminResources: AdminResource[] = [
       { key: "id", label: "Identificador interno", type: "text" },
       { key: "date_start", label: "Fecha inicio", type: "date", required: true },
       { key: "date_end", label: "Fecha fin", type: "date" },
-      { key: "event_type", label: "Tipo", type: "text" },
+      { key: "event_type", label: "Tipo", type: "select", options: eventTypeOptions, allowCustom: true },
       { key: "notes", label: "Notas", type: "textarea" },
       { key: "visible", label: "Bloquear esta fecha", type: "boolean" },
     ],

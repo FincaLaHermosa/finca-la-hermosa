@@ -342,6 +342,14 @@ function FieldEditor({ field, value, disabled = false, onChange }: { field: Admi
     );
   }
 
+  if (field.type === "select") {
+    return <SelectFieldEditor field={field} value={value} disabled={disabled} onChange={onChange} />;
+  }
+
+  if (field.type === "multi_select") {
+    return <MultiSelectFieldEditor field={field} value={value} onChange={onChange} />;
+  }
+
   if (field.type === "text_array") {
     if (field.key === "gallery") {
       return <GalleryFieldEditor field={field} value={value} onChange={onChange} />;
@@ -405,6 +413,128 @@ function FieldEditor({ field, value, disabled = false, onChange }: { field: Admi
         disabled={disabled}
       />
       {disabled ? <small>El identificador se bloquea al editar para evitar duplicados.</small> : null}
+    </div>
+  );
+}
+
+function SelectFieldEditor({ field, value, disabled = false, onChange }: { field: AdminField; value: unknown; disabled?: boolean; onChange: (value: unknown) => void }) {
+  const [customMode, setCustomMode] = useState(false);
+  const inputId = `admin-field-${field.key}`;
+  const currentValue = String(value || "");
+  const options = field.options || [];
+  const hasOption = options.some((option) => option.value === currentValue);
+  const isCustom = customMode || (Boolean(currentValue) && !hasOption);
+  const selectValue = isCustom ? "__custom__" : currentValue;
+
+  return (
+    <div className="admin-field admin-field-wide">
+      <label htmlFor={inputId}>{field.label}</label>
+      <select
+        id={inputId}
+        value={selectValue}
+        required={field.required}
+        disabled={disabled}
+        onChange={(event) => {
+          if (event.target.value === "__custom__") {
+            setCustomMode(true);
+            onChange(currentValue);
+            return;
+          }
+          setCustomMode(false);
+          onChange(event.target.value);
+        }}
+      >
+        <option value="">Seleccionar</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>{option.label}</option>
+        ))}
+        {field.allowCustom ? <option value="__custom__">Crear / escribir otra opción</option> : null}
+      </select>
+      {field.allowCustom && selectValue === "__custom__" ? (
+        <input
+          type="text"
+          value={currentValue}
+          onChange={(event) => {
+            setCustomMode(true);
+            onChange(formatCustomOptionValue(field, event.target.value));
+          }}
+          placeholder="Escribe la nueva opción"
+          disabled={disabled}
+        />
+      ) : null}
+      {field.help ? <small>{field.help}</small> : null}
+      {disabled ? <small>El identificador se bloquea al editar para evitar duplicados.</small> : null}
+    </div>
+  );
+}
+
+function MultiSelectFieldEditor({ field, value, onChange }: { field: AdminField; value: unknown; onChange: (value: unknown) => void }) {
+  const [customValue, setCustomValue] = useState("");
+  const selected = arrayFromLines(value).map(String);
+  const options = field.options || [];
+  const selectedSet = new Set(selected);
+  const customSelected = selected.filter((item) => !options.some((option) => option.value === item));
+
+  const setSelected = (items: string[]) => onChange(items.join("\n"));
+  const toggleOption = (optionValue: string) => {
+    if (selectedSet.has(optionValue)) {
+      setSelected(selected.filter((item) => item !== optionValue));
+      return;
+    }
+    setSelected([...selected, optionValue]);
+  };
+  const addCustom = () => {
+    const nextValue = formatCustomOptionValue(field, customValue);
+    if (!nextValue || selectedSet.has(nextValue)) return;
+    setSelected([...selected, nextValue]);
+    setCustomValue("");
+  };
+
+  return (
+    <div className="admin-field admin-field-wide">
+      <label>{field.label}</label>
+      <div className="admin-choice-list">
+        {options.map((option) => {
+          const active = selectedSet.has(option.value);
+          return (
+            <button
+              key={option.value}
+              className={active ? "admin-choice-chip active" : "admin-choice-chip"}
+              type="button"
+              onClick={() => toggleOption(option.value)}
+              aria-pressed={active}
+            >
+              {option.label}
+            </button>
+          );
+        })}
+      </div>
+      {customSelected.length ? (
+        <div className="admin-choice-list" aria-label="Opciones personalizadas">
+          {customSelected.map((item) => (
+            <button key={item} className="admin-choice-chip active custom" type="button" onClick={() => toggleOption(item)}>
+              {item}
+            </button>
+          ))}
+        </div>
+      ) : null}
+      {field.allowCustom ? (
+        <div className="admin-custom-option">
+          <input
+            type="text"
+            value={customValue}
+            onChange={(event) => setCustomValue(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key !== "Enter") return;
+              event.preventDefault();
+              addCustom();
+            }}
+            placeholder="Agregar opción nueva"
+          />
+          <button className="admin-secondary" type="button" onClick={addCustom}>Agregar</button>
+        </div>
+      ) : null}
+      {field.help ? <small>{field.help}</small> : <small>Elige una o varias opciones. Puedes quitar una opción activa tocándola de nuevo.</small>}
     </div>
   );
 }
@@ -561,7 +691,7 @@ function emptyRow(resource: AdminResource): Row {
     if (field.type === "boolean") return [field.key, field.key === "visible"];
     if (field.type === "number") return [field.key, 0];
     if (field.type === "json") return [field.key, "{}"];
-    if (field.type === "text_array") return [field.key, ""];
+    if (field.type === "text_array" || field.type === "multi_select") return [field.key, ""];
     return [field.key, ""];
   }));
 }
@@ -595,7 +725,7 @@ function normalizePayload(resource: AdminResource, row: Row): Row {
   for (const field of resource.fields) {
     const value = payload[field.key];
     if (field.type === "json") payload[field.key] = parseJson(value);
-    if (field.type === "text_array") payload[field.key] = arrayFromLines(value);
+    if (field.type === "text_array" || field.type === "multi_select") payload[field.key] = arrayFromLines(value);
     if (field.type === "number") payload[field.key] = Number(value || 0);
     if (field.type === "boolean") payload[field.key] = Boolean(value);
     if (field.key === "id" && !value) delete payload[field.key];
@@ -651,6 +781,22 @@ function arrayToLines(value: unknown) {
 function arrayFromLines(value: unknown) {
   if (Array.isArray(value)) return value;
   return String(value || "").split("\n").map((item) => item.trim()).filter(Boolean);
+}
+
+function formatCustomOptionValue(field: AdminField, value: string) {
+  const trimmed = value.trim();
+  if (!trimmed) return "";
+  if (["filters", "appears_in", "category_id", "event_type"].includes(field.key)) return slugifyOption(trimmed);
+  return trimmed;
+}
+
+function slugifyOption(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 }
 
 async function uploadOptimizedImage(file: File, folder: string, variant: "cover" | "gallery"): Promise<UploadResult> {
